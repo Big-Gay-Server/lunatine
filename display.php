@@ -10,7 +10,7 @@ $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
 
 // --- this should hopefully parse the gloss blocks.
-require_once 'ParsedownGloss.php';
+require_once 'parsedownGloss.php';
 $p = new ParsedownGloss();
 echo $p->text($your_markdown_string);
 
