@@ -143,19 +143,30 @@ if ($filePath && file_exists($filePath)) {
             // --- NEW: MANUAL GLOSS PRE-PARSER ---
             $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function($match) {
                 $lines = explode("\n", trim($match[1]));
-                $html = '<div class="gloss-container">';
+                $data = [];
+                $ft = '';
+
                 foreach ($lines as $line) {
-                    // Match \identifier and the rest of the line
-                    if (preg_match('/^(\\\\(\w+))\s*(.*)/', $line, $m)) {
-                        $idFull = $m[1]; // \ex
-                        $idName = $m[2]; // ex
-                        $content = $m[3];
-                        $html .= "<div class='gloss-line gloss-$idName'><span class='gloss-id'>$idFull</span> <span class='gloss-content'>$content</span></div>";
-                    } else {
-                        $html .= "<div>$line</div>";
+                    if (preg_match('/^\\\\(gla|glb)\s+(.*)/', $line, $m)) {
+                        $data[$m[1]] = explode(' ', $m[2]);
+                    } elseif (preg_match('/^\\\\ft\s+(.*)/', $line, $m)) {
+                        $ft = $m[1];
                     }
                 }
-                return $html . '</div>';
+
+                $html = '<div class="gloss-container"><div class="gloss-word-wrap">';
+                // Zip words from gla and glb together
+                $count = max(count($data['gla'] ?? []), count($data['glb'] ?? []));
+                for ($i = 0; $i < $count; $i++) {
+                    $html .= '<div class="gloss-column">';
+                    $html .= '<span class="gla">' . ($data['gla'][$i] ?? '&nbsp;') . '</span>';
+                    $html .= '<span class="glb">' . ($data['glb'][$i] ?? '&nbsp;') . '</span>';
+                    $html .= '</div>';
+                }
+                $html .= '</div>'; // close word-wrap
+                if ($ft) $html .= '<div class="gloss-ft">' . $ft . '</div>';
+                $html .= '</div>';
+                return $html;
             }, $text);
             // 1. DATA EMULATOR (Run this first while it is still raw text)
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
