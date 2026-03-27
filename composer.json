@@ -1,0 +1,6 @@
+{
+    "require": {
+        "league/commonmark": "^2.8",
+        "elazar/league-commonmark-obsidian": "^2.1"
+    }
+}

@@ -1,0 +1,67 @@
+formulas:
+  "": this.Age
+  Untitled: ""
+views:
+  - type: cards
+    name: View
+    filters:
+      and:
+        - '!note["Character Type"].isEmpty()'
+    groupBy:
+      property: Species
+      direction: DESC
+    order:
+      - Full Name
+      - Name Pronunciation
+      - Pronouns
+      - Species
+      - Status
+    sort: []
+    cardSize: 190
+    image: note.iconn
+    imageAspectRatio: 1
+  - type: table
+    name: View 2
+    filters:
+      and:
+        - "!Species.isEmpty()"
+    order:
+      - Full Name
+      - Name Pronunciation
+      - Species
+      - Apparent Age
+      - Actual Age
+      - Age
+      - Languages Spoken
+      - Perceived age range
+      - formula.Untitled
+      - Birthdate
+      - Death date
+    sort:
+      - property: Full Name
+        direction: ASC
+      - property: Actual Age
+        direction: DESC
+  - type: table
+    name: web
+    filters:
+      and:
+        - "!Species.isEmpty()"
+    order:
+      - icon
+      - Full Name
+      - Species
+      - Age
+      - Birthdate
+      - Death date
+    sort:
+      - property: Full Name
+        direction: ASC
+      - property: icon
+        direction: ASC
+      - property: Name Pronunciation
+        direction: ASC
+      - property: Actual Age
+        direction: DESC
+    columnSize:
+      note.icon: 373

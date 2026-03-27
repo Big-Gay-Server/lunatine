@@ -1,0 +1,382 @@
+/* GLOBAL STUFF */
+* {
+box-sizing: border-box;
+cursor: url('cursor.cur'), auto;
+}
+
+/* this is how the rem measurements scale */
+:root
+{
+    font-size: 16px;
+}
+
+/* this is the whole page */
+body {
+    margin: 0;
+    padding: 0;
+    background: #fce5ed url("merisgay_part_2_bg.png");
+    font-family: 'Belleza', sans-serif;
+    color: #be8dd4;
+    letter-spacing: 0.063rem;
+    line-height: 1.6;
+}
+
+.dancy {
+    opacity: 0;
+    @media(min-width: 900px) {
+        opacity: 1;
+    }
+}
+
+/* TYPOGRAPHY / HEADERS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+    font-family: "Yatra One", system-ui;
+    color: #e29b31;
+    text-align: center;
+    filter: drop-shadow(0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.48));
+}
+
+a {
+    color: #ff00d4;
+    &:active, &:visited { color: #ff00d4; }
+    &:hover { color: #ff73e8; }
+}
+
+#bio b,
+.vbinfo b,
+.expressioninfo b {
+    color: #e29b31;
+    font-size: 1.2rem;
+    filter: drop-shadow(4px 4px 4px rgb(0, 0, 0, 0.48));
+}
+
+.vbpreview {
+    height: 400px;
+    width: auto;
+    &:hover {
+        animation: pulse 0.5s;
+    }
+}
+
+/* HEADER / LOGO */
+#header {
+    width: 100%;
+    background: url("maikory wallpaper.png") no-repeat center;
+    background-size: 115%;
+    padding-top: 1rem;
+    min-height: 300px;
+    background-position: left 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    & > a {
+        text-decoration: none;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 5%;
+        z-index: 10;
+    }
+    & a, & a:link, & a:visited, & a:hover, & a:active {
+        text-decoration: none !important;
+    }
+}
+
+#logo {
+    font-size: clamp(1rem, 5vw + 1rem, 4.5rem);
+    font-family: "Cinzel Decorative", serif;
+    font-weight: 900;
+    background-image: linear-gradient(0deg, hsl(278deg 99% 32%) 0%, hsl(303deg 60% 56%) 20%, hsl(336deg 85% 75%) 40%, hsl(23deg 97% 68%) 60%, hsl(43deg 100% 69%) 80%, hsl(48deg 100% 73%) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.5px #62a8d3;
+    filter: drop-shadow(6px 6px 2px #00000088) drop-shadow(4px 4px 10px #bda1ff);
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+    width: max-content;
+    margin-left: 0;
+}
+
+#backtohome {
+    position: fixed;
+    top: 0.6rem;
+    left: 0.6rem;
+    z-index: 999;
+    & a {
+        font: 0.75rem monospace;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        background: rgba(0, 0, 0, 0.5);
+        color: #be8dd4;
+        text-decoration: none;
+    }
+}
+
+/* NAV BAR */
+#navigationwrap {
+    width: 100%;
+    filter: drop-shadow(0 10px 5px #00000044);
+    margin-top: 0;
+    & #navigation {
+        background: linear-gradient(90deg, #29007100 0%, #62a8d3 20%, #62a8d3 80%, #29007100 100%);
+        font-family: "Yatra One";
+        text-align: center;
+        & a {
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            letter-spacing: 2px;
+            color: #114696;
+            font-weight: bold;
+            text-decoration: none;
+            &:hover {
+                background: #114696;
+                color: #b98029;
+                animation: pulse 0.5s;
+            }
+        }
+    }
+}
+
+/* LAYOUT ENGINE */
+#contentwrap {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 1.25rem auto;
+    gap: 1.25rem;
+    @media(min-width: 900px) {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        max-width: 1300px;
+        width: 85%;
+    }
+}
+
+/* CONTENT */
+#content {
+    background: #030005cc;
+    border-radius: 1.25rem;
+    padding: clamp(1rem, 3vw, 2rem);
+    min-height: 46.875rem;
+    border: 1px solid #62a8d3;
+}
+
+/* SIDEBAR */
+#sidebar {
+    background: #180529dd;
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid #62a8d3;
+    font-size: 0.875rem;
+    @media(min-width: 900px) {
+        position: sticky;
+        top: 1.25rem;
+        height: fit-content;
+    }
+    & .sidebarsection {
+        border: 1px solid #cf82e857;
+        padding: 0.6rem;
+        margin-bottom: 1.25rem;
+        border-radius: 0.6rem;
+    }
+    & #quicklinks {
+        li {
+            padding: 5px;
+            margin: 5px;
+            list-style-type: none;
+            background: #350c5cCC;
+            line-height: 20px;
+            padding: 4px;
+            letter-spacing: 4px;
+            margin-right: 10px;
+            padding-left: 10px;
+            filter: drop-shadow(4px 4px 4px rgb(0, 0, 0, 0.46));
+            text-transform: uppercase;
+            &:link, &:visited, &:active {
+                color: #cf82e8;
+                text-decoration: none !important;
+                cursor: pointer;
+            }
+            &:hover {
+                background: #9030b0;
+                color: #cf82e8;
+                animation: pulse .5s;
+                cursor: pointer;
+                letter-spacing: 6px;
+                text-decoration: none !important;
+            }
+        }
+    }
+}
+
+/* ELEMENTS */
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    align-items: flex-start;
+    .center {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.column {
+    flex: 1;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+/* Specific Column Width Definitions */
+@media(min-width: 900px) {
+    /* 50/50 Split */
+    .flex50 {
+        flex: 0 0 calc(50% - 10px);
+    }
+    /* 33/33/33 Split */
+    .flex33 {
+        flex: 0 0 calc(33.33% - 14px);
+    }
+    /* 25/25/25/25 Split */
+    .flex25 {
+        flex: 0 0 calc(25% - 15px);
+    }
+    /* 80% Width - Used for main content in a lopsided row */
+    .flex80 {
+        flex: 0 0 calc(80% - 16px);
+    }
+    /* 20% Width - Often paired with flex80 */
+    .flex20 {
+        flex: 0 0 calc(20% - 16px);
+    }
+    /* 10% Width - For tiny sidebars or icons */
+    .flex10 {
+        flex: 0 0 calc(10% - 18px);
+    }
+}
+
+/* Tablet/Mobile Widths (Under 900px) */
+@media(max-width: 899px) {
+    .flex50,
+    .flex33,
+    .flex25 {
+        flex: 0 0 100%;
+    }
+}
+
+/* Fixes the Voicebank Icons */
+.vbicon {
+    flex: 0 0 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 5px double #be8dd4;
+}
+
+.vbinfo {
+    flex: 2;
+    text-align: center;
+}
+
+.voicebankbox {
+    background-color: #1f033849;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #62a8d3;
+    filter: drop-shadow(4px 4px 4px rgb(0, 0, 0, 0.486));
+}
+
+.column img,
+.voicebankbox img,
+.columnimg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#ust-table tr {
+    text-align: center;
+}
+
+button {
+    padding: 0.5rem 2rem;
+    border: none;
+    font-size: 1.25rem;
+    background: linear-gradient(90deg, #29007100 0%, #62a8d3 20%, #62a8d3 80%, #29007100 100%);
+    font-family: "Yatra One";
+    font-weight: bold;
+    color: #114696;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    animation: pulse 0.5s;
+    &:hover {
+        background: linear-gradient(90deg, #29007100 0%, #114696 20%, #114696 80%, #29007100 100%);
+        color: #b98029;
+        animation: pulse .5s;
+        font-family: "Yatra One";
+        cursor: pointer;
+    }
+    @media(min-width: 600px) {
+        width: auto;
+    }
+}
+
+/* ANIMATIONS / UTILITIES */
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+}
+
+.video-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 1.25rem 0;
+    iframe {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid #62a8d3;
+    }
+}
+
+/* RSS STYLES */
+.rss-list {
+    list-style: none;
+    padding: 0;
+    & li {
+        margin-bottom: 1.25rem;
+        border-bottom: 1px dashed #62a8d3;
+        padding-bottom: 1rem;
+    }
+}
+
+.blog-post {
+    color: #be8dd4;
+    line-height: 1.6;
+    text-align: left;
+    & img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+}

@@ -1,0 +1,1 @@
+At the beginning of the universe, The Expanse was empty. Dust came to be, alongside the first Inna, Hafei, to fill the void. From dust comes Essence and Souls. These two, along with dust in its pure form, make up the universe. Dust also sparks the powers of Creation and Construction.

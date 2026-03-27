@@ -1,0 +1,18 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.contains("LANGUAGES")
+        - file.ext != "base"
+        - "!title.isEmpty()"
+        - file.name == "index"
+        - file.folder != "LANGUAGES/Varae/dictionary"
+    order:
+      - title
+      - Mainly spoken by
+      - Evolved from
+      - Evolved into
+    sort:
+      - property: file.name
+        direction: DESC

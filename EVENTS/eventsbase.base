@@ -1,0 +1,12 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.contains("EVENTS")
+        - file.ext != "base"
+        - title != "Events"
+    order:
+      - title
+      - file.folder
+    sort: []

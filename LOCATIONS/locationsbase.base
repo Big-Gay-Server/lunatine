@@ -1,0 +1,18 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.contains("LOCATIONS")
+        - file.ext != "base"
+        - file.name == "index"
+    order:
+      - title
+      - Type
+      - Inhabitants Demonym
+      - Ruler/Owner
+      - "Location Under:"
+      - "Sublocations:"
+    sort:
+      - property: file.name
+        direction: DESC

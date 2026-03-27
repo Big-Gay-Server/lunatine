@@ -1,0 +1,318 @@
+@font-face {
+    font-family: 'Heavenly Celestial';
+    src: url('.fonts/Heavenly Celestial Demo.otf') format('opentype'),
+        url('.fonts/Heavenly Celestial Demo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    /* Expanded "Space Magic" Palette */
+    --color-1: #080212;
+    /* Deep Void Background */
+    --color-2: #1a0b2e;
+    /* Deep Nebula Purple (Cards/Sidebars) */
+    --color-3: #5a189a;
+    /* Royal Magic Purple (Borders) */
+    --color-4: #e36acb;
+    /* Neon Magenta Accent (Links/Interactive) */
+    --color-5: #e0aaff;
+    /* Starlight Lavender (Primary Text) */
+    --color-6: #240046;
+    /* Midnight Cloak (Inner Sections) */
+    --color-7: #e3ae54;
+    /* Solar Gold (Rare Accents/Highlights) */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--color-5);
+    line-height: 1.6;
+    background: var(--color-1) url(/GRAPHICS/background.png);
+    font-weight: 500;
+    font-family: "Caudex", serif;
+    letter-spacing: 0.005rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+    font-family: "Kurale", serif;
+    letter-spacing: 0.1rem;
+    color: var(--color-4);
+    /* Magenta for headers to match hair accents */
+}
+
+/* LAYOUT ENGINE */
+.contentwrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+    max-width: 90vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* CONTENT */
+.content-container {
+    flex: 1;
+    min-width: 0;
+    background: color-mix(in srgb, var(--color-2), transparent 20%);
+    border-radius: 1.25rem;
+    padding: clamp(1rem, 3vw, 2rem);
+    border: 1px solid var(--color-3);
+}
+
+/* SIDEBARS */
+.sidebar {
+    flex: 0 0 250px;
+    max-width: 250px;
+    background: var(--color-6);
+    /* Using the darker midnight purple here */
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-3);
+    box-sizing: border-box;
+
+    & .sidebarsection {
+        border: 1px solid var(--color-3);
+        padding: 0.6rem;
+        margin-bottom: 1.25rem;
+        border-radius: 0.6rem;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    & #quicklinks {
+        li {
+            list-style-type: none;
+            background: var(--color-2);
+            line-height: 20px;
+            padding: 10px;
+            letter-spacing: 4px;
+            margin: 5px 10px 5px 5px;
+            filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.46));
+            text-transform: uppercase;
+
+            &:link,
+            &:visited,
+            &:active {
+                color: var(--color-5);
+                text-decoration: none !important;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background: var(--color-4);
+                color: var(--color-1);
+                animation: pulse .5s;
+                cursor: pointer;
+                letter-spacing: 6px;
+            }
+        }
+    }
+}
+
+.header {
+    margin-bottom: 20px
+}
+
+.nav a {
+    padding: 10px;
+    font-size: 20px;
+    color: var(--color-5);
+}
+
+a {
+    color: var(--color-4);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--color-7);
+    /* Turns gold on hover like a solar flare */
+    text-decoration: underline;
+}
+
+/* Dataview Tables */
+.dataview-table-container td:empty::after {
+    content: "—";
+    color: var(--color-3);
+}
+
+.dataview-table-container tr {
+    border-bottom: 1px solid var(--color-3);
+}
+
+/* Bases Table */
+.bases-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    color: var(--color-5);
+}
+
+.bases-table th {
+    color: var(--color-7);
+    /* Gold headers for tables */
+    border-bottom: 1px solid var(--color-3);
+}
+
+.bases-table td {
+    padding: 10px;
+    border-bottom: 1px solid var(--color-6);
+}
+
+.file-link {
+    color: var(--color-4);
+}
+
+.logo {
+    font-size: 5vw;
+    font-family: 'Heavenly Celestial', serif;
+    letter-spacing: 30px;
+    color: var(--color-1);
+    /* Fill color */
+    -webkit-text-stroke: var(--color-4) 1px;
+    /* Magenta stroke */
+    filter: drop-shadow(0 0 7px var(--color-5));
+    
+}
+
+.header a:hover {
+    text-decoration: none;
+    letter-spacing: .5em;
+}
+
+/* 1. MAIN WRAPPER & TEXT WRAP LOGIC */
+.profile-wrapper {
+    display: block;
+    width: 100%;
+    /* Ensures the container expands to fit the floated sidebar */
+    overflow: auto;
+}
+
+.bio-sidebar {
+    /* The "Newspaper" wrap effect */
+    float: right;
+    width: 320px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+
+    background: rgba(26, 11, 46, 0.85);
+    /* var(--color-2) with alpha */
+    padding: 20px;
+    border: 1px solid var(--color-3);
+    border-radius: 1.25rem;
+    box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
+    text-align: center;
+}
+
+/* 2. THE TABLE: Centering and Wrapping */
+.bio-sidebar table {
+    margin: 0 auto !important;
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.bio-sidebar tr {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+    border: none !important;
+}
+
+/* Label Column */
+.bio-sidebar td:first-child {
+    flex: 0 0 35%;
+    text-align: right;
+    font-weight: bold;
+    color: var(--color-7);
+    /* Gold for labels like character halos */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none !important;
+}
+
+/* Value Column */
+.bio-sidebar td:last-child {
+    flex: 1 1 auto;
+    text-align: left;
+    color: var(--color-5);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    border: none !important;
+}
+
+/* 3. HEADERS & IMAGES */
+.bio-sidebar h2,
+.bio-sidebar h3,
+.bio-sidebar thead {
+    display: block;
+    text-align: center;
+    color: var(--color-4);
+    margin: 15px 0 10px 0;
+    font-size: 1.2rem;
+    text-shadow: 0 0 8px var(--color-3);
+}
+
+.bio-sidebar img {
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--color-3);
+}
+
+/* 4. CLEANUP */
+.bio-sidebar tbody {
+    display: block;
+    width: 100%;
+}
+
+.bio-sidebar hr,
+.bio-content hr {
+    display: none !important;
+}
+
+/* 5. MOBILE RESPONSIVENESS */
+@media (max-width: 800px) {
+    .bio-sidebar {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+
+    .bio-sidebar tr {
+        flex-wrap: wrap;
+        gap: 2px;
+    }
+
+    .bio-sidebar td:first-child,
+    .bio-sidebar td:last-child {
+        flex: 1 0 100%;
+        text-align: center;
+    }
+}

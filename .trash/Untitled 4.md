@@ -1,0 +1,1 @@
+An abnormally powerful Selhae who was used by the Solei government as a weapon. Assisted Esela in the Crescentmoon migration, but was trapped on Asilles due to Esela’s power waning.

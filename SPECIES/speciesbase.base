@@ -1,0 +1,12 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.startsWith("SPECIES")
+        - file.ext != "base"
+    order:
+      - title
+    sort:
+      - property: file.name
+        direction: DESC

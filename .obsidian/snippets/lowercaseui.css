@@ -1,0 +1,67 @@
+/* global lowercase */
+body *,
+/* placeholder */
+:is(
+input:is(
+[type="search"],
+[type="text"]),
+.prompt-input
+)::placeholder {
+text-transform: lowercase !important;
+}
+  
+/* exceptions */
+  
+/* titles */
+:is(
+.inline-title,
+.view-header-title
+)[contenteditable="true"],
+.view-header-breadcrumb,
+.titlebar-text,
+  
+[class^="nav-file"],
+[class^="nav-folder"],
+[class*="tree-item"],
+[class*="search-result-file-"],
+.suggestion-title,
+  
+.markdown-rendered .internal-link,
+  
+.workspace-tab-header:is(
+[data-type="markdown"],
+[data-type="canvas"],
+[data-type="bases"]
+) .workspace-tab-header-inner-title,
+body:has(
+.workspace-tab-header.workspace-tab-header:is(
+[data-type="markdown"],
+[data-type="canvas"],
+[data-type="bases"]
+):hover) .tooltip,
+.tooltip:is(
+.mod-file,
+.mod-folder
+),
+  
+/* note text */
+.markdown-source-view.mod-cm6 .cm-content,
+.markdown-source-view.mod-cm6 .cm-content *,
+.popover.hover-popover .markdown-preview-view,
+.popover.hover-popover .markdown-preview-view *,
+  
+/* input fields */
+input[type="search"],
+input[type="text"],
+.prompt-input,
+textarea,
+  
+/* tags */
+.cm-hashtag,
+a.tag,
+.tag-pane-tag,
+  
+/* vault */
+.workspace-drawer-vault-name {
+text-transform: none !important;
+}

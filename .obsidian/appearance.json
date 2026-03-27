@@ -1,0 +1,16 @@
+{
+  "cssTheme": "Catppuccin",
+  "monospaceFontFamily": "Monaspace Neon",
+  "accentColor": "#f5c2e7",
+  "textFontFamily": "SN Pro",
+  "interfaceFontFamily": "SN Pro",
+  "theme": "obsidian",
+  "nativeMenus": false,
+  "showViewHeader": true,
+  "showRibbon": true,
+  "baseFontSizeAction": true,
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "lowercaseui"
+  ]
+}

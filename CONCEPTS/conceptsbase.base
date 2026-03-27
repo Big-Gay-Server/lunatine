@@ -1,0 +1,13 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder.contains("CONCEPTS")
+        - file.ext != "base"
+        - file.name == "index"
+    order:
+      - title
+    sort:
+      - property: file.name
+        direction: DESC

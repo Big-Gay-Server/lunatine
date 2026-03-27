@@ -1,0 +1,293 @@
+{
+  "main": {
+    "id": "32cb84df7d25cb18",
+    "type": "split",
+    "children": [
+      {
+        "id": "99295c74abf384ed",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8c224558a59ca233",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "STORY/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d1ecb5f9bc98a708",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6b5a981be3f51a5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "52a7fa4a3980b932",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "a4a9109648b07c4f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ab2f31136c555ea0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          },
+          {
+            "id": "d7a5aee250372dec",
+            "type": "leaf",
+            "state": {
+              "type": "VIEW_TYPE_LONGFORM_EXPLORER",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "VIEW_TYPE_LONGFORM_EXPLORER"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 236.5
+  },
+  "right": {
+    "id": "ea4483eef96bb84e",
+    "type": "split",
+    "children": [
+      {
+        "id": "e42138525fc4c41e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1d4b072197f93ee3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "591b18d1aa3a12ef",
+            "type": "leaf",
+            "state": {
+              "type": "CALENDARIUM",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "CALENDARIUM"
+            }
+          },
+          {
+            "id": "a11da1ed54982d61",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "LANGUAGES/Varae/dictionary/miir.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties for miir"
+            }
+          },
+          {
+            "id": "341807e5da5cb74b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "LANGUAGES/Varae/dictionary/miir.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for miir"
+            }
+          },
+          {
+            "id": "967611e73b56bd24",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "LANGUAGES/Varae/dictionary/miir.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of miir"
+            }
+          },
+          {
+            "id": "a49d1d338a061c38",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "LANGUAGES/Varae/dictionary/miir.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from miir"
+            }
+          },
+          {
+            "id": "5c4a4f0fab3abc3a",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "1873e4ba55fe05c4",
+            "type": "leaf",
+            "state": {
+              "type": "tag-gallery-info",
+              "state": {
+                "filePath": "GALLERY/view from asilles.md"
+              },
+              "icon": "lucide-ghost",
+              "title": "tag-gallery-info"
+            }
+          }
+        ],
+        "currentTab": 7
+      }
+    ],
+    "direction": "horizontal",
+    "width": 338,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "markdown-importer:Open format converter": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-leaflet-plugin:Open Leaflet Map": false,
+      "obsidian-importer:Open Importer": false,
+      "obsidian-rich-links:Rich Links": false,
+      "obsidian-stille:Toggle Stille": false,
+      "tagged-gallery:Gallery": false,
+      "media-extended:Open external media": false,
+      "vscode-editor:Create Code File": false,
+      "terminal:Open terminal": false,
+      "quartz-syncer:Quartz Syncer publication center": false,
+      "calendarium:Open Calendarium": false
+    }
+  },
+  "active": "8c224558a59ca233",
+  "lastOpenFiles": [
+    "EVENTS/index.md",
+    "EVENTS/eventsbase.base",
+    "EVENTS/timeline.md",
+    "EVENTS/Kohoii Solei War/index.md",
+    "EVENTS/Kohoii Solei War/Kohoii-Solei War.md",
+    "EVENTS/Debris Impact/index.md",
+    "LANGUAGES/index.md",
+    "LANGUAGES/languagesbase.base",
+    "LANGUAGES/Varae/word generator.md",
+    "LANGUAGES/Varae/script.md",
+    "CHARACTERS/Esela/index.md",
+    "Construct.md",
+    "LANGUAGES/Varae/index.md",
+    "LANGUAGES/Innalang/index.md",
+    "LANGUAGES/Acorithe/index.md",
+    "CONCEPTS/Construction/index.md",
+    "CONCEPTS/index.md",
+    "LOCATIONS/index.md",
+    "CONCEPTS/conceptsbase.base",
+    "LOCATIONS/Kingdom of Acorithe/index.md",
+    "LOCATIONS/locationsbase.base",
+    "SPECIES/speciesbase.base",
+    "LOCATIONS/Maeniil/index.md",
+    "templates/characters_index.php",
+    "templates/default.php",
+    "SPECIES/index.md",
+    "codetop.php",
+    "display.php",
+    "templates/characters_bio.php",
+    "CHARACTERS/Esela/bio.md",
+    "Untitled.md",
+    "templates/default.md",
+    "LANGUAGES/Varae/grammar.md",
+    "index.md",
+    "LANGUAGES/Varae/dictionary/index.md",
+    "crescentmoon.PNG",
+    "GRAPHICS/banner.png",
+    "GRAPHICS/world cover.png",
+    "GRAPHICS/Untitled.png",
+    "GRAPHICS/noicon.png",
+    "GRAPHICS/nerdchart.png",
+    "GRAPHICS/maeniil.png",
+    "GRAPHICS/image (1).png",
+    "GRAPHICS/Illustration2.png",
+    "GRAPHICS/idk maybe asilles (1).jpg",
+    "CHARACTERS/relationship chart.canvas"
+  ]
+}

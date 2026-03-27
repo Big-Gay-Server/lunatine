@@ -1,0 +1,5 @@
+---
+aliases:
+  - Artifacts
+title: Artifacts
+---

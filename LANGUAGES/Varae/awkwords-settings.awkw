@@ -1,0 +1,10 @@
+#awkwords version 1.2
+V:a/i/u/e/o/ii/ae/ei
+C:b/p/t/d/k/g/s/m/n/r/l/w/y/v/th/h
+E:a/u/e/o/ii/ae/ei
+O:b/p/t/d/k/g/s/m/n/r/l/w/v/th/h/a/u/e/o/ii/ae/ei/i/y
+I:a/u/e/o/ii/ae/ei/i
+r:(C)I((C)(V((C)(V))((C)(V))(E)))
+n:500
+nle
+filterdup

@@ -1,0 +1,51 @@
+{
+  "imgDataFolder": "GALLERY",
+  "imgmetaTemplatePath": null,
+  "hiddenInfoTicker": {
+    "name": false,
+    "path": false,
+    "extension": false,
+    "size": false,
+    "dimensions": false,
+    "date": false,
+    "imageTags": false,
+    "backlinks": false,
+    "infolinks": false,
+    "relatedFiles": false,
+    "colorPalette": false,
+    "paging": false,
+    "tags": true,
+    "palette": true,
+    "targetImage": true,
+    "start": true,
+    "next": true,
+    "prev": true
+  },
+  "autoCompleteFields": {},
+  "uniqueMobileSettings": false,
+  "desktop": {
+    "filterType": 2,
+    "defaultFilter": "",
+    "lastFilter": "```gallery\npath:\nname:\ntags:\nregex:\nmatchCase:false\nexclusive:false\nimgWidth:400\nsort:UNSORTED\nreverseOrder:false\nrandom:0\n```",
+    "rightClickInfo": true,
+    "rightClickInfoGallery": true,
+    "rightClickMenu": true,
+    "width": 400,
+    "useMaxHeight": false,
+    "maxHeight": 400
+  },
+  "mobile": {
+    "filterType": 2,
+    "defaultFilter": "",
+    "lastFilter": "```gallery\npath:\nname:\ntags:\nregex:\nmatchCase:false\nexclusive:false\nimgWidth:400\nsort:UNSORTED\nreverseOrder:false\nrandom:0\n```",
+    "rightClickInfo": true,
+    "rightClickInfoGallery": true,
+    "rightClickMenu": true,
+    "width": 400,
+    "useMaxHeight": false,
+    "maxHeight": 400
+  },
+  "skipMetadataOverwrite": false,
+  "alternativeTags": null,
+  "namedFilters": []
+}

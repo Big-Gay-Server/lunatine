@@ -1,0 +1,61 @@
+<?php
+// basic setup
+$markdownDir = __DIR__ . '/';
+$fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
+$requestedPath = trim(str_replace('..', '', $fileName), '/');
+if (empty($requestedPath)) $requestedPath = 'index';
+
+// 1. Determine Section & Title
+$urlParts = explode('/', $requestedPath);
+$section = strtolower($urlParts[0]);
+$pageTitle = ucfirst(basename($requestedPath));
+
+// 2. Build Breadcrumbs
+$breadcrumbLinks = [];
+$currentBreadPath = "";
+foreach ($urlParts as $part) {
+    $currentBreadPath .= "/" . $part;
+    $name = strtoupper(str_replace('-', ' ', $part));
+    $breadcrumbLinks[] = "<a href='$currentBreadPath'>$name</a>";
+}
+$breadcrumbs = implode(' > ', $breadcrumbLinks);
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title><?= htmlspecialchars($pageTitle ?? 'Wiki') ?> | Lunatine</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Infant:ital,wght@0,300..700;1,300..700&family=Cormorant+Upright:wght@300;400;500;600;700&family=Kurale&family=Milonga&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <center>
+            <div class="logo"><a href="/">lunatine</a></div>
+            <div class="nav">
+                <a href="/characters">characters</a>
+                <a href="/locations">locations</a>
+                <a href="/species">species</a>
+                <a href="/languages">languages</a>
+                <a href="/concepts">concepts</a>
+                <a href="/events">events</a>
+                <a href="/artifacts">artifacts</a>
+                <a href="/organizations">organizations</a>
+                <a href="/story">story</a>
+            </div>
+        </center>
+    </div>
+    <div class="contentwrap">
+        <div class="sidebar"><?php @include 'sidebar.php'; ?></div>
+        <div class="content-container">
+            <div class="breadcrumbs"><a href="/"> HOME </a> > <?= $breadcrumbs ?></div>
+            <h1>
+                <center><?= htmlspecialchars($pageTitle) ?></center>
+            </h1>
