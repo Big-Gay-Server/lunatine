@@ -167,13 +167,6 @@ if ($filePath && file_exists($filePath)) {
                 $title = trim($m[1] . ' ' . $m[2]);
                 return "<h3 class='bio-section-header'>$title</h3>";
             }, $text);
-
-            // 2. Remove those annoying backticks (``) showing up for empty values
-            $text = str_replace(['` `', '``'], '', $text);
-
-            // 3. Final cleanup of any code tags or stray hr lines
-            $text = str_replace(['<pre><code>', '</code></pre>', '<code>', '</code>'], ['', '', '', ''], $text);
-            $text = preg_replace('/<hr\s*\/?>/i', '', $text);
       
             // C. Shortcode Embedder
             $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
