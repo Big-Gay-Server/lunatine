@@ -9,6 +9,11 @@ $Parsedown = new Parsedown();
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
 
+// --- this should hopefully parse the gloss blocks.
+require_once 'ParsedownGloss.php';
+$p = new ParsedownGloss();
+echo $p->text($your_markdown_string);
+
 // --- ALLOWS FOR CASE-INSENSITIVITY IN URLS ---
 function find_case_insensitive($baseDir, $path) {
     $segments = explode('/', trim($path, '/'));
