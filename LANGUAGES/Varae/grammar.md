@@ -102,7 +102,7 @@ question sentences are marked with the `sem` particle placed at the end of the s
 
 ```gloss
 \ex iise otem nihoso vaii asu aeso vaeya
-\gla iise o-tem niho-so vaii asu ae-so  vaeya.
+\gla iise o-tem niho-so vaii asu ae-so vaeya.
 \glb person REL-who speak-PST 1SG to be-PST kind.
 \ft The person who spoke to me was kind.
 ```
@@ -190,7 +190,7 @@ the copula `ae` is the only irregular verb in varae, in the sense that it does n
 ```gloss
 \num 1
 \ex maerut ~ vaii somela aeme
-\gla maerut ~  vaii somela ae-me.
+\gla maerut ~ vaii somela ae-me.
 \glb recently, 1SG happy be-PRS-PRF.
 \ft Recently, I have been happy.
 ```

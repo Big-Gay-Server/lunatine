@@ -266,14 +266,14 @@ a, .file-link {
 
 /* Metadata Styles */
 .gloss-num { font-weight: bold; margin-right: 5px; }
-.gloss-lbl { font-style: italic; color: #888; margin-right: 10px; }
+.gloss-lbl { font-style: italic; color: var(--color-7); margin-right: 10px; }
 .gloss-ex { margin-bottom: 8px; font-weight: 500; }
-.gloss-src { font-size: 0.85em; color: #777; text-align: right; margin-top: 4px; }
+.gloss-src { font-size: 0.85em; color: var(--color-5); text-align: right; margin-top: 4px; }
 
 /* Aligned Column Styles */
 .gloss-gla { font-style: italic; }
-.gloss-glb { font-variant: small-caps; color: #555; }
-.gloss-glc { font-size: 0.9em; color: #999; }
+.gloss-glb { font-variant: small-caps; color: var(--color-5); }
+.gloss-glc { font-size: 0.9em; color: var(--color-5); }
 
 /* Layout Fixes */
 .gloss-word-wrap { display: flex; flex-wrap: wrap; gap: 0.5em 1em; }
