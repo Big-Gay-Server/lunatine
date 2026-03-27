@@ -310,6 +310,6 @@ quotes/quotations, in written varae, use curly brackets `{ }` as quotation marke
 ```gloss
 \ex ota vaii beiso ~ deii vaii haraeso {koii aese mae vaiimosa}
 \gla o-ta vaii beiso ~ deii vaii harae-so koii koaese mae vaiimosa.
-\glb REL-when 1SG leave-PAS , 3SG 1SG tell-PAS you  IMP-be-FUT safe please
+\glb REL-when 1SG leave-PAS , 3SG 1SG tell-PAS you IMP-be-FUT safe please
 \ft When I left, she told me, 'Please be safe.'
 ```
