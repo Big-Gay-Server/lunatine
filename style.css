@@ -258,6 +258,18 @@ a, .file-link {
     }
 }
 
+/* INTERLINEAR GLOSSES */
+/* Hide the \ex, \gla, etc. in the browser */
+.gloss-id {
+    display: none;
+}
+
+/* Example: make the source line italic and the translation bold */
+.gloss-ex { font-style: italic; }
+.gloss-ft { font-weight: bold; margin-top: 10px; }
+
+
+
 /* 5. MOBILE RESPONSIVENESS */
 @media (max-width: 800px) {
     .bio-sidebar {
