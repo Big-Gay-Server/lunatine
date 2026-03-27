@@ -69,11 +69,11 @@ adverbs are placed after the verb, and that extends to adverbial clauses and phr
 
 question sentences are marked with the `sem` particle placed at the end of the sentence.
 
-```jsx
-"koii vaiivaii haeyase suran sem"
-koii vaiivaii haeyase  suran sem
-2SG  1PL      join-FUT later Q
-"Will you join us later?"
+```gloss
+\ex koii vaiivaii haeyase suran sem
+\gla koii vaiivaii haeyase suran sem
+\glb 2SG 1PL join-FUT later Q
+\ft Will you join us later?
 ```
 
 ## clauses
@@ -93,18 +93,18 @@ koii vaiivaii haeyase  suran sem
 | “that”  | `taem`     | `otaem`       |
 | “which” | `tes`      | `otes`        |
 
-```jsx
-"ota deii meris fa vaeso, deii eheso"
-o-ta      deii meris fa vae-so,    deii ehe-so.
-REL-when  3SG  moon  at look-PST,  3SG  smile-PST.
-"When she looked at the moon, she smiled."
+```gloss
+\ex ota deii meris fa vaeso, deii eheso
+\gla o-ta deii meris fa vae-so, deii ehe-so.
+\glb REL-when 3SG moon at look-PST, 3SG smile-PST.
+\ft When she looked at the moon, she smiled.
 ```
 
-```jsx
-"iise otem nihoso vaii asu aeso vaeya"
-iise   o-tem    niho-so    vaii asu ae-so  vaeya.
-person REL-who  speak-PST  1SG  to  be-PST kind.
-"The person who spoke to me was kind."
+```gloss
+\ex iise otem nihoso vaii asu aeso vaeya
+\gla iise o-tem niho-so vaii asu ae-so  vaeya.
+\glb person REL-who speak-PST 1SG to be-PST kind.
+\ft The person who spoke to me was kind.
 ```
 
 ---
@@ -127,18 +127,20 @@ all pronouns are gender neutral. plural pronouns are made by reduplication.
 
 this language only has one true case, that being the genitive case. the suffix **`fel`** is added to the end of the noun possessing the object.
 
-```jsx
-"selafel nuye"
-sela-fel    nuye
-flower-GEN  petal
-"The flower's petals"
+```gloss
+\num 1
+\ex selafel nuye
+\gla sela-fel nuye
+\glb flower-GEN petal
+\ft The flower's petals
 ```
 
-```jsx
-"niisafel saeka"
-niisa-fel saeka
-fire-GEN  color
-"The color of the fire"
+```gloss
+\num 2
+\ex niisafel saeka
+\gla niisa-fel saeka
+\glb fire-GEN color
+\ft The color of the fire
 ```
 
 a pseudo-case that varae also utilizes is in regards to the [Inna](Inna%2099642857c4464973a4612f6533cb754d.md) - the god-like species that created the universe. when using pronouns in regards to them, the prefix `iina` is added. it acts as a sort of honorific, but is only utilized for the inna. generally, a person using this on themselves or another person would be thought of extremely negatively. 
@@ -185,18 +187,20 @@ nouns can also be turned into verbs by adding this `sii` suffix, for example `le
 
 the copula `ae` is the only irregular verb in varae, in the sense that it does not end in `sii`. present plain form is simply `ae` , and all affixes remain the same. 
 
-```jsx
-"maerut ~ vaii somela aeme"
-maerut ~  vaii somela ae-me.
-recently, 1SG  happy  be-PRS-PRF.
-"Recently, I have been happy."
+```gloss
+\num 1
+\ex maerut ~ vaii somela aeme
+\gla maerut ~  vaii somela ae-me.
+\glb recently, 1SG happy be-PRS-PRF.
+\ft Recently, I have been happy.
 ```
 
-```jsx
-"honthe vaii ralaniin asu moaese garusera"
-honthe  vaii ralaniin asu mo-ae-se   garu-se-ra.
-tonight 1SG  festival to  NEG-be-FUT go-FUT-CONT.
-"I will not be going to the festival tonight."
+```gloss
+\num 2
+\ex honthe vaii ralaniin asu moaese garusera
+\glb honthe vaii ralaniin asu mo-ae-se garu-se-ra.
+\glb tonight 1SG festival to NEG-be-FUT go-FUT-CONT.
+\ftI will not be going to the festival tonight.
 ```
 
 ### moods
@@ -209,11 +213,11 @@ varae has three moods: the indicative, imperative, and the abilitative. they can
 | imperative | `koleivsii` “dream!” | `komoleivsii` “don’t dream!” |
 | abilitative | `soleivsii` “can dream” | `somoleivsii` “can’t dream” |
 
-```jsx
-"vaii somoleivsii gobu sem"
-vaii so-mo-leivsii   gobu sem
-1SG  ABL-NEG-dream   even Q
-"Can't I even dream?"
+```gloss
+\ex vaii somoleivsii gobu sem
+\gla vaii so-mo-leivsii gobu sem
+\glb 1SG ABL-NEG-dream even Q
+\ft Can't I even dream?
 ```
 
 ## adverbs

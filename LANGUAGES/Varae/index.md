@@ -12,3 +12,5 @@ title: Varae
 [[LANGUAGES/Varae/dictionary/index|Varae Dictionary]]
 
 [[LANGUAGES/Varae/script|Varae Script]]
+
+[[LANGUAGES/Varae/translations|Varae Translations]]
