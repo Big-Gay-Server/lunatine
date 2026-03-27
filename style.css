@@ -264,46 +264,20 @@ a, .file-link {
     display: none;
 }
 
-/* Container for the whole gloss */
-.gloss-container {
-    margin: 1.5em 0;
-    font-family: inherit;
-}
+/* Metadata Styles */
+.gloss-num { font-weight: bold; margin-right: 5px; }
+.gloss-lbl { font-style: italic; color: #888; margin-right: 10px; }
+.gloss-ex { margin-bottom: 8px; font-weight: 500; }
+.gloss-src { font-size: 0.85em; color: #777; text-align: right; margin-top: 4px; }
 
-/* Wraps the columns so they can break to a new line */
-.gloss-word-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 1em; /* Horizontal gap between words */
-    line-height: 1.4;
-}
+/* Aligned Column Styles */
+.gloss-gla { font-style: italic; }
+.gloss-glb { font-variant: small-caps; color: #555; }
+.gloss-glc { font-size: 0.9em; color: #999; }
 
-/* Each individual vertical pair (Word + Gloss) */
-.gloss-column {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5em;
-}
-
-/* Source language (gla) */
-.gla {
-    font-style: italic;
-}
-
-/* Metalanguage/Morphemes (glb) */
-.glb {
-    font-variant: small-caps;
-    color: #666;
-    font-size: 0.9em;
-}
-
-/* Free Translation (ft) */
-.gloss-ft {
-    display: block;
-    margin-top: 0.5em;
-    border-top: 1px solid #eee;
-    padding-top: 0.3em;
-}
+/* Layout Fixes */
+.gloss-word-wrap { display: flex; flex-wrap: wrap; gap: 0.5em 1em; }
+.gloss-column { display: flex; flex-direction: column; }
 
 
 /* 5. MOBILE RESPONSIVENESS */
