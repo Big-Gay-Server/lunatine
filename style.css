@@ -30,6 +30,7 @@
     /* Solar Gold (Rare Accents/Highlights) */
 }
 
+/* BODY */
 body {
     margin: 0;
     padding: 0;
@@ -41,6 +42,7 @@ body {
     letter-spacing: 0.005rem;
 }
 
+/* HEADINGS */
 h1,
 h2,
 h3,
@@ -51,6 +53,16 @@ th {
     font-family: "Kurale", serif;
     letter-spacing: 0.1rem;
     color: var(--color-4);
+}
+
+/* LINKS */
+a, .file-link {
+    color: var(--color-4);
+    text-decoration: none;
+    &:hover {
+        color: var(--color-7);
+        text-decoration: underline;
+    }
 }
 
 /* LAYOUT ENGINE */
@@ -75,7 +87,36 @@ th {
     border: 1px solid var(--color-3);
 }
 
-/* SIDEBARS */
+/* HEADER / NAVIGATION */
+.header {
+    margin-bottom: 20px;
+    & a:hover {
+        text-decoration: none;
+    }
+}
+
+.logo {
+    font-size: 5vw;
+    font-family: 'Heavenly Celestial', serif;
+    letter-spacing: 30px;
+    color: var(--color-1);
+    -webkit-text-stroke: var(--color-4) 1px;
+    filter: drop-shadow(0 0 7px var(--color-5));
+    & a:hover {
+        letter-spacing: .5em;
+    }
+}
+
+.nav a {
+    padding: 10px;
+    font-size: 20px;
+    color: var(--color-5);
+    & a:hover {
+        letter-spacing: .3em;
+    }
+}
+
+/* SIDEBAR */
 .sidebar {
     flex: 0 0 250px;
     max-width: 250px;
@@ -123,80 +164,23 @@ th {
     }
 }
 
-.header {
-    margin-bottom: 20px
-}
-
-.nav a {
-    padding: 10px;
-    font-size: 20px;
-    color: var(--color-5);
-}
-
-.nav a:hover {
-    letter-spacing: .3em;
-}
-
-a {
-    color: var(--color-4);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--color-7);
-    text-decoration: underline;
-}
-
-/* Dataview Tables */
-.dataview-table-container td:empty::after {
-    content: "—";
-    color: var(--color-3);
-}
-
-.dataview-table-container tr {
-    border-bottom: 1px solid var(--color-3);
-}
-
-/* Bases Table */
+/* BASES TABLES */
 .bases-table {
     width: 100%;
     border-collapse: collapse;
     background: transparent;
     color: var(--color-5);
+    & th {
+        color: var(--color-7);
+        border-bottom: 1px solid var(--color-3);
+    }
+    & td {
+        padding: 10px;
+        border-bottom: 1px solid var(--color-6);
+    }
 }
 
-.bases-table th {
-    color: var(--color-7);
-    border-bottom: 1px solid var(--color-3);
-}
-
-.bases-table td {
-    padding: 10px;
-    border-bottom: 1px solid var(--color-6);
-}
-
-.file-link {
-    color: var(--color-4);
-}
-
-.logo {
-    font-size: 5vw;
-    font-family: 'Heavenly Celestial', serif;
-    letter-spacing: 30px;
-    color: var(--color-1);
-    -webkit-text-stroke: var(--color-4) 1px;
-    filter: drop-shadow(0 0 7px var(--color-5));
-}
-
-.logo a:hover {
-    letter-spacing: .5em;
-}
-
-.header a:hover {
-    text-decoration: none;
-}
-
-/* 1. MAIN WRAPPER & TEXT WRAP LOGIC */
+/* CHARACTER PROFILES */
 .profile-wrapper {
     display: block;
     width: 100%;
@@ -214,81 +198,64 @@ a:hover {
     border-radius: 1.25rem;
     box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
     text-align: center;
-}
-
-/* 2. THE TABLE: Centering and Wrapping */
-.bio-sidebar table {
-    margin: 0 auto !important;
-    display: table;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.bio-sidebar tr {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 10px;
-    border: none !important;
-}
-
-/* Label Column */
-.bio-sidebar td:first-child {
-    flex: 0 0 35%;
-    text-align: right;
-    font-weight: bold;
-    color: var(--color-7);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: none !important;
-}
-
-/* Value Column */
-.bio-sidebar td:last-child {
-    flex: 1 1 auto;
-    text-align: left;
-    color: var(--color-5);
-    font-size: 0.95rem;
-    line-height: 1.4;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    border: none !important;
-}
-
-/* 3. HEADERS & IMAGES */
-.bio-sidebar h2,
-.bio-sidebar h3,
-.bio-sidebar thead {
-    display: block;
-    text-align: center;
-    color: var(--color-4);
-    margin: 15px 0 10px 0;
-    font-size: 1.2rem;
-    text-shadow: 0 0 8px var(--color-3);
-}
-
-.bio-sidebar img {
-    display: block;
-    margin: 0 auto 15px auto;
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    border: 1px solid var(--color-3);
-}
-
-/* 4. CLEANUP */
-.bio-sidebar tbody {
-    display: block;
-    width: 100%;
-}
-
-.bio-sidebar hr,
-.bio-content hr {
-    display: none !important;
+    & table {
+        margin: 0 auto !important;
+        display: table;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    & tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 10px;
+        border: none !important;
+    }
+    & td:first-child {
+        flex: 0 0 35%;
+        text-align: right;
+        font-weight: bold;
+        color: var(--color-7);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none !important;
+    }
+    & td:last-child {
+        flex: 1 1 auto;
+        text-align: left;
+        color: var(--color-5);
+        font-size: 0.95rem;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        border: none !important;
+    }
+    & h2,
+    & h3,
+    & thead {
+        display: block;
+        text-align: center;
+        color: var(--color-4);
+        margin: 15px 0 10px 0;
+        font-size: 1.2rem;
+        text-shadow: 0 0 8px var(--color-3);
+    }
+    & img {
+        display: block;
+        margin: 0 auto 15px auto;
+        max-width: 100%;
+        height:  auto;
+        border-radius: 10px;
+        border: 1px solid var(--color-3);
+    }
+    & tbody {
+        display: block;
+        width: 100%;
+    }
 }
 
 /* 5. MOBILE RESPONSIVENESS */
