@@ -133,6 +133,10 @@ th {
     color: var(--color-5);
 }
 
+.nav a:hover {
+    letter-spacing: .3em;
+}
+
 a {
     color: var(--color-4);
     text-decoration: none;
@@ -182,12 +186,14 @@ a:hover {
     color: var(--color-1);
     -webkit-text-stroke: var(--color-4) 1px;
     filter: drop-shadow(0 0 7px var(--color-5));
-    
+}
+
+.logo a:hover {
+    letter-spacing: .5em;
 }
 
 .header a:hover {
     text-decoration: none;
-    letter-spacing: .3em;
 }
 
 /* 1. MAIN WRAPPER & TEXT WRAP LOGIC */
