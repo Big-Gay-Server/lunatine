@@ -9,7 +9,7 @@ $Parsedown = new Parsedown();
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
 
-// --- HELPER: Case-Insensitive Resolver ---
+// --- CASE-INSENSITIVELY TRANSLATE URL TO PATH ---
 function find_case_insensitive($baseDir, $path) {
     $segments = explode('/', trim($path, '/'));
     $currentPath = rtrim($baseDir, '/');
@@ -29,7 +29,7 @@ function find_case_insensitive($baseDir, $path) {
     return $currentPath;
 }
 
-// --- LOCATE FILE ---
+// --- LOCATE FILE FROM PATH ---
 $target = trim($requestedPath, '/');
 $resolvedBase = find_case_insensitive($markdownDir, $target);
 
@@ -183,7 +183,7 @@ if ($filePath && file_exists($filePath)) {
                 return $path ? "<img src='$path' style='$style height:auto;'>" : "<i>(Image not found: $imageName)</i>";
             }, $text);
 
-            // E. Wikilinks] (LOWERCASE & NO INDEX)
+            // E. Wikilinks (LOWERCASE & NO INDEX)
             $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) {
                 $p = explode('|', $m[1]);
                 // Clean UID and .md extension
