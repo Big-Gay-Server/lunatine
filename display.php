@@ -131,7 +131,7 @@ if ($filePath && file_exists($filePath)) {
             $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess);
         }
 
-        // 2. Load separate Bio file content
+        // LOAD IN BIO PAGE
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
 
