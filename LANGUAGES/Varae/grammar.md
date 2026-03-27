@@ -94,9 +94,9 @@ question sentences are marked with the `sem` particle placed at the end of the s
 | “which” | `tes`      | `otes`        |
 
 ```gloss
-\ex ota deii meris fa vaeso, deii eheso
-\gla o-ta deii meris fa vae-so, deii ehe-so.
-\glb REL-when 3SG moon at look-PST, 3SG smile-PST.
+\ex ota deii meris fa vaeso ~ deii eheso
+\gla o-ta deii meris fa vae-so ~ deii ehe-so.
+\glb REL-when 3SG moon at look-PST , 3SG smile-PST.
 \ft When she looked at the moon, she smiled.
 ```
 
@@ -191,7 +191,7 @@ the copula `ae` is the only irregular verb in varae, in the sense that it does n
 \num 1
 \ex maerut ~ vaii somela aeme
 \gla maerut ~ vaii somela ae-me.
-\glb recently, 1SG happy be-PRS-PRF.
+\glb recently , 1SG happy be-PRS-PRF.
 \ft Recently, I have been happy.
 ```
 
@@ -310,6 +310,6 @@ quotes/quotations, in written varae, use curly brackets `{ }` as quotation marke
 ```gloss
 \ex ota vaii beiso ~ deii vaii haraeso {koii aese mae vaiimosa}
 \gla o-ta vaii beiso ~ deii vaii harae-so koii koaese mae vaiimosa.
-\glb REL-when 1SG leave-PAS, 3SG 1SG tell-PAS you  IMP-be-FUT safe please
+\glb REL-when 1SG leave-PAS , 3SG 1SG tell-PAS you  IMP-be-FUT safe please
 \ft When I left, she told me, 'Please be safe.'
 ```
