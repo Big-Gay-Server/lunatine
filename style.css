@@ -51,7 +51,6 @@ th {
     font-family: "Kurale", serif;
     letter-spacing: 0.1rem;
     color: var(--color-4);
-    /* Magenta for headers to match hair accents */
 }
 
 /* LAYOUT ENGINE */
@@ -81,7 +80,6 @@ th {
     flex: 0 0 250px;
     max-width: 250px;
     background: var(--color-6);
-    /* Using the darker midnight purple here */
     padding: 1.25rem;
     border-radius: 1.25rem;
     border: 1px solid var(--color-3);
@@ -142,7 +140,6 @@ a {
 
 a:hover {
     color: var(--color-7);
-    /* Turns gold on hover like a solar flare */
     text-decoration: underline;
 }
 
@@ -166,7 +163,6 @@ a:hover {
 
 .bases-table th {
     color: var(--color-7);
-    /* Gold headers for tables */
     border-bottom: 1px solid var(--color-3);
 }
 
@@ -184,35 +180,29 @@ a:hover {
     font-family: 'Heavenly Celestial', serif;
     letter-spacing: 30px;
     color: var(--color-1);
-    /* Fill color */
     -webkit-text-stroke: var(--color-4) 1px;
-    /* Magenta stroke */
     filter: drop-shadow(0 0 7px var(--color-5));
     
 }
 
 .header a:hover {
     text-decoration: none;
-    letter-spacing: .5em;
+    letter-spacing: .4em;
 }
 
 /* 1. MAIN WRAPPER & TEXT WRAP LOGIC */
 .profile-wrapper {
     display: block;
     width: 100%;
-    /* Ensures the container expands to fit the floated sidebar */
     overflow: auto;
 }
 
 .bio-sidebar {
-    /* The "Newspaper" wrap effect */
     float: right;
     width: 320px;
     margin-left: 30px;
     margin-bottom: 20px;
-
     background: rgba(26, 11, 46, 0.85);
-    /* var(--color-2) with alpha */
     padding: 20px;
     border: 1px solid var(--color-3);
     border-radius: 1.25rem;
@@ -244,7 +234,6 @@ a:hover {
     text-align: right;
     font-weight: bold;
     color: var(--color-7);
-    /* Gold for labels like character halos */
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
