@@ -143,30 +143,48 @@ if ($filePath && file_exists($filePath)) {
             // --- NEW: MANUAL GLOSS PRE-PARSER ---
             $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function($match) {
                 $lines = explode("\n", trim($match[1]));
-                $data = [];
-                $ft = '';
+                $alignedData = [];
+                $metadata = [];
+                $alignedTags = ['gla', 'glb', 'glc'];
 
                 foreach ($lines as $line) {
-                    if (preg_match('/^\\\\(gla|glb)\s+(.*)/', $line, $m)) {
-                        $data[$m[1]] = explode(' ', $m[2]);
-                    } elseif (preg_match('/^\\\\ft\s+(.*)/', $line, $m)) {
-                        $ft = $m[1];
+                    $line = trim($line);
+                    if (empty($line) || str_starts_with($line, '#')) continue;
+
+                    if (preg_match('/^\\\\(gla|glb|glc)\s+(.*)/', $line, $m)) {
+                        $alignedData[$m[1]] = explode(' ', $m[2]);
+                    } elseif (preg_match('/^\\\\(\w+)\s+(.*)/', $line, $m)) {
+                        $metadata[$m[1]] = $m[2];
                     }
                 }
 
-                $html = '<div class="gloss-container"><div class="gloss-word-wrap">';
-                // Zip words from gla and glb together
-                $count = max(count($data['gla'] ?? []), count($data['glb'] ?? []));
-                for ($i = 0; $i < $count; $i++) {
+                $html = '<div class="gloss-container">';
+                
+                // 1. Top Metadata (Num, Label, Example)
+                if (isset($metadata['num'])) $html .= '<span class="gloss-num">(' . $metadata['num'] . ')</span> ';
+                if (isset($metadata['lbl'])) $html .= '<span class="gloss-lbl">' . $metadata['lbl'] . '</span> ';
+                if (isset($metadata['ex'])) $html .= '<div class="gloss-ex">' . $metadata['ex'] . '</div>';
+
+                // 2. Aligned Columns (A, B, C)
+                $html .= '<div class="gloss-word-wrap">';
+                $maxWords = max(array_map('count', $alignedData ?: [[]]));
+                for ($i = 0; $i < $maxWords; $i++) {
                     $html .= '<div class="gloss-column">';
-                    $html .= '<span class="gla">' . ($data['gla'][$i] ?? '&nbsp;') . '</span>';
-                    $html .= '<span class="glb">' . ($data['glb'][$i] ?? '&nbsp;') . '</span>';
+                    foreach ($alignedTags as $tag) {
+                        if (isset($alignedData[$tag])) {
+                            $word = $alignedData[$tag][$i] ?? '&nbsp;';
+                            $html .= "<span class='gloss-$tag'>$word</span>";
+                        }
+                    }
                     $html .= '</div>';
                 }
-                $html .= '</div>'; // close word-wrap
-                if ($ft) $html .= '<div class="gloss-ft">' . $ft . '</div>';
                 $html .= '</div>';
-                return $html;
+
+                // 3. Bottom Metadata (Translation, Source)
+                if (isset($metadata['ft'])) $html .= '<div class="gloss-ft">' . $metadata['ft'] . '</div>';
+                if (isset($metadata['src'])) $html .= '<div class="gloss-src">' . $metadata['src'] . '</div>';
+
+                return $html . '</div>';
             }, $text);
             // 1. DATA EMULATOR (Run this first while it is still raw text)
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
