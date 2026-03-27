@@ -187,7 +187,7 @@ a:hover {
 
 .header a:hover {
     text-decoration: none;
-    letter-spacing: .4em;
+    letter-spacing: .3em;
 }
 
 /* 1. MAIN WRAPPER & TEXT WRAP LOGIC */
