@@ -140,6 +140,23 @@ if ($filePath && file_exists($filePath)) {
 
         // --- THE PARSER TOOL ---
         $wikiParser = function($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown) {
+            // --- NEW: MANUAL GLOSS PRE-PARSER ---
+            $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function($match) {
+                $lines = explode("\n", trim($match[1]));
+                $html = '<div class="gloss-container">';
+                foreach ($lines as $line) {
+                    // Match \identifier and the rest of the line
+                    if (preg_match('/^(\\\\(\w+))\s*(.*)/', $line, $m)) {
+                        $idFull = $m[1]; // \ex
+                        $idName = $m[2]; // ex
+                        $content = $m[3];
+                        $html .= "<div class='gloss-line gloss-$idName'><span class='gloss-id'>$idFull</span> <span class='gloss-content'>$content</span></div>";
+                    } else {
+                        $html .= "<div>$line</div>";
+                    }
+                }
+                return $html . '</div>';
+            }, $text);
             // 1. DATA EMULATOR (Run this first while it is still raw text)
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
             $text = preg_replace_callback($pattern, function($m) use ($yamlData) {
