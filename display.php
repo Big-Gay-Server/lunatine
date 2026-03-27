@@ -1,15 +1,15 @@
 <?php
-// Imports (Only if not already imported in codetop)
-require_once 'Parsedown.php';
-require_once 'Spyc.php';
-require_once 'imageparser.php';
-require_once 'filefinder.php';
+// --- IMPORTING EXTERNAL LIBRARIES ---
+require_once 'Parsedown.php'; // parses markdown to HTML.
+require_once 'Spyc.php'; // parses YAML to HTML.
+require_once 'imageparser.php'; // parses obsidian image links
+require_once 'filefinder.php'; // parses 
 
 $Parsedown = new Parsedown();
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
 
-// --- CASE-INSENSITIVELY TRANSLATE URL TO PATH ---
+// --- ALLOWS FOR CASE-INSENSITIVITY IN URLS ---
 function find_case_insensitive($baseDir, $path) {
     $segments = explode('/', trim($path, '/'));
     $currentPath = rtrim($baseDir, '/');
@@ -30,6 +30,10 @@ function find_case_insensitive($baseDir, $path) {
 }
 
 // --- LOCATE FILE FROM PATH ---
+
+// takes the path from the url and looks for (in this order)
+// index.md -> index.base -> exact .md file match
+// this gets set to $filePath
 $target = trim($requestedPath, '/');
 $resolvedBase = find_case_insensitive($markdownDir, $target);
 
@@ -47,7 +51,7 @@ $htmlContent = '';
 $bioHtml = ''; 
 $yamlData = [];       
 
-// --- TABLE RENDERER ---
+// --- BASES RENDERER ---
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
     if (!file_exists($basePath)) return "<i>(Base file not found)</i>";
     $baseData = Spyc::YAMLLoad($basePath);
@@ -112,7 +116,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     return $tableHtml . "</tbody></table>";
 };
 
-// --- PROCESSING ---
+// --- STANDARD MARKDOWN PROCESSING ---
 if ($filePath && file_exists($filePath)) {
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
     if ($extension === 'base') {
