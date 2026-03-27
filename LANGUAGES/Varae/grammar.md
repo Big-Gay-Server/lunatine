@@ -236,25 +236,25 @@ numbers after ten below 20 are `ran`+(digit), for example `ranuru`. tens from 20
 
 when written out, each digit place is considered a separate word.
 
-```jsx
-"uiiroran iia"
-uiio-ran iia
-six-ten  three
-"63" / "sixty three"
+```gloss
+\ex uiiroran iia
+\gla uiio-ran iia
+\glb six-ten three
+\ft 63 / sixty three
 ```
 
-```jsx
-"iiasiin iiaran kuo"
-iia-siin       iia-ran    kuo
-three-hundred  three-ten  nine
-"339" / "three hundred thirty nine"
+```gloss
+\ex iiasiin iiaran kuo
+\gla iia-siin iia-ran kuo
+\glb three-hundred three-ten nine
+\ft 339 / three hundred thirty nine
 ```
 
-```jsx
-"biimiin siin adiran uru"
-bii-miin        siin    adi-ran   uru
-eight-thousand  hundred four-ten  five
-"8145" / "eight thousand one hundred forty five"
+```gloss
+\ex biimiin siin adiran uru
+\gla bii-miin siin adi-ran uru
+\glb eight-thousand hundred four-ten five
+\ft 8145 / eight thousand one hundred forty five
 ```
 
 ---
@@ -277,14 +277,14 @@ lines can be broken off after a `~` or a `{` to prevent it from running off the 
 
 in informal writing, or where it is not possible to break lines or indent, lines may be broken at any point and may not be indented. however, if this is done, any following lines must be separated with enough visual space to be able to tell where one line ends and another begins.
 
-```jsx
-deii ~ otu vala dorafel anwaefa osu renaksii ~
-	dorafel korliia dae weise nerasii veha
-telasiira ~ deii yovela pahorii dala beirusii ~ 
-	na iinyaniilfel hiimana fa vahes meikasii
-ota deii lukasii nako karawesii ~ 
-	na vala dae tayaso ne geralo sakakesii muhaelii
-yiim deiifel kin ne teraniil asu keso
+```gloss
+\gla deii ~ otu vala dorafel anwaefa osu renaksii ~
+\gla 	dorafel korliia dae weise nerasii veha
+\gla telasiira ~ deii yovela pahorii dala beirusii ~ 
+\gla 	na iinyaniilfel hiimana fa vahes meikasii
+\gla ota deii lukasii nako karawesii ~ 
+\gla 	na vala dae tayaso ne geralo sakakesii muhaelii
+\gla yiim deiifel kin ne teraniil asu keso
 ```
 
 ```jsx
