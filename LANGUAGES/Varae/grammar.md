@@ -143,7 +143,7 @@ this language only has one true case, that being the genitive case. the suffix *
 \ft The color of the fire
 ```
 
-a pseudo-case that varae also utilizes is in regards to the [Inna](Inna%2099642857c4464973a4612f6533cb754d.md) - the god-like species that created the universe. when using pronouns in regards to them, the prefix `iina` is added. it acts as a sort of honorific, but is only utilized for the inna. generally, a person using this on themselves or another person would be thought of extremely negatively. 
+a pseudo-case that varae also utilizes is in regards to the [[Inna]] - the god-like species that created the universe. when using pronouns in regards to them, the prefix `iina` is added. it acts as a sort of honorific, but is only utilized for the inna. generally, a person using this on themselves or another person would be thought of extremely negatively. 
 
 |  | singular | plural |
 | --- | --- | --- |
@@ -226,9 +226,9 @@ adverbs do not always follow a strict pattern. they are always placed after the 
 
 ## **numbers and counting**
 
-| `kii` *( 0 )* | `thae` *( 1 )* | `tei` *****( 2 )* | `iia` *****( 3 )* | `adi` *****( 4 )* | `uru` *****( 5 )* | `uiio` *****( 6 )* |
+| `kii` *( 0 )* | `thae` *( 1 )* | `tei` *( 2 )* | `iia` *( 3 )* | `adi` *( 4 )* | `uru` *( 5 )* | `uiio` *( 6 )* |
 | --- | --- | --- | --- | --- | --- | --- |
-| `sus` *( 7 )* | `bii` *( 8 )* | `kuo` *****( 9 )* | `ran` *****( 10 )* | `siin` *****( 100 )* | `miin` *****( 1k )* | `wiin` *****( 1mil )* |
+| `sus` *( 7 )* | `bii` *( 8 )* | `kuo` *( 9 )* | `ran` *( 10 )* | `siin` *( 100 )* | `miin` *( 1k )* | `wiin` *( 1mil )* |
 
 numbers after ten below 20 are `ran`+(digit), for example `ranuru`. tens from 20 to 90 are (digit)+`ran`, as in `teiran` to `kuoran`. hundreds from 200 to 900 are (digit)+`siin`. thousands from 2000 to 9000 are (digit)+`miin`.
 
@@ -263,9 +263,9 @@ when written out, each digit place is considered a separate word.
 
 ### a note on written varae
 
-varae, in the world of [lunatine](lunatine%20d3a18d7ba2e24989bc945ee7018c653c.md), is written in a native script. however, for most *meta* purposes, it is romanized. the following rules are meant to adapt the written script into a more easily accessible format for learners and people interested in the world and its language.
+varae, within the worldbuilding, is written in a native script. however, for most *meta* purposes, it is romanized. the following rules are meant to adapt the written script into a more easily accessible format for learners and people interested in the world and its language.
 
-the main speakers of varae are the [Selhae](Selhae%20822e316012e74ddba8bb5c6faf31fe66.md), who have always had a very heavy focus on oral storytelling and music, as a culture. this means that the most common way something is passed along is verbally, and writing is not as common. some of these rules may seem unintuitive for long, detailed writing, but writing was generally reserved for preserving songs and stories, and communication between people (i.e. letters) - which all tended to be more poetic in nature.
+the main speakers of varae are the [[Selhae]], who have always had a very heavy focus on oral storytelling and music, as a culture. this means that the most common way something is passed along is verbally, and writing is not as common. some of these rules may seem unintuitive for long, detailed writing, but writing was generally reserved for preserving songs and stories, and communication between people (i.e. letters) - which all tended to be more poetic in nature.
 
 ## prose forms
 
@@ -278,16 +278,16 @@ lines can be broken off after a `~` or a `{` to prevent it from running off the 
 in informal writing, or where it is not possible to break lines or indent, lines may be broken at any point and may not be indented. however, if this is done, any following lines must be separated with enough visual space to be able to tell where one line ends and another begins.
 
 ```gloss
-\gla deii ~ otu vala dorafel anwaefa osu renaksii ~
-\gla 	dorafel korliia dae weise nerasii veha
-\gla telasiira ~ deii yovela pahorii dala beirusii ~ 
-\gla 	na iinyaniilfel hiimana fa vahes meikasii
-\gla ota deii lukasii nako karawesii ~ 
-\gla 	na vala dae tayaso ne geralo sakakesii muhaelii
-\gla yiim deiifel kin ne teraniil asu keso
+deii ~ otu vala dorafel anwaefa osu renaksii ~
+	dorafel korliia dae weise nerasii veha
+telasiira ~ deii yovela pahorii dala beirusii ~ 
+	na iinyaniilfel hiimana fa vahes meikasii
+ota deii lukasii nako karawesii ~ 
+	na vala dae tayaso ne geralo sakakesii muhaelii
+yiim deiifel kin ne teraniil asu keso
 ```
 
-```jsx
+```gloss
 deii otu vala dorafel
 anwaefa osu renaksii
 dorafel korliia dae
@@ -307,9 +307,9 @@ romanized varae is written entirely in lower case, with no upper case letters.
 
 quotes/quotations, in written varae, use curly brackets `{ }` as quotation markers. 
 
-```jsx
-"ota vaii beiso ~ deii vaii haraeso {koii aese mae vaiimosa}"
-o-ta     vaii beiso ~    deii vaii harae-so koii koaese     mae  vaiimosa.
-REL-when 1SG  leave-PAS, 3SG  1SG  tell-PAS you  IMP-be-FUT safe please
-"When I left, she told me, 'Please be safe.'"
+```gloss
+\ex ota vaii beiso ~ deii vaii haraeso {koii aese mae vaiimosa}
+\gla o-ta vaii beiso ~ deii vaii harae-so koii koaese mae vaiimosa.
+\glb REL-when 1SG leave-PAS, 3SG 1SG tell-PAS you  IMP-be-FUT safe please
+\ft When I left, she told me, 'Please be safe.'
 ```
