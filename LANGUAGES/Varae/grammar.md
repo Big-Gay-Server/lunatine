@@ -278,7 +278,7 @@ lines can be broken off after a `~` or a `{` to prevent it from running off the 
 
 in informal writing, or where it is not possible to break lines or indent, lines may be broken at any point and may not be indented. however, if this is done, any following lines must be separated with enough visual space to be able to tell where one line ends and another begins.
 
-```gloss
+```
 deii ~ otu vala dorafel anwaefa osu renaksii ~
 	dorafel korliia dae weise nerasii veha
 telasiira ~ deii yovela pahorii dala beirusii ~ 
@@ -288,7 +288,7 @@ ota deii lukasii nako karawesii ~
 yiim deiifel kin ne teraniil asu keso
 ```
 
-```gloss
+```
 deii otu vala dorafel
 anwaefa osu renaksii
 dorafel korliia dae

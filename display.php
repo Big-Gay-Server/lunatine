@@ -227,13 +227,6 @@ if ($filePath && file_exists($filePath)) {
             // 3. CONVERT TO HTML
             $text = $Parsedown->text($text);
 
-            // 1. Join split headers (ignores the inline styles Parsedown adds)
-            $text = preg_replace_callback('/<thead>\s*<tr>\s*<th.*?>\s*(.*?)\s*<\/th>\s*<th.*?>\s*(.*?)\s*<\/th>.*?<\/thead>/is', function ($m) {
-                // $m[1] is "Biographical", $m[2] is "Information"
-                $title = trim($m[1] . ' ' . $m[2]);
-                return "<h3 class='bio-section-header'>$title</h3>";
-            }, $text);
-
             // C. Shortcode Embedder
             $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));

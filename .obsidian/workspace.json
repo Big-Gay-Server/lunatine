@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LANGUAGES/Varae/grammar.md",
-                "mode": "source",
-                "source": false
+                "file": "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "grammar"
+              "title": "Sanctuary Varae Translyrics"
             }
           }
         ]
@@ -243,6 +243,8 @@
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "LANGUAGES/Varae/grammar.md",
+    "templates/languages.php",
     "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
     "LANGUAGES/Varae/translations/index.md",
     "LANGUAGES/Varae/index.md",
@@ -276,9 +278,7 @@
     "SPECIES/index.md",
     "codetop.php",
     "display.php",
-    "templates/characters_bio.php",
     "CHARACTERS/Esela/bio.md",
-    "Untitled.md",
     "crescentmoon.PNG",
     "GRAPHICS/banner.png",
     "GRAPHICS/world cover.png",

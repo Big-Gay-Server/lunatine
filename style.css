@@ -7,6 +7,22 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'SophieMono';
+    src: url('.fonts/sophiemonoserif/SophieMonofr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SimplySerifBook';
+    src: url('.fonts/simply-serif/SimplySerif-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -278,6 +294,56 @@ a, .file-link {
 .gloss-word-wrap { display: flex; flex-wrap: wrap; gap: 0.5em 1em; }
 .gloss-column { display: flex; flex-direction: column; }
 
+.gloss-container {
+    padding: 30px;
+    margin: 20px;
+    border: .5px dashed var(--color-7);
+    border-radius: 30px;
+    width: fit-content;
+}
+
+table {
+    text-align: center;
+    /* 1. Change collapse to separate */
+    border-collapse: separate; 
+    /* 2. Remove gaps between cells */
+    border-spacing: 0; 
+    padding: 30px;
+    margin: 20px;
+    border: .5px dashed var(--color-7);
+    border-radius: 30px;
+    overflow: hidden; /* Keeps the inner cells from overlapping the rounded corners */
+}
+
+/* Remove the top/left borders from cells so they don't double up with the table border */
+td, th {
+    border-bottom: .5px dashed var(--color-5);
+    border-right: .5px dashed var(--color-5);
+    padding: 10px;
+}
+
+/* Remove borders from the last row/column so they don't hit the table's outer border */
+tr:last-child td { border-bottom: none; }
+td:last-child, th:last-child { border-right: none; }
+
+/* Your specific "Header Column" divider */
+th:first-child, td:first-child {
+    border-right: 1px solid var(--color-3);
+    color: var(--color-4);
+}
+
+/* Target the cells inside the first row (thead) */
+table thead th {
+    border-bottom: 1px solid var(--color-3);
+    color: var(--color-4);
+}
+
+/* Ensure the first column also has its color and font settings */
+td:first-child {
+    color: var(--color-4);
+    /* If you want the first column cells to have the solid bottom border too: */
+    /* border-bottom: 1px solid var(--color-3); */
+}
 
 /* 5. MOBILE RESPONSIVENESS */
 @media (max-width: 800px) {
@@ -298,4 +364,13 @@ a, .file-link {
         flex: 1 0 100%;
         text-align: center;
     }
+}
+
+.grammar code {
+    color: var(--color-7);
+    font-family: 'SimplySerifBook', monospace;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    letter-spacing: .15em;
 }
