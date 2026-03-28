@@ -4,15 +4,15 @@ title: Varae Grammar
 # phonology
 ## phonetic inventory
 
-| **consonants** | *labial* | *labiodental* | *dental* | *alveolar* | *alv-pal* | *velar* | *glottal* |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| *plosive* | /p/  /b/ |  |  | /t/  /d/ |  | /k/  /g/ |  |
-| *nasal* | /m/ |  |  | /n/ |  |  |  |
-| *trill* |  |  |  |  |  |  |  |
-| *tap/flap* |  |  |  | /r/ |  |  |  |
-| *fricative* |  | /f/  /v/ | /θ/ | /s/  (/z/) |  |  | /h/ |
-| *affricate* |  |  |  |  | /j/ |  |  |
-| *approximants* | /w/ |  |  | (/ɹ/)  /l/ |  |  |  |
+| **consonants** | *labial* | *labiodental* | *dental* | *alveolar* | *alv-pal* | *velar*  | *glottal* |
+| -------------- | -------- | ------------- | -------- | ---------- | --------- | -------- | --------- |
+| *plosive*      | /p/  /b/ |               |          | /t/  /d/   |           | /k/  /g/ |           |
+| *nasal*        | /m/      |               |          | /n/        |           |          |           |
+| *trill*        |          |               |          |            |           |          |           |
+| *tap/flap*     |          |               |          | /r/        |           |          |           |
+| *fricative*    |          | /f/  /v/      | /θ/      | /s/  (/z/) |           |          | /h/       |
+| *affricate*    |          |               |          |            | /j/       |          |           |
+| *approximants* | /w/      |               |          | (/ɹ/)  /l/ |           |          |           |
 
 | **vowels** | *front* | a | *central* | a | *back* |
 | --- | --- | --- | --- | --- | --- |
@@ -24,10 +24,11 @@ title: Varae Grammar
 | a |  |  |  |  |  |
 | *open* | /a/ |  |  |  |  |
 
-| *romanization* | <**th**>=/**θ**/, <**y**>=/**j**/, <**i**>=/**ɪ**/, <**ii**>=/**i**/, otherwise spelled as seen. |
-| --- | --- |
-| *allophones* | [**s**] & [**z**] = <**s**>, [**ɛ**] & [**ɘ**] = <**e**>, [**r**] & [**ɹ**] =<**r**> |
-| *diphthongs* | /**ɛi**/ = <**ae**>, /**ai**/ = <**ei**> |
+*romanization* : <**th**>=/**θ**/, <**y**>=/**j**/, <**i**>=/**ɪ**/, <**ii**>=/**i**/, otherwise spelled as seen.
+
+*allophones*: [**s**] & [**z**] = <**s**>, [**ɛ**] & [**ɘ**] = <**e**>, [**r**] & [**ɹ**] =<**r**>
+
+*diphthongs*: /**ɛi**/ = <**ae**>, /**ai**/ = <**ei**>
 
 ## **phonotactics**
 
@@ -265,7 +266,7 @@ when written out, each digit place is considered a separate word.
 
 varae, within the worldbuilding, is written in a native script. however, for most *meta* purposes, it is romanized. the following rules are meant to adapt the written script into a more easily accessible format for learners and people interested in the world and its language.
 
-the main speakers of varae are the [[Selhae]], who have always had a very heavy focus on oral storytelling and music, as a culture. this means that the most common way something is passed along is verbally, and writing is not as common. some of these rules may seem unintuitive for long, detailed writing, but writing was generally reserved for preserving songs and stories, and communication between people (i.e. letters) - which all tended to be more poetic in nature.
+the main speakers of varae are the [[Selhae|selhae]], who have always had a very heavy focus on oral storytelling and music, as a culture. this means that the most common way something is passed along is verbally, and writing is not as common. some of these rules may seem unintuitive for long, detailed writing, but writing was generally reserved for preserving songs and stories, and communication between people (i.e. letters) - which all tended to be more poetic in nature.
 
 ## prose forms
 

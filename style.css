@@ -13,21 +13,20 @@
 
 :root {
     font-size: 16px;
-    /* Expanded "Space Magic" Palette */
     --color-1: #080212;
-    /* Deep Void Background */
+    /* background */
     --color-2: #1a0b2e;
-    /* Deep Nebula Purple (Cards/Sidebars) */
+    /* cards/sidebars*/
     --color-3: #5a189a;
-    /* Royal Magic Purple (Borders) */
+    /* borders */
     --color-4: #e36acb;
-    /* Neon Magenta Accent (Links/Interactive) */
+    /* links */
     --color-5: #e0aaff;
-    /* Starlight Lavender (Primary Text) */
+    /* text */
     --color-6: #240046;
-    /* Midnight Cloak (Inner Sections) */
+    /* ?? */
     --color-7: #e3ae54;
-    /* Solar Gold (Rare Accents/Highlights) */
+    /* accents */
 }
 
 /* BODY */

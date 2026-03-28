@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "STORY/index.md",
+                "file": "LANGUAGES/Varae/grammar.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "grammar"
             }
           }
         ]
@@ -243,6 +243,12 @@
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
+    "LANGUAGES/Varae/translations/index.md",
+    "LANGUAGES/Varae/index.md",
+    "LANGUAGES/Varae/translations/Untitled.md",
+    "LANGUAGES/Varae/translations.md",
+    "STORY/index.md",
     "EVENTS/index.md",
     "EVENTS/eventsbase.base",
     "EVENTS/timeline.md",
@@ -255,7 +261,6 @@
     "LANGUAGES/Varae/script.md",
     "CHARACTERS/Esela/index.md",
     "Construct.md",
-    "LANGUAGES/Varae/index.md",
     "LANGUAGES/Innalang/index.md",
     "LANGUAGES/Acorithe/index.md",
     "CONCEPTS/Construction/index.md",
@@ -274,10 +279,6 @@
     "templates/characters_bio.php",
     "CHARACTERS/Esela/bio.md",
     "Untitled.md",
-    "templates/default.md",
-    "LANGUAGES/Varae/grammar.md",
-    "index.md",
-    "LANGUAGES/Varae/dictionary/index.md",
     "crescentmoon.PNG",
     "GRAPHICS/banner.png",
     "GRAPHICS/world cover.png",

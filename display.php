@@ -1,24 +1,24 @@
 <?php
 // --- IMPORTING EXTERNAL LIBRARIES ---
-require_once 'Parsedown.php'; // parses markdown to HTML.
-require_once 'Spyc.php'; // parses YAML to HTML.
-require_once 'imageparser.php'; // parses obsidian image links
-require_once 'filefinder.php'; // parses 
+require_once 'Parsedown.php';  // parses markdown to HTML.
+require_once 'parsedownGloss.php';  // parsedown extension to parse interlinear gloss blocks to HTML
+require_once 'Spyc.php';  // parses YAML to HTML.
+require_once 'imageparser.php';  // parses obsidian image links
+require_once 'filefinder.php';  // parses ???? i dont know if i need this anymore really
 
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
-
-// --- this should hopefully parse the gloss blocks.
-require_once 'parsedownGloss.php';
 $Parsedown = new ParsedownGloss();
 
 // --- ALLOWS FOR CASE-INSENSITIVITY IN URLS ---
-function find_case_insensitive($baseDir, $path) {
+function find_case_insensitive($baseDir, $path)
+{
     $segments = explode('/', trim($path, '/'));
     $currentPath = rtrim($baseDir, '/');
     foreach ($segments as $segment) {
         $items = glob($currentPath . '/*', GLOB_NOSORT);
-        if (!$items) return null;
+        if (!$items)
+            return null;
         $found = false;
         foreach ($items as $item) {
             if (strcasecmp(basename($item), $segment) === 0) {
@@ -27,23 +27,26 @@ function find_case_insensitive($baseDir, $path) {
                 break;
             }
         }
-        if (!$found) return null;
+        if (!$found)
+            return null;
     }
     return $currentPath;
 }
 
 // --- LOCATE FILE FROM PATH ---
-
 // takes the path from the url and looks for (in this order)
-// index.md -> index.base -> exact .md file match
-// this gets set to $filePath
+// index.md -> index.base -> exact .md file match (like dust.md or smth)
+// this gets set to $filePath variable
 $target = trim($requestedPath, '/');
 $resolvedBase = find_case_insensitive($markdownDir, $target);
 
 if ($resolvedBase && is_dir($resolvedBase)) {
-    if (file_exists($resolvedBase . '/index.md')) $filePath = $resolvedBase . '/index.md';
-    elseif (file_exists($resolvedBase . '/index.base')) $filePath = $resolvedBase . '/index.base';
-    else $filePath = find_markdown_file($markdownDir, $target);
+    if (file_exists($resolvedBase . '/index.md'))
+        $filePath = $resolvedBase . '/index.md';
+    elseif (file_exists($resolvedBase . '/index.base'))
+        $filePath = $resolvedBase . '/index.base';
+    else
+        $filePath = find_markdown_file($markdownDir, $target);
 } elseif ($resolvedBase && file_exists($resolvedBase)) {
     $filePath = $resolvedBase;
 } else {
@@ -51,30 +54,38 @@ if ($resolvedBase && is_dir($resolvedBase)) {
 }
 
 $htmlContent = '';
-$bioHtml = ''; 
-$yamlData = [];       
+$bioHtml = '';
+$yamlData = [];
 
 // --- BASES RENDERER ---
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
-    if (!file_exists($basePath)) return "<i>(Base file not found)</i>";
+    if (!file_exists($basePath))
+        return '<i>(Base file not found)</i>';
     $baseData = Spyc::YAMLLoad($basePath);
     $viewIndex = 0;
     if (isset($baseData['views'])) {
         foreach ($baseData['views'] as $idx => $v) {
-            if ($targetViewName && strtolower($v['name'] ?? '') === strtolower($targetViewName)) { $viewIndex = $idx; break; }
-            if (!$targetViewName && ($v['type'] ?? '') === 'table') { $viewIndex = $idx; }
+            if ($targetViewName && strtolower($v['name'] ?? '') === strtolower($targetViewName)) {
+                $viewIndex = $idx;
+                break;
+            }
+            if (!$targetViewName && ($v['type'] ?? '') === 'table') {
+                $viewIndex = $idx;
+            }
         }
     }
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
     $scanDir = dirname($basePath);
-    $allFiles = array_merge(glob($scanDir . "/*/index.md"), glob($scanDir . "/*.md"));
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
     $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
 
     $findProp = function ($props, $id) {
-        if (isset($props[$id])) return $props[$id];
+        if (isset($props[$id]))
+            return $props[$id];
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
-            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId)
+                return $val;
         }
         return '';
     };
@@ -82,9 +93,9 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
         $colName = ($colId === 'file.name' || $colId === 'file') ? 'file name' : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
-        $tableHtml .= "<th>" . htmlspecialchars(strtolower($colName)) . "</th>";
+        $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
-    $tableHtml .= "</tr></thead><tbody>";
+    $tableHtml .= '</tr></thead><tbody>';
 
     foreach ($mdFiles as $mdFile) {
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
@@ -92,31 +103,32 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         $finalUrl = '/' . strtolower(trim($urlPath, '/'));
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) $props = Spyc::YAMLLoad($matches[1]);
-        
-        $tableHtml .= "<tr>";
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches))
+            $props = Spyc::YAMLLoad($matches[1]);
+
+        $tableHtml .= '<tr>';
         $linkPlaced = false;
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
             if (is_string($val) && str_contains($val, '!')) {
-                $val = preg_replace_callback('/!\[\[\s*([^|\]]+)(\|(\d+))?\s*\]\]/', function($m) {
+                $val = preg_replace_callback('/!\[\[\s*([^|\]]+)(\|(\d+))?\s*\]\]/', function ($m) {
                     $src = '/' . ltrim(trim($m[1]), '/');
                     $width = $m[3] ?? '75';
                     return "<img src='$src' style='width:{$width}px; height:auto;'>";
                 }, $val);
             }
             $isEmbed = (is_string($val) && str_contains($val, '<img'));
-            $cellValue = is_array($val) ? implode(' ', array_map(fn($i) => "<span class='prop-pill'>".htmlspecialchars($i)."</span>", $val)) : ($isEmbed ? $val : $Parsedown->line((string)$val));
-            if (!$linkPlaced && !$isEmbed && !empty(trim((string)$val))) {
+            $cellValue = is_array($val) ? implode(' ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val)) : ($isEmbed ? $val : $Parsedown->line((string) $val));
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
                 $tableHtml .= "<td>$cellValue</td>";
             }
         }
-        $tableHtml .= "</tr>";
+        $tableHtml .= '</tr>';
     }
-    return $tableHtml . "</tbody></table>";
+    return $tableHtml . '</tbody></table>';
 };
 
 // --- STANDARD MARKDOWN PROCESSING ---
@@ -139,9 +151,9 @@ if ($filePath && file_exists($filePath)) {
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
 
         // --- THE PARSER TOOL ---
-        $wikiParser = function($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown) {
+        $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown) {
             // --- NEW: MANUAL GLOSS PRE-PARSER ---
-            $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function($match) {
+            $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function ($match) {
                 $lines = explode("\n", trim($match[1]));
                 $alignedData = [];
                 $metadata = [];
@@ -149,7 +161,8 @@ if ($filePath && file_exists($filePath)) {
 
                 foreach ($lines as $line) {
                     $line = trim($line);
-                    if (empty($line) || str_starts_with($line, '#')) continue;
+                    if (empty($line) || str_starts_with($line, '#'))
+                        continue;
 
                     if (preg_match('/^\\\\(gla|glb|glc)\s+(.*)/', $line, $m)) {
                         $alignedData[$m[1]] = explode(' ', $m[2]);
@@ -159,11 +172,14 @@ if ($filePath && file_exists($filePath)) {
                 }
 
                 $html = '<div class="gloss-container">';
-                
+
                 // 1. Top Metadata (Num, Label, Example)
-                if (isset($metadata['num'])) $html .= '<span class="gloss-num">(' . $metadata['num'] . ')</span> ';
-                if (isset($metadata['lbl'])) $html .= '<span class="gloss-lbl">' . $metadata['lbl'] . '</span> ';
-                if (isset($metadata['ex'])) $html .= '<div class="gloss-ex">' . $metadata['ex'] . '</div>';
+                if (isset($metadata['num']))
+                    $html .= '<span class="gloss-num">(' . $metadata['num'] . ')</span> ';
+                if (isset($metadata['lbl']))
+                    $html .= '<span class="gloss-lbl">' . $metadata['lbl'] . '</span> ';
+                if (isset($metadata['ex']))
+                    $html .= '<div class="gloss-ex">' . $metadata['ex'] . '</div>';
 
                 // 2. Aligned Columns (A, B, C)
                 $html .= '<div class="gloss-word-wrap">';
@@ -181,39 +197,43 @@ if ($filePath && file_exists($filePath)) {
                 $html .= '</div>';
 
                 // 3. Bottom Metadata (Translation, Source)
-                if (isset($metadata['ft'])) $html .= '<div class="gloss-ft">' . $metadata['ft'] . '</div>';
-                if (isset($metadata['src'])) $html .= '<div class="gloss-src">' . $metadata['src'] . '</div>';
+                if (isset($metadata['ft']))
+                    $html .= '<div class="gloss-ft">' . $metadata['ft'] . '</div>';
+                if (isset($metadata['src']))
+                    $html .= '<div class="gloss-src">' . $metadata['src'] . '</div>';
 
                 return $html . '</div>';
             }, $text);
             // 1. DATA EMULATOR (Run this first while it is still raw text)
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
-            $text = preg_replace_callback($pattern, function($m) use ($yamlData) {
+            $text = preg_replace_callback($pattern, function ($m) use ($yamlData) {
                 $propName = $m[1];
                 $fallback = $m[2] ?? '';
                 $val = null;
                 foreach ($yamlData as $k => $v) {
                     if (strtolower(str_replace([' ', '-', '_'], '', $k)) === strtolower(str_replace([' ', '-', '_'], '', $propName))) {
-                        $val = $v; break;
+                        $val = $v;
+                        break;
                     }
                 }
-                if ($val !== null) return is_array($val) ? implode(', ', $val) : $val;
+                if ($val !== null)
+                    return is_array($val) ? implode(', ', $val) : $val;
                 return $fallback;
             }, $text);
 
             // 2. CLEAN UP RAW TEXT
             $text = preg_replace('/^character:\s*.*$/im', '', $text);
 
-            // 3. CONVERT TO HTML (This creates the <table> and <thead> tags)
+            // 3. CONVERT TO HTML
             $text = $Parsedown->text($text);
 
             // 1. Join split headers (ignores the inline styles Parsedown adds)
-            $text = preg_replace_callback('/<thead>\s*<tr>\s*<th.*?>\s*(.*?)\s*<\/th>\s*<th.*?>\s*(.*?)\s*<\/th>.*?<\/thead>/is', function($m) {
+            $text = preg_replace_callback('/<thead>\s*<tr>\s*<th.*?>\s*(.*?)\s*<\/th>\s*<th.*?>\s*(.*?)\s*<\/th>.*?<\/thead>/is', function ($m) {
                 // $m[1] is "Biographical", $m[2] is "Information"
                 $title = trim($m[1] . ' ' . $m[2]);
                 return "<h3 class='bio-section-header'>$title</h3>";
             }, $text);
-      
+
             // C. Shortcode Embedder
             $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
@@ -225,7 +245,7 @@ if ($filePath && file_exists($filePath)) {
                 $imageName = trim($m[1]);
                 $width = $m[3] ?? null;
                 $path = find_image_path($markdownDir, $imageName);
-                $style = $width ? "width:{$width}px;" : "max-width:100%;";
+                $style = $width ? "width:{$width}px;" : 'max-width:100%;';
                 return $path ? "<img src='$path' style='$style height:auto;'>" : "<i>(Image not found: $imageName)</i>";
             }, $text);
 
@@ -249,8 +269,6 @@ if ($filePath && file_exists($filePath)) {
         $htmlContent = $wikiParser($markdownToProcess);
     }
 }
-
-
 
 // --- TEMPLATE PICKER ---
 // 1. Check if the physical file is named index.md or index.base
@@ -278,6 +296,6 @@ if (file_exists($specificTemplate)) {
     include $templateDir . $section . '.php';
 } else {
     // DEFAULT LAYOUT
-    echo '<div class="main-content">'.$htmlContent.'</div>';
+    echo '<div class="main-content">' . $htmlContent . '</div>';
 }
 ?>
