@@ -143,15 +143,12 @@ if ($filePath && file_exists($filePath)) {
         require_once __DIR__ . '/metadata.php';
         
         // --- YAML PROCESSING ---
-        // get metadata
-        $yamlData = get_page_metadata($requestedPath);
-
-        // set global title variable
-        $pageTitle = $yamlData['title'] ?? ucfirst(basename($requestedPath));
-
-        // removes the YAML from the content so Parsedown doesn't try to render it
-        $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess);
-
+        // 1. Extract & Strip YAML Frontmatter
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $markdownToProcess, $matches)) {
+            $yamlData = Spyc::YAMLLoad($matches[1]);
+            $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess);
+        }
+        
         // --- LOAD IN BIO PAGE ---
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
