@@ -32,12 +32,34 @@ if (strtolower($pageTitle) === 'index' || $pageTitle === '') {
 // 2. Build Breadcrumbs
 $breadcrumbLinks = [];
 $currentBreadPath = "";
+$accumulatedFileSystemPath = $_SERVER['DOCUMENT_ROOT'];
+
 foreach ($urlParts as $part) {
+    if (empty($part)) continue;
+    
     $currentBreadPath .= "/" . $part;
-    $name = strtoupper(str_replace('-', ' ', $part));
-    $breadcrumbLinks[] = "<a href='$currentBreadPath'>$pageTitle</a>";
+    $accumulatedFileSystemPath .= "/" . $part;
+    
+    // Check if this part is a directory with an index.md or a direct .md file
+    $testFile = is_dir($accumulatedFileSystemPath) 
+                ? $accumulatedFileSystemPath . "/index.md" 
+                : $accumulatedFileSystemPath . ".md";
+
+    // Try to get the YAML title
+    require_once __DIR__ . '/metadata.php';
+    $meta = get_page_metadata($testFile);
+    
+    if (!empty($meta['title'])) {
+        $name = $meta['title'];
+    } else {
+        // Fallback to your original style if no YAML title is found
+        $name = strtoupper(str_replace('-', ' ', $part));
+    }
+    
+    $breadcrumbLinks[] = "<a href='$currentBreadPath'>$name</a>";
 }
 $breadcrumbs = implode(' > ', $breadcrumbLinks);
+
 ?>
 
 
