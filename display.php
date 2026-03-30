@@ -114,7 +114,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 $val = preg_replace_callback('/!\[\[\s*([^|\]]+)(\|(\d+))?\s*\]\]/', function ($m) {
                     $src = '/' . ltrim(trim($m[1]), '/');
                     $width = $m[3] ?? '75';
-                    return "<img src='$src' style='width:{$width}px; height:auto;'>";
+                    return "<img src='$src'; height:auto;'>";
                 }, $val);
             }
             $isEmbed = (is_string($val) && str_contains($val, '<img'));
@@ -152,7 +152,7 @@ if ($filePath && file_exists($filePath)) {
 
         // --- THE PARSER TOOL ---
         $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown) {
-            // --- NEW: MANUAL GLOSS PRE-PARSER ---
+            // --- INTERLINEAR GLOSS PARSER ---
             $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function ($match) {
                 $lines = explode("\n", trim($match[1]));
                 $alignedData = [];
@@ -204,7 +204,7 @@ if ($filePath && file_exists($filePath)) {
 
                 return $html . '</div>';
             }, $text);
-            // 1. DATA EMULATOR (Run this first while it is still raw text)
+            // INLINE DATAVIEW RENDERER
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
             $text = preg_replace_callback($pattern, function ($m) use ($yamlData) {
                 $propName = $m[1];
@@ -233,7 +233,7 @@ if ($filePath && file_exists($filePath)) {
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
             }, $text);
 
-            // D. Wikilink Images !]
+            // D. Wikilink Images
             $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
                 $imageName = trim($m[1]);
                 $width = $m[3] ?? null;

@@ -6,19 +6,40 @@
       {
         "id": "99295c74abf384ed",
         "type": "tabs",
+        "dimension": 71.55172413793103,
         "children": [
           {
             "id": "8c224558a59ca233",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
-                "mode": "preview",
-                "source": true
+                "file": "MISC/index.base",
+                "viewName": "Table"
               },
+              "icon": "lucide-table",
+              "title": "index"
+            }
+          }
+        ]
+      },
+      {
+        "id": "4ed915e04396d7fe",
+        "type": "tabs",
+        "dimension": 28.448275862068968,
+        "children": [
+          {
+            "id": "5a44808b1567a25c",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "vscode-editor",
+              "state": {
+                "file": "style.css"
+              },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "Sanctuary Varae Translyrics"
+              "title": "style"
             }
           }
         ]
@@ -88,7 +109,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 236.5
+    "width": 235
   },
   "right": {
     "id": "ea4483eef96bb84e",
@@ -243,52 +264,51 @@
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "index.md",
+    "style.css",
+    "MISC/index.base",
+    "CHARACTERS/characterbase.base",
+    "MISC/pando’s lore questions.md",
+    "MISC/pando’s charater analysis.md",
+    "MISC/misc worldbuilding.md",
+    "MISC/misc character building.md",
+    "MISC",
+    "CHARACTERS/Esela/bio.md",
+    "CHARACTERS/Esela/index.md",
+    "LOCATIONS/Kohoii/index.md",
+    "LOCATIONS/Kohoii.md",
+    "CHARACTERS/Esela/art/prism_transparent.png",
+    "CHARACTERS/Esela/art/prism transparent.png",
+    "CHARACTERS/Esela/art/_ICON_esela_treybop.png",
+    "CHARACTERS/Esela/art/_ICON_merisela_shortbread1008.png",
+    "CHARACTERS/Esela/art/_ICON_kulithsela_momo.png",
+    "CHARACTERS/Esela/art/index.md",
+    "SPECIES/Selhae/index.md",
+    "SPECIES/Selhae/index 1.md",
+    "CHARACTERS/Yudora/index.md",
+    "CHARACTERS/Merisdae/index.md",
+    "CHARACTERS/Kulith/index.md",
+    "CHARACTERS/Colarius/index.md",
+    "CHARACTERS/Colarius/bio.md",
+    "SPECIES/Construct/index.md",
+    "Construct.md",
+    "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
     "LANGUAGES/Varae/grammar.md",
     "templates/languages.php",
-    "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
     "LANGUAGES/Varae/translations/index.md",
     "LANGUAGES/Varae/index.md",
     "LANGUAGES/Varae/translations/Untitled.md",
     "LANGUAGES/Varae/translations.md",
-    "STORY/index.md",
-    "EVENTS/index.md",
     "EVENTS/eventsbase.base",
-    "EVENTS/timeline.md",
-    "EVENTS/Kohoii Solei War/index.md",
-    "EVENTS/Kohoii Solei War/Kohoii-Solei War.md",
-    "EVENTS/Debris Impact/index.md",
-    "LANGUAGES/index.md",
     "LANGUAGES/languagesbase.base",
-    "LANGUAGES/Varae/word generator.md",
-    "LANGUAGES/Varae/script.md",
-    "CHARACTERS/Esela/index.md",
-    "Construct.md",
-    "LANGUAGES/Innalang/index.md",
-    "LANGUAGES/Acorithe/index.md",
-    "CONCEPTS/Construction/index.md",
-    "CONCEPTS/index.md",
-    "LOCATIONS/index.md",
     "CONCEPTS/conceptsbase.base",
-    "LOCATIONS/Kingdom of Acorithe/index.md",
     "LOCATIONS/locationsbase.base",
     "SPECIES/speciesbase.base",
-    "LOCATIONS/Maeniil/index.md",
-    "templates/characters_index.php",
-    "templates/default.php",
-    "SPECIES/index.md",
-    "codetop.php",
-    "display.php",
-    "CHARACTERS/Esela/bio.md",
     "crescentmoon.PNG",
     "GRAPHICS/banner.png",
     "GRAPHICS/world cover.png",
     "GRAPHICS/Untitled.png",
     "GRAPHICS/noicon.png",
-    "GRAPHICS/nerdchart.png",
-    "GRAPHICS/maeniil.png",
-    "GRAPHICS/image (1).png",
-    "GRAPHICS/Illustration2.png",
-    "GRAPHICS/idk maybe asilles (1).jpg",
     "CHARACTERS/relationship chart.canvas"
   ]
 }

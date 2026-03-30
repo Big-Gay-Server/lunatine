@@ -20,7 +20,7 @@ Skin Tone: fair
 Species: "[[SPECIES/Construct/index |Construct]]"
 Titles: Construct of Starlight
 Actual Age: 1301 years
-icon: "![[art/yudora_icon.png|75]]"
+icon: "![[CHARACTERS/Yudora/art/yudora_icon.png|75]]"
 title: Yudora
 aliases: Yudora
 iconn: "[[yudora_icon.png]]"

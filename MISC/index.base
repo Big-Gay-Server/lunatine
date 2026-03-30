@@ -1,0 +1,15 @@
+properties:
+  file.name:
+    displayName: name
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder == "MISC"
+    order:
+      - file.name
+      - file.tags
+    sort:
+      - property: file.size
+        direction: DESC

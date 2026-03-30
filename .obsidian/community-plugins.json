@@ -17,7 +17,6 @@
   "image-captions",
   "obsidian-rich-links",
   "mononote",
-  "obsidian-vault-changelog",
   "colored-tags",
   "longform",
   "multi-properties",
@@ -32,11 +31,9 @@
   "datacore",
   "metadata-menu",
   "obsidian-front-matter-title-plugin",
-  "surfing",
   "vscode-editor",
   "terminal",
   "extended-graph",
   "obsidian-meta-bind-plugin",
-  "quartz-syncer",
   "cursor-integration"
 ]

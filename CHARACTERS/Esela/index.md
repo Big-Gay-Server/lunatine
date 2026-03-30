@@ -27,13 +27,12 @@ Skin Tone: fair
 aliases:
   - Esela
 title: Esela Levenkagaelii
-icon: "![[CHARACTERS/Esela/art/prism_transparent.png|75]]"
+icon: "![[CHARACTERS/Esela/art/prism transparent.png|75]]"
 tags:
   - Selhae
 fullbody: "![[fullbody.png|300]]"
 iconn: "[[prism transparent.png]]"
 ---
-
 ## About
 
 A young adult, who ran away from her home in Kohoii to be with her partner Kulith. She initiated the migration of the people of Asilles up to Crescentmoon.
@@ -119,10 +118,7 @@ she feels guilty about leaving kohoii, wants to help people as much as she can t
 - flowers
 - crafts & hobbies
 - the maeniil
-
 #### dislikes
-
-- 
 
 ### Virtues & Personality perks
 
@@ -134,12 +130,12 @@ she feels guilty about leaving kohoii, wants to help people as much as she can t
 
 ### Contacts & Relations
 
-\[\[CHARACTERS/Naediia/index|Naediia\]\] - mother
-\[\[Reika\]\] - grandmother
-\[\[Soren\]\] - childhood friend
-\[\[CHARACTERS/Kulith/index|Kulith\]\] - partner
-\[\[kaeyomii\]\] - daughter
-\[\[CHARACTERS/Merisdae/index|Merisdae\]\] - construct
+- [[CHARACTERS/Naediia/index|Naediia]] - mother
+- [[CHARACTERS/Reika/index|Reika]] - grandmother
+- [[CHARACTERS/Soren/index|Soren]] - childhood friend
+- [[CHARACTERS/Kulith/index|Kulith]] - partner
+- [[CHARACTERS/Kaeyomii/index|Kaeyomii]] - daughter
+- [[CHARACTERS/Merisdae/index|Merisdae]] - construct
 
 ### Family Ties
 
