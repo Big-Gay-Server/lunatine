@@ -1,4 +1,6 @@
-<h1> Updates </h1>
+<?php
+/* TITLE: News */
+?>
 
 <div id="rss-feed-container">
     <p>Loading latest news...</p>
