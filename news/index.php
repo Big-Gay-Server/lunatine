@@ -1,3 +1,5 @@
+<h1> Updates </h1>
+
 <div id="rss-feed-container">
     <p>Loading latest news...</p>
 </div>
@@ -5,7 +7,7 @@
 
 <script>
     async function loadRSS() {
-    const FEED_URL = 'https://vocalsynth.lunarconstruct.net/news/feed.php';
+    const FEED_URL = 'https://lunatine.lunarconstruct.net/news/feed.php';
     const container = document.getElementById('rss-feed-container');
 
     try {
