@@ -4,7 +4,7 @@
     </div>
     <div class="quicklinks">
         <h4>Compendium</h4>
-        <a href="/">home page</a>
+        <a href="/">home page</a></br>
         <a href="/characters">characters</a></br>
         <a href="/locations">locations</a></br>
         <a href="/species">species</a></br>
