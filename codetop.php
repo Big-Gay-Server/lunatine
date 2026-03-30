@@ -35,7 +35,7 @@ $currentBreadPath = "";
 foreach ($urlParts as $part) {
     $currentBreadPath .= "/" . $part;
     $name = strtoupper(str_replace('-', ' ', $part));
-    $breadcrumbLinks[] = "<a href='$currentBreadPath'>$name</a>";
+    $breadcrumbLinks[] = "<a href='$currentBreadPath'>$pageTitle</a>";
 }
 $breadcrumbs = implode(' > ', $breadcrumbLinks);
 ?>
