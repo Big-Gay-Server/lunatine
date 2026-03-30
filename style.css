@@ -133,8 +133,8 @@ a, .file-link {
 
 /* SIDEBAR */
 .sidebar {
-    flex: 0 0 250px;
-    max-width: 250px;
+    flex: 0 0 200px;
+    max-width: 200px;
     background: var(--color-6);
     padding: 1.25rem;
     border-radius: 1.25rem;

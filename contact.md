@@ -1,1 +1,1 @@
-test for the contact page!
+hi im workin on a contact page hehe you can reach me on discord @ LunarConstruct or email me at lunarconstruct@gmail.com !!
