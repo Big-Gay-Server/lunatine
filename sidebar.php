@@ -4,14 +4,15 @@
         search placeholder
     </div>
     <div class="nav">
-                <a href="/characters">characters</a>
-                <a href="/locations">locations</a>
-                <a href="/species">species</a>
-                <a href="/languages">languages</a>
-                <a href="/concepts">concepts</a>
-                <a href="/events">events</a>
-                <a href="/artifacts">artifacts</a>
-                <a href="/organizations">organizations</a>
-                <a href="/story">story</a>
+                <h3>Navigation</h3>
+                <a href="/characters">characters</a></br>
+                <a href="/locations">locations</a></br>
+                <a href="/species">species</a></br>
+                <a href="/languages">languages</a></br>
+                <a href="/concepts">concepts</a></br>
+                <a href="/events">events</a></br>
+                <a href="/artifacts">artifacts</a></br>
+                <a href="/organizations">organizations</a></br>
+                <a href="/story">story</a></br>
             </div>
 </div>
