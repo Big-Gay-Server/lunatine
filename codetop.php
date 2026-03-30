@@ -8,7 +8,26 @@ if (empty($requestedPath)) $requestedPath = 'index';
 // 1. Determine Section & Title
 $urlParts = explode('/', $requestedPath);
 $section = strtolower($urlParts[0]);
-$pageTitle = ucfirst(basename($requestedPath));
+
+require_once __DIR__ . '/metadata.php';
+
+// Get path from URI or Nginx query param
+$requestUri = $_SERVER['REQUEST_URI'];
+$cleanPath = $_SERVER['DOCUMENT_ROOT'] . $requestUri;
+
+// Logic to find the actual .md file (similar to your display.php logic)
+if (is_dir($cleanPath)) {
+    $targetFile = rtrim($cleanPath, '/') . '/index.md';
+} else {
+    $targetFile = $cleanPath; // Or handle .base/clean URL logic here
+}
+
+$meta = get_page_metadata($targetFile);
+$pageTitle = !empty($meta['title']) ? $meta['title'] : ucfirst(basename($requestUri));
+
+if (strtolower($pageTitle) === 'index' || $pageTitle === '') {
+    $pageTitle = 'Home';
+}
 
 // 2. Build Breadcrumbs
 $breadcrumbLinks = [];
