@@ -144,7 +144,7 @@ if ($filePath && file_exists($filePath)) {
         
         // --- YAML PROCESSING ---
         // get metadata
-        $yamlData = get_page_metadata($fullPath);
+        $yamlData = get_page_metadata($requestedPath);
 
         // set global title variable
         $pageTitle = $yamlData['title'] ?? ucfirst(basename($requestedPath));
