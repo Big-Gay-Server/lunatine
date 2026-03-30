@@ -181,10 +181,16 @@ a, .file-link {
 
 /* BASES TABLES */
 .bases-table {
+    & table {
     width: 100%;
     border-collapse: collapse;
     background: transparent;
     color: var(--color-5);
+    padding: 30px;
+    margin: 20px;
+    border: .5px dashed var(--color-7);
+    border-radius: 30px;
+    }
     & th {
         color: var(--color-7);
         border-bottom: 1px solid var(--color-3);
@@ -192,6 +198,17 @@ a, .file-link {
     & td {
         padding: 10px;
         border-bottom: 1px solid var(--color-6);
+        &:has(img) {
+        width: 1%;
+        white-space: nowrap;
+        }
+    & img {
+        display: block;
+        max-width: 150px;
+        height:  auto;
+        border-radius: 30px;
+        padding: 10px;
+        }
     }
 }
 
@@ -204,7 +221,7 @@ a, .file-link {
 
 .bio-sidebar {
     float: right;
-    width: 320px;
+    max-width: 350px;
     margin-left: 30px;
     margin-bottom: 20px;
     background: rgba(26, 11, 46, 0.85);
@@ -213,11 +230,16 @@ a, .file-link {
     border-radius: 1.25rem;
     box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
     text-align: center;
+    & code {
+        font-family: "Caudex", serif;
+        letter-spacing: 0.005rem;
+    }
     & table {
         margin: 0 auto !important;
         display: table;
-        border-collapse: collapse;
         width: 100%;
+        border: none;
+        padding: 0px;
     }
     & tr {
         display: flex;
@@ -247,6 +269,12 @@ a, .file-link {
         word-wrap: break-word;
         overflow-wrap: break-word;
         white-space: normal;
+        border: none !important;
+    }
+    & hr {
+        display: none;
+    }
+    & th {
         border: none !important;
     }
     & h2,
@@ -318,7 +346,7 @@ table {
 /* Remove the top/left borders from cells so they don't double up with the table border */
 td, th {
     border-bottom: .5px dashed var(--color-5);
-    border-right: .5px dashed var(--color-5);
+    border-right: .5px dashed color-mix(in srgb, var(--color-5), transparent 50%);
     padding: 10px;
 }
 

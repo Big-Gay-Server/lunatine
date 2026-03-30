@@ -28,7 +28,7 @@ Skin Tone: fair
 Species: "[[SPECIES/Construct/index |Construct]]"
 Titles: Construct of Moon
 title: Merisdae
-icon: "![[maikory merisdae icon.png|75]]"
+icon: "![[CHARACTERS/Merisdae/art/maikory merisdae icon.png|75]]"
 aliases:
   - Merisdae
 Actual Age: 1301 years

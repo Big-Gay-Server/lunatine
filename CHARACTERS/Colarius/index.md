@@ -24,7 +24,7 @@ Ruler/Owner of: "[[LOCATIONS/Kingdom of Acorithe/index]]"
 Skin Tone: tan
 Species: "[[SPECIES/Fae/index |Fae]]"
 Titles: Prince of Acorithe
-icon: "![[colarius new icon.png|75]]"
+icon: ![[CHARACTERS/Colarius/art/colarius new icon.png|75]]
 aliases:
   - Colarius
 fullbody: "![[CHARACTERS/Colarius/art/colarius new.png|400]]"

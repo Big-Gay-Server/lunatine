@@ -55,10 +55,12 @@ views:
       - Birthdate
       - Death date
     sort:
-      - property: Full Name
-        direction: ASC
       - property: icon
         direction: ASC
+      - property: Full Name
+        direction: ASC
+      - property: Species
+        direction: DESC
       - property: Name Pronunciation
         direction: ASC
       - property: Actual Age
