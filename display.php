@@ -260,20 +260,16 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 : $findProp($props, $propId);
 
             $cellValue = is_array($val)
-                ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
-                    if (is_array($i)) {
-                        $i = implode(', ', array_map('strval', $i));
-                    }
-                    $item = $Parsedown->line((string) $i);
-                    $item = render_wiki_markup_html($item, $markdownDir, $Parsedown, true);
-                    return "<span class='prop-pill'>$item</span>";
-                }, $val))
-                : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
+                ? implode(', ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
+                : $Parsedown->line((string) $val);
 
-            $hasAnchor = is_string($cellValue) && preg_match('/<a\s/i', $cellValue);
-            $isEmbed = is_string($cellValue) && str_contains($cellValue, '<img');
+            if (!is_array($val)) {
+                $cellValue = render_wiki_markup_html($cellValue, $markdownDir, $Parsedown, true);
+            }
 
-            if (!$linkPlaced && !$hasAnchor && !$isEmbed && !empty(trim((string) $val))) {
+            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
