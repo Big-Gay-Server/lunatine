@@ -92,7 +92,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     include $templatePath;
     $html = ob_get_clean();
     $html = preg_replace('/[\r\n]+/', ' ', $html);
-    return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE);
+    return $html;
 }
 
 // --- LOCATE FILE FROM PATH ---
