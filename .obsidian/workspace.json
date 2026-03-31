@@ -12,12 +12,13 @@
             "id": "8c224558a59ca233",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "MISC/index.base",
-                "viewName": "Table"
+                "file": "CHARACTERS/Kaeyomii/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
+              "icon": "lucide-file",
               "title": "index"
             }
           }
@@ -258,15 +259,15 @@
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
       "terminal:Open terminal": false,
-      "quartz-syncer:Quartz Syncer publication center": false,
       "calendarium:Open Calendarium": false
     }
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "Pasted image 20260329235002.png",
+    "MISC/index.base",
     "index.md",
     "style.css",
-    "MISC/index.base",
     "CHARACTERS/characterbase.base",
     "MISC/pando’s lore questions.md",
     "MISC/pando’s charater analysis.md",

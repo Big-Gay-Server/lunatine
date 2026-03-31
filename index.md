@@ -1,6 +1,7 @@
 ---
 title: Lunatine Wiki
 ---
+
 welcome to the lunatine wiki!
 
 this site is a work in progress, please pardon the [[CONCEPTS/Dust/index|Dust]] !!

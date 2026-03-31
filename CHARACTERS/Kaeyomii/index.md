@@ -112,3 +112,5 @@ Kaeyomii possesses a [[Core Archetypes#^6bd579 |Seer's Soul]], allowing her to s
 ### **Hobbies & Pets**
 
 ### **Speech**
+
+![[Pasted image 20260329235002.png]]

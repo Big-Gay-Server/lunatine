@@ -268,7 +268,7 @@ if ($filePath && file_exists($filePath)) {
 
 // --- TEMPLATE PICKER ---
 // 1. Check if the physical file is named index.md or index.base
-$isIndexFile = (basename($filePath, '.md') === 'index' || basename($filePath, '.base') === 'index');
+$isIndexFile = (basename($filePath ?? '', '.md') === 'index' || basename($filePath ?? '', '.base') === 'index');
 
 // 2. Check the depth of the requested URL
 // If count is 1 (e.g. /characters), it's a Section Index.

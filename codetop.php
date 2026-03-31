@@ -23,7 +23,7 @@ if (is_dir($cleanPath)) {
 }
 
 $meta = get_page_metadata($targetFile);
-$pageTitle = !empty($meta['title']) ? $meta['title'] : ucfirst(basename($requestUri));
+$pageTitle = !empty($meta['title']) ? $meta['title'] : ucfirst(urldecode(basename($requestUri)));
 
 if (strtolower($pageTitle) === 'index' || $pageTitle === '') {
     $pageTitle = 'Home';
@@ -59,9 +59,10 @@ foreach ($urlParts as $part) {
 
     // Fallback if no title found in any file
     if (empty($name)) {
-        $name = strtoupper(str_replace('-', ' ', $part));
-    }
-    
+        // urldecode ensures %C3%A9 becomes é
+        $name = strtoupper(urldecode(str_replace('-', ' ', $part)));
+        }
+        
     $breadcrumbLinks[] = "<a href='$currentBreadPath'>$name</a>";
 }
 $breadcrumbs = implode(' > ', $breadcrumbLinks);
@@ -76,6 +77,7 @@ $breadcrumbs = implode(' > ', $breadcrumbLinks);
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($pageTitle ?? 'Wiki') ?> | Lunatine</title>
+    <link rel="icon" type="image/x-icon" href="/GRAPHICS/icon.png">
     <link rel="stylesheet" href="/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,6 +89,7 @@ $breadcrumbs = implode(' > ', $breadcrumbLinks);
         <center>
             <div class="logo"><a href="/">lunatine</a></div>
             <div class="nav">
+                <a href="/">home</a>
                 <a href="/about">about</a>
                 <a href="/news">news</a>
                 <a href="/compendium">compendium</a>
@@ -98,6 +101,4 @@ $breadcrumbs = implode(' > ', $breadcrumbLinks);
         <div class="sidebar"><?php @include 'sidebar.php'; ?></div>
         <div class="content-container">
             <div class="breadcrumbs"><a href="/"> HOME </a> > <?= $breadcrumbs ?></div>
-            <h1>
-                <center><?= htmlspecialchars($pageTitle) ?></center>
-            </h1>
+            <h1><center><?= htmlspecialchars($pageTitle) ?></center></h1>
