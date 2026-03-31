@@ -64,9 +64,17 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     }
 
     $snippetHtml = $Parsedown->line($snippet);
-    $snippetText = trim(strip_tags($snippetHtml));
-    $snippetText = preg_replace('/\s+/', ' ', $snippetText);
-    $previewText = htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
+
+    // Convert wiki-style images in the preview snippet to real <img> tags.
+    $snippetHtml = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
+        $imageName = trim($m[1]);
+        $width = $m[3] ?? null;
+        $path = find_image_path($markdownDir, $imageName);
+        $style = $width ? "width:{$width}px;" : 'max-width:100%;';
+        return $path ? "<img src='$path' style='$style height:auto;'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
+    }, $snippetHtml);
+
+    $previewText = trim($snippetHtml);
 
     $previewTitle = basename(preg_replace('/\/index$/i', '', $linkTarget));
     if ($previewTitle === '') {
@@ -77,7 +85,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $templatePath = __DIR__ . '/templates/link_preview.php';
 
     if (!file_exists($templatePath)) {
-        return $snippetText;
+        return strip_tags($snippetHtml);
     }
 
     ob_start();
