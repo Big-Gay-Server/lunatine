@@ -85,7 +85,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     }
 
     $content = file_get_contents($filePath);
-    $content = preg_replace('/^---\s*[\s\S]*?\s---\s*/u', '', $content, 1);
+    $content = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $content, 1);
     $content = trim($content);
     $content = preg_replace('/\r\n|\r/', "\n", $content);
 
