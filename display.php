@@ -260,7 +260,12 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 : $findProp($props, $propId);
 
             $cellValue = is_array($val)
-                ? implode(', ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
+                ? implode(', ', array_map(function ($i) {
+                    if (is_array($i)) {
+                        $i = implode(', ', array_map('strval', $i));
+                    }
+                    return "<span class='prop-pill'>" . htmlspecialchars((string) $i, ENT_QUOTES | ENT_SUBSTITUTE) . '</span>';
+                }, $val))
                 : $Parsedown->line((string) $val);
 
             if (!is_array($val)) {
