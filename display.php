@@ -45,6 +45,38 @@ function find_case_insensitive($baseDir, $path)
     return $currentPath; // return the matched filesystem path
 }
 
+function create_wiki_url(string $path): string
+{
+    $path = rawurldecode($path);
+    $path = preg_replace('/#.*$/', '', $path);
+    $path = preg_replace('/\.md$/i', '', $path);
+    $path = preg_replace('/\/index$/i', '', $path);
+    $segments = array_filter(explode('/', trim($path, '/')),
+        fn($segment) => $segment !== '');
+
+    $slugSegments = array_map(function ($segment) {
+        $segment = trim($segment);
+        $segment = str_replace([' ', '_'], '-', $segment);
+        $segment = preg_replace('/-+/', '-', $segment);
+        return strtolower($segment);
+    }, $segments);
+
+    return '/' . implode('/', $slugSegments);
+}
+
+function get_preview_snippet(string $html): string
+{
+    if (preg_match('/<p[^>]*>.*?<\/p>/is', $html, $matches)) {
+        return trim($matches[0]);
+    }
+
+    if (preg_match('/<(?:div|blockquote|ul|ol|pre|table)[^>]*>.*?<\/\w+>/is', $html, $matches)) {
+        return trim($matches[0]);
+    }
+
+    return trim(strip_tags($html));
+}
+
 function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedown): string
 {
     $filePath = find_markdown_file($markdownDir, $linkTarget);
@@ -57,13 +89,12 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $content = trim($content);
     $content = preg_replace('/\r\n|\r/', "\n", $content);
 
-    // Render the full page content and extract the first HTML paragraph.
+    // Render the full page content and extract a preview snippet.
     $renderedHtml = $Parsedown->text($content);
-    if (!preg_match('/<p[^>]*>(.*?)<\/p>/is', $renderedHtml, $matches)) {
+    $previewText = get_preview_snippet($renderedHtml);
+    if ($previewText === '') {
         return '';
     }
-
-    $previewText = trim($matches[0]);
 
     // Convert wiki-style images inside the preview paragraph to real <img> tags.
     $previewText = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
@@ -79,7 +110,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
         $previewTitle = 'Preview';
     }
 
-    $previewUrl = '/' . ltrim(strtolower(preg_replace('/\/index$/i', '', $linkTarget)), '/');
+    $previewUrl = create_wiki_url($linkTarget);
     $templatePath = __DIR__ . '/templates/link_preview.php';
 
     if (!file_exists($templatePath)) {
@@ -361,8 +392,7 @@ if ($filePath && file_exists($filePath)) {
 
                 // Preserve anchor fragments in the href, but strip them for preview lookup.
                 $previewTarget = preg_replace('/#.*$/', '', $rawTarget);
-                $urlTarget = preg_replace('/\/index$/i', '', $rawTarget);
-                $url = '/' . ltrim(strtolower($urlTarget), '/');
+                $url = create_wiki_url($rawTarget);
                 $linkText = trim($p[1] ?? $p[0]);
                 $preview = get_wiki_link_preview($previewTarget, $markdownDir, $Parsedown);
                 $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
