@@ -64,17 +64,48 @@ function create_wiki_url(string $path): string
     return '/' . implode('/', $slugSegments);
 }
 
+function render_wiki_markup_html(string $html, string $markdownDir, $Parsedown, bool $includePreviewAttr = false): string
+{
+    $html = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
+        $imageName = trim($m[1]);
+        $width = $m[3] ?? null;
+        $path = find_image_path($markdownDir, $imageName);
+        $style = $width ? "width:{$width}px;" : 'max-width:100%;';
+        return $path ? "<img src='$path' style='$style height:auto;'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
+    }, $html);
+
+    $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown, $includePreviewAttr) {
+        $p = explode('|', $m[1]);
+        $rawTarget = trim($p[0]);
+        $rawTarget = preg_replace('/\s[a-f0-9]{32}$/i', '', $rawTarget);
+        $rawTarget = preg_replace('/\.md$/i', '', $rawTarget);
+
+        $url = create_wiki_url($rawTarget);
+        $linkText = trim($p[1] ?? $p[0]);
+        $preview = '';
+        $previewAttr = '';
+
+        if ($includePreviewAttr) {
+            $previewTarget = preg_replace('/#.*$/', '', $rawTarget);
+            $preview = get_wiki_link_preview($previewTarget, $markdownDir, $Parsedown);
+            if ($preview !== '') {
+                $previewAttr = ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"';
+            }
+        }
+
+        return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
+    }, $html);
+
+    return $html;
+}
+
 function get_preview_snippet(string $html): string
 {
-    if (preg_match('/<p[^>]*>.*?<\/p>/is', $html, $matches)) {
+    if (preg_match('/<p[^>]*>(.*?)<\/p>/is', $html, $matches)) {
         return trim($matches[0]);
     }
 
-    if (preg_match('/<(?:div|blockquote|ul|ol|pre|table)[^>]*>.*?<\/\w+>/is', $html, $matches)) {
-        return trim($matches[0]);
-    }
-
-    return trim(strip_tags($html));
+    return '';
 }
 
 function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedown): string
@@ -96,14 +127,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
         return '';
     }
 
-    // Convert wiki-style images inside the preview paragraph to real <img> tags.
-    $previewText = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
-        $imageName = trim($m[1]);
-        $width = $m[3] ?? null;
-        $path = find_image_path($markdownDir, $imageName);
-        $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-        return $path ? "<img src='$path' style='$style height:auto;'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
-    }, $previewText);
+    $previewText = render_wiki_markup_html($previewText, $markdownDir, $Parsedown, false);
 
     $previewTitle = basename(preg_replace('/\/index$/i', '', $linkTarget));
     if ($previewTitle === '') {
@@ -218,8 +242,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     // Render each markdown page as a row in the table.
     foreach ($mdFiles as $mdFile) {
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
-        $urlPath = str_replace([$markdownDir, '.md', '/index', 'index'], '', $mdFile);
-        $finalUrl = '/' . strtolower(trim($urlPath, '/'));
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
 
         $rawContent = file_get_contents($mdFile);
         $props = [];
@@ -236,17 +259,15 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 ? $displayName
                 : $findProp($props, $propId);
 
-            if (is_string($val) && str_contains($val, '!')) {
-                $val = preg_replace_callback('/!\[\[\s*([^|\]]+)(\|(\d+))?\s*\]\]/', function ($m) {
-                    $src = '/' . ltrim(trim($m[1]), '/');
-                    return "<img src='$src' style='height:auto;'>";
-                }, $val);
-            }
-
-            $isEmbed = (is_string($val) && str_contains($val, '<img'));
             $cellValue = is_array($val)
                 ? implode(', ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
-                : ($isEmbed ? $val : $Parsedown->line((string) $val));
+                : $Parsedown->line((string) $val);
+
+            if (!is_array($val)) {
+                $cellValue = render_wiki_markup_html($cellValue, $markdownDir, $Parsedown, true);
+            }
+
+            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
 
             if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
@@ -434,45 +455,8 @@ if (file_exists($specificTemplate)) {
     echo '<div class="main-content">' . $htmlContent . '</div>';
 }
 ?>
-<style>
-#wiki-link-preview-popup {
-    position: absolute;
-    z-index: 9999;
-    max-width: 320px;
-    display: none;
-    pointer-events: auto;
-}
-.wiki-preview-template {
-    padding: 1rem;
-    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.16));
-    border-radius: 0.75rem;
-    background: var(--card-background, #fff);
-    box-shadow: var(--card-shadow, 0 12px 28px rgba(0, 0, 0, 0.12));
-    color: inherit;
-    font: inherit;
-}
-.wiki-preview-title {
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-.wiki-preview-body {
-    margin-bottom: 0.75rem;
-}
-.wiki-preview-footer {
-    font-size: 0.9rem;
-    opacity: 0.85;
-}
-#wiki-link-preview-popup::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: 8px solid transparent;
-    border-top-color: var(--card-background, #fff);
-    bottom: 100%;
-    left: 18px;
-}
-</style>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const popup = document.createElement('div');

@@ -476,3 +476,41 @@ td:first-child {
     padding-right: 5px;
     letter-spacing: .15em;
 }
+
+#wiki-link-preview-popup {
+    position: absolute;
+    z-index: 9999;
+    max-width: 400px;
+    display: none;
+    pointer-events: auto;
+}
+.wiki-preview-template {
+    padding: 1rem;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.16));
+    border-radius: 0.75rem;
+    background: var(--card-background, #fff);
+    box-shadow: var(--card-shadow, 0 12px 28px rgba(0, 0, 0, 0.12));
+    color: inherit;
+    font: inherit;
+}
+.wiki-preview-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.wiki-preview-body {
+    margin-bottom: 0.75rem;
+}
+.wiki-preview-footer {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+#wiki-link-preview-popup::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-top-color: var(--card-background, #fff);
+    bottom: 100%;
+    left: 18px;
+}

@@ -23,7 +23,7 @@ if (is_dir($cleanPath)) {
 }
 
 $meta = get_page_metadata($targetFile);
-$pageTitle = !empty($meta['title']) ? $meta['title'] : ucfirst(urldecode(basename($requestUri)));
+$pageTitle = !empty($meta['title']) ? $meta['title'] : ucwords(str_replace(['-', '_'], ' ', urldecode(basename($requestUri))));
 
 if (strtolower($pageTitle) === 'index' || $pageTitle === '') {
     $pageTitle = 'Home';
@@ -60,9 +60,9 @@ foreach ($urlParts as $part) {
     // Fallback if no title found in any file
     if (empty($name)) {
         // urldecode ensures %C3%A9 becomes é
-        $name = strtoupper(urldecode(str_replace('-', ' ', $part)));
-        }
-        
+        $name = ucwords(str_replace(['-', '_'], ' ', urldecode($part)));
+    }
+    
     $breadcrumbLinks[] = "<a href='$currentBreadPath'>$name</a>";
 }
 $breadcrumbs = implode(' > ', $breadcrumbLinks);
