@@ -14,9 +14,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md",
+                "file": "LOCATIONS/World Garden/index.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "index"
@@ -252,18 +252,21 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "obsidian-leaflet-plugin:Open Leaflet Map": false,
+      "calendarium:Open Calendarium": false,
       "obsidian-importer:Open Importer": false,
       "obsidian-rich-links:Rich Links": false,
       "obsidian-stille:Toggle Stille": false,
       "tagged-gallery:Gallery": false,
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
-      "terminal:Open terminal": false,
-      "calendarium:Open Calendarium": false
+      "terminal:Open terminal": false
     }
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "LOCATIONS/index.md",
+    "CHARACTERS/Aenna/index.md",
+    "CHARACTERS/Kaeyomii/index.md",
     "Pasted image 20260329235002.png",
     "MISC/index.base",
     "index.md",
@@ -298,8 +301,6 @@
     "templates/languages.php",
     "LANGUAGES/Varae/translations/index.md",
     "LANGUAGES/Varae/index.md",
-    "LANGUAGES/Varae/translations/Untitled.md",
-    "LANGUAGES/Varae/translations.md",
     "EVENTS/eventsbase.base",
     "LANGUAGES/languagesbase.base",
     "CONCEPTS/conceptsbase.base",
@@ -309,7 +310,6 @@
     "GRAPHICS/banner.png",
     "GRAPHICS/world cover.png",
     "GRAPHICS/Untitled.png",
-    "GRAPHICS/noicon.png",
     "CHARACTERS/relationship chart.canvas"
   ]
 }

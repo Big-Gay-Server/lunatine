@@ -14,6 +14,7 @@ alias: Aenna
 title: Aenna
 ---
 ## About
+The [[SPECIES/Inna/index|Inna]] birthed from the planet [[LOCATIONS/Asilles/index|Asilles]] .
 
 ## Physical Description
 ### General Physical Condition
