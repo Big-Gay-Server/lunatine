@@ -1,124 +1,173 @@
 <?php
 // --- IMPORTING EXTERNAL LIBRARIES ---
-require_once 'Parsedown.php';  // parses markdown to HTML.
-require_once 'parsedownGloss.php';  // parsedown extension to parse interlinear gloss blocks to HTML
-require_once 'Spyc.php';  // parses YAML to HTML.
-require_once 'imageparser.php';  // parses obsidian image links
-require_once 'filefinder.php';  // parses ???? i dont know if i need this anymore really
+// Load the markdown parser, YAML parser, image helper, and file resolver.
+require_once 'Parsedown.php';           // basic markdown to HTML parser
+require_once 'parsedownGloss.php';      // extended parser for gloss blocks
+require_once 'Spyc.php';                // YAML frontmatter parser
+require_once 'imageparser.php';         // Obsidian-style image path resolver
+require_once 'filefinder.php';          // finds markdown files by URL path
 
+// Create instances used later in the file.
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
 $Parsedown = new ParsedownGloss();
 
-// --- ALLOWS FOR CASE-INSENSITIVITY IN URLS ---
+// --- CASE-INSENSITIVE PATH RESOLUTION ---
+// Find a filesystem path under $baseDir that matches $path ignoring case.
 function find_case_insensitive($baseDir, $path)
 {
+    // Split the URL path into directory/file segments.
     $segments = explode('/', trim($path, '/'));
     $currentPath = rtrim($baseDir, '/');
+
     foreach ($segments as $segment) {
+        // List all entries in the current directory.
         $items = glob($currentPath . '/*', GLOB_NOSORT);
-        if (!$items)
-            return null;
+        if (!$items) {
+            return null; // no entries found, path does not exist
+        }
+
         $found = false;
         foreach ($items as $item) {
+            // Compare the segment against each entry without case sensitivity.
             if (strcasecmp(basename($item), $segment) === 0) {
-                $currentPath = $item;
+                $currentPath = $item; // follow the matching entry
                 $found = true;
                 break;
             }
         }
-        if (!$found)
-            return null;
+
+        if (!$found) {
+            return null; // no matching segment for this part of the path
+        }
     }
-    return $currentPath;
+
+    return $currentPath; // return the matched filesystem path
 }
 
 // --- LOCATE FILE FROM PATH ---
 // takes the path from the url and looks for (in this order)
 // index.md -> index.base -> exact .md file match (like dust.md or smth)
 // this gets set to $filePath variable
+// Normalize the requested URL path and remove leading/trailing slashes.
 $target = trim($requestedPath, '/');
+
+// Resolve the target path against the markdown directory using case-insensitive matching.
 $resolvedBase = find_case_insensitive($markdownDir, $target);
 
+// If the URL points to a directory, prefer index.md or index.base inside that folder.
 if ($resolvedBase && is_dir($resolvedBase)) {
-    if (file_exists($resolvedBase . '/index.md'))
+    if (file_exists($resolvedBase . '/index.md')) {
         $filePath = $resolvedBase . '/index.md';
-    elseif (file_exists($resolvedBase . '/index.base'))
+    } elseif (file_exists($resolvedBase . '/index.base')) {
         $filePath = $resolvedBase . '/index.base';
-    else
+    } else {
         $filePath = find_markdown_file($markdownDir, $target);
-} elseif ($resolvedBase && file_exists($resolvedBase)) {
+    }
+}
+// If the URL directly matches a file, use that file.
+elseif ($resolvedBase && file_exists($resolvedBase)) {
     $filePath = $resolvedBase;
-} else {
+}
+// Otherwise, attempt to resolve the path through the markdown file finder.
+else {
     $filePath = find_markdown_file($markdownDir, $target);
 }
 
+// Initialize the main HTML output variables.
 $htmlContent = '';
 $bioHtml = '';
 $yamlData = [];
 
 // --- BASES RENDERER ---
+// This closure renders a .base file as an HTML table.
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
-    if (!file_exists($basePath))
+    // If the .base file is missing, return a placeholder.
+    if (!file_exists($basePath)) {
         return '<i>(Base file not found)</i>';
+    }
+
+    // Load YAML data from the .base file.
     $baseData = Spyc::YAMLLoad($basePath);
+
+    // Choose the correct view index from the base file.
     $viewIndex = 0;
     if (isset($baseData['views'])) {
-        foreach ($baseData['views'] as $idx => $v) {
-            if ($targetViewName && strtolower($v['name'] ?? '') === strtolower($targetViewName)) {
+        foreach ($baseData['views'] as $idx => $view) {
+            if ($targetViewName && strtolower($view['name'] ?? '') === strtolower($targetViewName)) {
                 $viewIndex = $idx;
                 break;
             }
-            if (!$targetViewName && ($v['type'] ?? '') === 'table') {
+            if (!$targetViewName && ($view['type'] ?? '') === 'table') {
                 $viewIndex = $idx;
             }
         }
     }
+
+    // Get the ordered columns for the table.
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
+
+    // Build the list of markdown pages to include in the table.
     $scanDir = dirname($basePath);
     $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
     $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
 
+    // Normalize property names and find values from page YAML.
     $findProp = function ($props, $id) {
-        if (isset($props[$id]))
+        if (isset($props[$id])) {
             return $props[$id];
+        }
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
-            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId)
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
                 return $val;
+            }
         }
         return '';
     };
 
+    // Start the HTML table and render the header row.
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
-        $colName = ($colId === 'file.name' || $colId === 'file') ? 'file name' : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        $colName = ($colId === 'file.name' || $colId === 'file')
+            ? 'file name'
+            : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
         $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
     $tableHtml .= '</tr></thead><tbody>';
 
+    // Render each markdown page as a row in the table.
     foreach ($mdFiles as $mdFile) {
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
         $urlPath = str_replace([$markdownDir, '.md', '/index', 'index'], '', $mdFile);
         $finalUrl = '/' . strtolower(trim($urlPath, '/'));
+
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches))
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
             $props = Spyc::YAMLLoad($matches[1]);
+        }
 
         $tableHtml .= '<tr>';
         $linkPlaced = false;
+
         foreach ($order as $propId) {
-            $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
+            $val = ($propId === 'file.name' || $propId === 'file')
+                ? $displayName
+                : $findProp($props, $propId);
+
             if (is_string($val) && str_contains($val, '!')) {
                 $val = preg_replace_callback('/!\[\[\s*([^|\]]+)(\|(\d+))?\s*\]\]/', function ($m) {
                     $src = '/' . ltrim(trim($m[1]), '/');
-                    $width = $m[3] ?? '75';
-                    return "<img src='$src'; height:auto;'>";
+                    return "<img src='$src' style='height:auto;'>";
                 }, $val);
             }
+
             $isEmbed = (is_string($val) && str_contains($val, '<img'));
-            $cellValue = is_array($val) ? implode(' ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val)) : ($isEmbed ? $val : $Parsedown->line((string) $val));
+            $cellValue = is_array($val)
+                ? implode(' ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
+                : ($isEmbed ? $val : $Parsedown->line((string) $val));
+
             if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
@@ -126,30 +175,39 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 $tableHtml .= "<td>$cellValue</td>";
             }
         }
+
         $tableHtml .= '</tr>';
     }
+
     return $tableHtml . '</tbody></table>';
 };
 
 // --- STANDARD MARKDOWN PROCESSING ---
+// Only run page rendering if the requested file exists.
 if ($filePath && file_exists($filePath)) {
+    // Detect whether this is a markdown file or a base data file.
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
     if ($extension === 'base') {
+        // Render .base files as tables rather than markdown pages.
         $htmlContent = $renderTable($filePath, $filePath);
     } else {
+        // Load the markdown page content into memory.
         $markdownToProcess = file_get_contents($filePath);
         $yamlData = [];
 
+        // Load any shared metadata helpers for page rendering.
         require_once __DIR__ . '/metadata.php';
         
         // --- YAML PROCESSING ---
-        // 1. Extract & Strip YAML Frontmatter
+        // 1. Extract YAML frontmatter from the top of the page.
         if (preg_match('/^---\s*([\s\S]*?)\s---/u', $markdownToProcess, $matches)) {
-            $yamlData = Spyc::YAMLLoad($matches[1]);
-            $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess);
+            $yamlData = Spyc::YAMLLoad($matches[1]); // parse YAML into PHP array
+            $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess); // remove YAML from markdown
         }
         
         // --- LOAD IN BIO PAGE ---
+        // If a bio page exists for this URL, load it too.
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
 
@@ -267,20 +325,17 @@ if ($filePath && file_exists($filePath)) {
 }
 
 // --- TEMPLATE PICKER ---
-// 1. Check if the physical file is named index.md or index.base
+// Decide which PHP template should render the page.
+// If this is the root index of a section, use section_index.
 $isIndexFile = (basename($filePath ?? '', '.md') === 'index' || basename($filePath ?? '', '.base') === 'index');
 
-// 2. Check the depth of the requested URL
-// If count is 1 (e.g. /characters), it's a Section Index.
-// If count is > 1 (e.g. /characters/merisdae), it's an Individual Page.
+// Count the URL segments to know whether this is a root section page or a child page.
+// Example: /characters has depth 1, /characters/merisdae has depth 2.
 $urlDepth = count($urlParts);
 
-// 3. Determine Template Name
 if ($isIndexFile && $urlDepth <= 1) {
-    // Only use _index template for the actual root of the section
     $templateName = $section . '_index';
 } else {
-    // Everything else (subfolders or direct files) uses the standard section template
     $templateName = $section;
 }
 
@@ -291,7 +346,7 @@ if (file_exists($specificTemplate)) {
 } elseif (file_exists($templateDir . $section . '.php')) {
     include $templateDir . $section . '.php';
 } else {
-    // DEFAULT LAYOUT
+    // If no section template exists, fall back to a simple content wrapper.
     echo '<div class="main-content">' . $htmlContent . '</div>';
 }
 ?>
