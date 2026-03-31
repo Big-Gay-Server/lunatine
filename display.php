@@ -71,7 +71,7 @@ function render_wiki_markup_html(string $html, string $markdownDir, $Parsedown, 
         $width = $m[3] ?? null;
         $path = find_image_path($markdownDir, $imageName);
         $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-        return $path ? "<img src='$path' style='$style height:auto;'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
+        return $path ? "<img src='$path'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
     }, $html);
 
     $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown, $includePreviewAttr) {
