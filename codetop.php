@@ -100,5 +100,5 @@ $breadcrumbs = implode(' > ', $breadcrumbLinks);
     <div class="contentwrap">
         <div class="sidebar"><?php @include 'sidebar.php'; ?></div>
         <div class="content-container">
-            <div class="breadcrumbs"><a href="/"> HOME </a> > <?= $breadcrumbs ?></div>
+            <div class="breadcrumbs"><a href="/"> Home </a> > <?= $breadcrumbs ?></div>
             <h1><center><?= htmlspecialchars($pageTitle) ?></center></h1>
