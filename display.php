@@ -403,7 +403,7 @@ if ($filePath && file_exists($filePath)) {
                 $width = $m[3] ?? null;
                 $path = find_image_path($markdownDir, $imageName);
                 $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-                return $path ? "<img src='$path' style='$style height:auto;'>" : "<i>(Image not found: $imageName)</i>";
+                return $path ? "<img src='$path'>" : "<i>(Image not found: $imageName)</i>";
             }, $text);
 
             // E. Wikilinks (LOWERCASE & NO INDEX)
