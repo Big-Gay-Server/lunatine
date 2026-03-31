@@ -45,6 +45,30 @@ function find_case_insensitive($baseDir, $path)
     return $currentPath; // return the matched filesystem path
 }
 
+function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedown): string
+{
+    $filePath = find_markdown_file($markdownDir, $linkTarget);
+    if (!$filePath || !file_exists($filePath)) {
+        return '';
+    }
+
+    $content = file_get_contents($filePath);
+    $content = preg_replace('/^---\s*[\s\S]*?\s---\s*/u', '', $content, 1);
+    $content = trim($content);
+    $content = preg_replace('/\r\n|\r/', "\n", $content);
+
+    $paragraphs = preg_split('/\n{2,}/', $content);
+    $snippet = trim($paragraphs[0] ?? '');
+    if ($snippet === '') {
+        return '';
+    }
+
+    $snippetHtml = $Parsedown->line($snippet);
+    $snippetText = trim(strip_tags($snippetHtml));
+    $snippetText = preg_replace('/\s+/', ' ', $snippetText);
+    return htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
+}
+
 // --- LOCATE FILE FROM PATH ---
 // takes the path from the url and looks for (in this order)
 // index.md -> index.base -> exact .md file match (like dust.md or smth)
@@ -305,7 +329,7 @@ if ($filePath && file_exists($filePath)) {
             }, $text);
 
             // E. Wikilinks (LOWERCASE & NO INDEX)
-            $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) {
+            $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
                 // Clean UID and .md extension
                 $cleanPath = preg_replace('/\s[a-f0-9]{32}$/i', '', trim(str_replace('.md', '', $p[0])));
@@ -313,7 +337,9 @@ if ($filePath && file_exists($filePath)) {
                 // 2. Convert to lowercase for case-insensitivity
                 $url = '/' . ltrim(strtolower(preg_replace('/\/index$/i', '', $cleanPath)), '/');
                 $linkText = trim($p[1] ?? $p[0]);
-                return "<a href='$url'>$linkText</a>";
+                $preview = get_wiki_link_preview($cleanPath, $markdownDir, $Parsedown);
+                $previewAttr = $preview ? " data-preview='$preview'" : '';
+                return "<a href='$url' class='wiki-preview-link'$previewAttr>$linkText</a>";
             }, $text);
 
             return $text;
@@ -351,3 +377,69 @@ if (file_exists($specificTemplate)) {
     echo '<div class="main-content">' . $htmlContent . '</div>';
 }
 ?>
+<style>
+#wiki-link-preview-popup {
+    position: absolute;
+    z-index: 9999;
+    max-width: 320px;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    color: #111;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    display: none;
+    pointer-events: none;
+}
+#wiki-link-preview-popup::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.98);
+    bottom: 100%;
+    left: 18px;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const popup = document.createElement('div');
+    popup.id = 'wiki-link-preview-popup';
+    document.body.appendChild(popup);
+
+    let hoverTimeout;
+
+    document.body.addEventListener('mouseover', function (event) {
+        const link = event.target.closest('a.wiki-preview-link');
+        if (!link) {
+            return;
+        }
+
+        const preview = link.dataset.preview;
+        if (!preview) {
+            return;
+        }
+
+        clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(function () {
+            popup.innerHTML = preview;
+            popup.style.display = 'block';
+            const rect = link.getBoundingClientRect();
+            popup.style.left = window.scrollX + rect.left + 'px';
+            popup.style.top = window.scrollY + rect.bottom + 8 + 'px';
+        }, 120);
+    });
+
+    document.body.addEventListener('mouseout', function (event) {
+        const link = event.target.closest('a.wiki-preview-link');
+        if (!link) {
+            return;
+        }
+        clearTimeout(hoverTimeout);
+        popup.style.display = 'none';
+    });
+});
+</script>
