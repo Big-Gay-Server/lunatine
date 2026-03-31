@@ -165,7 +165,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
             $isEmbed = (is_string($val) && str_contains($val, '<img'));
             $cellValue = is_array($val)
-                ? implode(' ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
+                ? implode(', ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
                 : ($isEmbed ? $val : $Parsedown->line((string) $val));
 
             if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
