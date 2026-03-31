@@ -57,24 +57,22 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $content = trim($content);
     $content = preg_replace('/\r\n|\r/', "\n", $content);
 
-    $paragraphs = preg_split('/\n{2,}/', $content);
-    $snippet = trim($paragraphs[0] ?? '');
-    if ($snippet === '') {
+    // Render the full page content and extract the first HTML paragraph.
+    $renderedHtml = $Parsedown->text($content);
+    if (!preg_match('/<p[^>]*>(.*?)<\/p>/is', $renderedHtml, $matches)) {
         return '';
     }
 
-    $snippetHtml = $Parsedown->line($snippet);
+    $previewText = trim($matches[0]);
 
-    // Convert wiki-style images in the preview snippet to real <img> tags.
-    $snippetHtml = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
+    // Convert wiki-style images inside the preview paragraph to real <img> tags.
+    $previewText = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
         $imageName = trim($m[1]);
         $width = $m[3] ?? null;
         $path = find_image_path($markdownDir, $imageName);
         $style = $width ? "width:{$width}px;" : 'max-width:100%;';
         return $path ? "<img src='$path' style='$style height:auto;'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
-    }, $snippetHtml);
-
-    $previewText = trim($snippetHtml);
+    }, $previewText);
 
     $previewTitle = basename(preg_replace('/\/index$/i', '', $linkTarget));
     if ($previewTitle === '') {
@@ -85,7 +83,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $templatePath = __DIR__ . '/templates/link_preview.php';
 
     if (!file_exists($templatePath)) {
-        return strip_tags($snippetHtml);
+        return strip_tags($previewText);
     }
 
     ob_start();
