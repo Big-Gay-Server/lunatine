@@ -1,10 +1,8 @@
 ---
 title: Kohoii River
----
-# Kohoii River
-
 Type: River
-Location Under:: Kohoii (Kohoii%205ec34e8227ec4373998d026fd09ee730.md)
+Location Under: : [[LOCATIONS/Kohoii/index|Kohoii]]
+---
 
 ## About
 

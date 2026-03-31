@@ -1,17 +1,13 @@
 ---
 title: The Expanse
----
-
-# The Expanse
-
 Type: Universe
-Ruler/Owner: Hafei (Hafei%20174c5cb610f580d88ee8cac629e93be4.md)
-Born here:: Hafei (Hafei%20174c5cb610f580d88ee8cac629e93be4.md), Untitled (https://www.notion.so/216c5cb610f580999f05d0379e36ade1?pvs=21), Kasime (Kasime%20216c5cb610f580348b9bcb2c725c05d2.md)
-Sublocations:: World Garden (World%20Garden%205a6cfe0468e64efe8e9b097f621b0ca2.md)
+Ruler/Owner: [[CHARACTERS/Hafei/index|Hafei]]
+Born here: [[CHARACTERS/Hafei/index|Hafei]], [[CHARACTERS/Kasime/index|Kasime]]
+Sublocations: [[LOCATIONS/World Garden/index|index]]
+---
 
 ## About
-
----
+everything.
 
 ## Generic
 

@@ -1,12 +1,11 @@
 ---
 title: Raevat
----
-# Raevat
-
 Type: Village
-Location Under:: Solei (Solei%20a43736a3946f491ab5b40ad8e7fab381.md)
+Location Under: [[LOCATIONS/Solei/index|Solei]]
+---
 
 ## About
+A village within the kingdom of Solei. 
 
 ---
 

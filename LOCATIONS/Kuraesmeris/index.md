@@ -1,16 +1,14 @@
 ---
 title: Kuraesmeris
----
-
-# Kuraesmeris
-
+alias: Kuraesmeris
 Alternative Names: Kuraesme, Crescentmoon (english)
 Type: Moon
-At this Location:: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md), KuraesMerisdae (KuraesMerisdae%2015ac5cb610f580fe93dfd8851dd0aeb5.md), Canelé (Canel%C3%A9%20612d94fd73f942e5be783bbe6b2327f8.md), Untitled (https://www.notion.so/216c5cb610f580999f05d0379e36ade1?pvs=21)
-Location Under:: Asilles (Asilles%2079f784ab6fd945de9a6813c70677d52e.md)
-Ruler/Owner: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md), Untitled (https://www.notion.so/216c5cb610f580999f05d0379e36ade1?pvs=21), KuraesMerisdae (KuraesMerisdae%2015ac5cb610f580fe93dfd8851dd0aeb5.md)
+At this Location: [[CHARACTERS/Merisdae/index|Merisdae]], [[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]], [[CHARACTERS/Canelé/index|Canelé]]
+Location Under: [[LOCATIONS/Asilles/index|Asilles]]
+Ruler/Owner: [[CHARACTERS/Merisdae/index|Merisdae]], [[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]]
 Owning Rank: Guardian
-Born here:: Canelé (Canel%C3%A9%20612d94fd73f942e5be783bbe6b2327f8.md), BuroMerisdae (BuroMerisdae%2015ac5cb610f580c68399dc731bfb73a3.md), KuraesMerisdae (KuraesMerisdae%2015ac5cb610f580fe93dfd8851dd0aeb5.md), KaeMerisdae (KaeMerisdae%2015ac5cb610f580f08af0f538639b8e4e.md), FolMerisdae (FolMerisdae%2015ac5cb610f58017bff4e17bc3e19042.md)
+Born here: [[CHARACTERS/Canelé/index|Canelé]], [[CHARACTERS/Merisdae/index|Merisdae]]
+---
 
 ## About
 
@@ -58,7 +56,7 @@ crescentmoon - **Kuraesmeris** *(lit. beautiful moon)* - colloquially Kuraesme
 
 ### Technological Level
 
-By the time the [Kuraesmeris Migration](Kuraesmeris%20Migration%20132911817b6a4e839ac229c3f65e7bc9.md) comes to a close, it had been around 100 years. living in this completely new environment required rapid innovation in technology, with innovations such as steam power, electricity, and advanced transportation methods.
+By the time the [[EVENTS/Kuraesmeris Migration/index|Kuraesmeris Migration]] comes to a close, it had been around 100 years. living in this completely new environment required rapid innovation in technology, with innovations such as steam power, electricity, and advanced transportation methods.
 
 This is largely due to the fact that the settlers on Kuraesmeris brought with them a greater knowledge of technology and science than those who remained on Asilles. The settlers on Kuraesmeris also made use of their ability to manipulate Dust in new and innovative ways, creating devices that were powered by Dust and allowing for the creation of new technologies that were not possible on Asilles.
 
@@ -70,6 +68,6 @@ the kuraesmeris settlement is treated as one large settlement, though comprised 
 
 the first group of Selhae to make it up to the moon formed a council, to govern the moons.
 
-- [Esela](Esela%207a0dac9b9d0f422489c6e9609eef84a6.md) was head of this council, with the guidance of [Merisdae](Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md).
+- [[CHARACTERS/Esela/index|Esela]] was head of this council, with the guidance of [[Merisdae]].
 
 ![new crescentmoon_momo.png](9eed2543-9351-4513-9976-d29ca55ae359.png)

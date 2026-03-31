@@ -5,7 +5,7 @@ Type: Woods
 Location Under: [[LOCATIONS/Kohoii/index|Kohoii]]
 ---
 
-a small clearing in the woods surrounding [Kohoii](Kohoii%205ec34e8227ec4373998d026fd09ee730.md). [Esela](Esela%207a0dac9b9d0f422489c6e9609eef84a6.md) visits this clearing often, giving it the name of *Maeniil*, or Sanctuary, as she is able to rest and enjoy her time here alone.
+a small clearing in the woods surrounding [[LOCATIONS/Kohoii/index|Kohoii]]. [[CHARACTERS/Esela/index|Esela]] visits this clearing often, giving it the name of *Maeniil*, or Sanctuary, as she is able to rest and enjoy her time here alone.
 
 ![img. credit - [Candlepowerforums](http://www.candlepowerforums.com/vb/showthread.php?369185-Figured-out-an-amazing-way-to-judge-if-you-really-like-your-lights-tints-or-not)](Untitled%202.png)
 
@@ -23,7 +23,7 @@ img credit - [Lizzy Forrester](https://pixels.com/featured/sunlight-clearing-in
 
 ### the little house
 
-when she was young, esela and her mother built a small hut/house in the maeniil, kind of like a treehouse but on the ground. when [Kulith](Kulith%206b51a534f7f148af8253f5706f402a1b.md) begins staying with esela in the maeniil to hide from [Solei](Solei%20a43736a3946f491ab5b40ad8e7fab381.md), she stays in this house.
+when she was young, esela and her mother built a small hut/house in the maeniil, kind of like a treehouse but on the ground. when [[CHARACTERS/Kulith/index|Kulith]] begins staying with esela in the maeniil to hide from [[LOCATIONS/Solei/index|Solei]], she stays in this house.
 
 it is becoming overgrown with moss and leaves, but the inside is full of esela’s knickknacks, flowers, books, etc. she spends more time here than anywhere else.
 

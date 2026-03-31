@@ -19,7 +19,7 @@ aliases:
 title: Kohoii
 ---
 
-A small village along the [Kohoii River](Kohoii%20River%20232c5cb610f580879a2cd9e12dfb5efd.md) in the southeast. It is surrounded by woods, and is nearby the border of the expansionist kingdom of [Solei](Solei%20a43736a3946f491ab5b40ad8e7fab381.md). The village has been in Solei’s sights for a very long time, leading to tense relations between the two.
+A small village along the [[LOCATIONS/Kohoii River/index|Kohoii River]] in the southeast. It is surrounded by woods, and is nearby the border of the expansionist kingdom of [[LOCATIONS/Solei/index|Solei]]. The village has been in Solei’s sights for a very long time, leading to tense relations between the two.
 
 ## Generic
 ### Demographics

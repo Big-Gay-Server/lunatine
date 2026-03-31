@@ -1,24 +1,19 @@
 ---
 title: Solei
----
-# Solei
-
 Alternative Names: Imperial Kingdom of Solei
 Type: City, Kingdom
-At this Location:: Helita (Helita%20211c5cb610f580e1b304d74db9050335.md)
-Location Under:: Asilles (Asilles%2079f784ab6fd945de9a6813c70677d52e.md)
+At this Location: [[CHARACTERS/Helita/index|Helita]]
+Location Under: [[LOCATIONS/Asilles/index|Asilles]]
 Date Became a Ruin (If Any): January 1, 1240
-Ruler/Owner: Helita (Helita%20211c5cb610f580e1b304d74db9050335.md)
+Ruler/Owner: [[CHARACTERS/Helita/index|Helita]]
 Owning Rank: King
 Population: 10,000
 Inhabitants Demonym: Soleise
-Born here:: Kulith (Kulith%206b51a534f7f148af8253f5706f402a1b.md), Helita (Helita%20211c5cb610f580e1b304d74db9050335.md)
-Sublocations:: Raevat (Raevat%20233c5cb610f58010980ee49fbbf18262.md)
-
-## About
-
+Born here: [[CHARACTERS/Kulith/index|Kulith]], [[CHARACTERS/Helita/index|Helita]]
+Sublocations: [[LOCATIONS/Raevat/index|Raevat]]
 ---
 
+## About
 A Selhae kingdom ruled by an imperialist king, taking over nearby villages. The imperial city is at the heart, and is what people are most commonly referring to when mentioning “Solei”. 
 
 ## Generic

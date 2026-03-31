@@ -12,14 +12,13 @@
             "id": "8c224558a59ca233",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "LOCATIONS/World Garden/index.md",
-                "mode": "source",
-                "source": true
+                "file": "LOCATIONS/locationsbase.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-table",
+              "title": "locationsbase"
             }
           }
         ]
@@ -252,18 +251,27 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "obsidian-leaflet-plugin:Open Leaflet Map": false,
-      "calendarium:Open Calendarium": false,
       "obsidian-importer:Open Importer": false,
       "obsidian-rich-links:Rich Links": false,
       "obsidian-stille:Toggle Stille": false,
       "tagged-gallery:Gallery": false,
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
-      "terminal:Open terminal": false
+      "terminal:Open terminal": false,
+      "calendarium:Open Calendarium": false
     }
   },
   "active": "8c224558a59ca233",
   "lastOpenFiles": [
+    "LOCATIONS/Yuvomne/index.md",
+    "LOCATIONS/Raevat/index.md",
+    "LOCATIONS/World Garden/index.md",
+    "LOCATIONS/The Expanse/index.md",
+    "LOCATIONS/Solei/index.md",
+    "LOCATIONS/Maeniil/index.md",
+    "LOCATIONS/Kuraesmeris/index.md",
+    "LOCATIONS/Kohoii River/index.md",
+    "LOCATIONS/Kohoii/index.md",
     "LOCATIONS/index.md",
     "CHARACTERS/Aenna/index.md",
     "CHARACTERS/Kaeyomii/index.md",
@@ -279,7 +287,6 @@
     "MISC",
     "CHARACTERS/Esela/bio.md",
     "CHARACTERS/Esela/index.md",
-    "LOCATIONS/Kohoii/index.md",
     "LOCATIONS/Kohoii.md",
     "CHARACTERS/Esela/art/prism_transparent.png",
     "CHARACTERS/Esela/art/prism transparent.png",
@@ -292,15 +299,7 @@
     "CHARACTERS/Yudora/index.md",
     "CHARACTERS/Merisdae/index.md",
     "CHARACTERS/Kulith/index.md",
-    "CHARACTERS/Colarius/index.md",
-    "CHARACTERS/Colarius/bio.md",
-    "SPECIES/Construct/index.md",
-    "Construct.md",
-    "LANGUAGES/Varae/translations/Sanctuary Varae Translyrics.md",
-    "LANGUAGES/Varae/grammar.md",
     "templates/languages.php",
-    "LANGUAGES/Varae/translations/index.md",
-    "LANGUAGES/Varae/index.md",
     "EVENTS/eventsbase.base",
     "LANGUAGES/languagesbase.base",
     "CONCEPTS/conceptsbase.base",
