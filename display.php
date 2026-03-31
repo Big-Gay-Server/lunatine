@@ -148,7 +148,8 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
-        $tableHtml .= '<tr>';
+        // Make the whole row clickable, but ignore clicks on inner anchor tags.
+        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
         $linkPlaced = false;
 
         foreach ($order as $propId) {
