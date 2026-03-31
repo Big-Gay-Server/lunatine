@@ -66,7 +66,25 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $snippetHtml = $Parsedown->line($snippet);
     $snippetText = trim(strip_tags($snippetHtml));
     $snippetText = preg_replace('/\s+/', ' ', $snippetText);
-    return htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
+    $snippetText = htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
+
+    $previewTitle = basename(preg_replace('/\/index$/i', '', $linkTarget));
+    if ($previewTitle === '') {
+        $previewTitle = 'Preview';
+    }
+
+    $previewUrl = '/' . ltrim(strtolower(preg_replace('/\/index$/i', '', $linkTarget)), '/');
+    $templatePath = __DIR__ . '/templates/link_preview.php';
+
+    if (!file_exists($templatePath)) {
+        return $snippetText;
+    }
+
+    ob_start();
+    include $templatePath;
+    $html = ob_get_clean();
+    $html = preg_replace('/[\r\n]+/', ' ', $html);
+    return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE);
 }
 
 // --- LOCATE FILE FROM PATH ---
