@@ -270,9 +270,10 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 }, $val))
                 : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
 
-            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+            $hasAnchor = is_string($cellValue) && preg_match('/<a\s/i', $cellValue);
+            $isEmbed = is_string($cellValue) && str_contains($cellValue, '<img');
 
-            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
+            if (!$linkPlaced && !$hasAnchor && !$isEmbed && !empty(trim((string) $val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
