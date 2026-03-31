@@ -10,6 +10,7 @@ function find_image_path($baseDir, $imageName) {
 
     $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($baseDir));
 
+    $fallbackMatch = null;
     foreach ($it as $file) {
         if ($file->isDir()) continue;
 
@@ -17,17 +18,23 @@ function find_image_path($baseDir, $imageName) {
         $currentFullPath = str_replace('\\', '/', realpath($file->getPathname()));
         $relativeDiskPath = ltrim(str_replace($normalizedBase, '', $currentFullPath), '/');
         $lowerDiskPath = strtolower($relativeDiskPath);
+        $lowerFilename = strtolower($file->getFilename());
 
-        // 4. Case-insensitive match check
-        if ($lowerDiskPath === $targetPath || 
-            strtolower($file->getFilename()) === basename($targetPath) ||
-            pathinfo(strtolower($file->getFilename()), PATHINFO_FILENAME) === pathinfo(basename($targetPath), PATHINFO_FILENAME)) {
-            
-            // Return the ACTUAL path on disk so Nginx can find it
+        // 4. Exact path match first
+        if ($lowerDiskPath === $targetPath) {
             return '/' . ltrim($relativeDiskPath, '/');
         }
+
+        // 5. Keep a fallback only if the exact path didn't match.
+        if ($lowerFilename === basename($targetPath)
+            || pathinfo($lowerFilename, PATHINFO_FILENAME) === pathinfo(basename($targetPath), PATHINFO_FILENAME)) {
+            if ($fallbackMatch === null) {
+                $fallbackMatch = '/' . ltrim($relativeDiskPath, '/');
+            }
+        }
     }
-    return null;
+
+    return $fallbackMatch;
 }
 
 ?>
