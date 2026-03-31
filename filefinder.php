@@ -6,6 +6,7 @@ function find_markdown_file($baseDir, $targetPath)
         return null;
     }
 
+    $targetPath = preg_replace('/#.*$/', '', $targetPath);
     $targetNormalized = strtolower(trim($targetPath, '/'));
     $tryIndexPath = $targetNormalized === '' ? 'index' : $targetNormalized . '/index';
 

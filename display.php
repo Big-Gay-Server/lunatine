@@ -355,13 +355,16 @@ if ($filePath && file_exists($filePath)) {
             // E. Wikilinks (LOWERCASE & NO INDEX)
             $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
-                // Clean UID and .md extension
-                $cleanPath = preg_replace('/\s[a-f0-9]{32}$/i', '', trim(str_replace('.md', '', $p[0])));
-                // 1. Remove /index from the end
-                // 2. Convert to lowercase for case-insensitivity
-                $url = '/' . ltrim(strtolower(preg_replace('/\/index$/i', '', $cleanPath)), '/');
+                $rawTarget = trim($p[0]);
+                $rawTarget = preg_replace('/\s[a-f0-9]{32}$/i', '', $rawTarget);
+                $rawTarget = preg_replace('/\.md$/i', '', $rawTarget);
+
+                // Preserve anchor fragments in the href, but strip them for preview lookup.
+                $previewTarget = preg_replace('/#.*$/', '', $rawTarget);
+                $urlTarget = preg_replace('/\/index$/i', '', $rawTarget);
+                $url = '/' . ltrim(strtolower($urlTarget), '/');
                 $linkText = trim($p[1] ?? $p[0]);
-                $preview = get_wiki_link_preview($cleanPath, $markdownDir, $Parsedown);
+                $preview = get_wiki_link_preview($previewTarget, $markdownDir, $Parsedown);
                 $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
                 return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
             }, $text);
