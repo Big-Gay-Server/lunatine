@@ -66,7 +66,7 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $snippetHtml = $Parsedown->line($snippet);
     $snippetText = trim(strip_tags($snippetHtml));
     $snippetText = preg_replace('/\s+/', ' ', $snippetText);
-    $snippetText = htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
+    $previewText = htmlspecialchars(mb_substr($snippetText, 0, 220), ENT_QUOTES | ENT_SUBSTITUTE);
 
     $previewTitle = basename(preg_replace('/\/index$/i', '', $linkTarget));
     if ($previewTitle === '') {
@@ -356,8 +356,8 @@ if ($filePath && file_exists($filePath)) {
                 $url = '/' . ltrim(strtolower(preg_replace('/\/index$/i', '', $cleanPath)), '/');
                 $linkText = trim($p[1] ?? $p[0]);
                 $preview = get_wiki_link_preview($cleanPath, $markdownDir, $Parsedown);
-                $previewAttr = $preview ? " data-preview='$preview'" : '';
-                return "<a href='$url' class='wiki-preview-link'$previewAttr>$linkText</a>";
+                $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
+                return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
             }, $text);
 
             return $text;
@@ -400,16 +400,28 @@ if (file_exists($specificTemplate)) {
     position: absolute;
     z-index: 9999;
     max-width: 320px;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-    color: #111;
-    font-size: 0.92rem;
-    line-height: 1.4;
     display: none;
-    pointer-events: none;
+    pointer-events: auto;
+}
+.wiki-preview-template {
+    padding: 1rem;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.16));
+    border-radius: 0.75rem;
+    background: var(--card-background, #fff);
+    box-shadow: var(--card-shadow, 0 12px 28px rgba(0, 0, 0, 0.12));
+    color: inherit;
+    font: inherit;
+}
+.wiki-preview-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.wiki-preview-body {
+    margin-bottom: 0.75rem;
+}
+.wiki-preview-footer {
+    font-size: 0.9rem;
+    opacity: 0.85;
 }
 #wiki-link-preview-popup::after {
     content: '';
@@ -417,7 +429,7 @@ if (file_exists($specificTemplate)) {
     width: 0;
     height: 0;
     border: 8px solid transparent;
-    border-top-color: rgba(255, 255, 255, 0.98);
+    border-top-color: var(--card-background, #fff);
     bottom: 100%;
     left: 18px;
 }
@@ -429,6 +441,28 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(popup);
 
     let hoverTimeout;
+    let hideTimeout;
+    let activeLink = null;
+
+    const showPopup = function (link, preview) {
+        popup.innerHTML = preview;
+        popup.style.display = 'block';
+        const rect = link.getBoundingClientRect();
+        popup.style.left = window.scrollX + rect.left + 'px';
+        popup.style.top = window.scrollY + rect.bottom + 8 + 'px';
+    };
+
+    const scheduleHide = function () {
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(function () {
+            popup.style.display = 'none';
+            activeLink = null;
+        }, 180);
+    };
+
+    const clearHide = function () {
+        clearTimeout(hideTimeout);
+    };
 
     document.body.addEventListener('mouseover', function (event) {
         const link = event.target.closest('a.wiki-preview-link');
@@ -441,23 +475,27 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        activeLink = link;
+        clearHide();
         clearTimeout(hoverTimeout);
         hoverTimeout = setTimeout(function () {
-            popup.innerHTML = preview;
-            popup.style.display = 'block';
-            const rect = link.getBoundingClientRect();
-            popup.style.left = window.scrollX + rect.left + 'px';
-            popup.style.top = window.scrollY + rect.bottom + 8 + 'px';
+            showPopup(link, preview);
         }, 120);
     });
 
     document.body.addEventListener('mouseout', function (event) {
-        const link = event.target.closest('a.wiki-preview-link');
-        if (!link) {
-            return;
+        if (event.target.closest('a.wiki-preview-link')) {
+            hoverTimeout && clearTimeout(hoverTimeout);
+            scheduleHide();
         }
-        clearTimeout(hoverTimeout);
-        popup.style.display = 'none';
+    });
+
+    popup.addEventListener('mouseover', function () {
+        clearHide();
+    });
+
+    popup.addEventListener('mouseout', function () {
+        scheduleHide();
     });
 });
 </script>
