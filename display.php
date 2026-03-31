@@ -260,12 +260,14 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 : $findProp($props, $propId);
 
             $cellValue = is_array($val)
-                ? implode(', ', array_map(fn($i) => "<span class='prop-pill'>" . htmlspecialchars($i) . '</span>', $val))
-                : $Parsedown->line((string) $val);
-
-            if (!is_array($val)) {
-                $cellValue = render_wiki_markup_html($cellValue, $markdownDir, $Parsedown, true);
-            }
+                ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
+                    if (is_array($i)) {
+                        $i = implode(', ', array_map('strval', $i));
+                    }
+                    $item = $Parsedown->line((string) $i);
+                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $Parsedown, true) . '</span>';
+                }, $val))
+                : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
 
             $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
 
