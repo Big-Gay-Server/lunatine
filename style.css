@@ -509,6 +509,7 @@ td:first-child {
     .contentwrap {
         flex-direction: column;
         max-width: 95vw;
+        min-width: 0;
     }
 
     .sidebar {
@@ -544,7 +545,8 @@ td:first-child {
 
     /* 3. Keep the table from shrinking too much */
     .bases-table table {
-        min-width: 600px; 
+        min-width: 600px;
+        overflow-x: auto;
     }
 
     /* 4. Adjust the image size for mobile */
