@@ -282,7 +282,7 @@ a, .file-link {
 
     & img {
         display: block;
-        width: 200px;
+        width: 30vw;
         height: auto;
         border-radius: 15px;
         border: 1px solid var(--color-3);
