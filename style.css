@@ -291,7 +291,7 @@ a, .file-link {
         width: 10vw;
         height: auto;
         border-radius: 15px;
-        border: 1px solid var(--color-3);
+        /* border: 1px solid var(--color-3); */
     }
 }
 
@@ -377,7 +377,7 @@ a, .file-link {
         max-width: 100%;
         height: auto;
         border-radius: 10px;
-        /* border: 1px solid var(--color-3); */
+        border: 1px solid var(--color-3);
     }
     & tbody {
         display: block;
