@@ -457,27 +457,6 @@ td:first-child {
     /* border-bottom: 1px solid var(--color-3); */
 }
 
-/* 5. MOBILE RESPONSIVENESS */
-@media (max-width: 800px) {
-    .bio-sidebar {
-        float: none;
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 30px;
-    }
-
-    .bio-sidebar tr {
-        flex-wrap: wrap;
-        gap: 2px;
-    }
-
-    .bio-sidebar td:first-child,
-    .bio-sidebar td:last-child {
-        flex: 1 0 100%;
-        text-align: center;
-    }
-}
-
 .grammar code {
     color: var(--color-7);
     font-family: 'SimplySerifBook', monospace;
@@ -523,4 +502,53 @@ td:first-child {
     border-top-color: var(--card-background, #fff);
     bottom: 100%;
     left: 18px;
+}
+
+@media screen and (max-width: 800px) {
+    /* 1. Stack the layout: Move sidebar above/below content */
+    .contentwrap {
+        flex-direction: column;
+        max-width: 95vw;
+    }
+
+    .sidebar {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .bio-sidebar {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+
+    .bio-sidebar tr {
+        flex-wrap: wrap;
+        gap: 2px;
+    }
+
+    .bio-sidebar td:first-child,
+    .bio-sidebar td:last-child {
+        flex: 1 0 100%;
+        text-align: center;
+    }
+    /* 2. Make the table scrollable so it doesn't overflow the container */
+    .bases-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    /* 3. Keep the table from shrinking too much */
+    .bases-table table {
+        min-width: 600px; 
+    }
+
+    /* 4. Adjust the image size for mobile */
+    .bases-table img {
+        width: 80px; /* Switch from vw to fixed size on mobile */
+    }
 }
