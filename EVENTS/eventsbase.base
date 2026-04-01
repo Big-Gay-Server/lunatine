@@ -8,5 +8,4 @@ views:
         - title != "Events"
     order:
       - title
-      - file.folder
     sort: []

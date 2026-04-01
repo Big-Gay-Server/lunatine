@@ -1,6 +1,6 @@
 ---
 Type: Village
-"Location Under:": "[[LOCATIONS/Asilles/index |Asilles]]"
+Location Under: "[[LOCATIONS/Asilles/index |Asilles]]"
 Founding Date: January 1, 1
 Date Became a Ruin (If Any): January 1, 1240
 Ruler/Owner:
@@ -11,12 +11,13 @@ Owning Rank: Elder
 Owning Organization: "[[ORGANIZATIONS/Kohoii Council of Elders/index |Kohoii Council of Elders]]"
 Population: 60
 Inhabitants Demonym: Kohoiise
-"Sublocations:":
+Sublocations:
   - "[[LOCATIONS/Maeniil/index |Maeniil]]"
   - "[[LOCATIONS/Kohoii River/index |Kohoii River]]"
 aliases:
   - Kohoii
 title: Kohoii
+icon: "![os0ljd3i2mq71.webp](https://preview.redd.it/os0ljd3i2mq71.png?width=640&crop=smart&auto=webp&s=f6aefa85f65459a78753ac790fda3de5057cee91)"
 ---
 
 A small village along the [[LOCATIONS/Kohoii River/index|Kohoii River]] in the southeast. It is surrounded by woods, and is nearby the border of the expansionist kingdom of [[LOCATIONS/Solei/index|Solei]]. The village has been in Solei’s sights for a very long time, leading to tense relations between the two.

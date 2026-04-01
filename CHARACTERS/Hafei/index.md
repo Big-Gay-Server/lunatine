@@ -17,6 +17,7 @@ Species: "[[SPECIES/Inna/index |Inna]]"
 Titles: The First Inna, High Seedkeeper
 aliases: Hafei
 title: Hafei
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

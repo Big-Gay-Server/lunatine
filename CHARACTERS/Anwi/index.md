@@ -10,7 +10,9 @@ Current Location: "[[LOCATIONS/Asilles/index |Asilles]]"
 Birthplace: "[[LOCATIONS/World Garden/index |World Garden]]"
 Children: "[[CHARACTERS/Aenna/index |Aenna]]"
 Partners: "[[CHARACTERS/Wefa/index |Wefa]]"
-Constructs: ["[[CHARACTERS/Merisdae/index |Merisdae]]", "[[CHARACTERS/Yudora/index |Yudora]]"]
+Constructs:
+  - "[[CHARACTERS/Merisdae/index |Merisdae]]"
+  - "[[CHARACTERS/Yudora/index |Yudora]]"
 Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
 Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
 Rank: Creators
@@ -18,6 +20,7 @@ Rank: Creators
 Species: "[[SPECIES/Inna/index |Inna]]"
 Titles: World Garden Curator, Mother of Selhae
 title: Anwi
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

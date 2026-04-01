@@ -22,6 +22,7 @@ Skin Tone: fair
 Species: "[[SPECIES/Selhae/index |Selhae]]"
 aliases: Naediia
 title: Naediia Levenkagaelii
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

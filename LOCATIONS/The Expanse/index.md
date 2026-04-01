@@ -1,11 +1,12 @@
 ---
-title: The Expanse
-Type: Universe
-Ruler/Owner: [[CHARACTERS/Hafei/index|Hafei]]
-Born here: [[CHARACTERS/Hafei/index|Hafei]], [[CHARACTERS/Kasime/index|Kasime]]
-Sublocations: [[LOCATIONS/World Garden/index|index]]
+title: "The Expanse"
+Type: "Universe"
+Ruler/Owner: "[[CHARACTERS/Hafei/index|Hafei]]"
+Born here: 
+  - "[[CHARACTERS/Hafei/index|Hafei]]"
+  - "[[CHARACTERS/Kasime/index|Kasime]]"
+Sublocations: "[[LOCATIONS/World Garden/index|index]]"
 ---
-
 ## About
 everything.
 

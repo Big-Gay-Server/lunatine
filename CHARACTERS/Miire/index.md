@@ -22,6 +22,7 @@ Species: "[[SPECIES/Selhae/index |Selhae]]"
 Titles: Kohoii Elder, Head of Gahinukagaelii
 title: Miire Gahinukagaelii
 aliases: Miire
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

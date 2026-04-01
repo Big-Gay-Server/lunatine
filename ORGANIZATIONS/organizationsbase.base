@@ -1,0 +1,12 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.path.contains("ORGANIZATIONS/")
+        - '!file.path.contains("BASE")'
+        - file.path != "ORGANIZATIONS/index.md"
+    order:
+      - title
+      - Owns
+      - Members

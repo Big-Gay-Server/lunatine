@@ -2,7 +2,9 @@
 title: Maeniil
 Alternative Names: Sanctuary
 Type: Woods
-Location Under: [[LOCATIONS/Kohoii/index|Kohoii]]
+Location Under:
+  - - LOCATIONS/Kohoii/index|Kohoii
+icon: "![[graphics/maeniil|75]]"
 ---
 
 a small clearing in the woods surrounding [[LOCATIONS/Kohoii/index|Kohoii]]. [[CHARACTERS/Esela/index|Esela]] visits this clearing often, giving it the name of *Maeniil*, or Sanctuary, as she is able to rest and enjoy her time here alone.

@@ -1,0 +1,9 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.path.contains("ARTIFACTS")
+        - file.ext == "md"
+    order:
+      - title

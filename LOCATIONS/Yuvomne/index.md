@@ -2,9 +2,11 @@
 title: Yuvomne
 Alternative Names: by the small path (english)
 Type: Village
-At this Location: [[Viisaha]]
+At this Location:
+  - - Viisaha
 Location Under: Asilles
-Ruler/Owner: Viisaha
+Ruler/Owner:
+  - "[[CHARACTERS/Viisaha/index|Viisaha Ros]]"
 Owning Rank: Village Head
 Population: 150
 Born here: Viisaha, Kaeyomii

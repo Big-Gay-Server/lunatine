@@ -1,15 +1,15 @@
 ---
-title: Hiitomeris
+title: "Hiitomeris"
+Alternative Names: "Hiitome, Bluemoon (english)"
+Type: "Moon"
+At this Location: "[[CHARACTERS/Merisdae/HiitoMerisdae|HiitoMerisdae]]"
+Location Under: "[[LOCATIONS/Asilles/index|Asilles]]"
+Ruler/Owner: 
+  - "[[CHARACTERS/Merisdae/index|Merisdae]]"
+  - "[[CHARACTERS/Merisdae/HiitoMerisdae|HiitoMerisdae]]"
+Owning Rank: "Guardian"
 ---
 
-# Hiitomeris
-
-Alternative Names: Hiitome, Bluemoon (english)
-Type: Moon
-At this Location:: HiitoMerisdae (HiitoMerisdae%2015ac5cb610f5808c8a2ed7f52d75dd55.md)
-Location Under:: Asilles (Asilles%2079f784ab6fd945de9a6813c70677d52e.md)
-Ruler/Owner: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md), HiitoMerisdae (HiitoMerisdae%2015ac5cb610f5808c8a2ed7f52d75dd55.md), Untitled (https://www.notion.so/216c5cb610f580999f05d0379e36ade1?pvs=21)
-Owning Rank: Guardian
 
 ## About
 

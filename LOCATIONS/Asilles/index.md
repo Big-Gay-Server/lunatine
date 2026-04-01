@@ -21,9 +21,8 @@ Inhabitants Demonym: Asille
   - "[[LOCATIONS/Raevat/index |Raevat]]"
   - "[[LOCATIONS/Kingdom of Acorithe/index |Kingdom of Acorithe]]"
 title: Asilles
+icon: "![[view from asilles.png]]"
 ---
-![[view from asilles.png]]
-
 ## Generic
 ### History
 Asilles began as a [[CONCEPTS/World Seed/index|World Seed]] planted in the [[LOCATIONS/World Garden/index|World Garden]], just as any planet did. Its caretakers, [[CHARACTERS/Anwi/index|Anwi]] and [[CHARACTERS/Wefa/index|Wefa]], had been partners for a very long time.

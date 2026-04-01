@@ -1,8 +1,14 @@
-# Seedkeeper Council
+---
+title: "Seedkeeper Council"
+Members:
+  - "[[CHARACTERS/Hafei/index|Hafei]]"
+  - "[[CHARACTERS/Kasime/index|Kasime]]"
+  - "[[CHARACTERS/Wefa/index|Wefa]]"
+  - "[[CHARACTERS/Anwi/index|Anwi]]"
+  - "[[CHARACTERS/Emeut/index|Emeut]]"
+Owns: "[[LOCATIONS/World Garden/index|World Garden]]"
+---
 
-Created: December 20, 2024 11:50 AM
-Members: Hafei (Hafei%20174c5cb610f580d88ee8cac629e93be4.md), Kasime (Kasime%20216c5cb610f580348b9bcb2c725c05d2.md), Wefa (Wefa%200d386a3f0d714b369130ebed9c6f58cd.md), Anwi (Anwi%20af7e2c72103f45cdbee264ff6beb0e57.md), Emeut (Emeut%2015fc5cb610f5804bbc41e9a30a552b29.md)
-Owns: World Garden (World%20Garden%205a6cfe0468e64efe8e9b097f621b0ca2.md)
 
 The council that presides over all [Inna](Inna%2099642857c4464973a4612f6533cb754d.md) in order to maintain balance in [The Expanse](The%20Expanse%20aae43c29a9ac4e94b8043b45e9f63a0b.md) and hold up the [Inna Tenets](Inna%20Tenets%2015fc5cb610f5804f938fcacbffd4b55f.md) established by [Hafei](Hafei%20174c5cb610f580d88ee8cac629e93be4.md).
 

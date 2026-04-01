@@ -1,7 +1,9 @@
 ---
 title: Kohoii River
 Type: River
-Location Under: : [[LOCATIONS/Kohoii/index|Kohoii]]
+Location Under:
+  - - LOCATIONS/Kohoii/index|Kohoii
+icon: "![](https://preview.redd.it/the-before-after-of-my-village-v0-b9oq1kzm2yyd1.jpg?width=640&crop=smart&auto=webp&s=d3a3b9417fcb9990b0dac36dd3d1568dc22d8f93)"
 ---
 
 ## About

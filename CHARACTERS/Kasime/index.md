@@ -13,6 +13,7 @@ Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
 Species: "[[SPECIES/Inna/index |Inna]]"
 aliases: Kasime
 title: Kasime
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

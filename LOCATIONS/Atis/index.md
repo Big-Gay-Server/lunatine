@@ -1,15 +1,9 @@
 ---
 title: Atis
----
-
-fdjfksdjk
-
-# Atis
-
 Type: Planet
-At this Location:: Emeut (Emeut%2015fc5cb610f5804bbc41e9a30a552b29.md)
-Location Under:: World Garden (World%20Garden%205a6cfe0468e64efe8e9b097f621b0ca2.md)
-
+At this Location : [[CHARACTERS/Emeut/index|Emeut]]
+Location Under: [[LOCATIONS/World Garden/index|World Garden]]
+---
 ## About
 
 ---

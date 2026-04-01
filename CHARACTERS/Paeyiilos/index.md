@@ -24,6 +24,7 @@ Titles: Kohoii Elder, Head of Daerikagaelii
 title: Paeyiilos Daerikagaelii
 aliases:
   - Paeyiilos
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

@@ -24,6 +24,7 @@ Species: "[[SPECIES/Selhae/index |Selhae]]"
 Titles: Kohoii Elder, Head of Levenkagaelii
 title: Reika Levenkagaelii
 aliases: Reika
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

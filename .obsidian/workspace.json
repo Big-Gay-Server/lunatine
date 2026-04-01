@@ -6,40 +6,40 @@
       {
         "id": "99295c74abf384ed",
         "type": "tabs",
-        "dimension": 71.55172413793103,
         "children": [
           {
-            "id": "8c224558a59ca233",
+            "id": "b6a2508e57b80fae",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "bases",
               "state": {
-                "file": "LOCATIONS/locationsbase.base",
+                "file": "ORGANIZATIONS/organizationsbase.base",
                 "viewName": "Table"
               },
+              "pinned": true,
               "icon": "lucide-table",
-              "title": "locationsbase"
+              "title": "organizationsbase"
             }
           }
         ]
       },
       {
-        "id": "4ed915e04396d7fe",
+        "id": "11e3135a467f5abb",
         "type": "tabs",
-        "dimension": 28.448275862068968,
         "children": [
           {
-            "id": "5a44808b1567a25c",
+            "id": "775d48a859d680d9",
             "type": "leaf",
-            "pinned": true,
             "state": {
-              "type": "vscode-editor",
+              "type": "markdown",
               "state": {
-                "file": "style.css"
+                "file": "ORGANIZATIONS/index.md",
+                "mode": "source",
+                "source": true
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "style"
+              "title": "index"
             }
           }
         ]
@@ -224,10 +224,10 @@
             "state": {
               "type": "tag-gallery-info",
               "state": {
-                "filePath": "GALLERY/view from asilles.md"
+                "filePath": "GALLERY/os0ljd3i2mq71.md"
               },
-              "icon": "lucide-ghost",
-              "title": "tag-gallery-info"
+              "icon": "image",
+              "title": "Image Info"
             }
           }
         ],
@@ -261,54 +261,53 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "8c224558a59ca233",
+  "active": "775d48a859d680d9",
   "lastOpenFiles": [
-    "LOCATIONS/Yuvomne/index.md",
-    "LOCATIONS/Raevat/index.md",
-    "LOCATIONS/World Garden/index.md",
-    "LOCATIONS/The Expanse/index.md",
-    "LOCATIONS/Solei/index.md",
-    "LOCATIONS/Maeniil/index.md",
-    "LOCATIONS/Kuraesmeris/index.md",
-    "LOCATIONS/Kohoii River/index.md",
-    "LOCATIONS/Kohoii/index.md",
-    "LOCATIONS/index.md",
-    "CHARACTERS/Aenna/index.md",
-    "CHARACTERS/Kaeyomii/index.md",
-    "Pasted image 20260329235002.png",
-    "MISC/index.base",
-    "index.md",
-    "style.css",
-    "CHARACTERS/characterbase.base",
-    "MISC/pando’s lore questions.md",
-    "MISC/pando’s charater analysis.md",
-    "MISC/misc worldbuilding.md",
-    "MISC/misc character building.md",
-    "MISC",
-    "CHARACTERS/Esela/bio.md",
-    "CHARACTERS/Esela/index.md",
-    "LOCATIONS/Kohoii.md",
-    "CHARACTERS/Esela/art/prism_transparent.png",
-    "CHARACTERS/Esela/art/prism transparent.png",
-    "CHARACTERS/Esela/art/_ICON_esela_treybop.png",
-    "CHARACTERS/Esela/art/_ICON_merisela_shortbread1008.png",
-    "CHARACTERS/Esela/art/_ICON_kulithsela_momo.png",
-    "CHARACTERS/Esela/art/index.md",
-    "SPECIES/Selhae/index.md",
-    "SPECIES/Selhae/index 1.md",
-    "CHARACTERS/Yudora/index.md",
-    "CHARACTERS/Merisdae/index.md",
-    "CHARACTERS/Kulith/index.md",
-    "templates/languages.php",
-    "EVENTS/eventsbase.base",
-    "LANGUAGES/languagesbase.base",
-    "CONCEPTS/conceptsbase.base",
-    "LOCATIONS/locationsbase.base",
+    "ORGANIZATIONS/organizationsbase.base",
+    "ORGANIZATIONS/index.md",
+    "ORGANIZATIONS/Solei Royal Court/index.md",
+    "ORGANIZATIONS/Seedkeeper Council/index.md",
+    "ORGANIZATIONS/Kohoii Council of Elders/index.md",
+    "ORGANIZATIONS/Acorithe Royal Court/index.md",
+    "ARTIFACTS/index.md",
+    "CHARACTERS/index.md",
+    "ARTIFACTS/artifactsbase.base",
     "SPECIES/speciesbase.base",
-    "crescentmoon.PNG",
-    "GRAPHICS/banner.png",
+    "EVENTS/eventsbase.base",
+    "EVENTS/index.md",
+    "CHARACTERS/Anwi/index.md",
+    "LOCATIONS/locationsbase.base",
+    "LOCATIONS/Kaemeris/index.md",
+    "LOCATIONS/Hiitomeris/index.md",
+    "LOCATIONS/Folmeris/index.md",
+    "LOCATIONS/Buromeris/index.md",
+    "LOCATIONS/Kohoii/index.md",
+    "GALLERY/os0ljd3i2mq71.md",
+    "LOCATIONS/Kingdom of Acorithe/index.md",
+    "LOCATIONS/Atis/index.md",
     "GRAPHICS/world cover.png",
     "GRAPHICS/Untitled.png",
+    "GRAPHICS/noicon.png",
+    "GRAPHICS/nerdchart.png",
+    "GRAPHICS/maeniil.png",
+    "GRAPHICS/idk maybe asilles (1).jpg",
+    "GRAPHICS/image (1).png",
+    "GRAPHICS/Illustration2.png",
+    "GRAPHICS/galaxy-overlay-space-free-png.png",
+    "GRAPHICS/icon.png",
+    "LOCATIONS/index.md",
+    "LOCATIONS/World Garden/index.md",
+    "style.css",
+    "CHARACTERS/Aenna/index.md",
+    "LOCATIONS/The Expanse/index.md",
+    "LOCATIONS/Solei/index.md",
+    "LOCATIONS/Kuraesmeris/index.md",
+    "LOCATIONS/Maeniil/index.md",
+    "LOCATIONS/Kohoii River/index.md",
+    "CHARACTERS/characterbase.base",
+    "MISC/index.base",
+    "MISC",
+    "templates/languages.php",
     "CHARACTERS/relationship chart.canvas"
   ]
 }

@@ -12,6 +12,7 @@ Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
 Species: "[[SPECIES/Inna/index |Inna]]"
 title: Emeut
 aliases: Emeut
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

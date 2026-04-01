@@ -1,15 +1,21 @@
 ---
 title: Kuraesmeris
 alias: Kuraesmeris
-Alternative Names: Kuraesme, Crescentmoon (english)
+Alternative Names: ["Kuraesme", "Crescentmoon (english)"]
 Type: Moon
-At this Location: [[CHARACTERS/Merisdae/index|Merisdae]], [[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]], [[CHARACTERS/Canelé/index|Canelé]]
-Location Under: [[LOCATIONS/Asilles/index|Asilles]]
-Ruler/Owner: [[CHARACTERS/Merisdae/index|Merisdae]], [[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]]
+At this Location: 
+  - "[[CHARACTERS/Merisdae/index|Merisdae]]"
+  - "[[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]]"
+  - "[[CHARACTERS/Canelé/index|Canelé]]"
+Location Under: "[[LOCATIONS/Asilles/index|Asilles]]"
+Ruler/Owner: 
+  - "[[CHARACTERS/Merisdae/index|Merisdae]]"
+  - "[[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]]"
 Owning Rank: Guardian
-Born here: [[CHARACTERS/Canelé/index|Canelé]], [[CHARACTERS/Merisdae/index|Merisdae]]
+Born here: 
+  - "[[CHARACTERS/Canelé/index|Canelé]]"
+  - "[[CHARACTERS/Merisdae/index|Merisdae]]"
 ---
-
 ## About
 
 ---

@@ -21,6 +21,7 @@ Titles: Kohoii Elder, Head of Gahinukagaelii
 aliases:
   - Mare
 title: Mare Gahinukagaelii
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

@@ -7,11 +7,17 @@ Gender: genderless
 Pronouns: any (she/they)
 Current Location: "[[LOCATIONS/Asilles/index |Asilles]]"
 Birthplace: "[[LOCATIONS/World Garden/index |World Garden]]"
-Parents: ["[[CHARACTERS/Wefa/index |Wefa]]", "[[CHARACTERS/Anwi/index |Anwi]]"]
-Languages Spoken: ["[[LANGUAGES/Innalang/index |InnaLang]]", "[[LANGUAGES/Varae/index |Varae]]", "[[LANGUAGES/Acorithe/index |Acorithe]]"]
+Parents:
+  - "[[CHARACTERS/Wefa/index |Wefa]]"
+  - "[[CHARACTERS/Anwi/index |Anwi]]"
+Languages Spoken:
+  - "[[LANGUAGES/Innalang/index |InnaLang]]"
+  - "[[LANGUAGES/Varae/index |Varae]]"
+  - "[[LANGUAGES/Acorithe/index |Acorithe]]"
 Species: "[[SPECIES/Inna/index |Inna]]"
 alias: Aenna
 title: Aenna
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 The [[SPECIES/Inna/index|Inna]] birthed from the planet [[LOCATIONS/Asilles/index|Asilles]] .

@@ -22,6 +22,7 @@ Skin Tone: tan
 Species: "[[SPECIES/Selhae/index |Selhae]]"
 aliases: Soren
 title: Soren Daerikagaelii
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

@@ -20,6 +20,7 @@ Skin Tone: deep
 Species: "[[SPECIES/Selhae/index |Selhae]]"
 Titles: Village Head of Yuvomne
 title: Viisaha Ros
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

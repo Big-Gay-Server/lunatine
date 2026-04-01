@@ -13,6 +13,7 @@ Species: "[[SPECIES/Construct/index |Construct]]"
 Titles: Construct of Riverstone
 title: Osuhii
 aliases: Osuhii
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

@@ -21,6 +21,7 @@ Species: "[[SPECIES/Inna/index |Inna]]"
 Titles: World Garden Curator, Mother of Fae
 title: Wefa
 aliases: Wefa
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

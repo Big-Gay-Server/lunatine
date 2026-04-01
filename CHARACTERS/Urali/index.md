@@ -18,6 +18,7 @@ Species: "[[SPECIES/Fae/index |Fae]]"
 Titles: Protector of the Prince
 aliases: Urali
 title: Urali Nerine
+icon: "![[GRAPHICS/NOICON.PNG|75]]"
 ---
 ## About
 

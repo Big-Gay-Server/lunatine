@@ -5,9 +5,29 @@ views:
       and:
         - file.folder.contains("LOCATIONS")
         - file.ext != "base"
+        - file.path != "LOCATIONS/index.md"
         - file.name == "index"
     order:
+      - icon
       - title
+      - Type
+      - Ruler/Owner
+      - "Location Under:"
+      - "Sublocations:"
+    sort:
+      - property: file.name
+        direction: DESC
+  - type: table
+    name: Table 2
+    filters:
+      and:
+        - file.folder.contains("LOCATIONS")
+        - file.ext != "base"
+        - file.name == "index"
+    order:
+      - icon
+      - title
+      - file.name
       - Type
       - Inhabitants Demonym
       - Ruler/Owner

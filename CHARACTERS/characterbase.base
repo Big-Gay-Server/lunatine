@@ -50,17 +50,15 @@ views:
     order:
       - icon
       - Full Name
+      - Name Pronunciation
       - Species
       - Age
-      - Birthdate
-      - Death date
+      - Gender
+      - Pronouns
+      - Titles
     sort:
-      - property: icon
-        direction: ASC
       - property: Full Name
         direction: ASC
-      - property: Species
-        direction: DESC
       - property: Name Pronunciation
         direction: ASC
       - property: Actual Age
