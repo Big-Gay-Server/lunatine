@@ -1,25 +1,23 @@
 ---
 Actual Age: 1301 years
----
-# KuraesMerisdae
-
 Status: Alive
 Gender: genderless
 Pronouns: they/she
 Apparent Age: ageless
 mid-twenties
-Current Location: Kuraesmeris (Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md)
-Birthplace: Kuraesmeris (Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md)
+Current Location: [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
+Birthplace: [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
 Eyes: Dark Purple, with the Lunatine symbol in their pupils in a lighter, magenta-pink color.
 Hair: Long, straight, flowy deep purple hair with blunt bangs and long sidelocks.
 Height: 5'4'' or 164cm
-Languages Spoken: Varae (Varae%20cbf0bf7060c841f8a0858a33fab063a6.md)
+Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
 Rank: Guardian
-Ruler/Owner of:: Kuraesmeris (Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md)
+Ruler/Owner of: [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
 Skin Tone: fair
-Species: Construct (Construct%2038fe566bb96341be8aa944ee36e73b6d.md)
+Species: [[SPECIES/Construct/index|Construct]]
 Titles: Construct of Crescentmoon
-main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
+main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+---
 
 [https://www.pinterest.com/lunarconstruct/merisdae/](https://www.pinterest.com/lunarconstruct/merisdae/)
 
@@ -50,7 +48,7 @@ main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
 
 ### **Special abilities**
 
-[**Catalyst’s Soul**](Soul%20f5650c5d3be2487194e629cc898ca601.md) 
+[**Catalyst’s Soul**]
 
 ### **Apparel & Accessories**
 

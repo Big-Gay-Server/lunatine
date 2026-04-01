@@ -4,17 +4,14 @@ aliases:
   - Inna
 title: Inna
 ---
-
-*Star Walkers*
-
 ## About
-Ancient cosmic beings who plant the seeds of new worlds in their Garden, and from those worlds spring newborn Inna. Rarely do they visit these worlds in person, but on such occasions they will hide their true form and blend in among the locals, indistinguishable save for their planetary eyes.
+Star Walkers. Ancient cosmic beings who plant the seeds of new worlds in their Garden, and from those worlds spring newborn Inna. Rarely do they visit these worlds in person, but on such occasions they will hide their true form and blend in among the locals, indistinguishable save for their planetary eyes.
 
-The oldest Inna has been around since the beginning of the universe, made purely of [Dust](Dust%20e5dd6dcde4974c6ca3920c91cad7c2cb.md). They awoke to an empty void, [The Expanse](The%20Expanse%20aae43c29a9ac4e94b8043b45e9f63a0b.md) - and used their unique gift of [Creation](Creation%20514a94ac18e24c60b6ca42ca5f194015.md) to give meaning to the universe. They created the [World Seed](World%20Seed%2079ce63c075c84da084bc3ad1f11cab5e.md)s, ultra-compressed pockets of dust used to grow worlds, to plant in the [World Garden](World%20Garden%205a6cfe0468e64efe8e9b097f621b0ca2.md). These World seeds become planets, and at the end of their lifecycle, the seed finally flowers - and a new Inna is born from the dying world.
+The oldest Inna has been around since the beginning of the universe, made purely of [[CONCEPTS/Dust/index|Dust]]. They awoke to an empty void, [[LOCATIONS/The Expanse/index|The Expanse]] - and used their unique gift of [[CONCEPTS/Creation/Creation|Creation]] to give meaning to the universe. They created the [[CONCEPTS/World Seed/World Seed|World Seed]]s, ultra-compressed pockets of dust used to grow worlds, to plant in the [[LOCATIONS/World Garden/index|World Garden]]. These World seeds become planets, and at the end of their lifecycle, the seed finally flowers - and a new Inna is born from the dying world.
 
 Since the first Inna, worlds have come and gone - planets once flourishing with life transformed into new Inna, who keep the cycle going. Traditionally, Inna are given permission by their caretakers - the Inna who planted their seed - to cultivate their own world seed, though this is not always the case. Some Inna choose not to grow worlds, and some go against their caretakers will and do so independently.
 
-Inna rarely visit their worlds personally, and will sometimes create [Construct](Construct%2038fe566bb96341be8aa944ee36e73b6d.md)s using [Construction](Construction%20aefd8cb2a0184071a880b20e5ad2d552.md) to watch over their seeds for them.
+Inna rarely visit their worlds personally, and will sometimes create [[SPECIES/Construct/index|Construct]]s using the power of [[CONCEPTS/Construction/index|Construction]] to watch over their seeds for them.
 
 ## Generic
 
@@ -22,13 +19,13 @@ Inna rarely visit their worlds personally, and will sometimes create [Construct]
 
 ### Anatomy & Morphology
 
-The Inna are large, abstract beings - created fully of [Soul](Soul%20f5650c5d3be2487194e629cc898ca601.md) dust, they normally do not contain any [Essence](Essence%20175c5cb610f580449e11d1751073f30c.md) to provide them with a physical form that would be recognizable as a living creature. They are often depicted as clouds of dust, or galaxies full of stars, as they are made up of the universe.
+The Inna are large, abstract beings - created fully of [[CONCEPTS/Soul/index|Soul]] dust, they normally do not contain any [[CONCEPTS/Essence/index|Essence]] to provide them with a physical form that would be recognizable as a living creature. They are often depicted as clouds of dust, or galaxies full of stars, as they are made up of the universe.
 
 They do have the ability to take on any form they wish. Sometimes, Inna will appear in the shape of the creatures on their world, and observe the planet from within. 
 
 ### Perception & Sensory / Extrasensory Capabilities
 
-Inna have a unique gift of [Creation](Creation%20514a94ac18e24c60b6ca42ca5f194015.md), which they use to grow worlds from [World Seed](World%20Seed%2079ce63c075c84da084bc3ad1f11cab5e.md) . Additionally, they have the power of [Construction](Construction%20aefd8cb2a0184071a880b20e5ad2d552.md). Some Inna use this ability to create constructs to assist in tending to their seed.
+Inna have a unique gift of [[CONCEPTS/Creation/Creation|Creation]], which they use to grow worlds from [[CONCEPTS/World Seed/World Seed|World Seed]] . Additionally, they have the power of [[CONCEPTS/Construction/index|Construction]]. Some Inna use this ability to create constructs to assist in tending to their seed.
 
 ### Genetics & Reproduction
 
@@ -81,7 +78,7 @@ In some cases, Inna may choose to change their names as they grow and evolve. Th
 
 ### Major Organizations
 
-[Seedkeeper Council](Seedkeeper%20Council%20162c5cb610f580c69ebdcdaed19868e3.md) 
+[[ORGANIZATIONS/Seedkeeper Council/index|Seedkeeper Council]]
 
 ### Beauty Ideals
 
@@ -101,14 +98,12 @@ In some cases, Inna may choose to change their names as they grow and evolve. Th
 
 ### Taboos
 
-[Inna Tenets](Inna%20Tenets%2015fc5cb610f5804f938fcacbffd4b55f.md) 
+[[CONCEPTS/Inna Tenets/Inna Tenets|Inna Tenets]]
 
 ### Myths and Legends
 
 ### Major Historical Figures
 
-[Hafei](Hafei%20174c5cb610f580d88ee8cac629e93be4.md) - The First Inna
+[[CHARACTERS/Hafei/index|Hafei]] - The First Inna
 
 ### Interspecies Relations
-
-![mostly_inna_lesgays_smaller.png](mostly_inna_lesgays_smaller%201.png)

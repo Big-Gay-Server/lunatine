@@ -1,25 +1,22 @@
 ---
 Actual Age: 1301 years
----
-# BuroMerisdae
-
 Status: Alive
 Gender: genderless
 Pronouns: they/she
-Apparent Age: ageless
-mid-twenties
-Current Location: Buromeris (Buromeris%2029c63ca0b6ff4a84b552d1cb685727b1.md)
-Birthplace: Kuraesmeris (Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md)
+Apparent Age: ageless / mid-twenties
+Current Location: [[LOCATIONS/Buromeris/index|Buromeris]]
+Birthplace: [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
 Eyes: bright red, with the Lunatine symbol in their pupils.
 Hair: deep, purple-y red hair with bright red ombre. thick, layered bangs over one eye, with the length pulled into a high ponytail on one side.
 Height: 5'4'' or 164cm
-Languages Spoken: Varae (Varae%20cbf0bf7060c841f8a0858a33fab063a6.md)
+Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
 Rank: Guardian
-Ruler/Owner of:: Buromeris (Buromeris%2029c63ca0b6ff4a84b552d1cb685727b1.md)
+"Ruler/Owner of": [[LOCATIONS/Buromeris/index|Buromeris]]
 Skin Tone: fair
-Species: Construct (Construct%2038fe566bb96341be8aa944ee36e73b6d.md)
+Species: [[SPECIES/Construct/index|Construct]]
 Titles: Construct of Bloodmoon
-main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
+main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+---
 
 [https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bloodmoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bloodmoon/&hideHeader=1&transparent=1)
 
@@ -45,7 +42,7 @@ main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
 
 ### **Special abilities**
 
-[**Warden’s Soul**](Soul%20f5650c5d3be2487194e629cc898ca601.md) 
+Warden's Soul
 
 ### **Apparel & Accessories**
 

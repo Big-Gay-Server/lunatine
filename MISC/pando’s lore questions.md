@@ -31,7 +31,7 @@
         
     - **what do inna do aside from create planets (and more inna as a result)?**
         - general: gives inna a reason to not be staring at their planets 24/7, as well as a reason for inna to not make a bunch of planets and grow even more rapidly, something to do if an inna doesn’t want to make a planet
-            - they take part in the [Seedkeeper Council](Seedkeeper%20Council%20162c5cb610f580c69ebdcdaed19868e3.md) and have jobs
+            - they take part in the [[ORGANIZATIONS/Seedkeeper Council/index|Seedkeeper Council]] and have jobs
         - lore-specific: anwi and wefa need a reason to not be around their planet while emeut’s causing problems
             - anwi and/or wefa are “world health inspectors” and go around making sure inna are taking proper care of their worlds
         - lore-specific: emeut probably had something he was doing when his planet was failing, neglect being his intention or not
@@ -56,10 +56,10 @@
                     - am i legit creating class divide amongst my inna fjdskfjdskfj
                 - maybe there are some extremists 0 w0
                     - on one side, there could be inna that don’t care about blooming another inna out of their world seed, they just want to make a planet and take care of it and visit it and be overall very involved in its creation/life
-                        - could use dust to prevent the world from coming to its natural end. this is against the [**Creation leads to Endings, and Endings lead to Beginnings.**](Inna%20Tenets%2015fc5cb610f5804f938fcacbffd4b55f.md)
+                        - could use dust to prevent the world from coming to its natural end. this is against the [**Creation leads to Endings, and Endings lead to Beginnings.**]
                         - anwi and wefa would probably be leaning towards this end of the spectrum but they do still care about the inna that blooms, so not quite as extreme as some could be
                     - but on the other, there could be inna that don’t care about the life on their planet at all and only care about the inna that will bloom out of it
-                        - could use dust to cause the world to accelerate the natural end of the world or to cause a premature end. this is also against the [**Neglect not the garden you have sown.**](Inna%20Tenets%2015fc5cb610f5804f938fcacbffd4b55f.md)
+                        - could use dust to cause the world to accelerate the natural end of the world or to cause a premature end. this is also against the [**Neglect not the garden you have sown.**]
                         - emeut could definitely be one of these extremists. could explain why he got in so much trouble. maybe he was a leader in the movement or smth?
                             - maaaaybe he used to be a strong and powerful inna with a lot of dust and he used it to essentially fund extremists to create a shitton of planets to neglect and turn into shitty inna lmfao
                             - could be why they took his dust, maybe its not a common punishment but it made sense in his case

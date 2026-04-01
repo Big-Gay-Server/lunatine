@@ -1,0 +1,17 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.folder == "STORY"
+    order:
+      - file.name
+      - Author
+      - order
+      - Status
+      - Characters
+    sort:
+      - property: order
+        direction: ASC
+    columnSize:
+      note.Status: 96

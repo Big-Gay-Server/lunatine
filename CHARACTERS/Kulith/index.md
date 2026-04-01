@@ -53,7 +53,7 @@ Kulith’s magic centers around the ability to manipulate sound waves. When cont
 ### Personal history
 From a young age, it was clear that Kulith was different from her peers. Her magic was hard to control, especially as a child, and thus became an issue very early on. She would get overstimulated or frustrated easily, making it harder and harder for her to keep her magic controlled. 
 
-As a child, authorities in Solei pressured Kulith into using their magic in attacks on [[LOCATIONS/Kohoii/index|Kohoii]] during the [[EVENTS/Kohoii Solei War/index|Kohoii Solei War]]. This unfortunately resulted in the death of [[CHARACTERS/Naediia/index|Naediia]], [[CHARACTERS/Esela/index|Esela]]'s mother. Kulith was never told about the casualties of these attacks, and both her and Esela don’t know that it was Kulith who killed Naediia. [[CHARACTERS/Reika/index|Reika]], being an elder of Kohoii, was aware of this, which heavily contributed to her vehement disapproval of Kulith and Esela together.
+As a child, authorities in Solei pressured Kulith into using their magic in attacks on [[LOCATIONS/Kohoii/index|Kohoii]] during the [[EVENTS/Kohoii Solei War/index|Kohoii/Solei War]]. This unfortunately resulted in the death of [[CHARACTERS/Naediia/index|Naediia]], [[CHARACTERS/Esela/index|Esela]]'s mother. Kulith was never told about the casualties of these attacks, and both her and Esela don’t know that it was Kulith who killed Naediia. [[CHARACTERS/Reika/index|Reika]], being an elder of Kohoii, was aware of this, which heavily contributed to her vehement disapproval of Kulith and Esela together.
 
 Kulith worked to escape Solei, no longer wanting to be used as a weapon in such a malicious war. Finally, in 1220 they were able to escape, and came across Esela in the [[LOCATIONS/Maeniil/index|Maeniil]]. The two fell for each other instantly, and Esela hid Kulith in the Maeniil away from her grandmother’s judgmental eyes.
 
@@ -63,9 +63,9 @@ Kulith worked to escape Solei, no longer wanting to be used as a weapon in such 
 ### Failures & Embarrassments
 ### Mental Trauma
 - was taken away from parents at a young age
-- was used as a weapon in an unjust war ([Kohoii/Solei War](Kohoii%20Solei%20War%203650a8f12f42430cbb47a319975bca7a.md))
-- lost their child in the [Debris Impact](Debris%20Impact%20ed20ff388be6470196280bfd47d06e5d.md)
-- separated from their partner [Esela](Esela%207a0dac9b9d0f422489c6e9609eef84a6.md) and stranded on a dying planet
+- was used as a weapon in an unjust war ([[EVENTS/Kohoii Solei War/index|Kohoii/Solei War]])
+- lost their child in the [[EVENTS/Debris Impact/index|Debris Impact]]
+- separated from their partner [[CHARACTERS/Esela/index|Esela]] and stranded on a dying planet
 
 ### Intellectual Characteristics
 ### Morality & Philosophy

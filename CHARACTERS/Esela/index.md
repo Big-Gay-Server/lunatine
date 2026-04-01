@@ -59,7 +59,7 @@ A young adult, who ran away from her home in Kohoii to be with her partner Kulit
 
 Esela’s \[\[Veil Archetypes#Seeker's Soul|Seeker's Soul\]\] allows her to teleport.
 Esela has to be able to visualize clearly the destination in order to be able to teleport. She has to have been there before, not just seen in pictures or described to her. Breaking concentration on the location can result in a unsteady arrival, or sometimes being teleported to the wrong place entirely.
-Initially, she can only teleport herself short distances. However, with the amplification of [Merisdae](Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md), she is capable of transporting groups of people over long distances. The further the distance, the more dust is required, meaning it takes a lot of Esela’s energy.
+Initially, she can only teleport herself short distances. However, with the amplification of [[CHARACTERS/Merisdae/index|Merisdae]], she is capable of transporting groups of people over long distances. The further the distance, the more dust is required, meaning it takes a lot of Esela’s energy.
 
 ### Apparel & Accessories
 
@@ -74,11 +74,11 @@ Initially, she can only teleport herself short distances. However, with the ampl
 
 - grew up in [[LOCATIONS/Kohoii|Kohoii]] her entire life
 - was next in line to be the head of the Levenkagaelii
-- her mother, [[CHARACTERS/Naediia/index|Naediia]], died in a conflict between Kohoii and [Solei](Solei%20a43736a3946f491ab5b40ad8e7fab381.md)
+- her mother, [[CHARACTERS/Naediia/index|Naediia]], died in a conflict between Kohoii and [[LOCATIONS/Solei/index|Solei]]
   - this causes her grandmother, Reika to be very protective of Esela especially around outsiders.
 - felt overwhelmed by pressure put on her
-- spent her free time away from others at her secret spot, which she called her [Maeniil](Maeniil%202639c0bb7d004eca8bde4f17ca7a6cc2.md)
-- one day [Kulith](Kulith%206b51a534f7f148af8253f5706f402a1b.md) stumbled into the maeniil, on the run from solei 
+- spent her free time away from others at her secret spot, which she called her [[LOCATIONS/Maeniil/index|Maeniil]]
+- one day [[CHARACTERS/Kulith/index|Kulith]]stumbled into the maeniil, on the run from solei 
   - esela helps her hide from solei, but also hides her from reika since she’s very against outsiders
   - the two become very close (gorlfriends)
 
