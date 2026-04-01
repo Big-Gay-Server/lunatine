@@ -375,9 +375,9 @@ a, .file-link {
         display: block;
         margin: 0 auto 15px auto;
         max-width: 100%;
-        height:  auto;
+        height: auto;
         border-radius: 10px;
-        border: 1px solid var(--color-3);
+        /* border: 1px solid var(--color-3); */
     }
     & tbody {
         display: block;
