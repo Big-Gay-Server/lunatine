@@ -407,32 +407,49 @@ if ($filePath && file_exists($filePath)) {
                 $text = str_replace(array_keys($transclusions), array_values($transclusions), $text);
             }
 
-            // 8. POST-PARSEDOWN: WIKILINKS (Supporting Anchors #)
+            // 6. SHORTCODES, IMAGES & LINKS (Post-Parsedown)
+            $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
+                $parts = explode('#', trim($m[1]));
+                return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
+            }, $text);
+
+            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
+                $imageName = trim($m[1]); $width = $m[3] ?? null;
+                $path = find_image_path($markdownDir, $imageName);
+                $style = $width ? "width:{$width}px;" : 'max-width:100%;';
+                return $path ? "<img src='$path' style='$style'>" : "<i>(Image not found: $imageName)</i>";
+            }, $text);
+
+            // E. Wikilinks (Supporting Anchors #)
             $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
-                $fullTarget = trim($p[0]); // This might be "Page#Header"
-                
-                // Split the target into Page and Anchor
+                $fullTarget = trim($p[0]); // e.g. "Note#Header"
+
+                // 1. Split the target into Page and Anchor
                 $parts = explode('#', $fullTarget);
                 $pageTarget = $parts[0];
                 $anchor = isset($parts[1]) ? '#' . $parts[1] : '';
 
-                // Clean the page target for file searching (strip .md, etc)
+                // 2. Clean the page target (strip IDs and .md)
                 $cleanPageTarget = preg_replace(['/\s[a-f0-9]{32}$/i', '/\.md$/i'], '', $pageTarget);
                 
-                // Create the final URL (Page URL + Anchor)
+                // 3. Build the URL (Page + Anchor)
                 $url = create_wiki_url($cleanPageTarget) . $anchor;
                 
                 $linkText = trim($p[1] ?? $p[0]);
 
-                // Preview logic should only look at the Page, ignoring the Anchor
+                // 4. Previews should only look at the base file (no anchor)
                 $previewTarget = preg_replace('/#.*$/', '', $cleanPageTarget);
                 $preview = get_wiki_link_preview($previewTarget, $markdownDir, $Parsedown);
+                
                 $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
 
                 return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
             }, $text);
+
+            return $text;
         };
+
 
         // Apply transformations to both pieces of content
         $bioHtml = $wikiParser($bioToProcess);
