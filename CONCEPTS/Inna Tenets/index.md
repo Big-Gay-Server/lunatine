@@ -1,7 +1,6 @@
 ---
 title: Inna Tenets
 ---
-
 1. **Neglect not the garden you have sown.**
     - *Care for your creations.*
     1. World seeds must not be neglected or treated badly. It can result in a weak, hurt Inna, which is cruel to the Inna and to the Expanse.

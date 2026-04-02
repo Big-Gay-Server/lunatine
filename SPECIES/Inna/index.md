@@ -98,7 +98,7 @@ In some cases, Inna may choose to change their names as they grow and evolve. Th
 
 ### Taboos
 
-![[CONCEPTS/Inna Tenets/Inna Tenets|Inna Tenets]]
+![[CONCEPTS/Inna Tenets/index|Inna Tenets]]
 
 ### Myths and Legends
 

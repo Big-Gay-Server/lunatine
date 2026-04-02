@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CONCEPTS/Inna Tenets/Inna Tenets.md",
+                "file": "SPECIES/Inna/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Inna Tenets"
+              "title": "index"
             }
           }
         ]
@@ -151,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CONCEPTS/Inna Tenets/Inna Tenets.md",
+                "file": "SPECIES/Inna/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Inna Tenets"
+              "title": "Outline of index"
             }
           },
           {
@@ -267,8 +267,10 @@
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
-    "SPECIES/Inna/index.md",
     "SPECIES/index.md",
+    "CONCEPTS/Inna Tenets/index.md",
+    "CONCEPTS/Inna Tenets/Inna Tenets.md",
+    "SPECIES/Inna/index.md",
     "CONCEPTS/Soul/index.md",
     "CONCEPTS/Soul/Archetypes/index.md",
     "CHARACTERS/Esela/bio.md",
@@ -295,8 +297,6 @@
     "STORY/chapter outlines/Chapter Template.md",
     "STORY/chapter outlines/Chapter Six.md",
     "STORY/chapter outlines/Chapter Seven.md",
-    "STORY/chapter outlines/Chapter One.md",
-    "STORY/chapter outlines/Chapter Nine.md",
     "STORY/chapter drafts/L U N A T I N E.docx",
     "STORY/misc writings",
     "STORY/chapter outlines",

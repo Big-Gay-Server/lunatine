@@ -1235,20 +1235,22 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 914,
+      "wordCount": 904,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 3.046666666666667,
-      "characterCount": 6126,
-      "nonWhitespaceCharacterCount": 4983,
-      "newlineCount": 110,
-      "readingTimeInMinutes": 3.449056603773585,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
+      "pageCount": 3.013333333333333,
+      "characterCount": 5893,
+      "nonWhitespaceCharacterCount": 4875,
+      "newlineCount": 105,
+      "readingTimeInMinutes": 3.4113207547169813,
+      "linkCount": 14,
+      "embedCount": 1,
+      "aliases": [
+        "Inna"
+      ],
       "createdDate": 1775147145570,
-      "modifiedDate": 1775147145570,
-      "sizeInBytes": 6130,
+      "modifiedDate": 1775164789912,
+      "sizeInBytes": 6022,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 3.046666666666667,
@@ -1256,6 +1258,16 @@
         "characterCount": 6126,
         "nonWhitespaceCharacterCount": 4983,
         "newlineCount": 110
+      },
+      "frontmatter": {
+        "Descended Species": [
+          "[[SPECIES/Selhae/index | Selhae]]",
+          "[[SPECIES/Fae/index | Fae]]"
+        ],
+        "aliases": [
+          "Inna"
+        ],
+        "title": "Inna"
       }
     },
     "SPECIES/index.md": {
@@ -1266,7 +1278,7 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 34,
+      "characterCount": 32,
       "nonWhitespaceCharacterCount": 30,
       "newlineCount": 3,
       "readingTimeInMinutes": 0.0037735849056603774,
@@ -1276,8 +1288,8 @@
         "Species"
       ],
       "createdDate": 1775147145577,
-      "modifiedDate": 1775147145579,
-      "sizeInBytes": 81,
+      "modifiedDate": 1775164780446,
+      "sizeInBytes": 75,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -15554,8 +15566,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537461,
-      "modifiedDate": 1775164142526,
-      "sizeInBytes": 24214,
+      "modifiedDate": 1775164607647,
+      "sizeInBytes": 23618,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -15716,16 +15728,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.9433333333333334,
-      "characterCount": 1706,
+      "characterCount": 1676,
       "nonWhitespaceCharacterCount": 1371,
       "newlineCount": 31,
       "readingTimeInMinutes": 1.0679245283018868,
       "linkCount": 0,
       "embedCount": 2,
-      "aliases": null,
+      "aliases": [
+        "Soul"
+      ],
       "createdDate": 1775147144768,
-      "modifiedDate": 1775147144768,
-      "sizeInBytes": 1733,
+      "modifiedDate": 1775164778158,
+      "sizeInBytes": 1701,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.9433333333333334,
@@ -15911,33 +15925,6 @@
         "aliases": "Shapeshifting"
       }
     },
-    "CONCEPTS/Inna Tenets/Inna Tenets.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 126,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.42,
-      "characterCount": 884,
-      "nonWhitespaceCharacterCount": 710,
-      "newlineCount": 17,
-      "readingTimeInMinutes": 0.47547169811320755,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1775147144749,
-      "modifiedDate": 1775147144749,
-      "sizeInBytes": 884,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.42,
-        "wordCount": 126,
-        "characterCount": 884,
-        "nonWhitespaceCharacterCount": 710,
-        "newlineCount": 17
-      }
-    },
     "CONCEPTS/Inna Tenets/index.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -15946,16 +15933,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.38333333333333336,
-      "characterCount": 695,
+      "characterCount": 684,
       "nonWhitespaceCharacterCount": 542,
-      "newlineCount": 11,
+      "newlineCount": 10,
       "readingTimeInMinutes": 0.4339622641509434,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Inna Tenets"
+      ],
       "createdDate": 1775147144750,
-      "modifiedDate": 1775147144750,
-      "sizeInBytes": 723,
+      "modifiedDate": 1775164954149,
+      "sizeInBytes": 710,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.38333333333333336,
