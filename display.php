@@ -311,7 +311,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     return $tableHtml . '</tbody></table>';
 };
 
- // --- THE PARSER TOOL ---
+// --- THE PARSER TOOL ---
         // Use &$wikiParser to allow the function to call itself for embedded notes.
         $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown, &$wikiParser) {
             
@@ -357,7 +357,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             }, $text);
 
             // 2. NOTE EMBEDDER (Pre-Parsedown)
-            // We use a placeholder so Parsedown doesn't escape our HTML <div> tags.
             $transclusions = [];
             $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions) {
                 $targetName = trim($m[1]);
@@ -404,7 +403,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             }
 
             // 6. POST-PARSEDOWN: BASE EMBEDS
-            $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
+            $text = preg_replace_callback('/\[\s*embed_base\s* : \s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
             }, $text);
@@ -434,6 +433,12 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
             return $text;
         };
+
+        // Apply transformations to both pieces of content
+        $bioHtml = $wikiParser($bioToProcess);
+        $htmlContent = $wikiParser($markdownToProcess);
+    }
+}
 
 // --- TEMPLATE PICKER ---
 // Decide which PHP template should render the page.
