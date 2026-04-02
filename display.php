@@ -398,6 +398,20 @@ if ($filePath && file_exists($filePath)) {
                 return $m[0]; 
             }, $text);
 
+            // --- 3.5. HEADER ID GENERATOR (The Fix for Anchors) ---
+            // This finds lines like "## My Header" and turns them into 
+            // "## My Header {#my-header}" so Parsedown Extra/standard can use them.
+            $text = preg_replace_callback('/^(#+)\s+(.+)$/m', function ($m) {
+                $level = $m[1];
+                $title = trim($m[2]);
+                // Create a slug: lowercase, replace spaces/special chars with dashes
+                $slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $title));
+                $slug = trim($slug, '-');
+                
+                // Return the header with the ID attached in the { #id } format
+                return "$level $title {#$slug}";
+            }, $text);
+
             // 4. MAIN PARSEDOWN RENDER
             $text = preg_replace('/^character:\s*.*$/im', '', $text);
             $text = $Parsedown->text($text);
