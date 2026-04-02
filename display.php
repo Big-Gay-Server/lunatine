@@ -66,12 +66,34 @@ function create_wiki_url(string $path): string
 
 function render_wiki_markup_html(string $html, string $markdownDir, $Parsedown, bool $includePreviewAttr = false): string
 {
-    $html = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
-        $imageName = trim($m[1]);
+    // Updated Regex to handle both Images and Note Embeds
+    $html = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, $Parsedown) {
+        $targetName = trim($m[1]);
         $width = $m[3] ?? null;
-        $path = find_image_path($markdownDir, $imageName);
-        $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-        return $path ? "<img src='$path'>" : htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
+        
+        // 1. Try to find the file using your existing helper
+        $path = find_image_path($markdownDir, $targetName);
+        
+        if ($path) {
+            $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+            $fullPath = $markdownDir . '/' . ltrim($path, '/');
+
+            // 2. If it's a Markdown file, EMBED it
+            if ($extension === 'md' && file_exists($fullPath)) {
+                $noteContent = file_get_contents($fullPath);
+                // Strip YAML frontmatter
+                $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
+                
+                // Wrap in a div and parse the markdown inside the note
+                return '<div class="markdown-embed">' . $Parsedown->text($noteContent) . '</div>';
+            }
+
+            // 3. Otherwise, treat it as an IMAGE (Existing logic)
+            $style = $width ? "width:{$width}px;" : 'max-width:100%;';
+            return "<img src='$path' style='$style' alt='$targetName'>";
+        }
+
+        return htmlspecialchars($m[0], ENT_QUOTES | ENT_SUBSTITUTE);
     }, $html);
 
     $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown, $includePreviewAttr) {
@@ -119,16 +141,6 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $content = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $content, 1);
     $content = trim($content);
     $content = preg_replace('/\r\n|\r/', "\n", $content);
-
-    // --- PASTE THIS NEW BLOCK HERE ---
-    $content = preg_replace_callback('/!\[\[(.+?)\]\]/', function ($matches) {
-        $notePath = 'content/' . $matches[1] . '.md';
-        if (file_exists($notePath)) {
-            return file_get_contents($notePath);
-        }
-        return "*(Note not found: " . $matches[1] . ")*";
-    }, $content);
-    // --- END OF NEW BLOCK ---
 
     // Render the full page content and extract a preview snippet.
     $renderedHtml = $Parsedown->text($content);
