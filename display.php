@@ -311,38 +311,11 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     return $tableHtml . '</tbody></table>';
 };
 
-// --- STANDARD MARKDOWN PROCESSING ---
-// Only run page rendering if the requested file exists.
-if ($filePath && file_exists($filePath)) {
-    // Detect whether this is a markdown file or a base data file.
-    $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-
-    if ($extension === 'base') {
-        // Render .base files as tables rather than markdown pages.
-        $htmlContent = $renderTable($filePath, $filePath);
-    } else {
-        // Load the markdown page content into memory.
-        $markdownToProcess = file_get_contents($filePath);
-        $yamlData = [];
-
-        // Load any shared metadata helpers for page rendering.
-        require_once __DIR__ . '/metadata.php';
-        
-        // --- YAML PROCESSING ---
-        // 1. Extract YAML frontmatter from the top of the page.
-        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $markdownToProcess, $matches)) {
-            $yamlData = Spyc::YAMLLoad($matches[1]); // parse YAML into PHP array
-            $markdownToProcess = preg_replace('/^---\s*[\s\S]*?\s---/u', '', $markdownToProcess); // remove YAML from markdown
-        }
-        
-        // --- LOAD IN BIO PAGE ---
-        // If a bio page exists for this URL, load it too.
-        $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
-        $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
-
-        // --- THE PARSER TOOL ---
-        $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown) {
-            // --- INTERLINEAR GLOSS PARSER ---
+// --- THE PARSER TOOL ---
+        // We use &$wikiParser so the function can call itself for nested notes
+        $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown, &$wikiParser) {
+            
+            // 1. PRE-PARSEDOWN: INTERLINEAR GLOSS PARSER
             $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function ($match) {
                 $lines = explode("\n", trim($match[1]));
                 $alignedData = [];
@@ -351,9 +324,7 @@ if ($filePath && file_exists($filePath)) {
 
                 foreach ($lines as $line) {
                     $line = trim($line);
-                    if (empty($line) || str_starts_with($line, '#'))
-                        continue;
-
+                    if (empty($line) || str_starts_with($line, '#')) continue;
                     if (preg_match('/^\\\\(gla|glb|glc)\s+(.*)/', $line, $m)) {
                         $alignedData[$m[1]] = explode(' ', $m[2]);
                     } elseif (preg_match('/^\\\\(\w+)\s+(.*)/', $line, $m)) {
@@ -362,16 +333,10 @@ if ($filePath && file_exists($filePath)) {
                 }
 
                 $html = '<div class="gloss-container">';
+                if (isset($metadata['num'])) $html .= '<span class="gloss-num">(' . $metadata['num'] . ')</span> ';
+                if (isset($metadata['lbl'])) $html .= '<span class="gloss-lbl">' . $metadata['lbl'] . '</span> ';
+                if (isset($metadata['ex'])) $html .= '<div class="gloss-ex">' . $metadata['ex'] . '</div>';
 
-                // 1. Top Metadata (Num, Label, Example)
-                if (isset($metadata['num']))
-                    $html .= '<span class="gloss-num">(' . $metadata['num'] . ')</span> ';
-                if (isset($metadata['lbl']))
-                    $html .= '<span class="gloss-lbl">' . $metadata['lbl'] . '</span> ';
-                if (isset($metadata['ex']))
-                    $html .= '<div class="gloss-ex">' . $metadata['ex'] . '</div>';
-
-                // 2. Aligned Columns (A, B, C)
                 $html .= '<div class="gloss-word-wrap">';
                 $maxWords = max(array_map('count', $alignedData ?: [[]]));
                 for ($i = 0; $i < $maxWords; $i++) {
@@ -386,15 +351,12 @@ if ($filePath && file_exists($filePath)) {
                 }
                 $html .= '</div>';
 
-                // 3. Bottom Metadata (Translation, Source)
-                if (isset($metadata['ft']))
-                    $html .= '<div class="gloss-ft">' . $metadata['ft'] . '</div>';
-                if (isset($metadata['src']))
-                    $html .= '<div class="gloss-src">' . $metadata['src'] . '</div>';
-
+                if (isset($metadata['ft'])) $html .= '<div class="gloss-ft">' . $metadata['ft'] . '</div>';
+                if (isset($metadata['src'])) $html .= '<div class="gloss-src">' . $metadata['src'] . '</div>';
                 return $html . '</div>';
             }, $text);
-            // INLINE DATAVIEW RENDERER
+
+            // 2. PRE-PARSEDOWN: INLINE DATAVIEW RENDERER
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
             $text = preg_replace_callback($pattern, function ($m) use ($yamlData) {
                 $propName = $m[1];
@@ -402,44 +364,63 @@ if ($filePath && file_exists($filePath)) {
                 $val = null;
                 foreach ($yamlData as $k => $v) {
                     if (strtolower(str_replace([' ', '-', '_'], '', $k)) === strtolower(str_replace([' ', '-', '_'], '', $propName))) {
-                        $val = $v;
-                        break;
+                        $val = $v; break;
                     }
                 }
-                if ($val !== null)
-                    return is_array($val) ? implode(', ', $val) : $val;
+                if ($val !== null) return is_array($val) ? implode(', ', $val) : $val;
                 return $fallback;
             }, $text);
 
-            // 2. CLEAN UP RAW TEXT
-            $text = preg_replace('/^character:\s*.*$/im', '', $text);
+            // 3. PRE-PARSEDOWN: NOTE EMBEDDER (The Fix)
+            // We do this BEFORE Parsedown so it doesn't get confused with images
+            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser) {
+                $targetName = trim($m[1]);
+                $path = find_image_path($markdownDir, $targetName);
+                
+                if ($path && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'md') {
+                    $fullPath = $markdownDir . '/' . ltrim($path, '/');
+                    if (file_exists($fullPath)) {
+                        $noteContent = file_get_contents($fullPath);
+                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
+                        
+                        // Recursive call to handle glosses/links inside the embed
+                        $parsedNote = $wikiParser($noteContent);
+                        $url = create_wiki_url($targetName);
+                        
+                        return "<div class='markdown-embed'>
+                                    $parsedNote
+                                    <div class='embed-source'><a href='$url'>Open Full Note: $targetName</a></div>
+                                </div>";
+                    }
+                }
+                return $m[0]; // Return original if not a .md file
+            }, $text);
 
-            // 3. CONVERT TO HTML
+            // 4. CLEAN UP RAW TEXT & CONVERT TO HTML
+            $text = preg_replace('/^character:\s*.*$/im', '', $text);
             $text = $Parsedown->text($text);
 
-            // C. Shortcode Embedder
+            // 5. POST-PARSEDOWN: SHORTCODE EMBEDDER
             $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
             }, $text);
 
-            // D. Wikilink Images
+            // 6. POST-PARSEDOWN: ACTUAL IMAGES
             $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
                 $imageName = trim($m[1]);
                 $width = $m[3] ?? null;
                 $path = find_image_path($markdownDir, $imageName);
                 $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-                return $path ? "<img src='$path'>" : "<i>(Image not found: $imageName)</i>";
+                return $path ? "<img src='$path' style='$style'>" : "<i>(Image not found: $imageName)</i>";
             }, $text);
 
-            // E. Wikilinks (LOWERCASE & NO INDEX)
+            // 7. POST-PARSEDOWN: WIKILINKS
             $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
                 $rawTarget = trim($p[0]);
                 $rawTarget = preg_replace('/\s[a-f0-9]{32}$/i', '', $rawTarget);
                 $rawTarget = preg_replace('/\.md$/i', '', $rawTarget);
-
-                // Preserve anchor fragments in the href, but strip them for preview lookup.
                 $previewTarget = preg_replace('/#.*$/', '', $rawTarget);
                 $url = create_wiki_url($rawTarget);
                 $linkText = trim($p[1] ?? $p[0]);
@@ -450,12 +431,6 @@ if ($filePath && file_exists($filePath)) {
 
             return $text;
         };
-
-        // Apply transformations to both pieces of content
-        $bioHtml = $wikiParser($bioToProcess);
-        $htmlContent = $wikiParser($markdownToProcess);
-    }
-}
 
 // --- TEMPLATE PICKER ---
 // Decide which PHP template should render the page.
