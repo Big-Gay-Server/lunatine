@@ -120,6 +120,16 @@ function get_wiki_link_preview(string $linkTarget, string $markdownDir, $Parsedo
     $content = trim($content);
     $content = preg_replace('/\r\n|\r/', "\n", $content);
 
+    // --- PASTE THIS NEW BLOCK HERE ---
+    $content = preg_replace_callback('/!\[\[(.+?)\]\]/', function ($matches) {
+        $notePath = 'content/' . $matches[1] . '.md';
+        if (file_exists($notePath)) {
+            return file_get_contents($notePath);
+        }
+        return "*(Note not found: " . $matches[1] . ")*";
+    }, $content);
+    // --- END OF NEW BLOCK ---
+
     // Render the full page content and extract a preview snippet.
     $renderedHtml = $Parsedown->text($content);
     $previewText = get_preview_snippet($renderedHtml);
