@@ -11,14 +11,13 @@
             "id": "65d43a3820334290",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "SPECIES/Inna/index.md",
-                "mode": "source",
-                "source": false
+                "file": "CHARACTERS/characterbase.base",
+                "viewName": "View"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-layout-grid",
+              "title": "characterbase"
             }
           }
         ]
@@ -151,13 +150,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SPECIES/Inna/index.md",
+                "file": "CHARACTERS/characterbase.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of characterbase"
             }
           },
           {
@@ -218,7 +217,7 @@
                   "viewState": 1,
                   "displaying": {
                     "day": 16,
-                    "month": 7,
+                    "month": 10,
                     "year": 1438
                   },
                   "displayDayNumber": false,
@@ -267,43 +266,42 @@
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
-    "SPECIES/index.md",
-    "CONCEPTS/Inna Tenets/index.md",
-    "CONCEPTS/Inna Tenets/Inna Tenets.md",
+    "SPECIES/Selhae/index.md",
+    "SPECIES/speciesbase.base",
+    "CHARACTERS/characterbase.base",
     "SPECIES/Inna/index.md",
-    "CONCEPTS/Soul/index.md",
-    "CONCEPTS/Soul/Archetypes/index.md",
-    "CHARACTERS/Esela/bio.md",
-    "CHARACTERS/Esela/music.md",
-    "CHARACTERS/Esela/index.md",
-    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
-    "CONCEPTS/Soul/Archetypes/Shell Archetypes.md",
-    "CONCEPTS/Soul/Archetypes/Veil Archetypes.md",
-    "CHARACTERS/Kaeyomii/index.md",
-    "CHARACTERS/Kaeyomii/art/meteor.webp",
+    "SPECIES/index.md",
+    "CHARACTERS/Merisdae/BuroMerisdae.md",
+    "CHARACTERS/Merisdae/index.md",
     "CHARACTERS/index.md",
+    "about.md",
+    "codebottom.php",
+    "GALLERY/index.md",
+    "GALLERY/fullbody.md",
+    "GALLERY/os0ljd3i2mq71.md",
+    "GALLERY/view from asilles.md",
+    "EVENTS/index.md",
+    "EVENTS/Debris Impact/index.md",
+    "EVENTS/Selhae-Fae Separation/index.md",
+    "EVENTS/Kuraesmeris Migration/index.md",
+    "EVENTS/Kohoii Solei War/index.md",
+    "CONCEPTS/World Seed/index.md",
+    "CONCEPTS/Inna Tenets/Inna Tenets.md",
+    "CONCEPTS/World Seed/World Seed.md",
+    "CONCEPTS/The Story of the Inna/index.md",
+    "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
+    "CONCEPTS/Soul/index.md",
+    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/index.md",
+    "CONCEPTS/Shapeshifting/index.md",
+    "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
     "STORY/misc writings/gay.docx",
-    "STORY/misc writings/esela story.md",
-    "STORY/misc writings/bloodmoon arc brainstorming.md",
-    "STORY/chapter outlines/Prologue.md",
-    "STORY/chapter outlines/Interlude.md",
-    "STORY/chapter outlines/Chapter Two.md",
-    "STORY/chapter outlines/Chapter Twelve.md",
-    "STORY/chapter outlines/Chapter Three.md",
-    "STORY/chapter outlines/Chapter Ten.md",
-    "STORY/chapter outlines/Chapter Thirteen.md",
-    "STORY/chapter outlines/Chapter Template.md",
-    "STORY/chapter outlines/Chapter Six.md",
-    "STORY/chapter outlines/Chapter Seven.md",
     "STORY/chapter drafts/L U N A T I N E.docx",
     "STORY/misc writings",
     "STORY/chapter outlines",
     "STORY/chapter drafts",
-    "STORY",
-    "ORGANIZATIONS/Solei Royal Court",
-    "ORGANIZATIONS/organizationsbase.base",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",

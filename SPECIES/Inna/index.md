@@ -5,7 +5,7 @@ aliases:
 title: Inna
 ---
 ## About
-Star Walkers. Ancient cosmic beings who plant the seeds of new worlds in their Garden, and from those worlds spring newborn Inna. Rarely do they visit these worlds in person, but on such occasions they will hide their true form and blend in among the locals, indistinguishable save for their planetary eyes.
+Inna - Star Walkers. Ancient cosmic beings who plant the seeds of new worlds in their Garden, and from those worlds spring newborn Inna. Rarely do they visit these worlds in person, but on such occasions they will hide their true form and blend in among the locals, indistinguishable save for their planetary eyes.
 
 The oldest Inna has been around since the beginning of the universe, made purely of [[CONCEPTS/Dust/index|Dust]]. They awoke to an empty void, [[LOCATIONS/The Expanse/index|The Expanse]] - and used their unique gift of [[CONCEPTS/Creation/Creation|Creation]] to give meaning to the universe. They created the [[CONCEPTS/World Seed/World Seed|World Seed]]s, ultra-compressed pockets of dust used to grow worlds, to plant in the [[LOCATIONS/World Garden/index|World Garden]]. These World seeds become planets, and at the end of their lifecycle, the seed finally flowers - and a new Inna is born from the dying world.
 

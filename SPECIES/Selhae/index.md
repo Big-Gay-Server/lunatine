@@ -4,7 +4,7 @@ Parent Species: "[[SPECIES/Inna/index | Inna]]"
 Descended Species: "[[SPECIES/Construct/index | Construct]]"
 aliases:
   - Selhae
-title: Selhae
+title: selhae
 ---
 ## About
 A species created by [[CHARACTERS/Anwi/index|Anwi]] to live upon the planet [[LOCATIONS/Asilles/index|Asilles]].

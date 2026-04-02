@@ -1,4 +1,4 @@
 ---
 title: Essence
 ---
-physical dust
+the physical manifestation of [[CONCEPTS/Dust/index|Dust]]. this makes up the physical universe.

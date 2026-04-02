@@ -1,3 +1,0 @@
-# Shapeshifting
-
-tags: magic

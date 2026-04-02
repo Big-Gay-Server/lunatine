@@ -4,18 +4,18 @@ Status: Alive
 Gender: genderless
 Pronouns: they/she
 Apparent Age: ageless / mid-twenties
-Current Location: [[LOCATIONS/Buromeris/index|Buromeris]]
-Birthplace: [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
+Current Location: "[[LOCATIONS/Buromeris/index|Buromeris]]"
+Birthplace: "[[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]"
 Eyes: bright red, with the Lunatine symbol in their pupils.
 Hair: deep, purple-y red hair with bright red ombre. thick, layered bangs over one eye, with the length pulled into a high ponytail on one side.
 Height: 5'4'' or 164cm
-Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
+Languages Spoken: "[[LANGUAGES/Varae/index|Varae]]"
 Rank: Guardian
-"Ruler/Owner of": [[LOCATIONS/Buromeris/index|Buromeris]]
+"Ruler/Owner of": "[[LOCATIONS/Buromeris/index|Buromeris]]"
 Skin Tone: fair
 Species: [[SPECIES/Construct/index|Construct]]
 Titles: Construct of Bloodmoon
-main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+main character: "[[CHARACTERS/Merisdae/index|Merisdae]]"
 ---
 
 [https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bloodmoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bloodmoon/&hideHeader=1&transparent=1)

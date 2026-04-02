@@ -75,7 +75,7 @@ views:
         direction: DESC
     columnSize:
       formula.age--: 72
-      note.Full Name: 105
+      note.Full Name: 139
       note.Name Pronunciation: 106
       note.Species: 84
       note.Apparent age: 84
