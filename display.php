@@ -314,7 +314,7 @@ if ($filePath && file_exists($filePath)) {
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
 
-                // --- THE PARSER TOOL ---
+        // --- THE PARSER TOOL ---
         // We add &$wikiParser to the 'use' so it can call itself for notes inside notes
         $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown, &$wikiParser) {
             
@@ -365,27 +365,37 @@ if ($filePath && file_exists($filePath)) {
                 return ($val !== null) ? (is_array($val) ? implode(', ', $val) : $val) : $fallback;
             }, $text);
 
-            // 3. NOTE EMBEDDER (![[Note]])
-            // We use a placeholder so Parsedown doesn't mess with our injected HTML
+            // 2. NOTE EMBEDDER (Pre-Parsedown)
             $transclusions = [];
             $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions) {
                 $targetName = trim($m[1]);
                 $path = find_image_path($markdownDir, $targetName);
                 
-                // If it's a Markdown file, we embed the text
                 if ($path && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'md') {
                     $fullPath = $markdownDir . '/' . ltrim($path, '/');
                     if (file_exists($fullPath)) {
-                        $noteContent = file_get_contents($fullPath);
-                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
+                        // --- GET TITLE USING CODETOP LOGIC ---
+                        $meta = get_page_metadata($fullPath);
+                        $displayTitle = !empty($meta['title']) ? $meta['title'] : ucwords(str_replace(['-', '_'], ' ', urldecode(basename($targetName))));
+
+                        if (strtolower($displayTitle) === 'index' || $displayTitle === '') {
+                            $displayTitle = 'Home';
+                        }
+
+                        // Get content and strip YAML
+                        $rawNote = file_get_contents($fullPath);
+                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $rawNote, 1);
+                        
+                        $parsedNote = $wikiParser($noteContent);
+                        $url = create_wiki_url($targetName);
                         
                         $id = "<!--TRANS_ID_" . count($transclusions) . "-->";
-                        $url = create_wiki_url($targetName);
-                        $transclusions[$id] = "<div class='markdown-embed'>" . $wikiParser($noteContent) . "<div class='embed-source'><a href='$url'>Open Full Note: $targetName</a></div></div>";
+                        // Embed the note with the synced title link at the bottom
+                        $transclusions[$id] = "<div class='markdown-embed'>$parsedNote<div class='embed-source'><a href='$url'>$displayTitle</a></div></div>";
                         return $id;
                     }
                 }
-                return $m[0]; // If it's an image, keep it as is for step 5
+                return $m[0]; 
             }, $text);
 
             // 4. MAIN PARSEDOWN RENDER
