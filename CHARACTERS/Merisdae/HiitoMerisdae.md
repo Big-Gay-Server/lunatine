@@ -1,26 +1,23 @@
 ---
 Actual Age: 1301 years
----
-# HiitoMerisdae
-
 Status: Alive
 Gender: genderless
 Pronouns: they/she
 Apparent Age: ageless
 mid-twenties
-Current Location: Hiitomeris (Hiitomeris%2085a97d5712054feb93bd85039bd30e18.md)
-Birthplace: Asilles (Asilles%2079f784ab6fd945de9a6813c70677d52e.md)
+Current Location: [[LOCATIONS/Hiitomeris/index|Hiitomeris]]
+Birthplace: [[LOCATIONS/Asilles/index|Asilles]]
 Eyes: Light Blue, with the Lunatine symbol in their pupils.
 Hair: Long, wavy deep periwinkle hair with blunt bangs, tied into a loose side ponytail over her shoulder.
 Height: 5'4'' or 164cm
-Languages Spoken: Varae (Varae%20cbf0bf7060c841f8a0858a33fab063a6.md)
+Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
 Rank: Guardian
-Ruler/Owner of:: Hiitomeris (Hiitomeris%2085a97d5712054feb93bd85039bd30e18.md)
+Ruler/Owner of: [[LOCATIONS/Hiitomeris/index|Hiitomeris]]
 Skin Tone: fair
-Species: Construct (Construct%2038fe566bb96341be8aa944ee36e73b6d.md)
+Species: [[SPECIES/Construct/index|Construct]]
 Titles: Construct of Bluemoon
-UTAU: bluemoon (https://www.notion.so/bluemoon-18725f4a19934efa8c925ef89f10a19b?pvs=21)
-main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
+main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+---
 
 [https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bluemoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/bluemoon/&hideHeader=1&transparent=1)
 
@@ -46,7 +43,7 @@ main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
 
 ### **Special abilities**
 
-[**Muse’s Soul**](Soul%20f5650c5d3be2487194e629cc898ca601.md) 
+Muse's soul
 
 ### **Apparel & Accessories**
 

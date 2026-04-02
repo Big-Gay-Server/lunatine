@@ -8,9 +8,9 @@
 1. **What are the major themes of Lunatine?** *This question is asking about the underlying ideas and messages that are present in the setting. Consider the themes of power, identity, morality, and other relevant topics.*
     1. 
 2. **What is the geography of Lunatine like?** *This question is asking about the physical landscape of the setting. Consider the different types of terrain that exist, the climate, and the natural resources that are available.*
-    1. [Asilles](Asilles%2079f784ab6fd945de9a6813c70677d52e.md) 
+    1.[[LOCATIONS/Asilles/index|Asilles]] 
         1. 
-    2. [Kuraesmeris](Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md) 
+    2. [[LOCATIONS/Kuraesmeris/index|Kuraesmeris]]
         1. 
 3. **What is the social hierarchy of Lunatine?** *This question is asking about the social structure of the setting. Consider the different classes or castes that exist, how they are determined, and the privileges and disadvantages associated with them.*
     1. 

@@ -1,25 +1,23 @@
 ---
 Actual Age: 1301 years
----
-# KaeMerisdae
-
 Status: Alive
 Gender: genderless
 Pronouns: they/she
 Apparent Age: ageless
 mid-twenties
-Current Location: Kaemeris (Kaemeris%20ffa41e6d2a784c509c6ac706462051cd.md)
-Birthplace: Kuraesmeris (Kuraesmeris%2039c7d3756b5b49399f2860c0862ed433.md)
+Current Location: [[LOCATIONS/Kaemeris/index|Kaemeris]]
+Birthplace: [[LOCATIONS/Asilles/index|Asilles]]
 Eyes: black
 Hair: messy purple hair that reaches mid-back, pulled into two low, loose ponytails on the side. tips fade to black.
 Height: 4'8'' or 142cm
-Languages Spoken: Varae (Varae%20cbf0bf7060c841f8a0858a33fab063a6.md)
+Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
 Rank: Guardian
-Ruler/Owner of:: Kaemeris (Kaemeris%20ffa41e6d2a784c509c6ac706462051cd.md)
+Ruler/Owner of: [[LOCATIONS/Kaemeris/index|Kaemeris]]
 Skin Tone: fair
-Species: Construct (Construct%2038fe566bb96341be8aa944ee36e73b6d.md)
+Species: [[SPECIES/Construct/index|Construct]]
 Titles: Construct of Newmoon
-main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
+main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+---
 
 [https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1)
 
@@ -45,7 +43,7 @@ main character: Merisdae (Merisdae%2096ee77d2a5d24d1aa718c98ca012d365.md)
 
 ### **Special abilities**
 
-[**Seer’s Soul**](Soul%20f5650c5d3be2487194e629cc898ca601.md) 
+Seer's Soul
 
 ### **Apparel & Accessories**
 
