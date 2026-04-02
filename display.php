@@ -398,70 +398,61 @@ if ($filePath && file_exists($filePath)) {
                 return $m[0]; 
             }, $text);
 
-            // --- 3.5. HEADER ID GENERATOR (The Fix for Anchors) ---
-            // This finds lines like "## My Header" and turns them into 
-            // "## My Header {#my-header}" so Parsedown Extra/standard can use them.
-            $text = preg_replace_callback('/^(#+)\s+(.+)$/m', function ($m) {
-                $level = $m[1];
-                $title = trim($m[2]);
-                // Create a slug: lowercase, replace spaces/special chars with dashes
-                $slug = strtolower(preg_replace('/[^A-Za-z0-9-]+/', '-', $title));
-                $slug = trim($slug, '-');
-                
-                // Return the header with the ID attached in the { #id } format
-                return "$level $title {#$slug}";
-            }, $text);
-
             // 4. MAIN PARSEDOWN RENDER
             $text = preg_replace('/^character:\s*.*$/im', '', $text);
-            $text = $Parsedown->text($text);
+            $html = $Parsedown->text($text); // We switch to $html here
 
-            // 5. RESTORE EMBEDS (Swap placeholders back into HTML)
+            // --- 3.5 POST-PARSEDOWN (Header ID Injection) ---
+            $html = preg_replace_callback('/<h([1-6])>(.*?)<\/h\1>/s', function ($m) {
+                $level = $m[1];
+                $content = strip_tags($m[2]);
+                $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $content), '-'));
+                return "<h$level id=\"$slug\">{$m[2]}</h$level>";
+            }, $html);
+
+            // 5. RESTORE EMBEDS (Use $html here!)
             if (!empty($transclusions)) {
-                $text = str_replace(array_keys($transclusions), array_values($transclusions), $text);
+                $html = str_replace(array_keys($transclusions), array_values($transclusions), $html);
             }
 
-            // 6. SHORTCODES, IMAGES & LINKS (Post-Parsedown)
-            $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
+            // 6. SHORTCODES, IMAGES & LINKS (Use $html here!)
+            $html = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
-            }, $text);
+            }, $html);
 
-            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
+            $html = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
                 $imageName = trim($m[1]); $width = $m[3] ?? null;
                 $path = find_image_path($markdownDir, $imageName);
                 $style = $width ? "width:{$width}px;" : 'max-width:100%;';
                 return $path ? "<img src='$path' style='$style'>" : "<i>(Image not found: $imageName)</i>";
-            }, $text);
+            }, $html);
 
-            // E. Wikilinks (Supporting Anchors #)
-            $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
+            $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
-                $fullTarget = trim($p[0]); // e.g. "Note#Header"
+                $fullTarget = trim($p[0]);
 
-                // 1. Split the target into Page and Anchor
+                // Split Page from Anchor
                 $parts = explode('#', $fullTarget);
-                $pageTarget = $parts[0];
-                $anchor = isset($parts[1]) ? '#' . $parts[1] : '';
+                $pagePath = $parts[0];
+                $anchor = "";
+                if (isset($parts[1])) {
+                    // SLUGIFY ANCHOR TO MATCH HEADERS
+                    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $parts[1]), '-'));
+                    $anchor = '#' . $slug;
+                }
 
-                // 2. Clean the page target (strip IDs and .md)
-                $cleanPageTarget = preg_replace(['/\s[a-f0-9]{32}$/i', '/\.md$/i'], '', $pageTarget);
-                
-                // 3. Build the URL (Page + Anchor)
-                $url = create_wiki_url($cleanPageTarget) . $anchor;
-                
+                $cleanPagePath = preg_replace(['/\s[a-f0-9]{32}$/i', '/\.md$/i'], '', $pagePath);
+                $url = create_wiki_url($cleanPagePath) . $anchor;
                 $linkText = trim($p[1] ?? $p[0]);
 
-                // 4. Previews should only look at the base file (no anchor)
-                $previewTarget = preg_replace('/#.*$/', '', $cleanPageTarget);
-                $preview = get_wiki_link_preview($previewTarget, $markdownDir, $Parsedown);
-                
-                $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
+                $preview = get_wiki_link_preview($cleanPagePath, $markdownDir, $Parsedown);
+                $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview) . '"' : '';
 
-                return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
-            }, $text);
+                return '<a href="' . htmlspecialchars($url) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText) . '</a>';
+            }, $html);
 
-            return $text;
+            return $html; // Return $html instead of $text
         };
 
 
