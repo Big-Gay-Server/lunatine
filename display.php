@@ -365,16 +365,19 @@ if ($filePath && file_exists($filePath)) {
                 return ($val !== null) ? (is_array($val) ? implode(', ', $val) : $val) : $fallback;
             }, $text);
 
-            // 2. NOTE EMBEDDER (Pre-Parsedown)
+            // 3. NOTE EMBEDDER (Pre-Parsedown)
             $transclusions = [];
-            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions) {
-                $targetName = trim($m[1]);
+            $text = preg_replace_callback('/!\[\[(.*?)\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions) {
+                // Handle the pipe (|) alias by splitting the string
+                $parts = explode('|', trim($m[1]));
+                $targetName = trim($parts[0]); // Only take the part before the pipe
+                
                 $path = find_image_path($markdownDir, $targetName);
                 
                 if ($path && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'md') {
                     $fullPath = $markdownDir . '/' . ltrim($path, '/');
                     if (file_exists($fullPath)) {
-                        // --- GET TITLE USING CODETOP LOGIC ---
+                        // --- GET TITLE ---
                         $meta = get_page_metadata($fullPath);
                         $displayTitle = !empty($meta['title']) ? $meta['title'] : ucwords(str_replace(['-', '_'], ' ', urldecode(basename($targetName))));
 
@@ -395,6 +398,8 @@ if ($filePath && file_exists($filePath)) {
                         return $id;
                     }
                 }
+                
+                // Return original if not a .md file (so image parser can try next)
                 return $m[0]; 
             }, $text);
 
