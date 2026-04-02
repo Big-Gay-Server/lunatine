@@ -1,0 +1,17 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "Ruler/Owner": "multitext",
+    "Sublocations:": "multitext",
+    "Born here": "multitext",
+    "Born here:": "multitext",
+    "At this Location:": "multitext",
+    "Members": "multitext",
+    "related words": "multitext",
+    "part of speech": "multitext",
+    "Languages Spoken": "multitext",
+    "date": "date"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "propertiesInDocument": "visible",
+  "readableLineLength": true,
+  "strictLineBreaks": true,
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "showLineNumber": false,
+  "showInlineTitle": true,
+  "newLinkFormat": "absolute",
+  "showUnsupportedFiles": true
+}
