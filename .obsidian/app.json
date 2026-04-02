@@ -1,6 +1,6 @@
 {
   "propertiesInDocument": "visible",
-  "readableLineLength": false,
+  "readableLineLength": true,
   "strictLineBreaks": true,
   "promptDelete": false,
   "alwaysUpdateLinks": true,

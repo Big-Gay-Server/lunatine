@@ -23,17 +23,32 @@
             }
           },
           {
-            "id": "d7ae7e5a4ad8efac",
+            "id": "775d48a859d680d9",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "STORY/writingbase.base",
+                "viewName": "Table"
+              },
+              "pinned": true,
+              "icon": "lucide-table",
+              "title": "writingbase"
+            }
+          },
+          {
+            "id": "1c5ace7cdbc971c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "EVENTS/Debris Impact/index.md",
+                "file": "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Core Archetypes"
             }
           }
         ],
@@ -57,7 +72,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -96,8 +111,8 @@
             "state": {
               "type": "VIEW_TYPE_LONGFORM_EXPLORER",
               "state": {},
-              "icon": "longform",
-              "title": "Longform"
+              "icon": "lucide-ghost",
+              "title": "VIEW_TYPE_LONGFORM_EXPLORER"
             }
           }
         ]
@@ -113,74 +128,8 @@
       {
         "id": "e42138525fc4c41e",
         "type": "tabs",
+        "dimension": 65.31007751937985,
         "children": [
-          {
-            "id": "b9e1026c49d8ee00",
-            "type": "leaf",
-            "state": {
-              "type": "CALENDARIUM",
-              "state": {
-                "calendar": "ID_493b988a495b",
-                "ephemeral": {
-                  "viewing": {
-                    "day": 16,
-                    "month": 10,
-                    "year": 1240
-                  },
-                  "viewState": 0,
-                  "displaying": {
-                    "day": 16,
-                    "month": 10,
-                    "year": 1240
-                  },
-                  "displayDayNumber": false,
-                  "displaySeasonColors": false,
-                  "interpolateColors": true,
-                  "displayAbsoluteYear": true,
-                  "displayMoons": true,
-                  "displayWeather": true,
-                  "location": ""
-                },
-                "id": "ID_59c8a98a3969",
-                "child": "ID_d9191b2a3ad8"
-              },
-              "icon": "CALENDARIUM",
-              "title": "Calendarium"
-            }
-          },
-          {
-            "id": "341807e5da5cb74b",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "EVENTS/Debris Impact/index.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks for index"
-            }
-          },
-          {
-            "id": "a49d1d338a061c38",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "EVENTS/Debris Impact/index.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from index"
-            }
-          },
           {
             "id": "1d4b072197f93ee3",
             "type": "leaf",
@@ -197,30 +146,63 @@
             }
           },
           {
-            "id": "967611e73b56bd24",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "LANGUAGES/Varae/dictionary/miir.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "Outline of miir"
-            }
-          },
-          {
             "id": "a11da1ed54982d61",
             "type": "leaf",
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "EVENTS/Debris Impact/index.md"
+                "file": "STORY/writingbase.base"
               },
               "icon": "lucide-info",
-              "title": "File properties for index"
+              "title": "File properties for writingbase"
+            }
+          },
+          {
+            "id": "341807e5da5cb74b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "STORY/writingbase.base",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for writingbase"
+            }
+          },
+          {
+            "id": "967611e73b56bd24",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "STORY/writingbase.base",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of writingbase"
+            }
+          },
+          {
+            "id": "a49d1d338a061c38",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "STORY/writingbase.base",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from writingbase"
             }
           },
           {
@@ -237,31 +219,48 @@
               "title": "All properties"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
-        "id": "78dcefe19acb4fa6",
+        "id": "afe34fa239e6fb93",
         "type": "tabs",
+        "dimension": 34.689922480620154,
         "children": [
           {
-            "id": "e0bda6463a5d21ec",
+            "id": "591b18d1aa3a12ef",
             "type": "leaf",
+            "pinned": true,
             "state": {
-              "type": "CALENDARIUM_AGENDA",
+              "type": "CALENDARIUM",
               "state": {
                 "calendar": "ID_493b988a495b",
-                "id": "ID_d9191b2a3ad8",
-                "parent": "ID_59c8a98a3969"
+                "ephemeral": {
+                  "viewState": 1,
+                  "displaying": {
+                    "day": 16,
+                    "month": 7,
+                    "year": 1438
+                  },
+                  "displayDayNumber": false,
+                  "displaySeasonColors": false,
+                  "interpolateColors": true,
+                  "displayMoons": true,
+                  "displayWeather": true,
+                  "location": ""
+                },
+                "id": "ID_2b3b2938c8e9"
               },
-              "icon": "CALENDARIUM_AGENDA",
-              "title": "Agenda"
+              "pinned": true,
+              "icon": "CALENDARIUM",
+              "title": "Calendarium"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 688
+    "width": 338
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -286,43 +285,45 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "d7ae7e5a4ad8efac",
+  "active": "775d48a859d680d9",
   "lastOpenFiles": [
-    "EVENTS/old overview timeline.md",
-    "ORGANIZATIONS/organizationsbase.base",
-    "EVENTS/Debris Impact/index.md",
-    "LANGUAGES/Varae/grammar.md",
-    "LANGUAGES/index.base",
-    "CONCEPTS/Asilles Calendar/index.md",
-    "LANGUAGES/Varae/dictionary/index.md",
-    "LANGUAGES/Varae/index.md",
-    "CONCEPTS/index.md",
-    "EVENTS/index.md",
-    "CHARACTERS/characterbase.base",
-    "CHARACTERS/index.md",
-    "CHARACTERS/_misc art/_misc art.md",
-    "CHARACTERS/_misc art/index.md",
+    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/Shell Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/Veil Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/index.md",
+    "CONCEPTS/Soul/index.md",
+    "STORY/plot draft.md",
     "news/posts/getting things started!.md",
-    "SPECIES/Selhae/index.md",
-    "news/posts/getting things.md",
+    "LANGUAGES/index.base",
     "LANGUAGES/LANGUAGES (490952).base",
+    "Untitled.md",
+    "EVENTS/old overview timeline.md",
+    "EVENTS/index.md",
+    "EVENTS/timeline.md",
+    "STORY/chapter outlines/Chapter Eight.md",
+    "STORY/~$meline.docx",
+    "STORY/misc writings",
+    "STORY/chapter drafts",
+    "STORY/chapter outlines",
+    "STORY/The It",
+    "STORY/misc writings/esela story.md",
+    "STORY/~$gay.docx",
+    "STORY/~$ela story.docx",
+    "STORY/writingbase.base",
+    "CONCEPTS/World Seed/World Seed.md",
+    "MISC/pando’s lore questions.md",
     "CHARACTERS/relationship chart.canvas",
-    "STORY/index.md",
-    "about.md",
-    "ORGANIZATIONS/index.md",
-    "ORGANIZATIONS/Solei Royal Court/index.md",
+    "MISC/misc worldbuilding.md",
+    "MISC/misc character building.md",
+    "CHARACTERS/Merisdae/KuraesMerisdae.md",
+    "CHARACTERS/Merisdae/KaeMerisdae.md",
+    "CHARACTERS/Esela/index.md",
+    "CHARACTERS/Kulith/index.md",
+    "EVENTS/Debris Impact/index.md",
+    "EVENTS/Kohoii Solei War/index.md",
+    "LANGUAGES/Acorithe/index.md",
+    "LOCATIONS/Asilles/index.md",
     "ORGANIZATIONS/Seedkeeper Council/index.md",
-    "ORGANIZATIONS/Kohoii Council of Elders/index.md",
-    "ORGANIZATIONS/Acorithe Royal Court/index.md",
-    "ARTIFACTS/index.md",
-    "ARTIFACTS/artifactsbase.base",
-    "SPECIES/speciesbase.base",
-    "EVENTS/eventsbase.base",
-    "CHARACTERS/Anwi/index.md",
-    "LOCATIONS/locationsbase.base",
-    "LOCATIONS/Kaemeris/index.md",
-    "LOCATIONS/Hiitomeris/index.md",
-    "LOCATIONS/Folmeris/index.md",
     "GRAPHICS/world cover.png",
     "GRAPHICS/Untitled.png",
     "GRAPHICS/noicon.png",
@@ -332,8 +333,6 @@
     "GRAPHICS/image (1).png",
     "GRAPHICS/Illustration2.png",
     "GRAPHICS/galaxy-overlay-space-free-png.png",
-    "GRAPHICS/icon.png",
-    "style.css",
-    "MISC/index.base"
+    "GRAPHICS/icon.png"
   ]
 }
