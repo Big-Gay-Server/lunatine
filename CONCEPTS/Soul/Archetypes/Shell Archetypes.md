@@ -1,5 +1,4 @@
 The outermost layer, like a shell, interacts with the tangible world, offering protection, structure, and practicality. There are many types of Shell Archetypes, and it is the most common archetype as well.
-### Outer Soul Archetypes (Shell)
 #### Architect’s Soul
 - **Theme**: Building, Creation of inanimate things
 - **Abilities**: Creating tools, buildings, bridges, etc.

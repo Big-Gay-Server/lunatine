@@ -8,33 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "775d48a859d680d9",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "empty",
-              "state": {},
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "65d43a3820334290",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+                "file": "CHARACTERS/Esela/music.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Core Archetypes"
+              "title": "music"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -164,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+                "file": "CHARACTERS/Esela/music.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Core Archetypes"
+              "title": "Outline of music"
             }
           },
           {
@@ -280,6 +267,12 @@
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
+    "CHARACTERS/Esela/bio.md",
+    "CHARACTERS/Esela/index.md",
+    "CONCEPTS/Soul/Archetypes/index.md",
+    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/Shell Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/Veil Archetypes.md",
     "CHARACTERS/Kaeyomii/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/index.md",
@@ -304,17 +297,11 @@
     "STORY/chapter outlines/Chapter Four.md",
     "STORY/chapter outlines/Chapter Five.md",
     "STORY/chapter outlines/Chapter Eleven.md",
-    "STORY/chapter outlines/Chapter Fifteen.md",
-    "STORY/chapter outlines/Chapter Eight.md",
     "STORY/chapter drafts/L U N A T I N E.docx",
-    "STORY/chapter drafts/rough rough draft from before outline.md",
-    "STORY/chapter drafts/ch1 - draft 1.md",
-    "STORY/plot draft.md",
     "STORY/misc writings",
     "STORY/chapter outlines",
     "STORY/chapter drafts",
     "STORY",
-    "ORGANIZATIONS/Solei Royal Court/index.md",
     "ORGANIZATIONS/Solei Royal Court",
     "ORGANIZATIONS/organizationsbase.base",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",

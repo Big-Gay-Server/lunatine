@@ -1,5 +1,4 @@
 The middle layer acts as a veil or bridge between the surface and the core, with abilities focused on connection, discovery, and interaction. Veil Archetypes are slightly less common than Shell Archetypes, but are not unheard of in regular individuals.
-### Middle Soul Archetypes (Veil)
 #### Healer’s Soul
 - **Theme**: Restoration and preservation.
 - **Abilities**: Healing physical wounds, mending objects, or restoring emotional balance.
