@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/Esela/music.md",
+                "file": "CHARACTERS/Esela/bio.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "music"
+              "title": "bio"
             }
           }
         ]
@@ -151,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/Esela/music.md",
+                "file": "CHARACTERS/Esela/bio.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of music"
+              "title": "Outline of bio"
             }
           },
           {
@@ -267,6 +267,7 @@
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
+    "CHARACTERS/Esela/music.md",
     "CHARACTERS/Esela/bio.md",
     "CHARACTERS/Esela/index.md",
     "CONCEPTS/Soul/Archetypes/index.md",
@@ -296,7 +297,6 @@
     "STORY/chapter outlines/Chapter Fourteen.md",
     "STORY/chapter outlines/Chapter Four.md",
     "STORY/chapter outlines/Chapter Five.md",
-    "STORY/chapter outlines/Chapter Eleven.md",
     "STORY/chapter drafts/L U N A T I N E.docx",
     "STORY/misc writings",
     "STORY/chapter outlines",

@@ -26,6 +26,6 @@ character: "[[CHARACTERS/Esela/index|Esela]]"
 |  Constructs: | `= this.character.Constructs` |
 
 #### playlist
-![[music]]
+<iframe src="https://navidrome.lunarconstruct.net/share/MUKckQ6ux1" allow="fullscreen" allowfullscreen="" style="height:100%;width:100%; aspect-ratio: 16 / 9; "></iframe>
 #### moodboard
 ![[CHARACTERS/Esela/moodboard|moodboard]]
