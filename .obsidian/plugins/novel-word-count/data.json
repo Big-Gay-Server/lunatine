@@ -13543,18 +13543,20 @@
     "SPECIES/Inna/index.md": {
       "isCountable": true,
       "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
+      "noteCount": 1,
+      "wordCount": 904,
       "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
+      "wordGoal": null,
+      "pageCount": 3.013333333333333,
+      "characterCount": 5892,
+      "nonWhitespaceCharacterCount": 4874,
+      "newlineCount": 105,
+      "readingTimeInMinutes": 3.4113207547169813,
+      "linkCount": 15,
       "embedCount": 0,
-      "aliases": [],
+      "aliases": [
+        "Inna"
+      ],
       "createdDate": 1775104672287,
       "modifiedDate": 1775104673315,
       "sizeInBytes": 6021,
@@ -13565,6 +13567,16 @@
         "characterCount": 6268,
         "nonWhitespaceCharacterCount": 5257,
         "newlineCount": 109
+      },
+      "frontmatter": {
+        "Descended Species": [
+          "[[SPECIES/Selhae/index | Selhae]]",
+          "[[SPECIES/Fae/index | Fae]]"
+        ],
+        "aliases": [
+          "Inna"
+        ],
+        "title": "Inna"
       }
     },
     "SPECIES/Fae/index.md": {
@@ -28273,9 +28285,9 @@
       "aliases": [
         "Debris Impact"
       ],
-      "createdDate": 1774577748804,
-      "modifiedDate": 1775104398562,
-      "sizeInBytes": 475,
+      "createdDate": 1775104672256,
+      "modifiedDate": 1775104673315,
+      "sizeInBytes": 497,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.17,
@@ -28285,6 +28297,8 @@
         "newlineCount": 21
       },
       "frontmatter": {
+        "Date 1": 16,
+        "Year": 1240,
         "title": "Debris Impact",
         "date": "1240-11-16",
         "aliases": "Debris Impact"
