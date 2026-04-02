@@ -50,7 +50,7 @@ iconn: "[[CHARACTERS/Kaeyomii/art/icon.png]]"
 ### **Physical quirks**
 
 ### **Special abilities**
-Kaeyomii possesses a [[Core Archetypes#Seer’s Soul|Seer's Soul]], allowing her to see into the future.
+Kaeyomii possesses a [[CONCEPTS/Soul/Archetypes/Core Archetypes#Seer’s Soul|Seer's Soul]], allowing her to see into the future.
 ### **Apparel & Accessories**
 
 ### **Specialized Equipment**
