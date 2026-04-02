@@ -3,7 +3,7 @@ views:
     name: Table
     filters:
       and:
-        - file.folder == "STORY"
+        - file.folder.contains("STORY")
     order:
       - file.name
       - Author

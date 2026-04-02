@@ -2,17 +2,14 @@ The deepest, most essential layer of the soul, representing intrinsic truth, ins
 ### Inner Soul Archetypes (Core)
 
 #### Seer’s Soul
-
-^6bd579
-
-    - **Theme**: Insight and foresight.
-    - **Abilities**: Seeing into the past, glimpsing potential futures, or sensing the flow of fate.
-    - **Notable Characters:** Kaeyomii, KaeMerisdae
+- **Theme**: Insight and foresight.
+- **Abilities**: Seeing into the past, glimpsing potential futures, or sensing the flow of fate.
+- Notable Characters: [[CHARACTERS/Kaeyomii/index|Kaeyomii]], [[CHARACTERS/Merisdae/KaeMerisdae|KaeMerisdae]]
 #### Catalyst’s Soul
-    - **Theme**: Amplification and acceleration.
-    - **Abilities**: Enhancing existing forces, speeding up reactions, or magnifying the power of others.
-    - **Notable Characters**: KuraesMerisdae
+- **Theme**: Amplification and acceleration.
+- **Abilities**: Enhancing existing forces, speeding up reactions, or magnifying the power of others.
+- Notable Characters: [[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]]
 #### Resonator’s Soul
-    - **Theme**: Resonance and equilibrium.
-    - **Abilities**: Harmonizing the unseen forces of the world, wielding sound and vibrations to create balance or upheaval.
-    - **Notable Characters**: Kulith
+- **Theme**: Resonance and equilibrium.
+- **Abilities**: Harmonizing the unseen forces of the world, wielding sound and vibrations to create balance or upheaval.
+- Notable Characters: [[CHARACTERS/Kulith/index|Kulith]]

@@ -9,7 +9,7 @@ all domains can be categorized as either **kingdoms** or **independent settlemen
 
 all domains are different in their ambitions, but some are more imperial than others and wish to conquer smaller settlements to expand their reach.
 
-1. this situation is what started the [[EVENTS/Kohoii Solei War/index|Kohoii Solei War]], as the kingdom of [[LOCATIONS/Solei/index|Solei]] attempted to annex the neighboring settlement of [[LOCATIONS/Kohoii/index|Kohoii]].
+1. this situation is what started the [[EVENTS/Kohoii Solei War/index|Kohoii/Solei War]], as the kingdom of [[LOCATIONS/Solei/index|Solei]] attempted to annex the neighboring settlement of [[LOCATIONS/Kohoii/index|Kohoii]].
 
 ### education across domains
 

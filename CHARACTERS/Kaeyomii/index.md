@@ -23,7 +23,7 @@ Hair: muted purple
 Height: 4’3”
 Languages Spoken: "[[LANGUAGES/Varae/index|Varae]]"
 Skin Tone: fair
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 icon: "![[CHARACTERS/Kaeyomii/art/icon.png|75]]"
 aliases:
   - Kaeyomii
@@ -50,7 +50,7 @@ iconn: "[[CHARACTERS/Kaeyomii/art/icon.png]]"
 ### **Physical quirks**
 
 ### **Special abilities**
-Kaeyomii possesses a [[Core Archetypes#^6bd579 |Seer's Soul]], allowing her to see into the future.
+Kaeyomii possesses a [[CONCEPTS/Soul/Archetypes/Core Archetypes#Seer’s Soul|Seer's Soul]], allowing her to see into the future.
 ### **Apparel & Accessories**
 
 ### **Specialized Equipment**
@@ -113,4 +113,4 @@ Kaeyomii possesses a [[Core Archetypes#^6bd579 |Seer's Soul]], allowing her to s
 
 ### **Speech**
 
-![[Pasted image 20260329235002.png]]
+![[CHARACTERS/Kaeyomii/art/meteor.webp]]
