@@ -391,7 +391,7 @@ if ($filePath && file_exists($filePath)) {
                         
                         $id = "<!--TRANS_ID_" . count($transclusions) . "-->";
                         // Embed the note with the synced title link at the bottom
-                        $transclusions[$id] = "<div class='markdown-embed'>$parsedNote<div class='embed-source'><a href='$url'>$displayTitle</a></div></div>";
+                        $transclusions[$id] = "<div class='markdown-embed'>$parsedNote<div class='embed-source'>- from <a href='$url'>$displayTitle</a></div></div>";
                         return $id;
                     }
                 }
