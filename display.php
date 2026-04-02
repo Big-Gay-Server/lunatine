@@ -311,11 +311,11 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     return $tableHtml . '</tbody></table>';
 };
 
-// --- THE PARSER TOOL ---
-        // We use &$wikiParser so the function can call itself for nested notes
+ // --- THE PARSER TOOL ---
+        // Use &$wikiParser to allow the function to call itself for embedded notes.
         $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown, &$wikiParser) {
             
-            // 1. PRE-PARSEDOWN: INTERLINEAR GLOSS PARSER
+            // 1. GLOSS PARSER (Pre-Parsedown)
             $text = preg_replace_callback('/```gloss\n(.*?)\n```/s', function ($match) {
                 $lines = explode("\n", trim($match[1]));
                 $alignedData = [];
@@ -356,7 +356,31 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                 return $html . '</div>';
             }, $text);
 
-            // 2. PRE-PARSEDOWN: INLINE DATAVIEW RENDERER
+            // 2. NOTE EMBEDDER (Pre-Parsedown)
+            // We use a placeholder so Parsedown doesn't escape our HTML <div> tags.
+            $transclusions = [];
+            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions) {
+                $targetName = trim($m[1]);
+                $path = find_image_path($markdownDir, $targetName);
+                
+                if ($path && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'md') {
+                    $fullPath = $markdownDir . '/' . ltrim($path, '/');
+                    if (file_exists($fullPath)) {
+                        $noteContent = file_get_contents($fullPath);
+                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
+                        
+                        $parsedNote = $wikiParser($noteContent);
+                        $url = create_wiki_url($targetName);
+                        
+                        $id = "<!--TRANSCLUSION_" . count($transclusions) . "-->";
+                        $transclusions[$id] = "<div class='markdown-embed'>$parsedNote<div class='embed-source'><a href='$url'>Open Full Note: $targetName</a></div></div>";
+                        return $id;
+                    }
+                }
+                return $m[0]; 
+            }, $text);
+
+            // 3. INLINE DATAVIEW & CLEANUP
             $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
             $text = preg_replace_callback($pattern, function ($m) use ($yamlData) {
                 $propName = $m[1];
@@ -367,55 +391,34 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
                         $val = $v; break;
                     }
                 }
-                if ($val !== null) return is_array($val) ? implode(', ', $val) : $val;
-                return $fallback;
+                return ($val !== null) ? (is_array($val) ? implode(', ', $val) : $val) : $fallback;
             }, $text);
-
-            // 3. PRE-PARSEDOWN: NOTE EMBEDDER (The Fix)
-            // We do this BEFORE Parsedown so it doesn't get confused with images
-            $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, &$wikiParser) {
-                $targetName = trim($m[1]);
-                $path = find_image_path($markdownDir, $targetName);
-                
-                if ($path && strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'md') {
-                    $fullPath = $markdownDir . '/' . ltrim($path, '/');
-                    if (file_exists($fullPath)) {
-                        $noteContent = file_get_contents($fullPath);
-                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
-                        
-                        // Recursive call to handle glosses/links inside the embed
-                        $parsedNote = $wikiParser($noteContent);
-                        $url = create_wiki_url($targetName);
-                        
-                        return "<div class='markdown-embed'>
-                                    $parsedNote
-                                    <div class='embed-source'><a href='$url'>Open Full Note: $targetName</a></div>
-                                </div>";
-                    }
-                }
-                return $m[0]; // Return original if not a .md file
-            }, $text);
-
-            // 4. CLEAN UP RAW TEXT & CONVERT TO HTML
             $text = preg_replace('/^character:\s*.*$/im', '', $text);
+
+            // 4. MAIN PARSEDOWN RENDER
             $text = $Parsedown->text($text);
 
-            // 5. POST-PARSEDOWN: SHORTCODE EMBEDDER
+            // 5. RESTORE EMBEDDED NOTES (Swap placeholders for real HTML)
+            if (!empty($transclusions)) {
+                $text = str_replace(array_keys($transclusions), array_values($transclusions), $text);
+            }
+
+            // 6. POST-PARSEDOWN: BASE EMBEDS
             $text = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
             }, $text);
 
-            // 6. POST-PARSEDOWN: ACTUAL IMAGES
+            // 7. POST-PARSEDOWN: ACTUAL IMAGES
             $text = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir) {
                 $imageName = trim($m[1]);
                 $width = $m[3] ?? null;
                 $path = find_image_path($markdownDir, $imageName);
                 $style = $width ? "width:{$width}px;" : 'max-width:100%;';
-                return $path ? "<img src='$path' style='$style'>" : "<i>(Image not found: $imageName)</i>";
+                return $path ? "<img src='$path' style='$style' alt='$imageName'>" : "<i>(Image not found: $imageName)</i>";
             }, $text);
 
-            // 7. POST-PARSEDOWN: WIKILINKS
+            // 8. POST-PARSEDOWN: WIKILINKS
             $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 $p = explode('|', $m[1]);
                 $rawTarget = trim($p[0]);
