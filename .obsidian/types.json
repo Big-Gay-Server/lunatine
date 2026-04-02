@@ -10,6 +10,8 @@
     "At this Location:": "multitext",
     "Members": "multitext",
     "related words": "multitext",
-    "part of speech": "multitext"
+    "part of speech": "multitext",
+    "Languages Spoken": "multitext",
+    "date": "date"
   }
 }

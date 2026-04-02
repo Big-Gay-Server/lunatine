@@ -2,7 +2,7 @@
   "cssTheme": "Catppuccin",
   "monospaceFontFamily": "Monaspace Neon",
   "accentColor": "#f5c2e7",
-  "textFontFamily": "SN Pro",
+  "textFontFamily": "SN Pro,Bitstream Vera Serif",
   "interfaceFontFamily": "SN Pro",
   "theme": "obsidian",
   "nativeMenus": false,

@@ -1,0 +1,2 @@
+hiya! thanks for checking out the news articles!
+the site has been under construction for a while now. i've been going back and forth with how i wanted to make this site, but i think i've finally found a permanent home for all my lunatine stuff! everything is completely self hosted, live updates with my personal vault of lunatine notes :3c

@@ -201,7 +201,7 @@ the copula `ae` is the only irregular verb in varae, in the sense that it does n
 \ex honthe vaii ralaniin asu moaese garusera
 \glb honthe vaii ralaniin asu mo-ae-se garu-se-ra.
 \glb tonight 1SG festival to NEG-be-FUT go-FUT-CONT.
-\ftI will not be going to the festival tonight.
+\ft I will not be going to the festival tonight.
 ```
 
 ### moods

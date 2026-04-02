@@ -5,7 +5,7 @@ Character Type: Background Character
 Status: Unknown
 Gender: male
 Pronouns: he/him
-Apparent Age: 30s
+Apparent Age: early thirties
 Birthplace: Kohoii
 Creators: Reika
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
@@ -14,6 +14,7 @@ Titles: Construct of Riverstone
 title: Osuhii
 aliases: Osuhii
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
+Actual Age: ????
 ---
 ## About
 

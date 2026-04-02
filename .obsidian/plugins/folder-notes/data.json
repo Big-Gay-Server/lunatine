@@ -9,7 +9,23 @@
   "autoCreateForAttachmentFolder": false,
   "autoCreateForFiles": false,
   "enableCollapsing": false,
-  "excludeFolders": [],
+  "excludeFolders": [
+    {
+      "type": "folder",
+      "id": "68424399-1a3f-4961-9ae4-2156aaf13cb4",
+      "path": "LANGUAGES",
+      "subFolders": false,
+      "disableSync": false,
+      "disableAutoCreate": false,
+      "disableFolderNote": false,
+      "enableCollapsing": false,
+      "position": 0,
+      "excludeFromFolderOverview": false,
+      "string": "",
+      "hideInSettings": true,
+      "showFolderNote": true
+    }
+  ],
   "whitelistFolders": [],
   "showDeleteConfirmation": false,
   "underlineFolder": false,

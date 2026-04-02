@@ -17,7 +17,7 @@ Languages Spoken: "[[LANGUAGES/Varae/index|Varae]]"
 Skin Tone: —
 Species: "[[SPECIES/Construct/index |Construct]]"
 Titles: Construct of Stardust
-Actual Age: 1301 years
+Actual Age: "?"
 title: Canelé
 Birthdate: "?"
 Height: "?"
@@ -30,6 +30,7 @@ Constructs:
 icon: "![[CHARACTERS/Canelé/canelé art/icon.png|75]]"
 fullbody: "![[CHARACTERS/Canelé/canelé art/caneleeeee.png|300]]"
 iconn: "[[CHARACTERS/Canelé/canelé art/icon.png]]"
+Apparent age: late twenties
 ---
 ## About
 

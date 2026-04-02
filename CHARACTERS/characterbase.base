@@ -1,6 +1,11 @@
 formulas:
   "": this.Age
   Untitled: ""
+  age--: image(iconn)
+  fullbody: image(fullbody)
+properties:
+  formula.age--:
+    displayName: icon
 views:
   - type: cards
     name: View
@@ -21,27 +26,81 @@ views:
     image: note.iconn
     imageAspectRatio: 1
   - type: table
-    name: View 2
+    name: table
     filters:
       and:
         - "!Species.isEmpty()"
+    groupBy:
+      property: Species
+      direction: DESC
     order:
+      - formula.age--
       - Full Name
       - Name Pronunciation
       - Species
-      - Apparent Age
+      - Apparent age
       - Actual Age
       - Age
       - Languages Spoken
       - Perceived age range
-      - formula.Untitled
       - Birthdate
       - Death date
+      - Pronouns
+      - Height
+      - Eyes
+      - Gender
+      - Hair
+      - Parents
+      - Partners
+      - Rank
+      - Ruler/Owner of
+      - "Ruler/Owner of:"
+      - Skin Tone
+      - Status
+      - tags
+      - Organizations
+      - Creators
+      - Current Location
+      - Death date (written)
+      - Birthdate (written)
+      - Birthplace
+      - Character Type
+      - Children
+      - Constructs
+      - Apparent Age range
     sort:
       - property: Full Name
         direction: ASC
       - property: Actual Age
         direction: DESC
+    columnSize:
+      formula.age--: 72
+      note.Full Name: 105
+      note.Name Pronunciation: 106
+      note.Species: 84
+      note.Apparent age: 84
+      note.Actual Age: 90
+      note.Age: 99
+      note.Languages Spoken: 140
+      note.Perceived age range: 111
+      note.Eyes: 156
+      note.Hair: 180
+      note.Parents: 81
+      note.Partners: 88
+      note.Rank: 86
+      note.Ruler/Owner of: 253
+      "note.Ruler/Owner of:": 77
+      note.Organizations: 157
+      note.Creators: 118
+      note.Current Location: 107
+      note.Death date (written): 137
+      note.Birthdate (written): 140
+      note.Birthplace: 100
+      note.Character Type: 92
+      note.Children: 92
+      note.Constructs: 157
+      note.Apparent Age range: 101
+    rowHeight: medium
   - type: table
     name: web
     filters:

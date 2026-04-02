@@ -4,7 +4,7 @@ aliases:
 Evolved from: "[[LANGUAGES/Innalang/index|Innalang]]"
 Mainly spoken by:
   - "[[Selhae]]"
-  - "[[Construct]]"
+  - "[[SPECIES/Construct/index|Construct]]"
 title: Varae
 ---
 [[LANGUAGES/Varae/grammar|Varae Grammar]]

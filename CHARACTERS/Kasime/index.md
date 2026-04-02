@@ -5,7 +5,7 @@ Character Type: Minor Character
 Status: Unknown
 Gender: genderless
 Pronouns: any (they/them)
-Actual Age: 11301 years
+Actual Age: ????
 Current Location: "[[LOCATIONS/World Garden/index |World Garden]]"
 Birthplace: "[[LOCATIONS/The Expanse/index |The Expanse]]"
 Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
@@ -14,6 +14,7 @@ Species: "[[SPECIES/Inna/index |Inna]]"
 aliases: Kasime
 title: Kasime
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
+Apparent age: ancient
 ---
 ## About
 
