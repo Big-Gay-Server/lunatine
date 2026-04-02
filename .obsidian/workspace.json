@@ -25,12 +25,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md",
+                "file": "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "Core Archetypes"
             }
           }
         ],
@@ -164,13 +164,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md",
+                "file": "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of Core Archetypes"
             }
           },
           {
@@ -200,9 +200,19 @@
               "icon": "lucide-archive",
               "title": "All properties"
             }
+          },
+          {
+            "id": "99b85da6ba43ad79",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "afe34fa239e6fb93",
@@ -264,11 +274,13 @@
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
       "terminal:Open terminal": false,
-      "calendarium:Open Calendarium": false
+      "calendarium:Open Calendarium": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
+    "CHARACTERS/Kaeyomii/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/index.md",
     "STORY/writingbase.base",
@@ -314,7 +326,6 @@
     "GRAPHICS/nerdchart.png",
     "GRAPHICS/maeniil.png",
     "GRAPHICS/idk maybe asilles (1).jpg",
-    "GRAPHICS/image (1).png",
-    "GRAPHICS/Illustration2.png"
+    "GRAPHICS/image (1).png"
   ]
 }

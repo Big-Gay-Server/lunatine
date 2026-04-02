@@ -35,5 +35,6 @@
   "terminal",
   "extended-graph",
   "obsidian-meta-bind-plugin",
-  "cursor-integration"
+  "cursor-integration",
+  "obsidian-git"
 ]
