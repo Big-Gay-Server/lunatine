@@ -29036,20 +29036,22 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 51,
+      "wordCount": 52,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.17,
-      "characterCount": 472,
-      "nonWhitespaceCharacterCount": 407,
-      "newlineCount": 21,
-      "readingTimeInMinutes": 0.19245283018867926,
+      "pageCount": 0.17333333333333334,
+      "characterCount": 430,
+      "nonWhitespaceCharacterCount": 365,
+      "newlineCount": 20,
+      "readingTimeInMinutes": 0.19622641509433963,
       "linkCount": 2,
       "embedCount": 1,
-      "aliases": null,
+      "aliases": [
+        "Debris Impact"
+      ],
       "createdDate": 1774577748804,
-      "modifiedDate": 1774577748804,
-      "sizeInBytes": 565,
+      "modifiedDate": 1775104398562,
+      "sizeInBytes": 475,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.17,
@@ -29059,9 +29061,8 @@
         "newlineCount": 21
       },
       "frontmatter": {
-        "Date 1": "16 (16%20237c5cb610f580039bc6c1cfce7ef893.md)",
-        "Year": 1240,
         "title": "Debris Impact",
+        "date": "1240-11-16",
         "aliases": "Debris Impact"
       }
     },
