@@ -66,29 +66,33 @@ function create_wiki_url(string $path): string
 
 function render_wiki_markup_html(string $html, string $markdownDir, $Parsedown, bool $includePreviewAttr = false): string
 {
-    // Updated Regex to handle both Images and Note Embeds
     $html = preg_replace_callback('/!\[\[(.*?)(\|(\d+))?\]\]/', function ($m) use ($markdownDir, $Parsedown) {
         $targetName = trim($m[1]);
         $width = $m[3] ?? null;
         
-        // 1. Try to find the file using your existing helper
         $path = find_image_path($markdownDir, $targetName);
         
         if ($path) {
             $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
             $fullPath = $markdownDir . '/' . ltrim($path, '/');
 
-            // 2. If it's a Markdown file, EMBED it
+            // --- NOTE EMBED LOGIC ---
             if ($extension === 'md' && file_exists($fullPath)) {
                 $noteContent = file_get_contents($fullPath);
-                // Strip YAML frontmatter
                 $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $noteContent, 1);
                 
-                // Wrap in a div and parse the markdown inside the note
-                return '<div class="markdown-embed">' . $Parsedown->text($noteContent) . '</div>';
+                // Recursively render links/images INSIDE the note
+                $noteHtml = render_wiki_markup_html($noteContent, $markdownDir, $Parsedown, false);
+                $parsedContent = $Parsedown->text($noteHtml);
+
+                // Create a link to the source note
+                $url = create_wiki_url($targetName);
+                $sourceLink = "<div class='embed-source'><a href='$url'>Open Full Note: $targetName</a></div>";
+                
+                return "<div class='markdown-embed'>$parsedContent $sourceLink</div>";
             }
 
-            // 3. Otherwise, treat it as an IMAGE (Existing logic)
+            // --- IMAGE LOGIC ---
             $style = $width ? "width:{$width}px;" : 'max-width:100%;';
             return "<img src='$path' style='$style' alt='$targetName'>";
         }
