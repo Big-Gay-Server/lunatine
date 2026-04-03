@@ -443,7 +443,7 @@ if ($filePath && file_exists($filePath)) {
             }, $html);
 
              // E. Wikilinks (Handling Paths, Anchors #, and Aliases |)
-            $text = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
+            $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
                 // Split the link into target and alias (e.g., [[Path#Header|Alias]])
                 $p = explode('|', $m[1]);
                 $fullTarget = trim($p[0]); 
@@ -480,7 +480,7 @@ if ($filePath && file_exists($filePath)) {
                 $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
 
                 return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
-            }, $text);
+            }, $html);
         };
 
 
