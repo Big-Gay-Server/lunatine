@@ -183,119 +183,107 @@ $bioHtml = '';
 $yamlData = [];
 
 // --- BASES RENDERER ---
+// This closure renders a .base file as an HTML table.
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
-    if (!file_exists($basePath)) return '<i>(Base file not found)</i>';
+    // If the .base file is missing, return a placeholder.
+    if (!file_exists($basePath)) {
+        return '<i>(Base file not found)</i>';
+    }
 
+    // Load YAML data from the .base file.
     $baseData = Spyc::YAMLLoad($basePath);
+
+    // Choose the correct view index from the base file.
     $viewIndex = 0;
     if (isset($baseData['views'])) {
         foreach ($baseData['views'] as $idx => $view) {
             if ($targetViewName && strtolower($view['name'] ?? '') === strtolower($targetViewName)) {
-                $viewIndex = $idx; break;
+                $viewIndex = $idx;
+                break;
             }
-            if (!$targetViewName && ($view['type'] ?? '') === 'table') $viewIndex = $idx;
+            if (!$targetViewName && ($view['type'] ?? '') === 'table') {
+                $viewIndex = $idx;
+            }
         }
     }
 
-    $viewDef = $baseData['views'][$viewIndex];
-    $order = $viewDef['order'] ?? [];
-    $sortRules = $viewDef['sort'] ?? [];
-    $scanDir = dirname($basePath);
+    // Get the ordered columns for the table.
+    $order = $baseData['views'][$viewIndex]['order'] ?? [];
 
+    // Build the list of markdown pages to include in the table.
+    $scanDir = dirname($basePath);
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
+    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
+
+    // Normalize property names and find values from page YAML.
     $findProp = function ($props, $id) {
-        if (!is_array($props)) return '';
-        if (isset($props[$id])) return $props[$id];
+        if (isset($props[$id])) {
+            return $props[$id];
+        }
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
-            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
+                return $val;
+            }
         }
         return '';
     };
 
-    // 1. COLLECT ALL FILES
-    $rows = [];
-    $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($scanDir));
-    
-    foreach ($it as $file) {
-        if ($file->isFile() && $file->getExtension() === 'md') {
-            $path = $file->getPathname();
-            $filename = basename($path);
-            
-            // Skip current page and bio.md
-            if (realpath($path) === realpath($currentPage) || $filename === 'bio.md') continue;
-            // Skip ONLY the index.md sitting right next to the .base file
-            if ($filename === 'index.md' && realpath(dirname($path)) === realpath($scanDir)) continue;
-
-            $raw = file_get_contents($path);
-            $props = [];
-            // Extract frontmatter safely
-            $parts = explode('---', $raw);
-            if (count($parts) >= 3) {
-                $props = Spyc::YAMLLoad(trim($parts[1]));
-            }
-
-            // --- REMOVED STRICT FILTERS ---
-            // We only use the filename and folder name logic now to ensure rows appear.
-            $name = ($filename === 'index.md') ? basename(dirname($path)) : basename($path, '.md');
-            $rows[] = ['path' => $path, 'props' => $props, 'name' => $name];
-        }
-    }
-
-    // 2. NATURAL SORTING (Fixes Story 1, 2, 10)
-    usort($rows, function($a, $b) use ($sortRules, $findProp) {
-        foreach ($sortRules as $rule) {
-            $prop = $rule['property'] ?? '';
-            $dir = (isset($rule['direction']) && strtoupper($rule['direction']) === 'DESC') ? -1 : 1;
-            $vA = ($prop === 'file.name' || $prop === 'file') ? $a['name'] : $findProp($a['props'], $prop);
-            $vB = ($prop === 'file.name' || $prop === 'file') ? $b['name'] : $findProp($b['props'], $prop);
-            if ($vA == $vB) continue;
-            return strnatcasecmp((string)$vA, (string)$vB) * $dir;
-        }
-        return 0;
-    });
-
-    // 3. RENDER
+    // Start the HTML table and render the header row.
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
-        $label = str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
-        $tableHtml .= "<th>" . htmlspecialchars(strtolower($label)) . "</th>";
+        $colName = ($colId === 'file.name' || $colId === 'file')
+            ? 'file name'
+            : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
-    $tableHtml .= "</tr></thead><tbody>";
+    $tableHtml .= '</tr></thead><tbody>';
 
-    foreach ($rows as $row) {
-        $url = create_wiki_url(str_replace([$markdownDir, '.md'], '', $row['path']));
-        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$url';}\" style='cursor:pointer;'>";
-        
-        $firstLink = false;
+    // Render each markdown page as a row in the table.
+    foreach ($mdFiles as $mdFile) {
+        $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+
+        $rawContent = file_get_contents($mdFile);
+        $props = [];
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
+            $props = Spyc::YAMLLoad($matches[1]);
+        }
+
+        // Make the whole row clickable, but ignore clicks on inner anchor tags.
+        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
+        $linkPlaced = false;
+
         foreach ($order as $propId) {
-            $val = ($propId === 'file.name' || $propId === 'file') ? $row['name'] : $findProp($row['props'], $propId);
+            $val = ($propId === 'file.name' || $propId === 'file')
+                ? $displayName
+                : $findProp($props, $propId);
 
-            if (is_array($val)) {
-                $pills = array_map(function($i) use ($markdownDir, $Parsedown) {
-                    $s = is_array($i) ? implode(', ', $i) : (string)$i;
-                    if ((strpos($s, '/') !== false || strpos($s, '|') !== false) && !str_contains($s, '[[')) $s = "[[$s]]";
-                    return "<span class='prop-pill'>" . render_wiki_markup_html($s, $markdownDir, $Parsedown, true) . "</span>";
-                }, $val);
-                $cell = implode(' ', $pills);
-            } else {
-                $s = (string)$val;
-                if ((strpos($s, '/') !== false || strpos($s, '|') !== false) && !str_contains($s, '[[')) $s = "[[$s]]";
-                $cell = render_wiki_markup_html($s, $markdownDir, $Parsedown, true);
-            }
+            $cellValue = is_array($val)
+                ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
+                    if (is_array($i)) {
+                        $i = implode(', ', array_map('strval', $i));
+                    }
+                    $item = $Parsedown->line((string) $i);
+                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $Parsedown, true) . '</span>';
+                }, $val))
+                : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
 
-            $isImg = (str_contains($cell, '<img') || str_contains($cell, '<svg'));
-            if (!$firstLink && !$isImg && !empty(trim(strip_tags($cell)))) {
-                $tableHtml .= "<td><a href='$url' class='file-link'>$cell</a></td>";
-                $firstLink = true;
+            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
+                $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
+                $linkPlaced = true;
             } else {
-                $tableHtml .= "<td>$cell</td>";
+                $tableHtml .= "<td>$cellValue</td>";
             }
         }
-        $tableHtml .= "</tr>";
-    }
-    return $tableHtml . "</tbody></table>";
-};
 
+        $tableHtml .= '</tr>';
+    }
+
+    return $tableHtml . '</tbody></table>';
+};
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
