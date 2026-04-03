@@ -26,21 +26,15 @@
       "showFolderNote": true
     },
     {
-      "type": "folder",
-      "id": "81ddd705-98f8-4be8-a69d-45491592c3f4",
-      "path": "LANGUAGES",
-      "subFolders": false,
-      "disableSync": true,
-      "disableAutoCreate": true,
-      "disableFolderNote": true,
+      "disableAutoCreate": false,
+      "disableFolderNote": false,
+      "disableSync": false,
       "enableCollapsing": false,
-      "position": 1,
       "excludeFromFolderOverview": false,
-      "string": "",
+      "detached": false,
       "hideInSettings": true,
-      "showFolderNote": false,
-      "detached": true,
-      "detachedFilePath": "LANGUAGES/index.base"
+      "showFolderNote": true,
+      "position": 1
     }
   ],
   "whitelistFolders": [],

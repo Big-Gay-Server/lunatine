@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/index.md",
+                "file": "LANGUAGES/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/index.md",
+                "file": "LANGUAGES/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -265,15 +265,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1702ae3c1c95b240",
+  "active": "52a7fa4a3980b932",
   "lastOpenFiles": [
+    "GALLERY/index.md",
+    "LANGUAGES/index.md",
+    "LANGUAGES/languagesbase.base",
+    "CHARACTERS/index.md",
     "CHARACTERS/characterbase.base",
     "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/index.md",
     "LANGUAGES/Acorithe/index.md",
-    "LANGUAGES/languagesbase.base",
     "LANGUAGES/LANGUAGES (490952).base",
-    "CHARACTERS/index.md",
     "CHARACTERS/Yudora/index.md",
     "SPECIES/Selhae/index.md",
     "SPECIES/speciesbase.base",
@@ -283,7 +285,6 @@
     "CHARACTERS/Merisdae/index.md",
     "about.md",
     "codebottom.php",
-    "GALLERY/index.md",
     "GALLERY/fullbody.md",
     "GALLERY/os0ljd3i2mq71.md",
     "GALLERY/view from asilles.md",
@@ -296,7 +297,6 @@
     "CONCEPTS/Inna Tenets/Inna Tenets.md",
     "CONCEPTS/World Seed/World Seed.md",
     "CONCEPTS/The Story of the Inna/index.md",
-    "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
