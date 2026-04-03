@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/index.md",
+                "file": "LANGUAGES/Varae/dictionary/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/index.md",
+                "file": "LANGUAGES/Varae/dictionary/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -265,10 +265,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1702ae3c1c95b240",
+  "active": "52a7fa4a3980b932",
   "lastOpenFiles": [
-    "CHARACTERS/characterbase.base",
+    "LANGUAGES/Varae/index.md",
+    "LANGUAGES/Acorithe/index.md",
+    "LANGUAGES/languagesbase.base",
+    "LANGUAGES/LANGUAGES (490952).base",
     "CHARACTERS/index.md",
+    "CHARACTERS/characterbase.base",
     "CHARACTERS/Yudora/index.md",
     "SPECIES/Selhae/index.md",
     "SPECIES/speciesbase.base",
@@ -294,15 +298,12 @@
     "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
     "CONCEPTS/Soul/index.md",
     "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
-    "CONCEPTS/Soul/Archetypes/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
     "STORY/misc writings/gay.docx",
     "STORY/chapter drafts/L U N A T I N E.docx",
     "STORY/misc writings",
-    "STORY/chapter outlines",
-    "STORY/chapter drafts",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",

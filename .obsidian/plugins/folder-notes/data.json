@@ -24,6 +24,23 @@
       "string": "",
       "hideInSettings": true,
       "showFolderNote": true
+    },
+    {
+      "type": "folder",
+      "id": "81ddd705-98f8-4be8-a69d-45491592c3f4",
+      "path": "LANGUAGES",
+      "subFolders": false,
+      "disableSync": true,
+      "disableAutoCreate": true,
+      "disableFolderNote": true,
+      "enableCollapsing": false,
+      "position": 1,
+      "excludeFromFolderOverview": false,
+      "string": "",
+      "hideInSettings": true,
+      "showFolderNote": false,
+      "detached": true,
+      "detachedFilePath": "LANGUAGES/index.base"
     }
   ],
   "whitelistFolders": [],
