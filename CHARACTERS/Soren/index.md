@@ -19,7 +19,7 @@ Hair: blonde
 Height: 5’2”
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
 Skin Tone: tan
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 aliases: Soren
 title: Soren Daerikagaelii
 icon: "![[GRAPHICS/NOICON.PNG|75]]"

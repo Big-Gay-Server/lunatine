@@ -9,7 +9,7 @@ Apparent Age: early thirties
 Birthplace: Kohoii
 Creators: Reika
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
-Species: "[[SPECIES/Construct/index |Construct]]"
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Riverstone
 title: Osuhii
 aliases: Osuhii

@@ -14,7 +14,7 @@ Birthplace: "[[LOCATIONS/Kingdom of Acorithe/index]]"
 Partners: "[[CHARACTERS/Colarius/index |Colarius]]"
 Languages Spoken: "[[LANGUAGES/Acorithe/index |Acorithe]]"
 Organizations: "[[ORGANIZATIONS/Acorithe Royal Court/index |Acorithe Royal Court]]"
-Species: "[[SPECIES/Fae/index |Fae]]"
+Species: "[[SPECIES/Fae/index|Fae]]"
 Titles: Protector of the Prince
 aliases: Urali
 title: Urali Nerine

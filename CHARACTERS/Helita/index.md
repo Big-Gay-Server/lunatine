@@ -19,7 +19,7 @@ Languages Spoken:
 Organizations: "[[ORGANIZATIONS/Solei Royal Court/index |Solei Royal Court]]"
 Rank: King
 Skin Tone: fair
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Ruler/Owner of: "[[LOCATIONS/Solei/index |Solei]]"
 Titles: King of Solei
 aliases:

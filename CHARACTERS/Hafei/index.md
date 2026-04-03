@@ -13,7 +13,7 @@ Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
 Ruler/Owner of:
   - "[[LOCATIONS/The Expanse/index |The Expanse]]"
   - "[[LOCATIONS/World Garden/index |World Garden]]"
-Species: "[[SPECIES/Inna/index |Inna]]"
+Species: "[[SPECIES/Inna/index|Inna]]"
 Titles: The First Inna, High Seedkeeper
 aliases: Hafei
 title: Hafei

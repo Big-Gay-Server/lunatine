@@ -14,7 +14,7 @@ Languages Spoken:
   - "[[LANGUAGES/Innalang/index |InnaLang]]"
   - "[[LANGUAGES/Varae/index |Varae]]"
   - "[[LANGUAGES/Acorithe/index |Acorithe]]"
-Species: "[[SPECIES/Inna/index |Inna]]"
+Species: "[[SPECIES/Inna/index|Inna]]"
 alias: Aenna
 title: Aenna
 icon: "![[GRAPHICS/NOICON.PNG|75]]"

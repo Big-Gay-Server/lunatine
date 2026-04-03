@@ -11,9 +11,9 @@ Hair: deep, purple-y red hair with bright red ombre. thick, layered bangs over o
 Height: 5'4'' or 164cm
 Languages Spoken: "[[LANGUAGES/Varae/index|Varae]]"
 Rank: Guardian
-"Ruler/Owner of": "[[LOCATIONS/Buromeris/index|Buromeris]]"
+Ruler/Owner of: "[[LOCATIONS/Buromeris/index|Buromeris]]"
 Skin Tone: fair
-Species: [[SPECIES/Construct/index|Construct]]
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Bloodmoon
 main character: "[[CHARACTERS/Merisdae/index|Merisdae]]"
 ---

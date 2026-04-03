@@ -17,7 +17,7 @@ Hair: indigo with yellow/blue/red peekaboo (depending on form)
 Languages Spoken:
   - "[[LANGUAGES/Varae/index |Varae]]"
 Skin Tone: fair
-Species: "[[SPECIES/Construct/index |Construct]]"
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Starlight
 Actual Age: "?"
 icon: "![[CHARACTERS/Yudora/art/yudora_icon.png|75]]"

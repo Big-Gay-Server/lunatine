@@ -18,7 +18,7 @@ Organizations: "[[ORGANIZATIONS/Kohoii Council of Elders/index |Kohoii Council o
 Rank: Elder
 Ruler/Owner of: "[[LOCATIONS/Kohoii/index |Kohoii]]"
 Skin Tone: deep
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Titles: Kohoii Elder, Head of Gahinukagaelii
 title: Miire Gahinukagaelii
 aliases: Miire

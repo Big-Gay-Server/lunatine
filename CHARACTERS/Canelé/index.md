@@ -15,7 +15,7 @@ Eyes: blue (right) / purple (left)
 Hair: purple/magenta with blue streaks
 Languages Spoken: "[[LANGUAGES/Varae/index|Varae]]"
 Skin Tone: —
-Species: "[[SPECIES/Construct/index |Construct]]"
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Stardust
 Actual Age: "?"
 title: Canelé

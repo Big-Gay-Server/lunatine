@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "CHARACTERS/characterbase.base",
-                "viewName": "View"
+                "file": "LANGUAGES/index.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-layout-grid",
-              "title": "characterbase"
+              "icon": "lucide-table",
+              "title": "index"
             }
           }
         ]
@@ -96,7 +96,7 @@
       {
         "id": "e42138525fc4c41e",
         "type": "tabs",
-        "dimension": 65.31007751937985,
+        "dimension": 62.720156555773,
         "children": [
           {
             "id": "1d4b072197f93ee3",
@@ -203,7 +203,7 @@
       {
         "id": "afe34fa239e6fb93",
         "type": "tabs",
-        "dimension": 34.689922480620154,
+        "dimension": 37.279843444227005,
         "children": [
           {
             "id": "591b18d1aa3a12ef",
@@ -260,20 +260,29 @@
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
       "terminal:Open terminal": false,
-      "calendarium:Open Calendarium": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "calendarium:Open Calendarium": false
     }
   },
   "active": "65d43a3820334290",
   "lastOpenFiles": [
-    "SPECIES/Selhae/index.md",
-    "SPECIES/speciesbase.base",
     "CHARACTERS/characterbase.base",
+    "CHARACTERS/Urali/index.md",
+    "CHARACTERS/Colarius/index.md",
+    "CHARACTERS/index.md",
+    "CHARACTERS/Colarius/art/colarius new icon.png",
+    "CHARACTERS/Colarius/art/colarius new.png",
+    "CHARACTERS/Colarius/art/colarius but with no shirt.jpg",
+    "CHARACTERS/Colarius/art/0faa15_f054e4b79f7242b9b49707ebb2bc8a41.png",
+    "CHARACTERS/Colarius/art/colarius.png",
+    "CHARACTERS/Merisdae/BuroMerisdae.md",
+    "SPECIES/Fae/index 1.md",
+    "SPECIES/Selhae/index.md",
+    "CHARACTERS/Esela/index.md",
+    "SPECIES/speciesbase.base",
     "SPECIES/Inna/index.md",
     "SPECIES/index.md",
-    "CHARACTERS/Merisdae/BuroMerisdae.md",
     "CHARACTERS/Merisdae/index.md",
-    "CHARACTERS/index.md",
     "about.md",
     "codebottom.php",
     "GALLERY/index.md",
@@ -290,10 +299,6 @@
     "CONCEPTS/World Seed/World Seed.md",
     "CONCEPTS/The Story of the Inna/index.md",
     "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
-    "CONCEPTS/Soul/index.md",
-    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
-    "CONCEPTS/Soul/Archetypes/index.md",
-    "CONCEPTS/Shapeshifting/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
@@ -306,11 +311,6 @@
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",
     "GRAPHICS/world cover.png",
-    "GRAPHICS/Untitled.png",
-    "GRAPHICS/noicon.png",
-    "GRAPHICS/nerdchart.png",
-    "GRAPHICS/maeniil.png",
-    "GRAPHICS/idk maybe asilles (1).jpg",
-    "GRAPHICS/image (1).png"
+    "GRAPHICS/Untitled.png"
   ]
 }

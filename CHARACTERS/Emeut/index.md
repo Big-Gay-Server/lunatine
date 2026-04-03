@@ -9,7 +9,7 @@ Current Location: "[[LOCATIONS/Atis/index |Atis]]"
 Birthplace: "[[LOCATIONS/World Garden/index |World Garden]]"
 Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
 Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
-Species: "[[SPECIES/Inna/index |Inna]]"
+Species: "[[SPECIES/Inna/index|Inna]]"
 title: Emeut
 aliases: Emeut
 icon: "![[GRAPHICS/NOICON.PNG|75]]"

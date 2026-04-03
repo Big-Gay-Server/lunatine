@@ -21,7 +21,7 @@ Hair: ice blue
 Height: 5’6”
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
 Skin Tone: pale blue
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 icon: "![[CHARACTERS/Kulith/art/kulithnew icon.png|75]]"
 aliases:
   - Kulith

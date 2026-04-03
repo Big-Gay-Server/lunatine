@@ -10,7 +10,7 @@ Current Location: "[[LOCATIONS/World Garden/index |World Garden]]"
 Birthplace: "[[LOCATIONS/The Expanse/index |The Expanse]]"
 Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
 Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
-Species: "[[SPECIES/Inna/index |Inna]]"
+Species: "[[SPECIES/Inna/index|Inna]]"
 aliases: Kasime
 title: Kasime
 icon: "![[GRAPHICS/NOICON.PNG|75]]"

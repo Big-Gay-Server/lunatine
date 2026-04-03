@@ -105,7 +105,7 @@ views:
     name: web
     filters:
       and:
-        - "!Species.isEmpty()"
+        - '!note["Character Type"].isEmpty()'
     order:
       - icon
       - Full Name

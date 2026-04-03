@@ -17,7 +17,7 @@ Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
 Rank: Village Head
 Ruler/Owner of: "[[LOCATIONS/Yuvomne/index |Yuvomne]]"
 Skin Tone: deep
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Titles: Village Head of Yuvomne
 title: Viisaha Ros
 icon: "![[GRAPHICS/NOICON.PNG|75]]"

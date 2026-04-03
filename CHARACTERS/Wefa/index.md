@@ -17,7 +17,7 @@ Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
 Organizations: "[[ORGANIZATIONS/Seedkeeper Council/index |Seedkeeper Council]]"
 Rank: Creators
 Ruler/Owner of: "[[LOCATIONS/Asilles/index |Asilles]]"
-Species: "[[SPECIES/Inna/index |Inna]]"
+Species: "[[SPECIES/Inna/index|Inna]]"
 Titles: World Garden Curator, Mother of Fae
 title: Wefa
 aliases: Wefa

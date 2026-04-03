@@ -19,7 +19,7 @@ Organizations: "[[ORGANIZATIONS/Kohoii Council of Elders/index |Kohoii Council o
 Rank: Elder
 Ruler/Owner of: "[[LOCATIONS/Kohoii/index |Kohoii]]"
 Skin Tone: tan
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Titles: Kohoii Elder, Head of Daerikagaelii
 title: Paeyiilos Daerikagaelii
 aliases:

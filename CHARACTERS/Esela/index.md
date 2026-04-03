@@ -3,7 +3,7 @@ Full Name: Esela Levenkagaelii
 Name Pronunciation: eh-SEHL-uh
 Character Type: Main Character
 Status: Alive
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Gender: nonbinary
 Pronouns: she/they
 Age: 103 years, appears 28

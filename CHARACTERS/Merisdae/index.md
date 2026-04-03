@@ -25,7 +25,7 @@ Ruler/Owner of:
   - "[[LOCATIONS/Hiitomeris/index |Hiitomeris]]"
   - "[[LOCATIONS/Folmeris/index |Folmeris]]"
 Skin Tone: fair
-Species: "[[SPECIES/Construct/index |Construct]]"
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Moon
 title: Merisdae
 icon: "![[CHARACTERS/Merisdae/art/maikory merisdae icon.png|75]]"

@@ -10,21 +10,21 @@ Actual Age: 25 years
 Apparent Age: mid twenties
 Birthdate: 12/27/1276
 Birthdate (written): Aemthe, Day 27 of Ranteiwa, Year 1276
-Current Location: "[[LOCATIONS/Kingdom of Acorithe/index]]"
-Birthplace: "[[LOCATIONS/Kingdom of Acorithe/index]]"
-Partners: "[[Urali]]"
+Current Location: "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]"
+Birthplace: "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]"
+Partners: "[[CHARACTERS/Urali/index|Urali]]"
 Eyes: royal purple
 Hair: messy auburn hair, tied into a small, low ponytail
 Languages Spoken:
-  - "[[Acorithe]]"
-  - "[[Varae]]"
+  - "[[LANGUAGES/Acorithe/index|Acorithe]]"
+  - "[[LANGUAGES/Varae/index|Varae]]"
 Organizations: "[[ORGANIZATIONS/Acorithe Royal Court/index|Acorithe Royal Court]]"
 Rank: Prince
-Ruler/Owner of: "[[LOCATIONS/Kingdom of Acorithe/index]]"
+Ruler/Owner of: "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]"
 Skin Tone: tan
-Species: "[[SPECIES/Fae/index |Fae]]"
+Species: "[[SPECIES/Fae/index|Fae]]"
 Titles: Prince of Acorithe
-icon: ![[CHARACTERS/Colarius/art/colarius new icon.png|75]]
+icon: "![[CHARACTERS/Colarius/art/colarius new.png|75]]"
 aliases:
   - Colarius
 fullbody: "![[CHARACTERS/Colarius/art/colarius new.png|400]]"

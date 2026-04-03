@@ -16,7 +16,7 @@ Birthplace: "[[LOCATIONS/Kohoii/index |Kohoii]]"
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
 Organizations: "[[ORGANIZATIONS/Kohoii Council of Elders/index |Kohoii Council of Elders]]"
 Skin Tone: deep
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 Titles: Kohoii Elder, Head of Gahinukagaelii
 aliases:
   - Mare

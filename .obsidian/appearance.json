@@ -10,7 +10,5 @@
   "showRibbon": true,
   "baseFontSizeAction": true,
   "baseFontSize": 16,
-  "enabledCssSnippets": [
-    "lowercaseui"
-  ]
+  "enabledCssSnippets": []
 }

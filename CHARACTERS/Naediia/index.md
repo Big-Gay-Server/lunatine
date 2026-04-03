@@ -19,7 +19,7 @@ Children: "[[CHARACTERS/Esela/index |Esela]]"
 Parents: "[[CHARACTERS/Reika/index |Reika]]"
 Languages Spoken: "[[LANGUAGES/Varae/index |Varae]]"
 Skin Tone: fair
-Species: "[[SPECIES/Selhae/index |Selhae]]"
+Species: "[[SPECIES/Selhae/index|Selhae]]"
 aliases: Naediia
 title: Naediia Levenkagaelii
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
