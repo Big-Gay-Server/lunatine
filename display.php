@@ -197,33 +197,11 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         }
     }
 
-    $order = $baseData['views'][$viewIndex]['order'] ?? [];
+    $viewDef = $baseData['views'][$viewIndex];
+    $order = $viewDef['order'] ?? [];
+    $sortRules = $viewDef['sort'] ?? [];
+    $filters = $viewDef['filters'] ?? [];
     $scanDir = dirname($basePath);
-
-    // --- SMART SCAN ---
-    $mdFiles = [];
-    $directory = new RecursiveDirectoryIterator($scanDir);
-    $iterator = new RecursiveIteratorIterator($directory);
-    
-    foreach ($iterator as $file) {
-        if ($file->isFile() && $file->getExtension() === 'md') {
-            $path = $file->getPathname();
-            $filename = basename($path);
-            $realPath = realpath($path);
-
-            // 1. Never include the current page or bio.md
-            if ($realPath === realpath($currentPage) || $filename === 'bio.md') continue;
-
-            // 2. SMART INDEX FILTER: 
-            // Only skip index.md if it's in the SAME folder as the .base file.
-            // If it's in a subfolder (like CHARACTERS/Yudora/index.md), we NEED it.
-            if ($filename === 'index.md' && dirname($path) === $scanDir) {
-                continue;
-            }
-
-            $mdFiles[] = $path;
-        }
-    }
 
     $findProp = function ($props, $id) {
         if (isset($props[$id])) return $props[$id];
@@ -234,73 +212,97 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         return '';
     };
 
+    // 1. COLLECT DATA
+    $rows = [];
+    $directory = new RecursiveDirectoryIterator($scanDir);
+    $iterator = new RecursiveIteratorIterator($directory);
+    
+    foreach ($iterator as $file) {
+        if ($file->isFile() && $file->getExtension() === 'md') {
+            $path = $file->getPathname();
+            $filename = basename($path);
+            if (realpath($path) === realpath($currentPage) || $filename === 'bio.md') continue;
+            if ($filename === 'index.md' && dirname($path) === $scanDir) continue;
+
+            $rawContent = file_get_contents($path);
+            $props = [];
+            if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
+                $props = Spyc::YAMLLoad($matches[1]);
+            }
+
+            // --- FILTER LOGIC ---
+            $isMatch = true;
+            if (isset($filters['and'])) {
+                foreach ($filters['and'] as $clause) {
+                    if (preg_match('/([\w\.]+)\s*(==|!=|contains)\s*(.+)/', $clause, $m)) {
+                        $p = trim($m[1]); $op = $m[2]; $val = trim($m[3], " '\"");
+                        $actual = $findProp($props, $p);
+                        if ($op == '==' && (string)$actual != $val) $isMatch = false;
+                        if ($op == '!=' && (string)$actual == $val) $isMatch = false;
+                        if ($op == 'contains' && !str_contains((string)$actual, $val)) $isMatch = false;
+                    }
+                }
+            }
+            if (!$isMatch) continue;
+
+            // Ensure row has data for columns
+            $hasData = false;
+            foreach ($order as $col) {
+                if ($col !== 'file.name' && !empty($findProp($props, $col))) { $hasData = true; break; }
+            }
+            if (!$hasData) continue;
+
+            $displayName = ($filename === 'index.md') ? basename(dirname($path)) : basename($path, '.md');
+            $rows[] = ['path' => $path, 'props' => $props, 'displayName' => $displayName];
+        }
+    }
+
+    // 2. SORT LOGIC
+    usort($rows, function($a, $b) use ($sortRules, $findProp) {
+        foreach ($sortRules as $rule) {
+            $prop = $rule['property'] ?? '';
+            $dir = (isset($rule['direction']) && strtoupper($rule['direction']) === 'DESC') ? -1 : 1;
+            
+            $valA = ($prop === 'file.name') ? $a['displayName'] : $findProp($a['props'], $prop);
+            $valB = ($prop === 'file.name') ? $b['displayName'] : $findProp($b['props'], $prop);
+
+            if ($valA == $valB) continue;
+            return ($valA < $valB ? -1 : 1) * $dir;
+        }
+        return 0;
+    });
+
+    // 3. RENDER TABLE
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
-        $colName = ($colId === 'file.name' || $colId === 'file') ? 'file name' : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        $colName = str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
         $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
     $tableHtml .= '</tr></thead><tbody>';
 
-        foreach ($mdFiles as $mdFile) {
-        $rawContent = file_get_contents($mdFile);
-        $props = [];
-        if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
-            $props = Spyc::YAMLLoad($matches[1]);
-        }
-
-        // --- DYNAMIC FILTER: Skip rows with no relevant data ---
-        $hasData = false;
-        foreach ($order as $colId) {
-            // Skip checking "file" or "name" columns since every file has those
-            if ($colId === 'file.name' || $colId === 'file') continue;
-            
-            $val = $findProp($props, $colId);
-            if (!empty($val)) {
-                $hasData = true;
-                break;
-            }
-        }
-
-        // If the file doesn't have any of the properties this table is looking for, skip it.
-        if (!$hasData) {
-            continue;
-        }
-
-        $displayName = basename($mdFile, '.md');
-        if ($displayName === 'index') {
-            $displayName = basename(dirname($mdFile)); // Use folder name for index.md files
-        }
-
-        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+    foreach ($rows as $row) {
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $row['path']));
         $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
-        
         $linkPlaced = false;
-        foreach ($order as $propId) {
-            $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // Render logic (Pills for arrays, Links for strings)
+        foreach ($order as $propId) {
+            $val = ($propId === 'file.name' || $propId === 'file') ? $row['displayName'] : $findProp($row['props'], $propId);
+
             if (is_array($val)) {
-                $pills = [];
-                foreach ($val as $item) {
-                    $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
-                    if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && strpos($itemStr, '[[') === false) {
-                        $itemStr = "[[" . $itemStr . "]]";
-                    }
-                    $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true) . "</span>";
-                }
+                $pills = array_map(function($i) use ($markdownDir, $Parsedown) {
+                    $i = is_array($i) ? implode(', ', $i) : (string)$i;
+                    if ((strpos($i, '/') !== false || strpos($i, '|') !== false) && !str_contains($i, '[[')) $i = "[[$i]]";
+                    return "<span class='prop-pill'>".render_wiki_markup_html($i, $markdownDir, $Parsedown, true)."</span>";
+                }, $val);
                 $cellValue = implode(' ', $pills);
             } else {
                 $itemStr = (string)$val;
-                if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && strpos($itemStr, '[[') === false) {
-                    $itemStr = "[[" . $itemStr . "]]";
-                }
+                if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && !str_contains($itemStr, '[[')) $itemStr = "[[$itemStr]]";
                 $cellValue = render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true);
             }
 
-            $isImage = (str_contains($cellValue, '<img') || str_contains($cellValue, '<svg'));
-            $hasText = !empty(trim(strip_tags($cellValue)));
-
-            if (!$linkPlaced && !$isImage && $hasText) {
+            $isEmbed = (str_contains($cellValue, '<img') || str_contains($cellValue, '<svg'));
+            if (!$linkPlaced && !$isEmbed && !empty(trim(strip_tags($cellValue)))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
