@@ -1,4 +1,2 @@
 
-[embed_base:writingbase#table]
-
-![[STORY/writingbase.base#Table]]
+![[STORY/writingbase.base#Table | writing base]]
