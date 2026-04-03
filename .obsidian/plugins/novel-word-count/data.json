@@ -95,39 +95,6 @@
         "newlineCount": 1
       }
     },
-    "Untitled.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0,
-      "characterCount": 1,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 2,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1775226840995,
-      "modifiedDate": 1775226841047,
-      "sizeInBytes": 43,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 1,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 2
-      },
-      "frontmatter": {
-        "Author": null,
-        "order": null,
-        "Status": null,
-        "Characters": null
-      }
-    },
     "templates/link_preview.php": {
       "isCountable": false,
       "targetNodeType": "file",
@@ -15629,8 +15596,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537461,
-      "modifiedDate": 1775236591024,
-      "sizeInBytes": 26759,
+      "modifiedDate": 1775246560214,
+      "sizeInBytes": 21845,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -19065,33 +19032,6 @@
         "character": "[[CHARACTERS/Aenna/index|Aenna]]"
       }
     },
-    "baseshelper.php": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1774630537456,
-      "modifiedDate": 1774630537457,
-      "sizeInBytes": 4116,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
     "ARTIFACTS/Starlight Crystal/index.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -19319,6 +19259,33 @@
         "characterCount": 857,
         "nonWhitespaceCharacterCount": 749,
         "newlineCount": 14
+      }
+    },
+    "parsedownBases.php": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1775243719118,
+      "modifiedDate": 1775245102858,
+      "sizeInBytes": 3622,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
       }
     }
   }
