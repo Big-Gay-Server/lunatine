@@ -9,7 +9,6 @@ views:
         - file.ext == "md"
     order:
       - file.name
-      - formula.type
       - Status
       - order
       - Author
