@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LANGUAGES/Varae/dictionary/index.md",
+                "file": "CHARACTERS/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LANGUAGES/Varae/dictionary/index.md",
+                "file": "CHARACTERS/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -265,14 +265,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "52a7fa4a3980b932",
+  "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "CHARACTERS/characterbase.base",
+    "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/index.md",
     "LANGUAGES/Acorithe/index.md",
     "LANGUAGES/languagesbase.base",
     "LANGUAGES/LANGUAGES (490952).base",
     "CHARACTERS/index.md",
-    "CHARACTERS/characterbase.base",
     "CHARACTERS/Yudora/index.md",
     "SPECIES/Selhae/index.md",
     "SPECIES/speciesbase.base",
@@ -296,8 +297,6 @@
     "CONCEPTS/World Seed/World Seed.md",
     "CONCEPTS/The Story of the Inna/index.md",
     "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
-    "CONCEPTS/Soul/index.md",
-    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",

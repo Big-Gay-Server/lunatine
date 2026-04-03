@@ -368,7 +368,7 @@ if ($filePath && file_exists($filePath)) {
             // 2. NOTE & BASE EMBEDDER (Pre-Parsedown)
             $transclusions = [];
             $text = preg_replace_callback('/!\[\[(.*?)\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions, $renderTable, $filePath) {
-                // Split for Alias and Anchor (e.g. ![[File.base#view|Alias]])
+                // 1. Split for Alias (|) and Anchor (#)
                 $parts = explode('|', trim($m[1]));
                 $rawTarget = trim($parts[0]);
                 
@@ -376,6 +376,7 @@ if ($filePath && file_exists($filePath)) {
                 $targetName = $targetParts[0];
                 $targetView = $targetParts[1] ?? null;
 
+                // 2. Find the file
                 $path = find_image_path($markdownDir, $targetName);
                 
                 if ($path) {
@@ -387,7 +388,6 @@ if ($filePath && file_exists($filePath)) {
                         
                         // --- CASE A: EMBEDDING A .BASE FILE (TABLES) ---
                         if ($extension === 'base') {
-                            // Call your existing table renderer
                             $tableHtml = $renderTable($fullPath, $filePath, $targetView);
                             $transclusions[$id] = "<div class='base-embed'>$tableHtml</div>";
                             return $id;
@@ -412,6 +412,7 @@ if ($filePath && file_exists($filePath)) {
                         }
                     }
                 }
+                // If it's an image or not found, return the original string for later steps
                 return $m[0]; 
             }, $text);
 
