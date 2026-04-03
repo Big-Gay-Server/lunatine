@@ -215,6 +215,31 @@ a, .file-link {
 }
 
 /* BASES TABLES */
+/* Container fix to prevent page blow-out */
+.base-embed {
+    width: 100%;
+    overflow-x: auto; /* Forces scrollbar if table is too wide */
+    margin: 20px 0;
+    scrollbar-width: thin; /* Clean look for Firefox */
+}
+
+/* Table layout fix */
+.base-embed table {
+    width: 100%;
+    table-layout: auto; /* Let the browser calculate widths */
+    border-collapse: collapse;
+    min-width: 600px; /* Ensures the table doesn't get squished to death */
+}
+
+/* Ensure cell content wraps instead of forcing width */
+.base-embed td, .base-embed th {
+    white-space: normal; /* Allow text to wrap to new lines */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    padding: 10px;
+    vertical-align: middle;
+}
+
 .bases-table {
     width: 100%;
     border-collapse: separate; 
