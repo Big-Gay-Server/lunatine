@@ -183,12 +183,17 @@ $bioHtml = '';
 $yamlData = [];
 
 // --- BASES RENDERER ---
+// This closure renders a .base file as an HTML table.
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
+    // If the .base file is missing, return a placeholder.
     if (!file_exists($basePath)) {
         return '<i>(Base file not found)</i>';
     }
 
+    // Load YAML data from the .base file.
     $baseData = Spyc::YAMLLoad($basePath);
+
+    // Choose the correct view index from the base file.
     $viewIndex = 0;
     if (isset($baseData['views'])) {
         foreach ($baseData['views'] as $idx => $view) {
@@ -202,52 +207,42 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         }
     }
 
-    $view = $baseData['views'][$viewIndex] ?? [];
-    $order = $view['order'] ?? [];
-    $filters = $view['filters'] ?? [];
+    // Get the ordered columns for the table.
+    $order = $baseData['views'][$viewIndex]['order'] ?? [];
 
-    $scanDir = dirname($basePath); 
-    foreach ($filters as $filter) {
-        if (($filter['field'] ?? '') === 'folder' && ($filter['operator'] ?? '') === 'contains') {
-            $val = trim($filter['value'] ?? '', '/ ');
-            $scanDir = $markdownDir . '/' . $val;
-        }
-    }
+    // Build the list of markdown pages to include in the table.
+    $scanDir = dirname($basePath);
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
+    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
 
-    $mdFiles = [];
-    if (is_dir($scanDir)) {
-        $directory = new RecursiveDirectoryIterator($scanDir);
-        $iterator = new RecursiveIteratorIterator($directory);
-        foreach ($iterator as $file) {
-            if ($file->isFile() && strtolower($file->getExtension()) === 'md') {
-                $filePathName = $file->getPathname();
-                if (realpath($filePathName) !== realpath($currentPage) && $file->getFilename() !== 'bio.md') {
-                    $mdFiles[] = $filePathName;
-                }
-            }
-        }
-    }
-
+    // Normalize property names and find values from page YAML.
     $findProp = function ($props, $id) {
-        if (isset($props[$id])) return $props[$id];
+        if (isset($props[$id])) {
+            return $props[$id];
+        }
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
-            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
+                return $val;
+            }
         }
         return '';
     };
 
+    // Start the HTML table and render the header row.
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
-        $colName = ($colId === 'file.name' || $colId === 'file') ? 'file name' : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        $colName = ($colId === 'file.name' || $colId === 'file')
+            ? 'file name'
+            : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
         $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
     $tableHtml .= '</tr></thead><tbody>';
 
+    // Render each markdown page as a row in the table.
     foreach ($mdFiles as $mdFile) {
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
-        $relativeUrlPath = ltrim(str_replace([realpath($markdownDir), '.md', '\\'], ['', '', '/'], realpath($mdFile)), '/');
-        $finalUrl = create_wiki_url($relativeUrlPath);
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
 
         $rawContent = file_get_contents($mdFile);
         $props = [];
@@ -255,31 +250,40 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
+        // Make the whole row clickable, but ignore clicks on inner anchor tags.
         $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
-        
+        $linkPlaced = false;
+
         foreach ($order as $propId) {
-            $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
+            $val = ($propId === 'file.name' || $propId === 'file')
+                ? $displayName
+                : $findProp($props, $propId);
 
-            // FIX: Ensure $cellValue is always defined
-            if (is_array($val)) {
-                $pills = array_map(function ($i) use ($markdownDir, $Parsedown) {
-                    $itemText = (string)(is_array($i) ? implode(', ', $i) : $i);
-                    $rendered = render_wiki_markup_html($Parsedown->line($itemText), $markdownDir, $Parsedown, true);
-                    return "<span class='prop-pill'>$rendered</span>";
-                }, $val);
-                $cellValue = implode(' ', $pills);
+            $cellValue = is_array($val)
+                ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
+                    if (is_array($i)) {
+                        $i = implode(', ', array_map('strval', $i));
+                    }
+                    $item = $Parsedown->line((string) $i);
+                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $Parsedown, true) . '</span>';
+                }, $val))
+                : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
+
+            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
+                $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
+                $linkPlaced = true;
             } else {
-                $cellValue = render_wiki_markup_html($Parsedown->line((string)$val), $markdownDir, $Parsedown, true);
+                $tableHtml .= "<td>$cellValue</td>";
             }
-
-            $tableHtml .= "<td>$cellValue</td>";
         }
+
         $tableHtml .= '</tr>';
     }
 
     return $tableHtml . '</tbody></table>';
 };
-
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
@@ -442,45 +446,31 @@ if ($filePath && file_exists($filePath)) {
                 return $path ? "<img src='$path' style='$style'>" : "<i>(Image not found: $imageName)</i>";
             }, $html);
 
-             // E. Wikilinks (Handling Paths, Anchors #, and Aliases |)
             $html = preg_replace_callback('/\[\[(.*?)\]\]/', function ($m) use ($markdownDir, $Parsedown) {
-                // Split the link into target and alias (e.g., [[Path#Header|Alias]])
                 $p = explode('|', $m[1]);
-                $fullTarget = trim($p[0]); 
+                $fullTarget = trim($p[0]);
 
-                // 1. Split Page from Anchor (#)
-                $targetParts = explode('#', $fullTarget);
-                $pagePath = $targetParts[0];
+                // Split Page from Anchor
+                $parts = explode('#', $fullTarget);
+                $pagePath = $parts[0];
                 $anchor = "";
-                if (isset($targetParts[1])) {
-                    // Slugify anchor to match the Header ID logic
-                    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $targetParts[1]), '-'));
+                if (isset($parts[1])) {
+                    // SLUGIFY ANCHOR TO MATCH HEADERS
+                    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $parts[1]), '-'));
                     $anchor = '#' . $slug;
                 }
 
-                // 2. Clean the page path (strip Obsidian IDs and .md)
                 $cleanPagePath = preg_replace(['/\s[a-f0-9]{32}$/i', '/\.md$/i'], '', $pagePath);
-                
-                // 3. Build the final URL using your site's helper
                 $url = create_wiki_url($cleanPagePath) . $anchor;
-                
-                // 4. Link Text: Use Alias if present, otherwise format the filename
-                if (isset($p[1])) {
-                    $linkText = trim($p[1]);
-                } else {
-                    $linkText = basename($cleanPagePath);
-                    if (strtolower($linkText) === 'index') {
-                        $linkText = basename(dirname($cleanPagePath));
-                    }
-                    $linkText = ucwords(str_replace(['-', '_'], ' ', $linkText));
-                }
+                $linkText = trim($p[1] ?? $p[0]);
 
-                // 5. Previews (ignore the anchor and use the clean file path)
                 $preview = get_wiki_link_preview($cleanPagePath, $markdownDir, $Parsedown);
-                $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview, ENT_QUOTES | ENT_SUBSTITUTE) . '"' : '';
+                $previewAttr = $preview ? ' data-preview="' . htmlspecialchars($preview) . '"' : '';
 
-                return '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText, ENT_QUOTES | ENT_SUBSTITUTE) . '</a>';
+                return '<a href="' . htmlspecialchars($url) . '" class="wiki-preview-link"' . $previewAttr . '>' . htmlspecialchars($linkText) . '</a>';
             }, $html);
+
+            return $html; // Return $html instead of $text
         };
 
 
