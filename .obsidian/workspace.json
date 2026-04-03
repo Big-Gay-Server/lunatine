@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LANGUAGES/index.md",
+                "file": "CHARACTERS/Colarius/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LANGUAGES/index.md",
+                "file": "CHARACTERS/Colarius/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -265,13 +265,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "52a7fa4a3980b932",
+  "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
-    "GALLERY/index.md",
+    "CHARACTERS/characterbase.base",
     "LANGUAGES/index.md",
+    "GALLERY/index.md",
     "LANGUAGES/languagesbase.base",
     "CHARACTERS/index.md",
-    "CHARACTERS/characterbase.base",
     "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/index.md",
     "LANGUAGES/Acorithe/index.md",

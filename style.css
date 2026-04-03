@@ -257,11 +257,10 @@ a, .file-link {
 /* 5. Fix image sizing so it doesn't push the row height too far */
 .bases-table img {
     display: block;
-    width: 150px; /* Use fixed width for icons instead of vw to keep rows consistent */
-    /* height: 80px; */
+    width: 80px; /* Use fixed width for icons instead of vw to keep rows consistent */
+    height: 80px;
     object-fit: cover;
-    /* border-radius: 50%; Makes them circular like your screenshot */
-    border-radius: 30px;
+    border-radius: 50%; /* Makes them circular like your screenshot */
 }
 
 
