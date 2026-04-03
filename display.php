@@ -248,12 +248,22 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
-        // --- FILTER: Skip empty rows ---
-        // If the file doesn't have an Author or Status (for Story) 
-        // OR a Species (for Characters), don't render the row.
-        $hasRequiredData = isset($props['Author']) || isset($props['Status']) || isset($props['Species']);
-        if (!$hasRequiredData) {
-            continue; 
+        // --- DYNAMIC FILTER: Skip rows with no relevant data ---
+        $hasData = false;
+        foreach ($order as $colId) {
+            // Skip checking "file" or "name" columns since every file has those
+            if ($colId === 'file.name' || $colId === 'file') continue;
+            
+            $val = $findProp($props, $colId);
+            if (!empty($val)) {
+                $hasData = true;
+                break;
+            }
+        }
+
+        // If the file doesn't have any of the properties this table is looking for, skip it.
+        if (!$hasData) {
+            continue;
         }
 
         $displayName = basename($mdFile, '.md');
