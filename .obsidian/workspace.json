@@ -11,13 +11,14 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "STORY/writingbase.base",
-                "viewName": "Table"
+                "file": "CHARACTERS/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "writingbase"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -150,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "STORY/writingbase.base",
+                "file": "CHARACTERS/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of writingbase"
+              "title": "Outline of index"
             }
           },
           {
@@ -264,14 +265,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "52a7fa4a3980b932",
+  "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
-    "STORY/index.md",
-    "STORY/writingbase.base",
-    "Untitled.md",
+    "CHARACTERS/_misc art/index.md",
     "CHARACTERS/index.md",
-    "CHARACTERS/Colarius/index.md",
     "CHARACTERS/characterbase.base",
+    "STORY/writingbase.base",
+    "STORY/index.md",
+    "Untitled.md",
+    "CHARACTERS/Colarius/index.md",
     "LANGUAGES/index.md",
     "GALLERY/index.md",
     "LANGUAGES/languagesbase.base",

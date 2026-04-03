@@ -270,12 +270,14 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
             if (is_array($val)) {
-                $cellValue = implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
-                    $item = $Parsedown->line((string)(is_array($i) ? implode(', ', $i) : $i));
-                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $Parsedown, true) . '</span>';
-                }, $val));
-            } else {
-                $cellValue = render_wiki_markup_html($Parsedown->line((string)$val), $markdownDir, $Parsedown, true);
+                $cellValue = is_array($val)
+                    ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
+                        $itemText = (string)(is_array($i) ? implode(', ', $i) : $i);
+                        // FORCE the parser to resolve [[Wikilinks]] inside the array
+                        $renderedItem = render_wiki_markup_html($Parsedown->line($itemText), $markdownDir, $Parsedown, true);
+                        return "<span class='prop-pill'>$renderedItem</span>";
+                    }, $val))
+                    : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
             }
 
             $tableHtml .= "<td>$cellValue</td>";
