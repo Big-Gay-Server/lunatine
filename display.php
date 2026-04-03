@@ -289,6 +289,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     return $tableHtml . '</tbody></table>';
 };
 
+
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
 if ($filePath && file_exists($filePath)) {
