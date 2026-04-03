@@ -212,7 +212,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         return '';
     };
 
-    // 1. DATA COLLECTION
+    // 1. DATA COLLECTION (Fixed Recursive Logic)
     $rows = [];
     $directory = new RecursiveDirectoryIterator($scanDir);
     $iterator = new RecursiveIteratorIterator($directory);
@@ -224,14 +224,14 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             
             if (realpath($path) === realpath($currentPage) || $filename === 'bio.md') continue;
             
-            // Only skip index.md if it's the one in the SAME folder as the .base file
+            // SMART INDEX FILTER: Skip index.md ONLY if it's the main entry for the .base file itself
             if ($filename === 'index.md' && realpath(dirname($path)) === realpath($scanDir)) continue;
 
             $rawContent = file_get_contents($path);
             $props = [];
-            // Use index 1 from matches to get raw YAML without the --- delimiters
+            // FIXED: Regex captures only the YAML between the delimiters
             if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
-                $props = Spyc::YAMLLoad($matches[1]);
+                $props = Spyc::YAMLLoad($matches[1]); // Specifically use index 1
             }
 
             // --- UNIVERSAL FILTER ---
@@ -249,7 +249,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             }
             if (!$isMatch) continue;
 
-            // Ensure file has at least one of the columns we are looking for
+            // DYNAMIC ROW CHECK: Must have at least one column's data to show up
             $hasData = false;
             foreach ($order as $col) {
                 if ($col === 'file.name' || $col === 'file') continue;
@@ -262,7 +262,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         }
     }
 
-    // 2. NATURAL SORTING (Fixes 1, 2, 10 order)
+    // 2. STABLE MULTI-SORT (Handles Natural Order 1, 2, 10)
     usort($rows, function($a, $b) use ($sortRules, $findProp) {
         foreach ($sortRules as $rule) {
             $prop = $rule['property'] ?? '';
@@ -318,8 +318,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     }
     return $tableHtml . '</tbody></table>';
 };
-
-
 
 
 // --- STANDARD MARKDOWN PROCESSING ---
