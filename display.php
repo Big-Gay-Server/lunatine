@@ -200,7 +200,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
     $scanDir = dirname($basePath);
 
-    // 1. IMPROVED RECURSIVE SCAN
+    // 1. Recursive Scan for Story/Character files
     $mdFiles = [];
     $directory = new RecursiveDirectoryIterator($scanDir);
     $iterator = new RecursiveIteratorIterator($directory);
@@ -208,7 +208,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         if ($file->isFile() && $file->getExtension() === 'md') {
             $path = $file->getPathname();
             $fname = basename($path);
-            // Skip current page, bios, and index files that aren't the main one
             if (realpath($path) !== realpath($currentPage) && $fname !== 'bio.md' && $fname !== 'index.md') {
                 $mdFiles[] = $path;
             }
@@ -237,8 +236,8 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        // 2. STABLE FRONTMATTER PARSING
-        if (preg_match('/^---\s*\n(.*?)\n---\s*\n/s', $rawContent, $matches)) {
+        // Match frontmatter specifically
+        if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---/s', $rawContent, $matches)) {
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
@@ -248,23 +247,24 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // 3. FIX ARRAY ERROR & PILL RENDERING
+            // 2. Direct Rendering Logic
+            // We pass raw YAML values to the wiki renderer to handle [[links]] and ![[images]]
             if (is_array($val)) {
                 $pills = [];
                 foreach ($val as $item) {
                     $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
-                    $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($Parsedown->line($itemStr), $markdownDir, $Parsedown, true) . "</span>";
+                    // Don't use Parsedown here; let your wiki function handle the raw text
+                    $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true) . "</span>";
                 }
                 $cellValue = implode(' ', $pills);
             } else {
-                $cellValue = render_wiki_markup_html($Parsedown->line((string)$val), $markdownDir, $Parsedown, true);
+                $cellValue = render_wiki_markup_html((string)$val, $markdownDir, $Parsedown, true);
             }
 
-            // Detect if cell should be linked
-            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
-            $isEmpty = empty(trim(strip_tags($cellValue)));
+            $isEmbed = (str_contains($cellValue, '<img') || str_contains($cellValue, '<picture'));
+            $hasTextContent = !empty(trim(strip_tags($cellValue)));
 
-            if (!$linkPlaced && !$isEmbed && !$isEmpty) {
+            if (!$linkPlaced && !$isEmbed && $hasTextContent) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
@@ -275,7 +275,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     }
     return $tableHtml . '</tbody></table>';
 };
-
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
