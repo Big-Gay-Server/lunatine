@@ -217,14 +217,10 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
     // Normalize property names and find values from page YAML.
     $findProp = function ($props, $id) {
-        // FIX: Strip 'formula.' or 'file.' prefixes so we can find the raw YAML key
-        $searchId = str_replace(['formula.', 'file.'], '', $id);
-        
-        if (isset($props[$searchId])) {
-            return $props[$searchId];
+        if (isset($props[$id])) {
+            return $props[$id];
         }
-        
-        $cleanId = strtolower(str_replace([' ', '_', '-'], '', $searchId));
+        $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
             if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
                 return $val;
@@ -288,7 +284,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
     return $tableHtml . '</tbody></table>';
 };
-
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.

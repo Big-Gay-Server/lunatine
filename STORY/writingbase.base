@@ -5,7 +5,7 @@ views:
     name: Table
     filters:
       and:
-        - file.folder.contains("STORY/")
+        - file.folder.startsWith("STORY")
         - file.ext == "md"
     order:
       - file.name
@@ -17,8 +17,6 @@ views:
     sort:
       - property: Author
         direction: DESC
-      - property: formula.type
-        direction: ASC
       - property: order
         direction: ASC
     columnSize:
