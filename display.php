@@ -200,7 +200,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
     $scanDir = dirname($basePath);
 
-    // 1. RECURSIVE SCAN: Find all .md files
+    // 1. Recursive Scan
     $mdFiles = [];
     $directory = new RecursiveDirectoryIterator($scanDir);
     $iterator = new RecursiveIteratorIterator($directory);
@@ -208,7 +208,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         if ($file->isFile() && $file->getExtension() === 'md') {
             $path = $file->getPathname();
             $fname = basename($path);
-            // Ignore current page, bios, and index files that aren't the main one
             if (realpath($path) !== realpath($currentPage) && $fname !== 'bio.md' && $fname !== 'index.md') {
                 $mdFiles[] = $path;
             }
@@ -237,9 +236,10 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        // Extract frontmatter
-        if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---/s', $rawContent, $matches)) {
-            $props = Spyc::YAMLLoad($matches[1]);
+        
+        // FIXED REGEX: Specifically targets the block between triple-dashes
+        if (preg_match('/^---\s*\n(.*?)\n---\s*/s', $rawContent, $matches)) {
+            $props = Spyc::YAMLLoad($matches[1]); 
         }
 
         $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
@@ -248,24 +248,32 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // 2. RENDERING LOGIC: Handle wiki-links and images
+            // 2. WIKI-LINK RESTORATION
+            // If the value contains a pipe | or forward slash / but no brackets, it's a raw wiki-link from YAML.
+            $processValue = function($input) use ($markdownDir, $Parsedown) {
+                $input = (string)$input;
+                if (empty(trim($input))) return '';
+                
+                // Re-wrap in brackets so render_wiki_markup_html recognizes it
+                if ((strpos($input, '|') !== false || strpos($input, '/') !== false) && strpos($input, '[[') === false) {
+                    $input = "[[" . $input . "]]";
+                }
+                return render_wiki_markup_html($input, $markdownDir, $Parsedown, true);
+            };
+
             if (is_array($val)) {
                 $pills = [];
                 foreach ($val as $item) {
-                    $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
-                    $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true) . "</span>";
+                    $pills[] = "<span class='prop-pill'>" . $processValue($item) . "</span>";
                 }
                 $cellValue = implode(' ', $pills);
             } else {
-                // If it's a string, pass it directly to render_wiki_markup_html to handle [[links]]
-                $cellValue = render_wiki_markup_html((string)$val, $markdownDir, $Parsedown, true);
+                $cellValue = $processValue($val);
             }
 
-            // 3. ICON & LINK LOGIC
             $isImage = (str_contains($cellValue, '<img') || str_contains($cellValue, '<svg'));
             $hasText = !empty(trim(strip_tags($cellValue)));
 
-            // Ensure the main link is only placed on the first text-based column
             if (!$linkPlaced && !$isImage && $hasText) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
