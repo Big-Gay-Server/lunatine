@@ -214,110 +214,53 @@ a, .file-link {
     }
 }
 
-/* BASES TABLES */
-/* Container fix to prevent page blow-out */
+/* 1. Add padding to the container so shadows/rounded corners aren't clipped */
 .base-embed {
     width: 100%;
-    overflow-x: auto; /* Forces scrollbar if table is too wide */
+    overflow-x: auto; 
     margin: 20px 0;
-    scrollbar-width: thin; /* Clean look for Firefox */
+    padding: 10px; /* Essential: gives the row ends room to exist */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-3) transparent;
 }
 
-/* Table layout fix */
-.base-embed table {
-    width: 100%;
-    table-layout: auto; /* Let the browser calculate widths */
-    border-collapse: collapse;
-    min-width: 600px; /* Ensures the table doesn't get squished to death */
-}
-
-/* Ensure cell content wraps instead of forcing width */
-.base-embed td, .base-embed th {
-    white-space: normal; /* Allow text to wrap to new lines */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    padding: 10px;
-    vertical-align: middle;
-}
-
+/* 2. Ensure the table doesn't collapse borders, or the radius won't show */
 .bases-table {
     width: 100%;
-    border-collapse: separate; 
+    border-collapse: separate; /* Required for border-radius on cells */
     border-spacing: 0 12px; 
-    margin: 20px 0;
-    font-family: "Caudex", serif;
-    & table {
-        table-layout: auto;
-        width: 100%;
-        max-width: 100%;
-        border-collapse: collapse;
-    }
+    margin: 0; /* Margin moved to container */
+    table-layout: auto;
+}
 
-    & thead th {
-        font-family: "Kurale", serif;
-        color: var(--color-4);
-        text-transform: lowercase;
-        letter-spacing: 0.1rem;
-        padding: 0 15px 5px 15px;
-        text-align: center;
-        border: none !important;
-        filter: drop-shadow(0px 0px 5px color-mix(in srgb, var(--color-7), transparent 70%));
-    }
+/* 3. Fix the cell background and border logic */
+.bases-table tbody tr td {
+    /* Ensure the background doesn't bleed past the rounded corners */
+    background-clip: padding-box; 
+    border-top: 1px solid var(--color-3);
+    border-bottom: 1px solid var(--color-3);
+}
 
-    & tbody tr {
-        /* Move the shadow here - it wraps the whole row without causing seams */
-        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
-        transition: all 0.3s ease-in-out;
-        background-color: transparent !important; /* Row MUST be transparent */
+/* 4. Ensure the first and last cells explicitly handle the radius */
+.bases-table tbody tr td:first-child {
+    border-left: 1px solid var(--color-3) !important;
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+}
 
-        & td {
-            padding: 15px;
-            color: var(--color-5);
-            border-top: 1px solid var(--color-3);
-            border-bottom: 1px solid var(--color-3);
-            transition: background 0.3s ease;
-            
-            /* Apply the background color to the CELLS instead */
-            background-color: color-mix(in srgb, var(--color-2), transparent 80%);
-        }
+.bases-table tbody tr td:last-child {
+    border-right: 1px solid var(--color-3) !important;
+    border-top-right-radius: 25px !important;
+    border-bottom-right-radius: 25px !important;
+}
 
-        /* Zebra striping for even row cells */
-        &:nth-child(even) td {
-            background-color: color-mix(in srgb, var(--color-1), transparent 80%);
-        }
-
-        & td:first-child {
-            border-left: 1px solid var(--color-3);
-            border-top-left-radius: 25px;
-            border-bottom-left-radius: 25px;
-        }
-
-        & td:last-child {
-            border-right: 1px solid var(--color-3);
-            border-top-right-radius: 25px;
-            border-bottom-right-radius: 25px;
-        }
-
-        /* Hover state: changes all cells in the row */
-        &:hover {
-            filter: drop-shadow(0px 0px 8px var(--color-7));
-            cursor: pointer;
-
-            & td {
-                background-color: var(--color-3) !important;
-                color: var(--color-7);
-                border-color: var(--color-7);
-            }
-        }
-    }
-
-    & img {
-        display: block;
-        width: 10vw;
-        height: auto;
-        border-radius: 15px;
-        /* border: 1px solid var(--color-3); */
-    }
+/* 5. Fix image sizing so it doesn't push the row height too far */
+.bases-table img {
+    display: block;
+    width: 80px; /* Use fixed width for icons instead of vw to keep rows consistent */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%; /* Makes them circular like your screenshot */
 }
 
 
