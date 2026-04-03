@@ -7,9 +7,6 @@ views:
       and:
         - file.folder.contains("STORY/")
         - file.ext == "md"
-    groupBy:
-      property: formula.type
-      direction: ASC
     order:
       - file.name
       - formula.type
