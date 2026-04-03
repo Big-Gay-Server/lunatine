@@ -1,78 +1,110 @@
 <?php
-require_once 'parsedownGloss.php';
+require_once 'Parsedown.php';
 
-class ParsedownBases extends ParsedownGloss {
-    protected $renderTable;
-    protected $markdownDir;
-    protected $currentFilePath;
+class ParsedownBases extends Parsedown {
 
-    public function __construct($markdownDir, $currentFilePath, callable $renderTable) {
-        $this->markdownDir = $markdownDir;
-        $this->currentFilePath = $currentFilePath;
-        $this->renderTable = $renderTable;
-
-        // Register the ![[ marker
-        $this->InlineTypes['!'][] = 'ObsidianEmbed';
+    // --- BASES RENDERER ---
+    // This method renders a .base file as an HTML table.
+    public function renderTable($basePath, $currentPage, $markdownDir, $targetViewName = null)
+    {
+    // If the .base file is missing, return a placeholder.
+    if (!file_exists($basePath)) {
+        return '<i>(Base file not found)</i>';
     }
 
-    protected function inlineObsidianEmbed($Excerpt) {
-        // Look for ![[target]] or ![[target|alias/width]]
-        if (preg_match('/^!\\[\\[(.*?)\\]\\]/', $Excerpt['text'], $matches)) {
-            $parts = explode('|', trim($matches[1]));
-            $rawTarget = trim($parts[0]);
-            
-            // Handle Anchor/View splitting (e.g., ![[file#view]])
-            $targetParts = explode('#', $rawTarget);
-            $targetName = $targetParts[0];
-            $targetView = $targetParts[1] ?? null;
+    // Load YAML data from the .base file.
+    $baseData = Spyc::YAMLLoad($basePath);
 
-            // Use the helper to find the actual file path
-            $path = find_image_path($this->markdownDir, $targetName);
-            
-            if ($path) {
-                $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-                $fullPath = $this->markdownDir . '/' . ltrim($path, '/');
-
-                if (file_exists($fullPath)) {
-                    // --- CASE A: .BASE FILE (TABLES) ---
-                    if ($extension === 'base') {
-                        $render = $this->renderTable;
-                        $html = "<div class='base-embed'>" . $render($fullPath, $this->currentFilePath, $targetView) . "</div>";
-                        return [
-                            'extent' => strlen($matches[0]),
-                            'element' => ['rawHtml' => $html],
-                        ];
-                    }
-
-                    // --- CASE B: .MD FILE (NOTES) ---
-                    if ($extension === 'md') {
-                        $meta = get_page_metadata($fullPath);
-                        $displayTitle = !empty($meta['title']) ? $meta['title'] : ucwords(str_replace(['-', '_'], ' ', urldecode(basename($targetName))));
-                        if (strtolower($displayTitle) === 'index' || $displayTitle === '') {
-                            $displayTitle = 'Home';
-                        }
-
-                        $rawNote = file_get_contents($fullPath);
-                        // Strip YAML
-                        $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $rawNote, 1);
-                        
-                        // Recursive call: Parse the note content using the current parser instance
-                        $parsedNote = $this->text($noteContent);
-                        $url = create_wiki_url($targetName);
-                        
-                        $html = "<div class='markdown-embed'>$parsedNote<div class='embed-source'>- from <a href='$url'>$displayTitle</a></div></div>";
-                        return [
-                            'extent' => strlen($matches[0]),
-                            'element' => ['rawHtml' => $html],
-                        ];
-                    }
-                    
-                    // --- CASE C: IMAGES ---
-                    // If it's an image, we return nothing here and let the 
-                    // standard Parsedown image handler (or your post-processor) take it.
-                }
+    // Choose the correct view index from the base file.
+    $viewIndex = 0;
+    if (isset($baseData['views'])) {
+        foreach ($baseData['views'] as $idx => $view) {
+            if ($targetViewName && strtolower($view['name'] ?? '') === strtolower($targetViewName)) {
+                $viewIndex = $idx;
+                break;
+            }
+            if (!$targetViewName && ($view['type'] ?? '') === 'table') {
+                $viewIndex = $idx;
             }
         }
-        return null;
+    }
+
+    // Get the ordered columns for the table.
+    $order = $baseData['views'][$viewIndex]['order'] ?? [];
+
+    // Build the list of markdown pages to include in the table.
+    $scanDir = dirname($basePath);
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
+    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
+
+    // Normalize property names and find values from page YAML.
+    $findProp = function ($props, $id) {
+        if (isset($props[$id])) {
+            return $props[$id];
+        }
+        $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
+        foreach ($props as $key => $val) {
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
+                return $val;
+            }
+        }
+        return '';
+    };
+
+    // Start the HTML table and render the header row.
+    $tableHtml = "<table class='bases-table'><thead><tr>";
+    foreach ($order as $colId) {
+        $colName = ($colId === 'file.name' || $colId === 'file')
+            ? 'file name'
+            : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
+    }
+    $tableHtml .= '</tr></thead><tbody>';
+
+    // Render each markdown page as a row in the table.
+    foreach ($mdFiles as $mdFile) {
+        $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+
+        $rawContent = file_get_contents($mdFile);
+        $props = [];
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
+            $props = Spyc::YAMLLoad($matches[1]);
+        }
+
+        // Make the whole row clickable, but ignore clicks on inner anchor tags.
+        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
+        $linkPlaced = false;
+
+        foreach ($order as $propId) {
+            $val = ($propId === 'file.name' || $propId === 'file')
+                ? $displayName
+                : $findProp($props, $propId);
+
+            $cellValue = is_array($val)
+                ? implode(', ', array_map(function ($i) use ($markdownDir) {
+                    if (is_array($i)) {
+                        $i = implode(', ', array_map('strval', $i));
+                    }
+                    $item = $this->line((string) $i);
+                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $this, true) . '</span>';
+                }, $val))
+                : render_wiki_markup_html($this->line((string) $val), $markdownDir, $this, true);
+
+            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
+                $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
+                $linkPlaced = true;
+            } else {
+                $tableHtml .= "<td>$cellValue</td>";
+            }
+        }
+
+        $tableHtml .= '</tr>';
+    }
+
+    return $tableHtml . '</tbody></table>';
     }
 }
+?>

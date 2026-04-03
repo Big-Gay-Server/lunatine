@@ -1,7 +1,7 @@
 <?php
-require_once 'Parsedown.php';
+require_once 'parsedownBases.php';
 
-class ParsedownGloss extends Parsedown {
+class ParsedownGloss extends ParsedownBases {
     // We override the standard Fenced Code block
     protected function blockFencedCode($Line) {
         $Block = parent::blockFencedCode($Line);
