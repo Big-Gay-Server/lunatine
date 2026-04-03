@@ -4,19 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "99295c74abf384ed",
+        "id": "892de77251f513ff",
         "type": "tabs",
         "children": [
           {
-            "id": "65d43a3820334290",
+            "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "LANGUAGES/index.base",
-                "viewName": "Table"
+                "file": "CHARACTERS/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
+              "icon": "lucide-file",
               "title": "index"
             }
           }
@@ -96,7 +97,7 @@
       {
         "id": "e42138525fc4c41e",
         "type": "tabs",
-        "dimension": 62.720156555773,
+        "dimension": 65.31007751937985,
         "children": [
           {
             "id": "1d4b072197f93ee3",
@@ -150,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/characterbase.base",
+                "file": "CHARACTERS/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of characterbase"
+              "title": "Outline of index"
             }
           },
           {
@@ -203,7 +204,7 @@
       {
         "id": "afe34fa239e6fb93",
         "type": "tabs",
-        "dimension": 37.279843444227005,
+        "dimension": 34.689922480620154,
         "children": [
           {
             "id": "591b18d1aa3a12ef",
@@ -260,28 +261,20 @@
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
       "terminal:Open terminal": false,
-      "obsidian-git:Open Git source control": false,
-      "calendarium:Open Calendarium": false
+      "calendarium:Open Calendarium": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "65d43a3820334290",
+  "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
     "CHARACTERS/characterbase.base",
-    "CHARACTERS/Urali/index.md",
-    "CHARACTERS/Colarius/index.md",
     "CHARACTERS/index.md",
-    "CHARACTERS/Colarius/art/colarius new icon.png",
-    "CHARACTERS/Colarius/art/colarius new.png",
-    "CHARACTERS/Colarius/art/colarius but with no shirt.jpg",
-    "CHARACTERS/Colarius/art/0faa15_f054e4b79f7242b9b49707ebb2bc8a41.png",
-    "CHARACTERS/Colarius/art/colarius.png",
-    "CHARACTERS/Merisdae/BuroMerisdae.md",
-    "SPECIES/Fae/index 1.md",
+    "CHARACTERS/Yudora/index.md",
     "SPECIES/Selhae/index.md",
-    "CHARACTERS/Esela/index.md",
     "SPECIES/speciesbase.base",
     "SPECIES/Inna/index.md",
     "SPECIES/index.md",
+    "CHARACTERS/Merisdae/BuroMerisdae.md",
     "CHARACTERS/Merisdae/index.md",
     "about.md",
     "codebottom.php",
@@ -299,6 +292,9 @@
     "CONCEPTS/World Seed/World Seed.md",
     "CONCEPTS/The Story of the Inna/index.md",
     "CONCEPTS/The Story of the Inna/The Story of the Inna.md",
+    "CONCEPTS/Soul/index.md",
+    "CONCEPTS/Soul/Archetypes/Core Archetypes.md",
+    "CONCEPTS/Soul/Archetypes/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
@@ -311,6 +307,11 @@
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",
     "GRAPHICS/world cover.png",
-    "GRAPHICS/Untitled.png"
+    "GRAPHICS/Untitled.png",
+    "GRAPHICS/noicon.png",
+    "GRAPHICS/nerdchart.png",
+    "GRAPHICS/maeniil.png",
+    "GRAPHICS/idk maybe asilles (1).jpg",
+    "GRAPHICS/image (1).png"
   ]
 }
