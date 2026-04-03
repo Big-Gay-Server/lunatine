@@ -11,13 +11,14 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "CHARACTERS/characterbase.base",
-                "viewName": "web"
+                "file": "STORY/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "characterbase"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -266,9 +267,9 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "CHARACTERS/characterbase.base",
     "STORY/index.md",
     "STORY/writingbase.base",
-    "CHARACTERS/characterbase.base",
     "SPECIES/Selhae/index.md",
     "CHARACTERS/index.md",
     "CHARACTERS/_misc art/index.md",
