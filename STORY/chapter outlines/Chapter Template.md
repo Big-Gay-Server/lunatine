@@ -1,3 +1,6 @@
+---
+Author:
+---
 # Chapter Template
 
 # Outline

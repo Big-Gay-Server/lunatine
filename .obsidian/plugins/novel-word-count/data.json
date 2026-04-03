@@ -273,8 +273,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147145650,
-      "modifiedDate": 1775227352733,
-      "sizeInBytes": 532,
+      "modifiedDate": 1775227524021,
+      "sizeInBytes": 602,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -282,33 +282,6 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
-      }
-    },
-    "STORY/plot draft.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 2320,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 7.733333333333333,
-      "characterCount": 13449,
-      "nonWhitespaceCharacterCount": 10970,
-      "newlineCount": 88,
-      "readingTimeInMinutes": 8.754716981132075,
-      "linkCount": 0,
-      "embedCount": 1,
-      "aliases": null,
-      "createdDate": 1775147145646,
-      "modifiedDate": 1775147145647,
-      "sizeInBytes": 13499,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 7.733333333333333,
-        "wordCount": 2320,
-        "characterCount": 13449,
-        "nonWhitespaceCharacterCount": 10970,
-        "newlineCount": 88
       }
     },
     "STORY/misc writings/esela story.md": {
@@ -640,16 +613,16 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.04,
-      "characterCount": 250,
+      "characterCount": 251,
       "nonWhitespaceCharacterCount": 155,
-      "newlineCount": 39,
+      "newlineCount": 40,
       "readingTimeInMinutes": 0.045283018867924525,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1775147145612,
-      "modifiedDate": 1775147145613,
-      "sizeInBytes": 250,
+      "modifiedDate": 1775227482372,
+      "sizeInBytes": 266,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.04,
@@ -657,6 +630,9 @@
         "characterCount": 250,
         "nonWhitespaceCharacterCount": 155,
         "newlineCount": 39
+      },
+      "frontmatter": {
+        "Author": null
       }
     },
     "STORY/chapter outlines/Chapter Ten.md": {
@@ -19354,6 +19330,33 @@
         "order": null,
         "Status": null,
         "Characters": null
+      }
+    },
+    "STORY/chapter drafts/plot draft.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 2320,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 7.733333333333333,
+      "characterCount": 13449,
+      "nonWhitespaceCharacterCount": 10970,
+      "newlineCount": 88,
+      "readingTimeInMinutes": 8.754716981132075,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1775147145646,
+      "modifiedDate": 1775147145647,
+      "sizeInBytes": 13499,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
       }
     }
   }

@@ -13,15 +13,18 @@ views:
     order:
       - file.name
       - formula.type
-      - Author
-      - order
       - Status
+      - order
+      - Author
       - Characters
     sort:
+      - property: Author
+        direction: DESC
       - property: formula.type
         direction: ASC
       - property: order
         direction: ASC
     columnSize:
-      note.Status: 96
       formula.type: 146
+      note.order: 49
+      note.Status: 96
