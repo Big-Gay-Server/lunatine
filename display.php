@@ -200,7 +200,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
     $scanDir = dirname($basePath);
 
-    // 1. Recursive Scan
+    // 1. RECURSIVE SCAN
     $mdFiles = [];
     $directory = new RecursiveDirectoryIterator($scanDir);
     $iterator = new RecursiveIteratorIterator($directory);
@@ -237,9 +237,9 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         $rawContent = file_get_contents($mdFile);
         $props = [];
         
-        // FIXED REGEX: Specifically targets the block between triple-dashes
-        if (preg_match('/^---\s*\n(.*?)\n---\s*/s', $rawContent, $matches)) {
-            $props = Spyc::YAMLLoad($matches[1]); 
+        // FIX: Extract only the inner content for Spyc
+        if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
+            $props = Spyc::YAMLLoad($matches[1]); // Use index 1
         }
 
         $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
@@ -248,27 +248,25 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // 2. WIKI-LINK RESTORATION
-            // If the value contains a pipe | or forward slash / but no brackets, it's a raw wiki-link from YAML.
-            $processValue = function($input) use ($markdownDir, $Parsedown) {
-                $input = (string)$input;
-                if (empty(trim($input))) return '';
-                
-                // Re-wrap in brackets so render_wiki_markup_html recognizes it
-                if ((strpos($input, '|') !== false || strpos($input, '/') !== false) && strpos($input, '[[') === false) {
-                    $input = "[[" . $input . "]]";
-                }
-                return render_wiki_markup_html($input, $markdownDir, $Parsedown, true);
-            };
-
+            // FIX: Process arrays into a string of pills BEFORE rendering
+            $cellValue = "";
             if (is_array($val)) {
                 $pills = [];
                 foreach ($val as $item) {
-                    $pills[] = "<span class='prop-pill'>" . $processValue($item) . "</span>";
+                    $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
+                    // Auto-wrap links if they look like paths but lack brackets
+                    if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && strpos($itemStr, '[[') === false) {
+                        $itemStr = "[[" . $itemStr . "]]";
+                    }
+                    $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true) . "</span>";
                 }
                 $cellValue = implode(' ', $pills);
             } else {
-                $cellValue = $processValue($val);
+                $itemStr = (string)$val;
+                if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && strpos($itemStr, '[[') === false) {
+                    $itemStr = "[[" . $itemStr . "]]";
+                }
+                $cellValue = render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true);
             }
 
             $isImage = (str_contains($cellValue, '<img') || str_contains($cellValue, '<svg'));
