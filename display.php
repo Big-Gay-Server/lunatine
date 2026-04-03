@@ -222,15 +222,14 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $path = $file->getPathname();
             $filename = basename($path);
             
-            // Skip the current page and any 'bio.md' files
             if (realpath($path) === realpath($currentPage) || $filename === 'bio.md') continue;
             
-            // Only skip index.md if it is the ONE sitting right next to the .base file
+            // Only skip index.md if it's the one in the SAME folder as the .base file
             if ($filename === 'index.md' && realpath(dirname($path)) === realpath($scanDir)) continue;
 
             $rawContent = file_get_contents($path);
             $props = [];
-            // FIXED: Capture the inner content (index 1) to avoid Spyc parsing errors
+            // Use index 1 from matches to get raw YAML without the --- delimiters
             if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
                 $props = Spyc::YAMLLoad($matches[1]);
             }
@@ -250,7 +249,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             }
             if (!$isMatch) continue;
 
-            // Row validity check: Ignore "empty" files like templates
+            // Ensure file has at least one of the columns we are looking for
             $hasData = false;
             foreach ($order as $col) {
                 if ($col === 'file.name' || $col === 'file') continue;
@@ -263,7 +262,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         }
     }
 
-    // 2. STABLE MULTI-SORT
+    // 2. NATURAL SORTING (Fixes 1, 2, 10 order)
     usort($rows, function($a, $b) use ($sortRules, $findProp) {
         foreach ($sortRules as $rule) {
             $prop = $rule['property'] ?? '';
@@ -273,13 +272,12 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
             $valB = ($prop === 'file.name' || $prop === 'file') ? $b['displayName'] : $findProp($b['props'], $prop);
 
             if ($valA == $valB) continue;
-            // Use natural comparison so "Chapter 10" follows "Chapter 2" correctly
             return strnatcasecmp((string)$valA, (string)$valB) * $dir;
         }
         return 0;
     });
 
-    // 3. RENDER
+    // 3. RENDER TABLE
     $tableHtml = "<table class='bases-table'><thead><tr>";
     foreach ($order as $colId) {
         $colName = str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
@@ -295,7 +293,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $row['displayName'] : $findProp($row['props'], $propId);
 
-            // Correctly handle arrays (like lists of Species or Tags)
             if (is_array($val)) {
                 $pills = array_map(function($i) use ($markdownDir, $Parsedown) {
                     $itemStr = is_array($i) ? implode(', ', $i) : (string)$i;
@@ -321,6 +318,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     }
     return $tableHtml . '</tbody></table>';
 };
+
 
 
 
