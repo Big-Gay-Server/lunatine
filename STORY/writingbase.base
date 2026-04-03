@@ -6,7 +6,7 @@ views:
     filters:
       and:
         - file.ext == "md"
-        - "!Author.isEmpty()"
+        - file.folder.contains("STORY/")
     order:
       - file.name
       - formula.type
