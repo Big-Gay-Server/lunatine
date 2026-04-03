@@ -193,7 +193,9 @@ if ($filePath && file_exists($filePath)) {
 
     if ($extension === 'base') {
         // Render .base files as tables rather than markdown pages.
-        $htmlContent = $renderTable($filePath, $filePath);
+        // Pass $markdownDir as the 3rd argument as defined in your ParsedownBases class
+        $htmlContent = $Parsedown->renderTable($filePath, $filePath, $markdownDir);
+
     } else {
         // Load the markdown page content into memory.
         $markdownToProcess = file_get_contents($filePath);
@@ -213,6 +215,12 @@ if ($filePath && file_exists($filePath)) {
         // If a bio page exists for this URL, load it too.
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
+
+        // This bridge variable allows the closure to call the class method
+        $renderTable = function($basePath, $currentPage, $targetView = null) use ($Parsedown, $markdownDir) {
+            // Note: renderTable in your class requires 4 arguments
+            return $Parsedown->renderTable($basePath, $currentPage, $markdownDir, $targetView);
+        };
 
         // --- THE PARSER TOOL ---
         // We add &$wikiParser to the 'use' so it can call itself for notes inside notes
