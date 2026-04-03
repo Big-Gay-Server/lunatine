@@ -200,7 +200,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
     $scanDir = dirname($basePath);
 
-    // 1. Recursive Scan for Story/Character files
+    // 1. RECURSIVE SCAN: Find all .md files
     $mdFiles = [];
     $directory = new RecursiveDirectoryIterator($scanDir);
     $iterator = new RecursiveIteratorIterator($directory);
@@ -208,6 +208,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         if ($file->isFile() && $file->getExtension() === 'md') {
             $path = $file->getPathname();
             $fname = basename($path);
+            // Ignore current page, bios, and index files that aren't the main one
             if (realpath($path) !== realpath($currentPage) && $fname !== 'bio.md' && $fname !== 'index.md') {
                 $mdFiles[] = $path;
             }
@@ -236,7 +237,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        // Match frontmatter specifically
+        // Extract frontmatter
         if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---/s', $rawContent, $matches)) {
             $props = Spyc::YAMLLoad($matches[1]);
         }
@@ -247,24 +248,25 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // 2. Direct Rendering Logic
-            // We pass raw YAML values to the wiki renderer to handle [[links]] and ![[images]]
+            // 2. RENDERING LOGIC: Handle wiki-links and images
             if (is_array($val)) {
                 $pills = [];
                 foreach ($val as $item) {
                     $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
-                    // Don't use Parsedown here; let your wiki function handle the raw text
                     $pills[] = "<span class='prop-pill'>" . render_wiki_markup_html($itemStr, $markdownDir, $Parsedown, true) . "</span>";
                 }
                 $cellValue = implode(' ', $pills);
             } else {
+                // If it's a string, pass it directly to render_wiki_markup_html to handle [[links]]
                 $cellValue = render_wiki_markup_html((string)$val, $markdownDir, $Parsedown, true);
             }
 
-            $isEmbed = (str_contains($cellValue, '<img') || str_contains($cellValue, '<picture'));
-            $hasTextContent = !empty(trim(strip_tags($cellValue)));
+            // 3. ICON & LINK LOGIC
+            $isImage = (str_contains($cellValue, '<img') || str_contains($cellValue, '<svg'));
+            $hasText = !empty(trim(strip_tags($cellValue)));
 
-            if (!$linkPlaced && !$isEmbed && $hasTextContent) {
+            // Ensure the main link is only placed on the first text-based column
+            if (!$linkPlaced && !$isImage && $hasText) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
@@ -275,6 +277,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     }
     return $tableHtml . '</tbody></table>';
 };
+
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
