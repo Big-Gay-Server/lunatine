@@ -15498,8 +15498,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537461,
-      "modifiedDate": 1775223485662,
-      "sizeInBytes": 24501,
+      "modifiedDate": 1775229578039,
+      "sizeInBytes": 24829,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -16254,7 +16254,7 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.016666666666666666,
-      "characterCount": 49,
+      "characterCount": 44,
       "nonWhitespaceCharacterCount": 37,
       "newlineCount": 6,
       "readingTimeInMinutes": 0.018867924528301886,
@@ -16264,8 +16264,8 @@
         "Character Art"
       ],
       "createdDate": 1775147144705,
-      "modifiedDate": 1775147144706,
-      "sizeInBytes": 108,
+      "modifiedDate": 1775229402251,
+      "sizeInBytes": 99,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.016666666666666666,

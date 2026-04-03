@@ -183,7 +183,6 @@ $bioHtml = '';
 $yamlData = [];
 
 // --- BASES RENDERER ---
-// This closure renders a .base file as an HTML table with support for folder filters and recursion.
 $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($markdownDir, $Spyc, $Parsedown) {
     if (!file_exists($basePath)) {
         return '<i>(Base file not found)</i>';
@@ -191,8 +190,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
     $baseData = Spyc::YAMLLoad($basePath);
     $viewIndex = 0;
-
-    // Find the requested view or default to the first table
     if (isset($baseData['views'])) {
         foreach ($baseData['views'] as $idx => $view) {
             if ($targetViewName && strtolower($view['name'] ?? '') === strtolower($targetViewName)) {
@@ -209,7 +206,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $order = $view['order'] ?? [];
     $filters = $view['filters'] ?? [];
 
-    // 1. Determine Scan Directory (Handle "folder contains" filters)
     $scanDir = dirname($basePath); 
     foreach ($filters as $filter) {
         if (($filter['field'] ?? '') === 'folder' && ($filter['operator'] ?? '') === 'contains') {
@@ -218,7 +214,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         }
     }
 
-    // 2. Recursive File Search (Finds files in all subfolders)
     $mdFiles = [];
     if (is_dir($scanDir)) {
         $directory = new RecursiveDirectoryIterator($scanDir);
@@ -226,7 +221,6 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($iterator as $file) {
             if ($file->isFile() && strtolower($file->getExtension()) === 'md') {
                 $filePathName = $file->getPathname();
-                // Filter out the current page and bio.md
                 if (realpath($filePathName) !== realpath($currentPage) && $file->getFilename() !== 'bio.md') {
                     $mdFiles[] = $filePathName;
                 }
@@ -251,10 +245,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     $tableHtml .= '</tr></thead><tbody>';
 
     foreach ($mdFiles as $mdFile) {
-        // Use folder name for index.md files, otherwise use filename
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
-        
-        // Fix URL path generation for recursive folders
         $relativeUrlPath = ltrim(str_replace([realpath($markdownDir), '.md', '\\'], ['', '', '/'], realpath($mdFile)), '/');
         $finalUrl = create_wiki_url($relativeUrlPath);
 
@@ -269,15 +260,16 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
+            // FIX: Ensure $cellValue is always defined
             if (is_array($val)) {
-                $cellValue = is_array($val)
-                    ? implode(', ', array_map(function ($i) use ($markdownDir, $Parsedown) {
-                        $itemText = (string)(is_array($i) ? implode(', ', $i) : $i);
-                        // FORCE the parser to resolve [[Wikilinks]] inside the array
-                        $renderedItem = render_wiki_markup_html($Parsedown->line($itemText), $markdownDir, $Parsedown, true);
-                        return "<span class='prop-pill'>$renderedItem</span>";
-                    }, $val))
-                    : render_wiki_markup_html($Parsedown->line((string) $val), $markdownDir, $Parsedown, true);
+                $pills = array_map(function ($i) use ($markdownDir, $Parsedown) {
+                    $itemText = (string)(is_array($i) ? implode(', ', $i) : $i);
+                    $rendered = render_wiki_markup_html($Parsedown->line($itemText), $markdownDir, $Parsedown, true);
+                    return "<span class='prop-pill'>$rendered</span>";
+                }, $val);
+                $cellValue = implode(' ', $pills);
+            } else {
+                $cellValue = render_wiki_markup_html($Parsedown->line((string)$val), $markdownDir, $Parsedown, true);
             }
 
             $tableHtml .= "<td>$cellValue</td>";
@@ -287,6 +279,7 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
     return $tableHtml . '</tbody></table>';
 };
+
 
 // --- STANDARD MARKDOWN PROCESSING ---
 // Only run page rendering if the requested file exists.
