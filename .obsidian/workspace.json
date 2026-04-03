@@ -11,13 +11,14 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "STORY/writingbase.base",
-                "viewName": "Table"
+                "file": "STORY/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "writingbase"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -150,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "STORY/writingbase.base",
+                "file": "STORY/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of writingbase"
+              "title": "Outline of index"
             }
           },
           {
@@ -266,8 +267,8 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
-    "STORY/index.md",
     "STORY/writingbase.base",
+    "STORY/index.md",
     "Untitled.md",
     "CHARACTERS/index.md",
     "CHARACTERS/Colarius/index.md",
