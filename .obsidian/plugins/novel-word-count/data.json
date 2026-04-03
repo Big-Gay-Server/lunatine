@@ -15498,13 +15498,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537461,
-<<<<<<< HEAD
-      "modifiedDate": 1775229787142,
-      "sizeInBytes": 24301,
-=======
-      "modifiedDate": 1775229578039,
-      "sizeInBytes": 24829,
->>>>>>> e6fc22784ae0879217146af4e8bcb1cab0d5a991
+      "modifiedDate": 1775230518573,
+      "sizeInBytes": 24501,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
