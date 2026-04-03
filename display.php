@@ -3,7 +3,6 @@
 // Load the markdown parser, YAML parser, image helper, and file resolver.
 require_once 'Parsedown.php';           // basic markdown to HTML parser
 require_once 'parsedownGloss.php';      // extended parser for gloss blocks
-require_once 'parsedownBases.php';      // your new extension
 require_once 'Spyc.php';                // YAML frontmatter parser
 require_once 'imageparser.php';         // Obsidian-style image path resolver
 require_once 'filefinder.php';          // finds markdown files by URL path
@@ -11,6 +10,7 @@ require_once 'filefinder.php';          // finds markdown files by URL path
 // Create instances used later in the file.
 $Spyc = new Spyc();
 $templateDir = __DIR__ . '/templates/';
+$Parsedown = new ParsedownGloss();
 
 // --- CASE-INSENSITIVE PATH RESOLUTION ---
 // Find a filesystem path under $baseDir that matches $path ignoring case.
@@ -314,9 +314,6 @@ if ($filePath && file_exists($filePath)) {
         $bioFile = find_markdown_file($markdownDir, $requestedPath . '/bio');
         $bioToProcess = $bioFile ? file_get_contents($bioFile) : '';
 
-        // Instantiate your new combined parser
-        $Parsedown = new ParsedownBases($markdownDir, $filePath, $renderTable);
-
         // --- THE PARSER TOOL ---
         // We add &$wikiParser to the 'use' so it can call itself for notes inside notes
         $wikiParser = function ($text) use ($yamlData, $markdownDir, $renderTable, $filePath, $Parsedown, &$wikiParser) {
@@ -366,6 +363,56 @@ if ($filePath && file_exists($filePath)) {
                     }
                 }
                 return ($val !== null) ? (is_array($val) ? implode(', ', $val) : $val) : $fallback;
+            }, $text);
+
+            // 2. NOTE & BASE EMBEDDER (Pre-Parsedown)
+            $transclusions = [];
+            $text = preg_replace_callback('/!\[\[(.*?)\]\]/', function ($m) use ($markdownDir, &$wikiParser, &$transclusions, $renderTable, $filePath) {
+                // Split for Alias and Anchor (e.g. ![[File.base#view|Alias]])
+                $parts = explode('|', trim($m[1]));
+                $rawTarget = trim($parts[0]);
+                
+                $targetParts = explode('#', $rawTarget);
+                $targetName = $targetParts[0];
+                $targetView = $targetParts[1] ?? null;
+
+                $path = find_image_path($markdownDir, $targetName);
+                
+                if ($path) {
+                    $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+                    $fullPath = $markdownDir . '/' . ltrim($path, '/');
+
+                    if (file_exists($fullPath)) {
+                        $id = "<!--TRANS_ID_" . count($transclusions) . "-->";
+                        
+                        // --- CASE A: EMBEDDING A .BASE FILE (TABLES) ---
+                        if ($extension === 'base') {
+                            // Call your existing table renderer
+                            $tableHtml = $renderTable($fullPath, $filePath, $targetView);
+                            $transclusions[$id] = "<div class='base-embed'>$tableHtml</div>";
+                            return $id;
+                        }
+
+                        // --- CASE B: EMBEDDING A .MD FILE (NOTES) ---
+                        if ($extension === 'md') {
+                            $meta = get_page_metadata($fullPath);
+                            $displayTitle = !empty($meta['title']) ? $meta['title'] : ucwords(str_replace(['-', '_'], ' ', urldecode(basename($targetName))));
+                            if (strtolower($displayTitle) === 'index' || $displayTitle === '') {
+                                $displayTitle = 'Home';
+                            }
+
+                            $rawNote = file_get_contents($fullPath);
+                            $noteContent = preg_replace('/\A(?:\xEF\xBB\xBF)?---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/u', '', $rawNote, 1);
+                            
+                            $parsedNote = $wikiParser($noteContent);
+                            $url = create_wiki_url($targetName);
+                            
+                            $transclusions[$id] = "<div class='markdown-embed'>$parsedNote<div class='embed-source'>- from <a href='$url'>$displayTitle</a></div></div>";
+                            return $id;
+                        }
+                    }
+                }
+                return $m[0]; 
             }, $text);
 
             // 4. MAIN PARSEDOWN RENDER
