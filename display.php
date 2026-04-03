@@ -241,31 +241,38 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
     }
     $tableHtml .= '</tr></thead><tbody>';
 
-    foreach ($mdFiles as $mdFile) {
-        $displayName = basename($mdFile, '.md');
-        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
-        
+        foreach ($mdFiles as $mdFile) {
         $rawContent = file_get_contents($mdFile);
         $props = [];
-        
-        // FIX: Extract only the inner content for Spyc
         if (preg_match('/^---\s*[\r\n](.*?)[\r\n]---\s*/s', $rawContent, $matches)) {
-            $props = Spyc::YAMLLoad($matches[1]); // Use index 1
+            $props = Spyc::YAMLLoad($matches[1]);
         }
 
-        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
-        $linkPlaced = false;
+        // --- FILTER: Skip empty rows ---
+        // If the file doesn't have an Author or Status (for Story) 
+        // OR a Species (for Characters), don't render the row.
+        $hasRequiredData = isset($props['Author']) || isset($props['Status']) || isset($props['Species']);
+        if (!$hasRequiredData) {
+            continue; 
+        }
 
+        $displayName = basename($mdFile, '.md');
+        if ($displayName === 'index') {
+            $displayName = basename(dirname($mdFile)); // Use folder name for index.md files
+        }
+
+        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
+        
+        $linkPlaced = false;
         foreach ($order as $propId) {
             $val = ($propId === 'file.name' || $propId === 'file') ? $displayName : $findProp($props, $propId);
 
-            // FIX: Process arrays into a string of pills BEFORE rendering
-            $cellValue = "";
+            // Render logic (Pills for arrays, Links for strings)
             if (is_array($val)) {
                 $pills = [];
                 foreach ($val as $item) {
                     $itemStr = is_array($item) ? implode(', ', $item) : (string)$item;
-                    // Auto-wrap links if they look like paths but lack brackets
                     if ((strpos($itemStr, '/') !== false || strpos($itemStr, '|') !== false) && strpos($itemStr, '[[') === false) {
                         $itemStr = "[[" . $itemStr . "]]";
                     }
