@@ -1,0 +1,1 @@
+![[STORY/writingbase.base|writingbase]]

@@ -1,17 +1,27 @@
+formulas:
+  type: (file.folder).split("/").slice(1)
 views:
   - type: table
     name: Table
     filters:
       and:
-        - file.folder.contains("STORY")
+        - file.folder.contains("STORY/")
+        - file.ext == "md"
+    groupBy:
+      property: formula.type
+      direction: ASC
     order:
       - file.name
+      - formula.type
       - Author
       - order
       - Status
       - Characters
     sort:
+      - property: formula.type
+        direction: ASC
       - property: order
         direction: ASC
     columnSize:
       note.Status: 96
+      formula.type: 146

@@ -246,8 +246,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537475,
-      "modifiedDate": 1775225178647,
-      "sizeInBytes": 13554,
+      "modifiedDate": 1775225352703,
+      "sizeInBytes": 13522,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -273,8 +273,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147145650,
-      "modifiedDate": 1775147145651,
-      "sizeInBytes": 307,
+      "modifiedDate": 1775227352733,
+      "sizeInBytes": 532,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -18555,20 +18555,22 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 177,
+      "wordCount": 74,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.59,
-      "characterCount": 1930,
-      "nonWhitespaceCharacterCount": 1613,
-      "newlineCount": 76,
-      "readingTimeInMinutes": 0.6679245283018868,
+      "pageCount": 0.24666666666666667,
+      "characterCount": 876,
+      "nonWhitespaceCharacterCount": 747,
+      "newlineCount": 45,
+      "readingTimeInMinutes": 0.2792452830188679,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Colarius"
+      ],
       "createdDate": 1775147144537,
-      "modifiedDate": 1775147144538,
-      "sizeInBytes": 1930,
+      "modifiedDate": 1775226011573,
+      "sizeInBytes": 1951,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.59,
@@ -18576,6 +18578,39 @@
         "characterCount": 1930,
         "nonWhitespaceCharacterCount": 1613,
         "newlineCount": 76
+      },
+      "frontmatter": {
+        "title": "Colarius Emelth",
+        "Full Name": "Colarius Emelth",
+        "Name Pronunciation": "so-LAIR-ee-us",
+        "Character Type": "Major Character",
+        "Status": "Alive",
+        "Gender": "Bigender",
+        "Pronouns": "he/they",
+        "Actual Age": "25 years",
+        "Apparent Age": "mid twenties",
+        "Birthdate": "12/27/1276",
+        "Birthdate (written)": "Aemthe, Day 27 of Ranteiwa, Year 1276",
+        "Current Location": "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]",
+        "Birthplace": "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]",
+        "Partners": "[[CHARACTERS/Urali/index|Urali]]",
+        "Eyes": "royal purple",
+        "Hair": "messy auburn hair, tied into a small, low ponytail",
+        "Languages Spoken": [
+          "[[LANGUAGES/Acorithe/index|Acorithe]]",
+          "[[LANGUAGES/Varae/index|Varae]]"
+        ],
+        "Organizations": "[[ORGANIZATIONS/Acorithe Royal Court/index|Acorithe Royal Court]]",
+        "Rank": "Prince",
+        "Ruler/Owner of": "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]",
+        "Skin Tone": "tan",
+        "Species": "[[SPECIES/Fae/index|Fae]]",
+        "Titles": "Prince of Acorithe",
+        "icon": "![[CHARACTERS/Colarius/art/colarius new icon.png|75]]",
+        "aliases": [
+          "Colarius"
+        ],
+        "fullbody": "![[CHARACTERS/Colarius/art/colarius new.png|400]]"
       }
     },
     "CHARACTERS/Colarius/bio.md": {
@@ -19259,6 +19294,66 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      }
+    },
+    "STORY/index.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.0033333333333333335,
+      "characterCount": 39,
+      "nonWhitespaceCharacterCount": 39,
+      "newlineCount": 1,
+      "readingTimeInMinutes": 0.0037735849056603774,
+      "linkCount": 0,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1775226748485,
+      "modifiedDate": 1775226757575,
+      "sizeInBytes": 39,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "Untitled.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0,
+      "characterCount": 1,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 2,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1775226840995,
+      "modifiedDate": 1775226841047,
+      "sizeInBytes": 43,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      },
+      "frontmatter": {
+        "Author": null,
+        "order": null,
+        "Status": null,
+        "Characters": null
       }
     }
   }

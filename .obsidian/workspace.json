@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CHARACTERS/Colarius/index.md",
+                "file": "STORY/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CHARACTERS/Colarius/index.md",
+                "file": "STORY/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -267,11 +267,15 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "STORY/writingbase.base",
+    "Untitled.md",
+    "STORY/index.md",
+    "CHARACTERS/index.md",
+    "CHARACTERS/Colarius/index.md",
     "CHARACTERS/characterbase.base",
     "LANGUAGES/index.md",
     "GALLERY/index.md",
     "LANGUAGES/languagesbase.base",
-    "CHARACTERS/index.md",
     "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/index.md",
     "LANGUAGES/Acorithe/index.md",
@@ -294,11 +298,7 @@
     "EVENTS/Kuraesmeris Migration/index.md",
     "EVENTS/Kohoii Solei War/index.md",
     "CONCEPTS/World Seed/index.md",
-    "CONCEPTS/Inna Tenets/Inna Tenets.md",
-    "CONCEPTS/World Seed/World Seed.md",
-    "CONCEPTS/The Story of the Inna/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
-    "STORY/writingbase.base",
     "STORY/misc writings/kaeyomii.docx",
     "STORY/misc writings/gay.docx",
     "STORY/chapter drafts/L U N A T I N E.docx",

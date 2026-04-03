@@ -28,7 +28,6 @@ icon: "![[CHARACTERS/Colarius/art/colarius new icon.png|75]]"
 aliases:
   - Colarius
 fullbody: "![[CHARACTERS/Colarius/art/colarius new.png|400]]"
-iconn: "[[colarius new icon.png]]"
 ---
 ## About
 
