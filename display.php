@@ -212,8 +212,21 @@ $renderTable = function ($basePath, $currentPage, $targetViewName = null) use ($
 
     // Build the list of markdown pages to include in the table.
     $scanDir = dirname($basePath);
-    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
-    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
+
+    // Use a recursive directory iterator to find ALL .md files in subfolders
+    $directory = new RecursiveDirectoryIterator($scanDir);
+    $iterator = new RecursiveIteratorIterator($directory);
+    $mdFiles = [];
+
+    foreach ($iterator as $file) {
+        if ($file->isFile() && $file->getExtension() === 'md') {
+            $path = $file->getPathname();
+            // Skip current page and bio.md
+            if (realpath($path) !== realpath($currentPage) && basename($path) !== 'bio.md') {
+                $mdFiles[] = $path;
+            }
+        }
+    }
 
     // Normalize property names and find values from page YAML.
     $findProp = function ($props, $id) {
