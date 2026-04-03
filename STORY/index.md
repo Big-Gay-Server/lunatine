@@ -1,2 +1,2 @@
 
-![[STORY/writingbase.base#Table| writingbase]]
+![[STORY/writingbase.base#Table]]
