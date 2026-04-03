@@ -5,10 +5,11 @@ views:
     name: Table
     filters:
       and:
-        - file.folder.startsWith("STORY")
         - file.ext == "md"
+        - "!Author.isEmpty()"
     order:
       - file.name
+      - formula.type
       - Status
       - order
       - Author
