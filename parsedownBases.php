@@ -1,101 +1,142 @@
 <?php
-require_once 'Parsedown.php';
+// Opens the PHP code block.
+
+require_once 'Parsedown.php'; 
+// Imports the base Parsedown library. 'require_once' ensures the script stops if the file is missing.
 
 class ParsedownBases extends Parsedown {
+// Defines a new class that "inherits" from Parsedown, allowing it to use and extend Markdown features.
 
     // --- BASES RENDERER ---
-    // This method renders a .base file as an HTML table.
     public function renderTable($basePath, $currentPage, $markdownDir, $targetViewName = null)
     {
-    // If the .base file is missing, return a placeholder.
+    // A public function that takes the file path, the current page (to exclude it), the root directory, and an optional view name.
+
     if (!file_exists($basePath)) {
         return '<i>(Base file not found)</i>';
     }
+    // Checks if the .base (YAML) file exists. If not, it returns an error message instead of crashing.
 
-    // Load YAML data from the .base file.
     $baseData = Spyc::YAMLLoad($basePath);
+    // Uses the 'Spyc' library to convert the YAML content of the .base file into a PHP associative array.
 
-    // Choose the correct view index from the base file.
     $viewIndex = 0;
+    // Initializes a variable to track which "view" configuration to use from the YAML.
+
     if (isset($baseData['views'])) {
         foreach ($baseData['views'] as $idx => $view) {
+            // Loops through the views defined in the base file.
+            
             if ($targetViewName && strtolower($view['name'] ?? '') === strtolower($targetViewName)) {
                 $viewIndex = $idx;
                 break;
             }
+            // If a specific view name was requested and matches, save that index and stop looking.
+
             if (!$targetViewName && ($view['type'] ?? '') === 'table') {
                 $viewIndex = $idx;
             }
+            // If no name was requested, default to the first view marked as a 'table'.
         }
     }
 
-    // Get the ordered columns for the table.
     $order = $baseData['views'][$viewIndex]['order'] ?? [];
+    // Retrieves the list of columns (properties) to display, defaulting to an empty list if none exist.
 
-    // Build the list of markdown pages to include in the table.
     $scanDir = dirname($basePath);
-    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
-    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
+    // Gets the directory path where the .base file lives.
 
-    // Normalize property names and find values from page YAML.
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
+    // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
+
+    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
+    // Filters out the current page you are viewing and any 'bio.md' files from appearing in the table.
+
     $findProp = function ($props, $id) {
+        // Defines a helper function (closure) to find metadata values regardless of naming style (e.g., 'Full Name' vs 'fullname').
+
         if (isset($props[$id])) {
             return $props[$id];
         }
+        // Direct match check.
+
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
+        // Strips spaces, underscores, and dashes to create a "normalized" ID for comparison.
+
         foreach ($props as $key => $val) {
             if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
                 return $val;
             }
         }
+        // Loops through all metadata keys to find a normalized match.
+
         return '';
+        // Returns an empty string if the property isn't found.
     };
 
-    // Start the HTML table and render the header row.
     $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
-    
+    // Starts the HTML string for the table structure.
+
     foreach ($order as $colId) {
-        // Strips 'formula.', 'note.', and the Obsidian formula syntax '["..."]'
+        // Loops through the column IDs defined in the YAML 'order'.
+
         $colName = preg_replace(['/formula\[["\'](.*)["\']\]/', '/formula\./', '/note\./', '/file\./'], ['$1', '', '', ''], $colId);
+        // Uses Regular Expressions to clean up technical prefixes like 'formula.' so the header looks like "Name" instead of "note.Name".
+
         $colName = str_replace(['.', '_'], ' ', $colName);
-        
+        // Replaces dots and underscores with spaces for a cleaner UI.
+
         $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
+        // Adds the column name to the table header, making it lowercase and safe from HTML injection.
     }
     $tableHtml .= '</tr></thead><tbody>'; 
+    // Closes the header section and starts the table body.
 
-    // Render each markdown page as a row in the table.
     foreach ($mdFiles as $mdFile) {
+        // Loops through every Markdown file found earlier to create a table row.
+
         $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
+        // Determines the "Name" of the file: if it's 'index.md', use the folder name; otherwise, use the filename.
+
         $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+        // Generates a clickable link to the page (uses a custom function `create_wiki_url`).
 
         $rawContent = file_get_contents($mdFile);
+        // Reads the entire text of the Markdown file.
+
         $props = [];
         if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
             $props = Spyc::YAMLLoad($matches[1]);
         }
+        // Extracts the "Frontmatter" (the YAML between the --- lines at the top of the file) into an array.
 
-        // Make the whole row clickable, but ignore clicks on inner anchor tags.
         $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
+        // Creates the row. If the user clicks anywhere on the row (except a link), it redirects them to that page.
+
         $linkPlaced = false;
+        // A flag to ensure we only place a clickable text link in the first available cell.
 
         foreach ($order as $propId) {
+            // Loops through each column for this specific row/page.
+
             $val = '';
             $cleanFormulaId = str_replace('formula.', '', $propId);
+            // Prepares the ID in case it's a calculated formula.
 
-            // 1. Check if it's a Formula
             if (isset($baseData['formulas'][$cleanFormulaId])) {
                 $expression = (string)$baseData['formulas'][$cleanFormulaId];
                 $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
             } 
-            // 2. Otherwise, treat as a Standard Property
+            // 1. If the column is a formula, run the math/logic defined in the .base file.
+
             else {
                 $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
                 $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
                     ? $displayName 
                     : $findProp($props, $cleanPropId);
             }
+            // 2. Otherwise, fetch the property from the page metadata or use the filename.
 
-            // 3. Render Output (Handle <br> and Arrays)
             if (is_string($val) && str_contains($val, '<br>')) {
                 $cellValue = render_wiki_markup_html($val, $markdownDir, $this, true);
             } else {
@@ -106,8 +147,8 @@ class ParsedownBases extends Parsedown {
                     }, $val))
                     : render_wiki_markup_html($this->line((string)$val), $markdownDir, $this, true);
             }
+            // 3. Formats the data. If it's an array (like Tags), it creates "pills". Otherwise, it renders Markdown into HTML.
 
-            // 4. Build Table Cell
             $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
             if (!$linkPlaced && !$isEmbed && !empty(trim((string)$val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
@@ -115,57 +156,66 @@ class ParsedownBases extends Parsedown {
             } else {
                 $tableHtml .= "<td>" . ($cellValue ?: '&nbsp;') . "</td>";
             }
-        } // End of foreach ($order)
-        
+            // 4. Places the value in a cell (`<td>`). Wraps the first text-based cell in an anchor tag link.
+        } 
         
         $tableHtml .= '</tr>';
+        // Closes the row.
     }
 
     return $tableHtml . '</tbody></table>';
+    // Returns the full HTML table string.
     }
-        private function evaluateObsidianFormula($expression, $vars, $displayName) {
-    // 1. Handle the "calc age" logic specifically
+
+    private function evaluateObsidianFormula($expression, $vars, $displayName) {
+    // A private helper to handle "Formulas" (Logic inside the table).
+
     if (str_contains($expression, 'Actual Age')) {
-        // Use your $findProp helper to get the values
+        // Specifically looks for logic related to a custom "Age" calculation.
+
         $age = $vars['Actual Age'] ?? null; 
         $species = (string)($vars['Species'] ?? '');
+        // Pulls the 'Actual Age' and 'Species' metadata from the page.
 
         if ($age === null || $age === '') return "Unknown Age";
 
         $ageNum = (float)$age;
         $appearsAge = $ageNum;
 
-        // Reproduce your Obsidian logic:
-        // if(contains("Selhae"), if(age > 25, ((age-25)/25)+25, age), age)
         if (str_contains($species, "Selhae") && $ageNum > 25) {
             $appearsAge = (($ageNum - 25) / 25) + 25;
         }
+        // Custom world-building logic: If species is 'Selhae', calculate their "apparent" age differently after 25.
 
-        // OUTPUT: Matches your Obsidian screenshot (Years \n <i>appears Age)
-        // Notice: NO $species variable in the string!
         return $ageNum . " years<br><i>appears " . round($appearsAge) . "</i>";
+        // Returns two lines of text: the real age and the visual age.
     }
 
-    // 2. Handle Simple Concatenation (Full Name + "\n" + Pronunciation)
     if (str_contains($expression, '+')) {
+        // Handles simple string concatenation (joining text).
+
         $parts = explode('+', $expression);
         $out = '';
         foreach ($parts as $part) {
             $part = trim($part);
             if (preg_match('/^["\'](.*)["\']$/', $part, $lit)) {
                 $out .= str_replace('\n', '<br>', $lit[1]);
-            } else {
-                // Strip note[" "] syntax
+            } 
+            // If the part is a literal string (in quotes), add it to the output.
+
+            else {
                 $clean = str_replace(['note[', ']', '"', "'", 'this.'], '', $part);
                 $out .= ($clean === 'file.name') ? $displayName : ($vars[$clean] ?? '');
             }
+            // Otherwise, treat the part as a variable name and fetch its value from the metadata.
         }
         return $out;
     }
 
     return $expression; 
-}
+    // If it's not a special formula, just return the raw expression.
+    }
 
 }
-
+// Closes the class definition.
 ?>
