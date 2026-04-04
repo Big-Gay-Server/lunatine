@@ -6,8 +6,8 @@ Status: Alive
 Gender: male
 Pronouns: he/him
 Age: 526 years, appears 45
-Actual Age: 526 years
-Apparent Age: 45 years
+Actual Age: "526"
+Apparent Age: "45"
 Perceived age range: late 40s
 Birthdate: 8/2/775
 Birthdate (written): Dothe, Day 2 of Biiwa, Year 775

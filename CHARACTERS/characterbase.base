@@ -1,11 +1,35 @@
 formulas:
-  "": this.Age
+  "": ""
   Untitled: ""
   age--: image(iconn)
   fullbody: image(fullbody)
+  gender/pronouns: Gender + "\n" + Pronouns
+  name: note["Full Name"] + "\n" + "</a><i>" + note["Name Pronunciation"] + "</i>"
+  calc age: |
+    if(note["Actual Age"] != null, 
+      note["Actual Age"].toString() + " years\n<i>appears " + 
+      (
+        if(
+          note["Species"].toString().contains("Selhae"),
+          if(
+            number(note["Actual Age"]) > 25,
+            ((number(note["Actual Age"]) - 25) / 25) + 25,
+            number(note["Actual Age"])
+          ),
+          number(note["Actual Age"])
+        )
+      ).round().toString(),
+      "<i>Unknown Age</i>"
+    )
+  age: formula["calc age"]
+  characteristics: Hair
 properties:
   formula.age--:
     displayName: icon
+  note.Actual Age:
+    displayName: Actual Age
+  formula.calc age:
+    displayName: age
 views:
   - type: cards
     name: View
@@ -108,14 +132,14 @@ views:
         - '!note["Character Type"].isEmpty()'
     order:
       - icon
-      - Full Name
-      - Name Pronunciation
+      - formula.name
       - Species
-      - Age
-      - Gender
-      - Pronouns
+      - formula.gender/pronouns
+      - formula.calc age
       - Titles
     sort:
+      - property: formula.name
+        direction: ASC
       - property: Full Name
         direction: ASC
       - property: Name Pronunciation
@@ -123,4 +147,5 @@ views:
       - property: Actual Age
         direction: DESC
     columnSize:
-      note.icon: 373
+      note.icon: 25
+      formula.name: 257

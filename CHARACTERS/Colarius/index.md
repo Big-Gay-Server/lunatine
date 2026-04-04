@@ -6,8 +6,8 @@ Character Type: Major Character
 Status: Alive
 Gender: Bigender
 Pronouns: he/they
-Actual Age: 25 years
-Apparent Age: mid twenties
+Actual Age: "25"
+Apparent Age: "25"
 Birthdate: 12/27/1276
 Birthdate (written): Aemthe, Day 27 of Ranteiwa, Year 1276
 Current Location: "[[LOCATIONS/Kingdom of Acorithe/index|Kingdom of Acorithe]]"

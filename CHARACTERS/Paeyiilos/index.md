@@ -6,8 +6,8 @@ Status: Unknown
 Gender: transmasc
 Pronouns: he/him
 Age: 369 years, appears 39
-Actual Age: 369 years
-Apparent age: 39 years
+Actual Age: "369"
+Apparent age: "39"
 Apparent Age: mid 40s
 Birthdate: 13/13/932
 Birthdate (written): Muthuthe, Day 13 of Raniiawa, Year 932

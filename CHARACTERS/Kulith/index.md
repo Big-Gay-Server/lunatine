@@ -6,8 +6,8 @@ Status: Alive
 Gender: transfemme
 Pronouns: she/they
 Age: 106 years, appears 28
-Actual Age: 106 years
-Apparent age: 28 years
+Actual Age: "106"
+Apparent age: "28"
 Perceived age range: late twenties
 Birthdate: 6/4/1195
 Birthdate (written): Samthe, Day 4 of Uiiowa, Year 1195

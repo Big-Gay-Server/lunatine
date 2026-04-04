@@ -5,7 +5,7 @@ Character Type: Major Character
 Status: Alive
 Gender: genderless
 Pronouns: any (she/her)
-Actual Age: ??
+Actual Age:
 Current Location: "[[LOCATIONS/Asilles/index |Asilles]]"
 Birthplace: "[[LOCATIONS/World Garden/index |World Garden]]"
 Children: "[[CHARACTERS/Aenna/index |Aenna]]"
@@ -21,7 +21,8 @@ Species: "[[SPECIES/Inna/index|Inna]]"
 Titles: World Garden Curator, Mother of Selhae
 title: Anwi
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
-Apparent age: ageless
+Apparent age:
+Perceived age range: ageless
 ---
 ## About
 

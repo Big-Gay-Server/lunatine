@@ -6,8 +6,8 @@ Status: Deceased
 Gender: female
 Pronouns: she/her
 Age: 9 years, appears 9
-Actual Age: 9 years
-Apparent age: 9 years
+Actual Age: "9"
+Apparent age: "9"
 Perceived age range: 9 years
 Birthdate: 9/8/1231
 Birthdate (written): Daethe, Day 8 of Kuowa, Year 1231

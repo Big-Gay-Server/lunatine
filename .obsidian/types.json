@@ -13,6 +13,8 @@
     "part of speech": "multitext",
     "Languages Spoken": "multitext",
     "date": "date",
-    "Species": "text"
+    "Species": "text",
+    "Actual Age": "number",
+    "Apparent age": "number"
   }
 }

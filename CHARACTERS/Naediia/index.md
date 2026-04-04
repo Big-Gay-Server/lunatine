@@ -6,8 +6,8 @@ Status: Deceased
 Gender: female
 Pronouns: she/her
 Age: 275 years, appears 35
-Actual Age: 275 years
-Apparent age: 35 years
+Actual Age: "275"
+Apparent age: "35"
 Perceived age range: mid 40s
 Birthdate: 12/4/928
 Birthdate (written): Samthe, Day 4 of Ranteiwa, Year 928

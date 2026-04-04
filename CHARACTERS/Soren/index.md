@@ -6,8 +6,8 @@ Status: Unknown
 Gender: nonbinary
 Pronouns: they/them
 Age: 80 years, appears 27
-Actual Age: 80 years
-Apparent age: 27 years
+Actual Age: "80"
+Apparent age: "27"
 Apparent Age: early to mid twenties
 Birthdate: 7/15/1221
 Birthdate (written): Athe, Day 15 of Suswa, Year 1221

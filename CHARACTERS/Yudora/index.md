@@ -5,7 +5,7 @@ Character Type: Major Character
 Status: Alive
 Gender: genderless
 Pronouns: she/they
-Apparent Age range: ageless early twenties
+Apparent Age range:
 Current Location: "[[LOCATIONS/Kaemeris/index |Kaemeris]]"
 Birthplace: "[[LOCATIONS/Kaemeris/index |Kaemeris]]"
 Creators:
@@ -19,12 +19,13 @@ Languages Spoken:
 Skin Tone: fair
 Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Starlight
-Actual Age: "?"
+Actual Age:
 icon: "![[CHARACTERS/Yudora/art/yudora_icon.png|75]]"
 title: Yudora
 aliases: Yudora
 iconn: "[[yudora_icon.png]]"
-Apparent age: ageless
+Apparent age:
+Perceived age range: ageless
 ---
 ## About
 

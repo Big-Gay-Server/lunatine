@@ -6,8 +6,8 @@ Status: Unknown
 Gender: female
 Pronouns: she/her
 Age: 953 years, appears 62
-Actual Age: 953 years
-Apparent age: 62 years
+Actual Age: "953"
+Apparent age: "62"
 Apparent Age: early to mid 60s
 Birthdate: 4/7/348
 Birthdate (written): Aemthe, Day 7 of Adiwa, Year 348

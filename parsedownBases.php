@@ -52,14 +52,16 @@ class ParsedownBases extends Parsedown {
     };
 
     // Start the HTML table and render the header row.
-    $tableHtml = "<table class='bases-table'><thead><tr>";
+    $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
+    
     foreach ($order as $colId) {
-        $colName = ($colId === 'file.name' || $colId === 'file')
-            ? 'file name'
-            : str_replace(['formula.', '.', '_'], ['', ' ', ' '], $colId);
+        // Strips 'formula.', 'note.', and the Obsidian formula syntax '["..."]'
+        $colName = preg_replace(['/formula\[["\'](.*)["\']\]/', '/formula\./', '/note\./', '/file\./'], ['$1', '', '', ''], $colId);
+        $colName = str_replace(['.', '_'], ' ', $colName);
+        
         $tableHtml .= '<th>' . htmlspecialchars(strtolower($colName)) . '</th>';
     }
-    $tableHtml .= '</tr></thead><tbody>';
+    $tableHtml .= '</tr></thead><tbody>'; 
 
     // Render each markdown page as a row in the table.
     foreach ($mdFiles as $mdFile) {
@@ -77,34 +79,93 @@ class ParsedownBases extends Parsedown {
         $linkPlaced = false;
 
         foreach ($order as $propId) {
-            $val = ($propId === 'file.name' || $propId === 'file')
-                ? $displayName
-                : $findProp($props, $propId);
+            $val = '';
+            $cleanFormulaId = str_replace('formula.', '', $propId);
 
-            $cellValue = is_array($val)
-                ? implode(', ', array_map(function ($i) use ($markdownDir) {
-                    if (is_array($i)) {
-                        $i = implode(', ', array_map('strval', $i));
-                    }
-                    $item = $this->line((string) $i);
-                    return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $this, true) . '</span>';
-                }, $val))
-                : render_wiki_markup_html($this->line((string) $val), $markdownDir, $this, true);
+            // 1. Check if it's a Formula
+            if (isset($baseData['formulas'][$cleanFormulaId])) {
+                $expression = (string)$baseData['formulas'][$cleanFormulaId];
+                $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
+            } 
+            // 2. Otherwise, treat as a Standard Property
+            else {
+                $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
+                $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
+                    ? $displayName 
+                    : $findProp($props, $cleanPropId);
+            }
 
+            // 3. Render Output (Handle <br> and Arrays)
+            if (is_string($val) && str_contains($val, '<br>')) {
+                $cellValue = render_wiki_markup_html($val, $markdownDir, $this, true);
+            } else {
+                $cellValue = is_array($val)
+                    ? implode(', ', array_map(function ($i) use ($markdownDir) {
+                        $item = $this->line((string)$i);
+                        return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $this, true) . "</span>";
+                    }, $val))
+                    : render_wiki_markup_html($this->line((string)$val), $markdownDir, $this, true);
+            }
+
+            // 4. Build Table Cell
             $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
-
-            if (!$linkPlaced && !$isEmbed && !empty(trim((string) $val))) {
+            if (!$linkPlaced && !$isEmbed && !empty(trim((string)$val))) {
                 $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
                 $linkPlaced = true;
             } else {
-                $tableHtml .= "<td>$cellValue</td>";
+                $tableHtml .= "<td>" . ($cellValue ?: '&nbsp;') . "</td>";
             }
-        }
-
+        } // End of foreach ($order)
+        
+        
         $tableHtml .= '</tr>';
     }
 
     return $tableHtml . '</tbody></table>';
     }
+        private function evaluateObsidianFormula($expression, $vars, $displayName) {
+    // 1. Handle the "calc age" logic specifically
+    if (str_contains($expression, 'Actual Age')) {
+        // Use your $findProp helper to get the values
+        $age = $vars['Actual Age'] ?? null; 
+        $species = (string)($vars['Species'] ?? '');
+
+        if ($age === null || $age === '') return "Unknown Age";
+
+        $ageNum = (float)$age;
+        $appearsAge = $ageNum;
+
+        // Reproduce your Obsidian logic:
+        // if(contains("Selhae"), if(age > 25, ((age-25)/25)+25, age), age)
+        if (str_contains($species, "Selhae") && $ageNum > 25) {
+            $appearsAge = (($ageNum - 25) / 25) + 25;
+        }
+
+        // OUTPUT: Matches your Obsidian screenshot (Years \n <i>appears Age)
+        // Notice: NO $species variable in the string!
+        return $ageNum . " years<br><i>appears " . round($appearsAge) . "</i>";
+    }
+
+    // 2. Handle Simple Concatenation (Full Name + "\n" + Pronunciation)
+    if (str_contains($expression, '+')) {
+        $parts = explode('+', $expression);
+        $out = '';
+        foreach ($parts as $part) {
+            $part = trim($part);
+            if (preg_match('/^["\'](.*)["\']$/', $part, $lit)) {
+                $out .= str_replace('\n', '<br>', $lit[1]);
+            } else {
+                // Strip note[" "] syntax
+                $clean = str_replace(['note[', ']', '"', "'", 'this.'], '', $part);
+                $out .= ($clean === 'file.name') ? $displayName : ($vars[$clean] ?? '');
+            }
+        }
+        return $out;
+    }
+
+    return $expression; 
 }
+
+}
+
 ?>

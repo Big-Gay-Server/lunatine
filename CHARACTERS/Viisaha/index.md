@@ -6,8 +6,8 @@ Status: Unknown
 Gender: nonbinary
 Pronouns: she/he/they
 Age: 415 years, appears 41
-Actual Age: 415 years
-Apparent age: 41 years
+Actual Age: "415"
+Apparent age: "41"
 Apparent Age: mid 40s
 Birthdate: 9/17/886
 Birthdate (written): Aemthe, Day 17 of Kuowa, Year 886

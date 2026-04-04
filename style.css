@@ -257,8 +257,8 @@ a, .file-link {
 /* 5. Fix image sizing so it doesn't push the row height too far */
 .bases-table img {
     display: block;
-    width: 80px; /* Use fixed width for icons instead of vw to keep rows consistent */
-    height: 80px;
+    width: 150px; /* Use fixed width for icons instead of vw to keep rows consistent */
+    height: 150px;
     object-fit: cover;
     border-radius: 50%; /* Makes them circular like your screenshot */
 }
@@ -520,5 +520,6 @@ td:first-child {
     /* 4. Adjust the image size for mobile */
     .bases-table img {
         width: 80px; /* Switch from vw to fixed size on mobile */
+        height: 80px;
     }
 }

@@ -18,8 +18,9 @@ Species: "[[SPECIES/Inna/index|Inna]]"
 alias: Aenna
 title: Aenna
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
-Actual Age: "?"
-Apparent age: ageless
+Actual Age:
+Apparent age:
+Perceived age range: ageless
 ---
 ## About
 The [[SPECIES/Inna/index|Inna]] birthed from the planet [[LOCATIONS/Asilles/index|Asilles]] .

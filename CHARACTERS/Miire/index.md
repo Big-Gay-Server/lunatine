@@ -6,8 +6,8 @@ Status: Unknown
 Gender: bigender
 Pronouns: she/he
 Age: 577 years, appears 47
-Actual Age: 577 years
-Apparent age: 47 years
+Actual Age: "577"
+Apparent age: "47"
 Apparent Age: mid 50s
 Birthdate: 2/19/724
 Birthdate (written): Pakamthe, Day 19 of Teiwa, Year 724

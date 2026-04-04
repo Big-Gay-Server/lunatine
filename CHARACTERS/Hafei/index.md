@@ -5,7 +5,7 @@ Character Type: Major Character
 Status: Alive
 Gender: genderless
 Pronouns: any (it/its)
-Actual Age: ????
+Actual Age:
 Current Location: "[[LOCATIONS/World Garden/index |World Garden]]"
 Birthplace: "[[LOCATIONS/The Expanse/index |The Expanse]]"
 Languages Spoken: "[[LANGUAGES/Innalang/index |InnaLang]]"
@@ -18,7 +18,7 @@ Titles: The First Inna, High Seedkeeper
 aliases: Hafei
 title: Hafei
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
-Apparent age: ancient
+Apparent age:
 ---
 ## About
 

@@ -11,14 +11,13 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "STORY/index.md",
-                "mode": "source",
-                "source": false
+                "file": "CHARACTERS/characterbase.base",
+                "viewName": "web"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-table",
+              "title": "characterbase"
             }
           }
         ]
@@ -267,11 +266,11 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "STORY/index.md",
     "wiki_tables.php",
     "parsedownBases.php",
     "STORY/parsedownBases.php",
     "CHARACTERS/characterbase.base",
-    "STORY/index.md",
     "STORY/writingbase.base",
     "SPECIES/Selhae/index.md",
     "CHARACTERS/index.md",
@@ -303,7 +302,6 @@
     "EVENTS/Kohoii Solei War/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "STORY/misc writings/kaeyomii.docx",
-    "STORY/misc writings/gay.docx",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",

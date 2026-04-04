@@ -7,8 +7,8 @@ Species: "[[SPECIES/Selhae/index|Selhae]]"
 Gender: nonbinary
 Pronouns: she/they
 Age: 103 years, appears 28
-Actual Age: 103 years
-Apparent age: 28 years
+Actual Age: "103"
+Apparent age: "28"
 Perceived age range: mid-to-late twenties
 Birthdate: 5/26/1198
 Birthdate (written): Yomiithe, Day 26 of Uruwa, Year 1198

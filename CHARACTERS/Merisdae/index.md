@@ -31,10 +31,10 @@ title: Merisdae
 icon: "![[CHARACTERS/Merisdae/art/maikory merisdae icon.png|75]]"
 aliases:
   - Merisdae
-Actual Age: "?"
+Actual Age:
 fullbody: "![[maikory merisdae.png|400]]"
 iconn: "[[maikory merisdae icon.png]]"
-Apparent age: ageless
+Apparent age:
 ---
 A construct created from the Moonband, a celestial headband embedded with pieces of the five Asilles moons.
 

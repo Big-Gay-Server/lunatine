@@ -5,8 +5,8 @@ Character Type: Minor Character
 Status: Alive
 Gender: male
 Pronouns: he/him
-Actual Age: 29 years
-Apparent Age: late twenties
+Actual Age: "29"
+Apparent Age:
 Birthdate: 10/12/1272
 Birthdate (written): Dothe, Day 12 of Ranwa, Year 1272
 Current Location: "[[LOCATIONS/Kingdom of Acorithe/index]]"
@@ -19,6 +19,7 @@ Titles: Protector of the Prince
 aliases: Urali
 title: Urali Nerine
 icon: "![[GRAPHICS/NOICON.PNG|75]]"
+Perceived age range: late twenties
 ---
 ## About
 
