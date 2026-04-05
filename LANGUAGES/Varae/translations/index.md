@@ -1,2 +1,1 @@
-[[LANGUAGES/Varae/translations/Sanctuary Varae Translyrics|Sanctuary Varae Translyrics]]
-
+![[LANGUAGES/Varae/translations/translationsbase.base|translationsbase]]

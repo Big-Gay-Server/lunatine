@@ -49,6 +49,8 @@ class ParsedownBases extends Parsedown {
     $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
+    $baseFilter = $baseData['views'][$viewIndex]['filters'] ?? [];
+
     $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
     // Filters out the current page you are viewing and any 'bio.md' files from appearing in the table.
 
@@ -117,54 +119,46 @@ class ParsedownBases extends Parsedown {
         // A flag to ensure we only place a clickable text link in the first available cell.
 
         foreach ($order as $propId) {
-            // Loops through each column for this specific row/page.
+                $val = '';
+                $cleanFormulaId = str_replace('formula.', '', $propId);
 
-            $val = '';
-            $cleanFormulaId = str_replace('formula.', '', $propId);
-            // Prepares the ID in case it's a calculated formula.
+                if (isset($baseData['formulas'][$cleanFormulaId])) {
+                    $expression = (string)$baseData['formulas'][$cleanFormulaId];
+                    $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
+                } else {
+                    $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
+                    $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
+                        ? $displayName 
+                        : $findProp($props, $cleanPropId);
+                }
 
-            if (isset($baseData['formulas'][$cleanFormulaId])) {
-                $expression = (string)$baseData['formulas'][$cleanFormulaId];
-                $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
+                // --- FORMATTING LOGIC ---
+                if (is_array($val)) {
+                    $cellValue = implode('', array_map(function ($i) use ($markdownDir) {
+                        $flatItem = is_array($i) ? implode(', ', $i) : (string)$i;
+                        $rendered = render_wiki_markup_html($this->line($flatItem), $markdownDir, $this, true);
+                        return "<span class='prop-pill'>" . $rendered . "</span>";
+                    }, $val));
+                } elseif (is_string($val) && str_contains($val, '<br>')) {
+                    $cellValue = render_wiki_markup_html($val, $markdownDir, $this, true);
+                } else {
+                    $safeVal = (is_array($val)) ? '' : (string)$val; 
+                    $cellValue = render_wiki_markup_html($this->line($safeVal), $markdownDir, $this, true);
+                }
+
+                // --- CELL PLACEMENT ---
+                $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
+                if (!$linkPlaced && !$isEmbed && !empty(trim((string)(is_array($val) ? implode($val) : $val)))) {
+                    $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
+                    $linkPlaced = true;
+                } else {
+                    $tableHtml .= "<td>" . ($cellValue ?: '&nbsp;') . "</td>";
+                }
             } 
-            // 1. If the column is a formula, run the math/logic defined in the .base file.
+            $tableHtml .= '</tr>';
+        }
 
-            else {
-                $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
-                $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
-                    ? $displayName 
-                    : $findProp($props, $cleanPropId);
-            }
-            // 2. Otherwise, fetch the property from the page metadata or use the filename.
-
-            if (is_string($val) && str_contains($val, '<br>')) {
-                $cellValue = render_wiki_markup_html($val, $markdownDir, $this, true);
-            } else {
-                $cellValue = is_array($val)
-                    ? implode(', ', array_map(function ($i) use ($markdownDir) {
-                        $item = $this->line((string)$i);
-                        return "<span class='prop-pill'>" . render_wiki_markup_html($item, $markdownDir, $this, true) . "</span>";
-                    }, $val))
-                    : render_wiki_markup_html($this->line((string)$val), $markdownDir, $this, true);
-            }
-            // 3. Formats the data. If it's an array (like Tags), it creates "pills". Otherwise, it renders Markdown into HTML.
-
-            $isEmbed = (is_string($cellValue) && str_contains($cellValue, '<img'));
-            if (!$linkPlaced && !$isEmbed && !empty(trim((string)$val))) {
-                $tableHtml .= "<td><a href='$finalUrl' class='file-link'>$cellValue</a></td>";
-                $linkPlaced = true;
-            } else {
-                $tableHtml .= "<td>" . ($cellValue ?: '&nbsp;') . "</td>";
-            }
-            // 4. Places the value in a cell (`<td>`). Wraps the first text-based cell in an anchor tag link.
-        } 
-        
-        $tableHtml .= '</tr>';
-        // Closes the row.
-    }
-
-    return $tableHtml . '</tbody></table>';
-    // Returns the full HTML table string.
+        return $tableHtml . '</tbody></table>';
     }
 
     private function evaluateObsidianFormula($expression, $vars, $displayName) {

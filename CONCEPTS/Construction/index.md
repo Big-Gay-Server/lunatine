@@ -1,5 +1,7 @@
 ---
 title: Construction
+tags:
+  - magic
 ---
 The act of creating a living being, by imbuing an inanimate object (Essence) with a soulpiece from the creator’s Soul. The soulpiece and magic are then pulled out of the object, resulting in a living being that can take on almost any form the creator wishes, including humanoid, animal, and mythical creature forms.
 

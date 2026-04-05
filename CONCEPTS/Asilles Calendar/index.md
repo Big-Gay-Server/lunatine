@@ -19,3 +19,4 @@ The first nine weekdays are named after the elements, and the last weekday is na
 The calendar starts at year 1, the year that Anwi and Wefa created the Selhae and the Fae. Asilles had been around for thousands of years at this point, and referring to a date before year 1 is done with negative numbers. (i.e. 1/1/-200)
 
 When the calendar was first created, the Selhae and the Fae were still intertwined in one society, speaking Varae. Therefore, even though the fae are now isolated from the Selhae, and speak mainly Acorithe, the fae still use the same calendar as the Selhae, including the Varae names.
+

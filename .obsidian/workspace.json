@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "CHARACTERS/characterbase.base",
-                "viewName": "web"
+                "file": "LANGUAGES/Varae/translations/translationsbase.base",
+                "viewName": "Table"
               },
               "icon": "lucide-table",
-              "title": "characterbase"
+              "title": "translationsbase"
             }
           }
         ]
@@ -119,10 +119,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md"
+                "file": "LANGUAGES/Varae/translations/translationsbase.base"
               },
               "icon": "lucide-info",
-              "title": "File properties for index"
+              "title": "File properties for translationsbase"
             }
           },
           {
@@ -131,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md",
+                "file": "LANGUAGES/Varae/translations/translationsbase.base",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -141,7 +141,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for index"
+              "title": "Backlinks for translationsbase"
             }
           },
           {
@@ -174,20 +174,6 @@
             }
           },
           {
-            "id": "5c4a4f0fab3abc3a",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "All properties"
-            }
-          },
-          {
             "id": "99b85da6ba43ad79",
             "type": "leaf",
             "state": {
@@ -198,7 +184,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       },
       {
         "id": "afe34fa239e6fb93",
@@ -266,42 +252,42 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "LANGUAGES/Varae/translations/Sanctuary.md",
+    "LANGUAGES/Varae/translations/How Far You've Come.md",
+    "LANGUAGES/Varae/translations/index.md",
+    "LANGUAGES/Varae/translations/translationsbase.base",
+    "LANGUAGES/Varae/translations/Path of Lights.md",
+    "LANGUAGES/Varae/dictionary/index.md",
+    "LANGUAGES/Varae/word generator.md",
+    "LANGUAGES/Varae/script.md",
+    "LANGUAGES/Varae/grammar.md",
+    "LANGUAGES/index.md",
+    "CONCEPTS/World Seed/index.md",
+    "CONCEPTS/conceptsbase.base",
+    "CONCEPTS/The Story of the Inna/index.md",
+    "CONCEPTS/Soul/index.md",
+    "CONCEPTS/Shapeshifting/index.md",
+    "CONCEPTS/Inna Tenets/index.md",
+    "CONCEPTS/Essence/index.md",
+    "CONCEPTS/Elemental Magic/index.md",
+    "CONCEPTS/Dust/index.md",
+    "CONCEPTS/Domains/index.md",
+    "CONCEPTS/Creation/index.md",
+    "CONCEPTS/Construction/index.md",
+    "CONCEPTS/Asilles Calendar/index.md",
+    "CHARACTERS/characterbase.base",
+    "CHARACTERS/index.md",
+    "ARTIFACTS/index.md",
+    "vendor/dflydev/dot-access-data/README.md",
     "STORY/index.md",
     "wiki_tables.php",
     "parsedownBases.php",
     "STORY/parsedownBases.php",
-    "CHARACTERS/characterbase.base",
     "STORY/writingbase.base",
-    "SPECIES/Selhae/index.md",
-    "CHARACTERS/index.md",
-    "CHARACTERS/_misc art/index.md",
-    "Untitled.md",
-    "CHARACTERS/Colarius/index.md",
-    "LANGUAGES/index.md",
-    "GALLERY/index.md",
     "LANGUAGES/languagesbase.base",
-    "LANGUAGES/Varae/dictionary/index.md",
-    "LANGUAGES/Varae/index.md",
-    "LANGUAGES/Acorithe/index.md",
     "LANGUAGES/LANGUAGES (490952).base",
-    "CHARACTERS/Yudora/index.md",
     "SPECIES/speciesbase.base",
-    "SPECIES/Inna/index.md",
-    "SPECIES/index.md",
-    "CHARACTERS/Merisdae/BuroMerisdae.md",
-    "CHARACTERS/Merisdae/index.md",
-    "about.md",
-    "codebottom.php",
-    "GALLERY/fullbody.md",
-    "GALLERY/os0ljd3i2mq71.md",
-    "GALLERY/view from asilles.md",
-    "EVENTS/index.md",
-    "EVENTS/Debris Impact/index.md",
-    "EVENTS/Selhae-Fae Separation/index.md",
-    "EVENTS/Kuraesmeris Migration/index.md",
-    "EVENTS/Kohoii Solei War/index.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
-    "STORY/misc writings/kaeyomii.docx",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/relationship chart.canvas",

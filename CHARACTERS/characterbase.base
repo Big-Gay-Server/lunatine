@@ -1,6 +1,4 @@
 formulas:
-  "": ""
-  Untitled: ""
   age--: image(iconn)
   fullbody: image(fullbody)
   gender/pronouns: Gender + "\n" + Pronouns
@@ -22,7 +20,6 @@ formulas:
       "<i>Unknown Age</i>"
     )
   age: formula["calc age"]
-  characteristics: Hair
 properties:
   formula.age--:
     displayName: icon
