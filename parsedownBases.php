@@ -251,30 +251,45 @@ class ParsedownBases extends Parsedown {
     private function matchesFilters($props, $filterGroup, $findProp) {
         if (empty($filterGroup)) return true;
 
-        // 1. Handle "AND" groups
-        if (isset($filterGroup['and'])) {
+        // Handle the 'and' array inside the YAML
+        if (isset($filterGroup['and']) && is_array($filterGroup['and'])) {
             foreach ($filterGroup['and'] as $subFilter) {
+                // Recursive call for each item in the 'and' list
                 if (!$this->matchesFilters($props, $subFilter, $findProp)) return false;
             }
             return true;
         }
 
-        // 2. Handle "OR" groups
-        if (isset($filterGroup['or'])) {
-            foreach ($filterGroup['or'] as $subFilter) {
-                if ($this->matchesFilters($props, $subFilter, $findProp)) return true;
+        // --- NEW: Handle the string filter style "!Species.isEmpty()" ---
+        if (is_string($filterGroup)) {
+            $filterStr = $filterGroup;
+            $isNot = str_starts_with($filterStr, '!');
+            $cleanFilter = ltrim($filterStr, '!');
+
+            // Handle .isEmpty()
+            if (str_ends_with($cleanFilter, '.isEmpty()')) {
+                $propId = str_replace('.isEmpty()', '', $cleanFilter);
+                
+                // note["Character Type"] style cleaning
+                $propId = preg_replace('/note\[["\'](.*?)["\']\]/', '$1', $propId);
+                
+                $actual = $findProp($props, $propId);
+                $isEmpty = empty($actual) || $actual === '';
+                
+                return $isNot ? !$isEmpty : $isEmpty;
             }
-            return false;
         }
 
-        // 3. Handle a single atomic filter
-        $propId = $filterGroup['property'] ?? '';
-        $operator = $filterGroup['operator'] ?? 'is';
-        $expected = $filterGroup['value'] ?? '';
-        
-        $actual = $findProp($props, $propId);
+        // --- Keep the old Object-style filter support just in case ---
+        if (is_array($filterGroup)) {
+            $propId = $filterGroup['property'] ?? '';
+            $operator = $filterGroup['operator'] ?? 'is';
+            $expected = $filterGroup['value'] ?? '';
+            $actual = $findProp($props, $propId);
+            return $this->evaluateOperator($actual, $operator, $expected);
+        }
 
-        return $this->evaluateOperator($actual, $operator, $expected);
+        return true;
     }
 
     private function evaluateOperator($actual, $op, $expected) {
