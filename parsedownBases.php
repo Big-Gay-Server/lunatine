@@ -223,8 +223,8 @@ class ParsedownBases extends Parsedown {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // Uncomment to see exactly why a specific formula is still failing
-            // return "Syntax Error: " . $e->getMessage() . " | Final Expr: " . $expr;
-            return $expression; 
+            return "Syntax Error: " . $e->getMessage() . " | Final Expr: " . $expr;
+            // return $expression; 
         }
     }
 
