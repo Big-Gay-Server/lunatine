@@ -193,30 +193,28 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        $expr = $expression;
+    $expr = $expression;
 
-        // 1. NORMALIZE QUOTES AND SPACES: note["Actual Age"] -> Actual_Age
+    // 1. CLEAN PROPERTIES FIRST: note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]);
+            return str_replace(' ', '_', $m[2]); 
         }, $expr);
 
-        // 2. UNWRAP NESTED DOTS: ( ... ).round().toString() -> toString(round( ... ))
-        // We do this manually for the "heavy" nested parts first
-        $expr = preg_replace('/\((.*?)\)\.round\(\)\.toString\(\)/s', 'toString(round($1))', $expr);
-        $expr = preg_replace('/\((.*?)\)\.round\(\)/s', 'round($1)', $expr);
-        $expr = preg_replace('/\((.*?)\)\.toString\(\)/s', 'toString($1)', $expr);
+        // 2. THE SURGICAL UNWRAP: ( ... ).round().toString() -> toString(round( ... ))
+        // We use [^if] to make sure we don't swallow the word "if" 
+        $expr = preg_replace('/\((?!if)(.*?)\)\.round\(\)\.toString\(\)/s', 'toString(round($1))', $expr);
+        $expr = preg_replace('/\((?!if)(.*?)\)\.round\(\)/s', 'round($1)', $expr);
+        $expr = preg_replace('/\((?!if)(.*?)\)\.toString\(\)/s', 'toString($1)', $expr);
 
-        // 3. FLIP SIMPLE DOTS: Species.toString().contains("Selhae") -> contains(toString(Species), "Selhae")
-        // We run this twice to catch chains
-        for ($i = 0; $i < 2; $i++) {
-            $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
-            $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
-        }
+        // 3. FLIP SIMPLE DOTS: Species.toString() -> toString(Species)
+        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
+        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
 
-        // 4. FINAL CLEANUP: Remove "note." and fix "plus" to "concat"
-        $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
+        // 4. FINAL CLEANUP
+        // We add a space after 'if' just in case, and fix the other symbols
+        $expr = str_replace(['if(', 'note.', 'prop.', '+', '!= null'], ['if (', '', '', '~', '!= ""'], $expr);
 
-        // 5. PREPARE VARIABLES (Match the underscore style)
+        // 5. PREPARE VARIABLES
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -226,8 +224,8 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // If it STILL fails, uncomment this to see the "Final Expr" that broke it
-            return "Broken Expr: " . $expr . " | Error: " . $e->getMessage();
+            // Keep this here for one last check if it fails
+            return "Debug: " . $e->getMessage() . " | Final: " . $expr;
             // return $expression; 
         }
     }
