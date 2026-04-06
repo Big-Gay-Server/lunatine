@@ -89,11 +89,6 @@ class ParsedownBases extends Parsedown {
     $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
-    $baseFilter = $baseData['views'][$viewIndex]['filters'] ?? [];
-
-    $mdFiles = array_filter($allFiles, fn($f) => realpath($f) !== realpath($currentPage) && basename($f) !== 'bio.md');
-    // Filters out the current page you are viewing and any 'bio.md' files from appearing in the table.
-
     $findProp = function ($props, $id) {
         // Defines a helper function (closure) to find metadata values regardless of naming style (e.g., 'Full Name' vs 'fullname').
 
@@ -115,6 +110,42 @@ class ParsedownBases extends Parsedown {
         return '';
         // Returns an empty string if the property isn't found.
     };
+
+    // --- GET FILTERS FROM YAML ---
+    $baseFilters = $baseData['views'][$viewIndex]['filters'] ?? [];
+
+    // --- APPLY FILTERS TO FILES ---
+    $mdFiles = array_filter($allFiles, function($mdFile) use ($currentPage, $baseFilters, $findProp) {
+        // 1. Skip the current page or bio files as you already do
+        if (realpath($mdFile) === realpath($currentPage) || basename($mdFile) === 'bio.md') {
+            return false;
+        }
+
+        // 2. Load the frontmatter for this specific file
+        $content = file_get_contents($mdFile);
+        $props = [];
+        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $content, $matches)) {
+            // We use Spyc to load the note's properties
+            $props = Spyc::YAMLLoad($matches[1]);
+        }
+
+        // 3. Check every filter defined in the Base
+        foreach ($baseFilters as $filter) {
+            $propId = $filter['property'] ?? '';
+            $operator = $filter['operator'] ?? 'is';
+            $expected = $filter['value'] ?? '';
+            
+            // Get the actual value from the note (e.g., the "Status" or "Tags")
+            $actual = $findProp($props, $propId);
+
+            // Use your evaluateOperator function to check for a match
+            if (!$this->evaluateOperator($actual, $operator, $expected)) {
+                return false; // Hide the note if it fails even ONE 'and' filter
+            }
+        }
+
+        return true; // Keep the note if it passes all filters
+    });
 
     $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
     // Starts the HTML string for the table structure.
