@@ -195,26 +195,25 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. Convert note["Prop Name"] to Prop_Name
+        // 1. note["Prop Name"] -> Prop_Name
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]);
+            return str_replace(' ', '_', $m[2]); // $m[2] is the text inside the brackets
         }, $expr);
 
-        // 2. The Big Fix: Convert if(a, b, c) -> (a ? b : c)
-        // This regex looks for the three parts of the IF and rewrites them
-        while (preg_match('/if\((.*?), (.*?), (.*)\)/s', $expr)) {
-            $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/s', '($1 ? $2 : $3)', $expr);
-        }
+        // 2. Fix the dot-notation chains (Obsidian style to Function style)
+        // .toString() -> toString()
+        $expr = preg_replace('/\.toString\(\)/', '', $expr); // We'll wrap the whole thing in toString later if needed
+        
+        // .round() -> round()
+        // This is a bit of a hack for your specific Selhae logic:
+        $expr = str_replace(').round()', ')', $expr);
+        $expr = preg_replace('/if\((.*)\)\.round\(\)/', 'round(if($1))', $expr);
 
-        // 3. Fix Dot Notation (Chains)
-        // This turns .toString().contains("X") into contains(toString(X), "X")
+        // 3. Fix the "contains" dot: Species.toString().contains("Selhae") -> contains(toString(Species), "Selhae")
         $expr = preg_replace('/([\w_]+)\.toString\(\)\.contains\((.*?)\)/', 'contains(toString($1), $2)', $expr);
-        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
-        $expr = preg_replace('/([\w_]+)\.round\(\)/', 'round($1)', $expr);
 
-        // 4. Standard Fixes
-        $expr = str_replace(['note.', 'prop.', '+'], ['', '', '~'], $expr);
-        $expr = str_replace('!= null', '!= ""', $expr);
+        // 4. Standard Cleanup
+        $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
         // 5. Variables Prep
         $variables = [];
@@ -224,11 +223,11 @@ class ParsedownBases extends Parsedown {
         $variables['name'] = $displayName;
 
         try {
-            return (string)$this->el->evaluate($expr, $variables);
+            return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Uncomment to see exactly why a specific formula is still failing
-            return "Syntax Error: " . $e->getMessage() . " | Final Expr: " . $expr;
-            // return $expression; 
+            // Log the final expression to see what the engine is actually trying to read
+            // return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
+            return $expression; 
         }
     }
 
