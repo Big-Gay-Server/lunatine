@@ -193,12 +193,14 @@ class ParsedownBases extends Parsedown {
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
         // 3. Wrap every property in our Proxy Object
-        $variables = [];
+       $variables = [];
         foreach ($props as $k => $v) {
             $cleanK = str_replace(' ', '_', $k);
+            // Wrap the value so Symfony treats it as an object with methods
             $variables[$cleanK] = new MetadataWrapper($v);
         }
         $variables['name'] = new MetadataWrapper($displayName);
+        $variables['file'] = new MetadataWrapper($displayName);
 
         try {
             return (string)$this->el->evaluate($expr, $variables);
