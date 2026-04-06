@@ -182,22 +182,21 @@ class ParsedownBases extends Parsedown {
         return $tableHtml . '</tbody></table>';
     }
 
-    private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // 1. Clean note["Prop Name"] -> Prop_Name
-        // We use a simplified regex that is less likely to fail
+        private function evaluateObsidianFormula($expression, $props, $displayName) {
+        $expr = $expression;
+
+        // 1. Convert Property.contains("Value") to hasValue(Property, "Value")
+        // Note: We use 'hasValue' now to avoid the conflict
+        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
+
+        // 2. Standard cleanup for dot notation and Obsidian syntax
+        $expr = str_replace(['.toString()', '.round()'], '', $expr);
+
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
-        }, $expression);
+            return str_replace(' ', '_', $m); 
+        }, $expr);
 
-        // 2. Fix the specific "dot" issues for your Age formula
-        // We do simple string swaps for your exact formula needs
-        $expr = str_replace('.toString()', '', $expr);
-        $expr = str_replace('.round()', '', $expr);
-        
-        // Fix .contains("X") -> contains(Prop, "X")
-        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
-
-        // 3. Final cleanup and plus-to-concat
+        // 3. Final cleanup for plus signs and null checks
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
         // 4. Variables Prep (Keep Arrays as Arrays!)
@@ -210,8 +209,8 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Return this for one last debug check if it still fails
-            return "Debug: " . $e->getMessage() . " | Final: " . $expr;
+            // Log this to see the "Final Expr" if it fails
+            return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
         }
     }
 
