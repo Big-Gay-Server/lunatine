@@ -15,17 +15,23 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
-        // 1. Map if(cond, true, false) generically
+        // Register ALL the functions found in your debug message
         $this->el->register('if', function($arg) { return ''; }, function($args, $cond, $true, $false) {
             return $cond ? $true : $false;
         });
 
-        // 2. Map number() for math
+        $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
+            return is_array($val) ? implode(', ', $val) : (string)$val;
+        });
+
+        $this->el->register('contains', function($arg) { return ''; }, function($args, $haystack, $needle) {
+            return str_contains((string)$haystack, (string)$needle);
+        });
+
         $this->el->register('number', function($arg) { return ''; }, function($args, $val) {
             return (float)$val;
         });
 
-        // 3. Map round()
         $this->el->register('round', function($arg) { return ''; }, function($args, $val) {
             return round((float)$val);
         });
@@ -187,23 +193,26 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // 1. Convert note["Prop"].toString() -> toString(note["Prop"])
-        // This looks for anything followed by .toString() and wraps it
-        $expr = preg_replace('/(.*?)\.toString\(\)/', 'toString($1)', $expression);
+        $expr = $expression;
 
-        // 2. Turn note["Actual Age"] into Actual_Age
+        // A. Fix Dot Notation: Convert 'X.contains(Y)' to 'contains(X, Y)'
+        $expr = preg_replace('/(.*?)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
+        
+        // B. Fix Dot Notation: Convert 'X.toString()' to 'toString(X)'
+        $expr = preg_replace('/(.*?)\.toString\(\)/', 'toString($1)', $expr);
+        
+        // C. Fix Dot Notation: Convert 'X.round()' to 'round(X)'
+        $expr = preg_replace('/(.*?)\.round\(\)/', 'round($1)', $expr);
+
+        // D. Clean Property Names: note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            // Return just the property name with underscores
             return str_replace(' ', '_', $m[2]); 
         }, $expr);
 
-        // 3. Clean up any remaining note. or prop. prefixes
-        $expr = str_replace(['note.', 'prop.'], '', $expr);
+        // E. Remove generic prefixes and fix concatenation
+        $expr = str_replace(['note.', 'prop.', '+'], ['', '', '~'], $expr);
 
-        // 4. Standard fixes (+ to ~)
-        $expr = str_replace('+', '~', $expr);
-
-        // 5. Variables matching the underscore style
+        // F. Variables Prep (underscores for spaces)
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -213,8 +222,9 @@ class ParsedownBases extends Parsedown {
         try {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr; 
-            // return $expression; 
+            // Only return debug if it fails
+            // return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
+            return $expression; 
         }
     }
 
