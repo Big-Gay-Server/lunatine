@@ -7,7 +7,6 @@ require_once 'Parsedown.php';
 require_once __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 // imports composer stuff?
-
 class ParsedownBases extends Parsedown {
 // Defines a new class that "inherits" from Parsedown, allowing it to use and extend Markdown features.
     private $el;
@@ -185,35 +184,28 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
+        // 1. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
+            return str_replace(' ', '_', $m[1]); 
         }, $expr);
 
-        // 2. THE FLIP: Convert Species.contains("Selhae") -> hasValue(Species, "Selhae")
-        // This removes the dot so Symfony doesn't look for a "method"
-        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
-
-        // 3. Remove .toString() and .round() 
-        // We already handled these by wrapping or registering them, so remove the dots
-        $expr = str_replace(['.toString()', '.round()'], '', $expr);
-
-        // 4. Standard cleanup
+        // 2. Standard syntax cleanup (Keep the dots! The wrapper handles them now)
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 5. Prepare Variables (Keep Arrays as Arrays for tags/species lists)
+        // 3. Wrap every property in our Proxy Object
         $variables = [];
         foreach ($props as $k => $v) {
             $cleanK = str_replace(' ', '_', $k);
-            $variables[$cleanK] = is_array($v) ? $v : (string)$v;
+            $variables[$cleanK] = new MetadataWrapper($v);
         }
-        $variables['name'] = $displayName;
+        $variables['name'] = new MetadataWrapper($displayName);
 
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Return this for debugging if it still fails
-            return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
+            // Only for debugging:
+            // return "Error: " . $e->getMessage() . " | Expr: " . $expr;
+            return $expression; 
         }
     }
 
@@ -246,4 +238,35 @@ class ParsedownBases extends Parsedown {
     }
 }
 // Closes the class definition.
+
+class MetadataWrapper {
+    public $data;
+
+    public function __construct($data) {
+        // Fix: use the function is_array(), not a variable
+        $this->data = is_array($data) ? $data : (string)$data;
+    }
+
+    // Handles .toString() in your formula
+    public function toString() {
+        return is_array($this->data) ? implode(', ', $this->data) : (string)$this->data;
+    }
+
+    // Handles .contains("Selhae") in your formula
+    public function contains($needle) {
+        $haystack = is_array($this->data) ? implode(' ', $this->data) : (string)$this->data;
+        return str_contains(strtolower($haystack), strtolower((string)$needle));
+    }
+
+    // Handles .round() in your formula
+    public function round() {
+        return round((float)$this->toString());
+    }
+
+    // This allows the object to be used like a string (e.g. for concatenation)
+    public function __toString() {
+        return $this->toString();
+    }
+}
+
 ?>
