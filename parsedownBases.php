@@ -15,11 +15,7 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
-        // Register ALL the functions found in your debug message
-        $this->el->register('if', function($arg) { return ''; }, function($args, $cond, $true, $false) {
-            return $cond ? $true : $false;
-        });
-
+        // ONLY register simple conversion functions
         $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
             return is_array($val) ? implode(', ', $val) : (string)$val;
         });
@@ -193,31 +189,30 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-    $expr = $expression;
+        $expr = $expression;
 
-    // 1. Convert note["Prop Name"] to Prop_Name (Underscores for spaces)
+        // 1. Convert note["Prop Name"] to Prop_Name
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return str_replace(' ', '_', $m[2]);
         }, $expr);
 
-        // 2. Fix the "Double Dot" chain: .toString().contains() -> contains(toString(), )
-        // This handles your complex Selhae logic specifically
-        $expr = str_replace('.toString().contains(', ').contains(toString(', $expr);
-
-        // 3. Convert all remaining X.function() to function(X)
-        // We do this three times to catch nested/chained dots
-        for ($i = 0; $i < 3; $i++) {
-            $expr = preg_replace('/([\w_]+)\.(toString|round|number|contains)\((.*?)\)/', '$2($1, $3)', $expr);
-            $expr = preg_replace('/([\w_]+)\.(toString|round|number|contains)\(\)/', '$2($1)', $expr);
+        // 2. The Big Fix: Convert if(a, b, c) -> (a ? b : c)
+        // This regex looks for the three parts of the IF and rewrites them
+        while (preg_match('/if\((.*?), (.*?), (.*)\)/s', $expr)) {
+            $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/s', '($1 ? $2 : $3)', $expr);
         }
 
-        // 4. Clean up any accidental double commas from the regex above
-        $expr = str_replace(', )', ')', $expr);
+        // 3. Fix Dot Notation (Chains)
+        // This turns .toString().contains("X") into contains(toString(X), "X")
+        $expr = preg_replace('/([\w_]+)\.toString\(\)\.contains\((.*?)\)/', 'contains(toString($1), $2)', $expr);
+        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
+        $expr = preg_replace('/([\w_]+)\.round\(\)/', 'round($1)', $expr);
 
-        // 5. Standard Fixes: note. prefix and + concatenation
+        // 4. Standard Fixes
         $expr = str_replace(['note.', 'prop.', '+'], ['', '', '~'], $expr);
+        $expr = str_replace('!= null', '!= ""', $expr);
 
-        // 6. Prepare variables matching the underscore style
+        // 5. Variables Prep
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -225,10 +220,10 @@ class ParsedownBases extends Parsedown {
         $variables['name'] = $displayName;
 
         try {
-            return $this->el->evaluate($expr, $variables);
+            return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Uncomment to debug if it still fails
-            // return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
+            // Uncomment to see exactly why a specific formula is still failing
+            // return "Syntax Error: " . $e->getMessage() . " | Final Expr: " . $expr;
             return $expression; 
         }
     }
