@@ -1475,8 +1475,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775243719118,
-      "modifiedDate": 1775509146266,
-      "sizeInBytes": 16027,
+      "modifiedDate": 1775509211325,
+      "sizeInBytes": 15755,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -18610,7 +18610,7 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147144708,
-      "modifiedDate": 1775508906897,
+      "modifiedDate": 1775509454720,
       "sizeInBytes": 3330,
       "sessionStart": {
         "noteCount": 0,
@@ -19167,33 +19167,6 @@
         "characterCount": 857,
         "nonWhitespaceCharacterCount": 749,
         "newlineCount": 14
-      }
-    },
-    "CHARACTERS/dataview serializer test.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 7,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.023333333333333334,
-      "characterCount": 56,
-      "nonWhitespaceCharacterCount": 48,
-      "newlineCount": 5,
-      "readingTimeInMinutes": 0.026415094339622643,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1775490905920,
-      "modifiedDate": 1775491238574,
-      "sizeInBytes": 56,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
       }
     },
     "vendor/autoload.php": {
