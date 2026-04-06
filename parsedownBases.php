@@ -15,25 +15,19 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
-        // Register 'number' (converts string to float)
+        // 1. Map if(cond, true, false) generically
+        $this->el->register('if', function($arg) { return ''; }, function($args, $cond, $true, $false) {
+            return $cond ? $true : $false;
+        });
+
+        // 2. Map number() for math
         $this->el->register('number', function($arg) { return ''; }, function($args, $val) {
             return (float)$val;
         });
 
-        // Register 'toString' (converts anything to string)
-        $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
-            return is_array($val) ? implode(', ', $val) : (string)$val;
-        });
-
-        // Register 'round'
+        // 3. Map round()
         $this->el->register('round', function($arg) { return ''; }, function($args, $val) {
             return round((float)$val);
-        });
-
-        // Register 'contains' for Tags/Lists
-        $this->el->register('contains', function($arg) { return ''; }, function($args, $haystack, $needle) {
-            if (is_array($haystack)) return in_array($needle, $haystack);
-            return str_contains((string)$haystack, (string)$needle);
         });
     }
 
@@ -193,30 +187,31 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // A. Normalize: turn note["Actual Age"] into Actual_Age
-        // We use a regex that finds the quoted text and underscores it
+        // A. The Key Step: Turn note["Actual Age"] into Actual_Age
+        // This finds ANY text inside brackets and replaces spaces with underscores
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return str_replace(' ', '_', $m[2]);
         }, $expression);
 
-        // B. Handle the if() syntax -> (cond ? true : false)
-        // We use a non-greedy match to find the three parts of the 'if'
-        $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/', '($1 ? $2 : $3)', $expr);
+        // B. Clean up trailing dots (note.Actual_Age -> Actual_Age)
+        $expr = str_replace(['note.', 'prop.'], '', $expr);
 
-        // C. String Concatenation Fix
+        // C. Concat fix
         $expr = str_replace('+', '~', $expr);
 
-        // D. Prepare the variables (using the fix from Step 1)
+        // D. Prepare Variables (matching the underscore style)
         $variables = [];
         foreach ($props as $k => $v) {
-            $variables[str_replace(' ', '_', $k)] = is_array($v) ? $v : $v;
+            $cleanK = str_replace(' ', '_', $k);
+            $variables[$cleanK] = is_array($v) ? $v : $v;
         }
         $variables['name'] = $displayName;
 
         try {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Return raw expression if it fails so you can see what's wrong
+            // If it still fails, show the error temporarily so we can see which word broke it
+            // return "Error: " . $e->getMessage(); 
             return $expression; 
         }
     }
