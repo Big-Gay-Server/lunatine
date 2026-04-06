@@ -215,6 +215,10 @@ class ParsedownBases extends Parsedown {
         // Normalize inputs (trim whitespace, handle nulls)
         $actual = $actual ?? '';
         $expected = $expected ?? '';
+                
+        if (is_object($actual) && method_exists($actual, '__toString')) {
+            $actual = (string)$actual;
+        }
 
         switch ($op) {
             case 'is':
@@ -222,7 +226,9 @@ class ParsedownBases extends Parsedown {
             case 'is not':
             case '!=': return $actual != $expected;
             case 'contains':
-                return is_array($actual) ? in_array($expected, $actual) : str_contains((string)$actual, (string)$expected);
+                // If it's a Wrapper object, get the internal data
+                $data = (is_object($actual)) ? $actual->data : $actual;
+                return is_array($data) ? in_array($expected, $data) : str_contains((string)$data, (string)$expected);
             case 'does not contain':
                 return is_array($actual) ? !in_array($expected, $actual) : !str_contains((string)$actual, (string)$expected);
             case 'is empty': return empty($actual);
@@ -245,29 +251,30 @@ class MetadataWrapper {
     public $data;
 
     public function __construct($data) {
-        // Fix: use the function is_array(), not a variable
-        $this->data = is_array($data) ? $data : (string)$data;
+        $this->data = $data;
     }
 
-    // Handles .toString() in your formula
+    // CHANGE: Return $this so you can chain .toString().contains()
     public function toString() {
-        return is_array($this->data) ? implode(', ', $this->data) : (string)$this->data;
+        return $this;
     }
 
-    // Handles .contains("Selhae") in your formula
+    // The actual "text" version used by PHP for echo/concat/math
+    public function __toString() {
+        if (is_array($this->data)) {
+            return implode(', ', $this->data);
+        }
+        return (string)$this->data;
+    }
+
     public function contains($needle) {
-        $haystack = is_array($this->data) ? implode(' ', $this->data) : (string)$this->data;
+        $haystack = (string)$this; // Uses __toString() logic above
         return str_contains(strtolower($haystack), strtolower((string)$needle));
     }
 
-    // Handles .round() in your formula
     public function round() {
-        return round((float)$this->toString());
-    }
-
-    // This allows the object to be used like a string (e.g. for concatenation)
-    public function __toString() {
-        return $this->toString();
+        // Return a new wrapper so you can do .round().toString()
+        return new MetadataWrapper(round((float)((string)$this)));
     }
 }
 
