@@ -195,41 +195,44 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. CLEAN PROPERTIES FIRST: note["Actual Age"] -> Actual_Age
-        // This makes the string "clean" so the next regex can actually find the dots
-        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); 
+        // 1. Convert note["Prop Name"] to Prop_Name (Handles spaces correctly)
+        $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
+            return str_replace(' ', '_', $m[1]);
         }, $expr);
 
-        // 2. CONVERT DOTS: Actual_Age.toString() -> toString(Actual_Age)
-        // We run this in a loop to catch chained methods like .round().toString()
+        // 2. Multi-pass dot notation cleanup
+        // Handles chained methods like .round().toString() by wrapping them
         for ($i = 0; $i < 3; $i++) {
-            // Handle methods with arguments: .contains("Selhae") -> contains(X, "Selhae")
-            $expr = preg_replace('/([\w_]+)\.([\w]+)\((.*?)\)/', '$2($1, $3)', $expr);
-            // Handle methods without arguments: .toString() -> toString(X)
-            $expr = preg_replace('/([\w_]+)\.([\w]+)\(\)/', '$2($1)', $expr);
+            // Case: X.contains("Y") -> contains(X, "Y")
+            $expr = preg_replace('/([\w_]+)\.([\w_]+)\((.*?)\)/', '$2($1, $3)', $expr);
+            // Case: X.toString() -> toString(X)
+            $expr = preg_replace('/([\w_]+)\.([\w_]+)\(\)/', '$2($1)', $expr);
+            // Case: (...).round() -> round(...) for nested groups
+            $expr = preg_replace('/\(([^()]+)\)\.([\w_]+)\(\)/', '$2($1)', $expr);
         }
 
-        // 3. FIX NESTED DOTS: This fixes ).round() -> round()
-        $expr = preg_replace('/\)\.([\w]+)\(\)/', '$1()', $expr);
+        // 3. Final Syntax Normalization
+        $expr = str_replace(
+            ['note.', 'prop.', '+', '!= null', '== null'],
+            ['', '', '~', '!= ""', '== ""'],
+            $expr
+        );
 
-        // 4. FINAL CLEANUP
-        $expr = str_replace(['note.', 'prop.', '+', '!= null', ', )'], ['', '', '~', '!= ""', ')'], $expr);
-
-        // 5. PREPARE VARIABLES
+        // 4. Prepare Variables (Ensure keys match the underscores used in Step 1)
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
         }
         $variables['name'] = $displayName;
+        $variables['file'] = $displayName;
 
         try {
-            // We use @ to suppress warnings and return as a string
+            // Evaluate the cleaned expression
             $result = $this->el->evaluate($expr, $variables);
             return (string)$result;
         } catch (\Exception $e) {
-            // Log the error to your Docker logs so you can see WHY it failed
-            error_log("Bases Error: " . $e->getMessage() . " | Final Expr: " . $expr);
+            // If it fails, return the original expression so you can still see it
+            // and optionally log the error to debug the specific word causing issues
             return $expression; 
         }
     }
