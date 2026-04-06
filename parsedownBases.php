@@ -137,6 +137,43 @@ class ParsedownBases extends Parsedown {
         return $this->matchesFilters($props, $baseFilters, $findProp);
     });
 
+    // --- APPLY SORTING ---
+    $sortConfig = $baseData['views'][$viewIndex]['sort'] ?? [];
+
+    if (!empty($sortConfig)) {
+        usort($mdFiles, function($a, $b) use ($sortConfig, $findProp) {
+            foreach ($sortConfig as $s) {
+                $propId = $s['property'] ?? '';
+                $direction = strtolower($s['direction'] ?? 'asc');
+
+                // 1. Get properties for both files
+                $contentA = file_get_contents($a);
+                $contentB = file_get_contents($b);
+                $propsA = []; $propsB = [];
+
+                if (preg_match('/^---\s*([\s\S]*?)\s---/u', $contentA, $m)) { $propsA = Spyc::YAMLLoad($m[1]); }
+                if (preg_match('/^---\s*([\s\S]*?)\s---/u', $contentB, $m)) { $propsB = Spyc::YAMLLoad($m[1]); }
+
+                // 2. Get specific values (handle Name/File specially)
+                $valA = ($propId === 'name' || $propId === 'file') ? basename($a, '.md') : $findProp($propsA, $propId);
+                $valB = ($propId === 'name' || $propId === 'file') ? basename($b, '.md') : $findProp($propsB, $propId);
+
+                // 3. Compare (Numeric vs String)
+                if (is_numeric($valA) && is_numeric($valB)) {
+                    $cmp = $valA <=> $valB;
+                } else {
+                    $cmp = strcasecmp((string)$valA, (string)$valB);
+                }
+
+                // 4. Return based on direction
+                if ($cmp !== 0) {
+                    return ($direction === 'desc') ? -$cmp : $cmp;
+                }
+            }
+            return 0;
+        });
+    }
+
     $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
     // Starts the HTML string for the table structure.
 
