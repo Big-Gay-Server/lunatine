@@ -15,25 +15,15 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
-        $this->el->register('if', function($arg) { return ''; }, function($variables, $condition, $trueValue, $falseValue) {
-            return $condition ? $trueValue : $falseValue;
+        // Standard Functions
+        $this->el->register('if', function($arg) { return ''; }, function($vars, $c, $t, $f) { return $c ? $t : $f; });
+        $this->el->register('number', function($arg) { return ''; }, function($vars, $v) { return (float)$v; });
+        $this->el->register('round', function($arg) { return ''; }, function($vars, $v) { return round((float)$v); });
+        $this->el->register('toString', function($arg) { return ''; }, function($vars, $v) { 
+            return is_array($v) ? implode(', ', $v) : (string)$v; 
         });
-        
-        // ONLY register simple conversion functions
-        $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
-            return is_array($val) ? implode(', ', $val) : (string)$val;
-        });
-
-        $this->el->register('contains', function($arg) { return ''; }, function($args, $haystack, $needle) {
-            return str_contains((string)$haystack, (string)$needle);
-        });
-
-        $this->el->register('number', function($arg) { return ''; }, function($args, $val) {
-            return (float)$val;
-        });
-
-        $this->el->register('round', function($arg) { return ''; }, function($args, $val) {
-            return round((float)$val);
+        $this->el->register('contains', function($arg) { return ''; }, function($vars, $h, $n) { 
+            return str_contains((string)$h, (string)$n); 
         });
     }
 
@@ -193,38 +183,26 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        $expr = $expression;
-
-        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
+        // 1. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return str_replace(' ', '_', $m[1]); 
-        }, $expr);
+        }, $expression);
 
-        // 2. THE "ONION" LOOP: Keep flipping dots until they are all gone
-        // This turns X.toString() into toString(X) AND X.contains(Y) into contains(X, Y)
-        $pattern_with_args = '/([\w_]+\(.*\)|[\w_]+)\.([\w_]+)\((.*?)\)/s';
-        $pattern_no_args   = '/([\w_]+\(.*\)|[\w_]+)\.([\w_]+)\(\)/s';
-
-        while (preg_match($pattern_with_args, $expr) || preg_match($pattern_no_args, $expr)) {
-            $expr = preg_replace($pattern_with_args, '$2($1, $3)', $expr);
-            $expr = preg_replace($pattern_no_args, '$2($1)', $expr);
-        }
-
-        // 3. FINAL CLEANUP: Remove prefixes and fix plus signs
+        // 2. ONLY fix the plus sign and the prefixes
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 4. PREPARE VARIABLES (Handles the Array Warning too)
+        // 3. Prepare variables (Keep Arrays as Arrays!)
         $variables = [];
         foreach ($props as $k => $v) {
-            $cleanK = str_replace(' ', '_', $k);
-            $variables[$cleanK] = is_array($v) ? $v : (string)$v;
+            $variables[str_replace(' ', '_', $k)] = $v;
         }
         $variables['name'] = $displayName;
 
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            return "Debug: " . $e->getMessage() . " | Final: " . $expr;
+            // This will now show us exactly where Symfony is stuck
+            return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
         }
     }
 
