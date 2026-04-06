@@ -1,6 +1,5 @@
 {
     "require": {
-        "league/commonmark": "^2.8",
-        "elazar/league-commonmark-obsidian": "^2.1"
+        "symfony/expression-language": "^6.0 || ^7.0"
     }
 }
