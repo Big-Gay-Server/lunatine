@@ -195,47 +195,43 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. Convert note["Prop Name"] to Prop_Name (Handles spaces correctly)
-        $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[1]);
+        // 1. NORMALIZE QUOTES AND SPACES: note["Actual Age"] -> Actual_Age
+        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
+            return str_replace(' ', '_', $m[2]);
         }, $expr);
 
-        // 2. Multi-pass dot notation cleanup
-        // Handles chained methods like .round().toString() by wrapping them
-        for ($i = 0; $i < 3; $i++) {
-            // Case: X.contains("Y") -> contains(X, "Y")
-            $expr = preg_replace('/([\w_]+)\.([\w_]+)\((.*?)\)/', '$2($1, $3)', $expr);
-            // Case: X.toString() -> toString(X)
-            $expr = preg_replace('/([\w_]+)\.([\w_]+)\(\)/', '$2($1)', $expr);
-            // Case: (...).round() -> round(...) for nested groups
-            $expr = preg_replace('/\(([^()]+)\)\.([\w_]+)\(\)/', '$2($1)', $expr);
+        // 2. UNWRAP NESTED DOTS: ( ... ).round().toString() -> toString(round( ... ))
+        // We do this manually for the "heavy" nested parts first
+        $expr = preg_replace('/\((.*?)\)\.round\(\)\.toString\(\)/s', 'toString(round($1))', $expr);
+        $expr = preg_replace('/\((.*?)\)\.round\(\)/s', 'round($1)', $expr);
+        $expr = preg_replace('/\((.*?)\)\.toString\(\)/s', 'toString($1)', $expr);
+
+        // 3. FLIP SIMPLE DOTS: Species.toString().contains("Selhae") -> contains(toString(Species), "Selhae")
+        // We run this twice to catch chains
+        for ($i = 0; $i < 2; $i++) {
+            $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
+            $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
         }
 
-        // 3. Final Syntax Normalization
-        $expr = str_replace(
-            ['note.', 'prop.', '+', '!= null', '== null'],
-            ['', '', '~', '!= ""', '== ""'],
-            $expr
-        );
+        // 4. FINAL CLEANUP: Remove "note." and fix "plus" to "concat"
+        $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 4. Prepare Variables (Ensure keys match the underscores used in Step 1)
+        // 5. PREPARE VARIABLES (Match the underscore style)
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
         }
         $variables['name'] = $displayName;
-        $variables['file'] = $displayName;
 
         try {
-            // Evaluate the cleaned expression
-            $result = $this->el->evaluate($expr, $variables);
-            return (string)$result;
+            return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // If it fails, return the original expression so you can still see it
-            // and optionally log the error to debug the specific word causing issues
+            // If it STILL fails, uncomment this to see the "Final Expr" that broke it
+            // return "Broken Expr: " . $expr . " | Error: " . $e->getMessage();
             return $expression; 
         }
     }
+
     private function evaluateOperator($actual, $op, $expected) {
         // Normalize inputs (trim whitespace, handle nulls)
         $actual = $actual ?? '';
