@@ -222,8 +222,8 @@ class ParsedownBases extends Parsedown {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // Log this to see the "Final Expr" if it fails
-            // error_log("Bases Error: " . $e->getMessage() . " | Expr: " . $expr);
-            return $expression; 
+            error_log("Bases Error: " . $e->getMessage() . " | Expr: " . $expr);
+            // return $expression; 
         }
     }
     private function evaluateOperator($actual, $op, $expected) {
