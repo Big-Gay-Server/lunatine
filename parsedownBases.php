@@ -223,11 +223,11 @@ class ParsedownBases extends Parsedown {
         $variables['file'] = new MetadataWrapper($displayName);
 
         try {
-            return (string)$this->el->evaluate($expr, $variables);
+            $result = (string)$this->el->evaluate($expr, $variables);
+            // Convert Obsidian newlines to HTML breaks
+            return str_replace("\n", "<br>", $result);
         } catch (\Exception $e) {
-            // Only for debugging:
-            return "Error: " . $e->getMessage() . " | Expr: " . $expr;
-            // return $expression; 
+            return $expression; 
         }
     }
 
