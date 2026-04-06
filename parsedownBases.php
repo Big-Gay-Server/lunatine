@@ -15,6 +15,10 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
+        $this->el->register('if', function($arg) { return ''; }, function($variables, $condition, $trueValue, $falseValue) {
+            return $condition ? $trueValue : $falseValue;
+        });
+        
         // ONLY register simple conversion functions
         $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
             return is_array($val) ? implode(', ', $val) : (string)$val;
