@@ -191,31 +191,36 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // A. Clean note["Prop"] -> Prop
-        $expr = preg_replace('/(note|prop)\[["\'](.*?)["\']\]/', '$2', $expression);
-        
-        // B. Clean note.Prop -> Prop
-        $expr = str_replace('note.', '', $expr);
+        // 1. CLEAN SYNTAX: note["Prop"] -> Prop_Name
+        // This removes the "note[]" or "prop()" wrapper and replaces spaces with underscores
+        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
+            return str_replace(' ', '_', $m[2]);
+        }, $expression);
 
-        // C. Convert if(a, b, c) -> (a ? b : c)
-        // This is a simple version; nested if's might need more regex love
+        // 2. CONVERT IF: if(a, b, c) -> (a ? b : c)
+        // This is the most common reason for the "fallback" to raw text
         $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/', '($1 ? $2 : $3)', $expr);
 
-        // D. The string joining fix you did earlier
+        // 3. CONCAT: + -> ~
         $expr = str_replace('+', '~', $expr);
 
-        // E. Prepare variables (Clean spaces in property names)
+        // 4. NULL CHECK: != null -> != "" (PHP handles empty strings better here)
+        $expr = str_replace('!= null', '!= ""', $expr);
+
+        // 5. PREPARE VARIABLES: Flatten $props to match underscores
         $variables = [];
-        foreach ($props as $k => $v) {
-            $variables[str_replace(' ', '_', $k)] = $v;
+        foreach ($props as $key => $val) {
+            $cleanKey = str_replace(' ', '_', $key);
+            $variables[$cleanKey] = (string)$val;
         }
-        $expr = str_replace(' ', '_', $expr);
+        $variables['name'] = $displayName;
 
         try {
+            // Evaluate the cleaned-up expression
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Log the error to see exactly what failed (helpful for debugging)
-            // error_log("Bases Error: " . $e->getMessage() . " in " . $expr);
+            // DEBUG: Uncomment the line below to see WHY it's failing in your browser's console or logs
+            // return "Error: " . $e->getMessage() . " | In: " . $expr; 
             return $expression; 
         }
     }
