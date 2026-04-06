@@ -22,8 +22,8 @@ class ParsedownBases extends Parsedown {
         $this->el->register('toString', function($arg) { return ''; }, function($vars, $v) { 
             return is_array($v) ? implode(', ', $v) : (string)$v; 
         });
-        $this->el->register('contains', function($arg) { return ''; }, function($vars, $h, $n) { 
-            return str_contains((string)$h, (string)$n); 
+        $this->el->register('hasValue', function($arg) { return ''; }, function($vars, $haystack, $needle) {
+            return str_contains((string)$haystack, (string)$needle);
         });
     }
 
