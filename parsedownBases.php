@@ -227,8 +227,8 @@ class ParsedownBases extends Parsedown {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // If it STILL fails, uncomment this to see the "Final Expr" that broke it
-            // return "Broken Expr: " . $expr . " | Error: " . $e->getMessage();
-            return $expression; 
+            return "Broken Expr: " . $expr . " | Error: " . $e->getMessage();
+            // return $expression; 
         }
     }
 
