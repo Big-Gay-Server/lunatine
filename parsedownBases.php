@@ -289,7 +289,10 @@ class MetadataWrapper {
     }
 
     public function __toString() {
-        if (is_array($this->data)) return implode(', ', $this->data);
+        if (is_array($this->data)) {
+            return implode(', ', $this->data);
+        }
+        // Return the raw string including any <i> or <br> tags
         return (string)$this->data;
     }
 }
