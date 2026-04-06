@@ -15,9 +15,23 @@ class ParsedownBases extends Parsedown {
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
         
-        // Register 'dateadd' so it works in any formula generically
-        $this->el->register('dateadd', function ($arg) { return ''; }, function ($args, $date, $amount, $unit) {
-            return date('Y-m-d', strtotime("$date +$amount $unit"));
+        // 1. Map "if(cond, true, false)" to PHP's ternary logic
+        // Obsidian uses if(a, b, c), but Symfony likes (a ? b : c)
+        // We handle this with a regex in the evaluate function below.
+
+        // 2. Map "toString()"
+        $this->el->register('toString', function ($str) { return ''; }, function ($args, $val) {
+            return (string)$val;
+        });
+
+        // 3. Map "contains()"
+        $this->el->register('contains', function ($str) { return ''; }, function ($args, $haystack, $needle) {
+            return str_contains((string)$haystack, (string)$needle);
+        });
+
+        // 4. Map "round()"
+        $this->el->register('round', function ($str) { return ''; }, function ($args, $val) {
+            return round((float)$val);
         });
     }
 
