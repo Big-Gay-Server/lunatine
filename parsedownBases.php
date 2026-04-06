@@ -161,55 +161,57 @@ class ParsedownBases extends Parsedown {
         return $tableHtml . '</tbody></table>';
     }
 
-    private function evaluateObsidianFormula($expression, $vars, $displayName) {
-    // A private helper to handle "Formulas" (Logic inside the table).
+    private function evaluateObsidianFormula($expression, $props, $displayName) {
+        // 1. Initialize the "Calculator"
+        $language = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
-    if (str_contains($expression, 'Actual Age')) {
-        // Specifically looks for logic related to a custom "Age" calculation.
+        // 2. Clean the Obsidian syntax
+        // This turns prop("Price") into just 'Price' so the library recognizes it as a variable
+        $cleanExpression = preg_replace('/prop\(["\'](.*?)["\']\)/', '$1', $expression);
 
-        $age = $vars['Actual Age'] ?? null; 
-        $species = (string)($vars['Species'] ?? '');
-        // Pulls the 'Actual Age' and 'Species' metadata from the page.
+        // 3. Prepare the data
+        // We pass the frontmatter ($props) so the formula can see the values
+        $variables = $props;
+        $variables['name'] = $displayName;
+        $variables['file'] = $displayName;
 
-        if ($age === null || $age === '') return "Unknown Age";
-
-        $ageNum = (float)$age;
-        $appearsAge = $ageNum;
-
-        if (str_contains($species, "Selhae") && $ageNum > 25) {
-            $appearsAge = (($ageNum - 25) / 25) + 25;
+        try {
+            // 4. Let Symfony do the heavy lifting!
+            return $language->evaluate($cleanExpression, $variables);
+        } catch (\Exception $e) {
+            // If it's a complex Obsidian function the library doesn't know yet,
+            // it just returns the raw string instead of crashing your site.
+            return $expression; 
         }
-        // Custom world-building logic: If species is 'Selhae', calculate their "apparent" age differently after 25.
-
-        return $ageNum . " years<br><i>appears " . round($appearsAge) . "</i>";
-        // Returns two lines of text: the real age and the visual age.
     }
 
-    if (str_contains($expression, '+')) {
-        // Handles simple string concatenation (joining text).
+    private function evaluateOperator($actual, $op, $expected) {
+        // Normalize inputs (trim whitespace, handle nulls)
+        $actual = $actual ?? '';
+        $expected = $expected ?? '';
 
-        $parts = explode('+', $expression);
-        $out = '';
-        foreach ($parts as $part) {
-            $part = trim($part);
-            if (preg_match('/^["\'](.*)["\']$/', $part, $lit)) {
-                $out .= str_replace('\n', '<br>', $lit[1]);
-            } 
-            // If the part is a literal string (in quotes), add it to the output.
-
-            else {
-                $clean = str_replace(['note[', ']', '"', "'", 'this.'], '', $part);
-                $out .= ($clean === 'file.name') ? $displayName : ($vars[$clean] ?? '');
-            }
-            // Otherwise, treat the part as a variable name and fetch its value from the metadata.
+        switch ($op) {
+            case 'is':
+            case '==': return $actual == $expected;
+            case 'is not':
+            case '!=': return $actual != $expected;
+            case 'contains':
+                return is_array($actual) ? in_array($expected, $actual) : str_contains((string)$actual, (string)$expected);
+            case 'does not contain':
+                return is_array($actual) ? !in_array($expected, $actual) : !str_contains((string)$actual, (string)$expected);
+            case 'is empty': return empty($actual);
+            case 'is not empty': return !empty($actual);
+            case '>':
+            case 'is after': return $actual > $expected;
+            case '<':
+            case 'is before': return $actual < $expected;
+            case '>=': return $actual >= $expected;
+            case '<=': return $actual <= $expected;
+            case 'starts with': return str_starts_with((string)$actual, (string)$expected);
+            case 'ends with': return str_ends_with((string)$actual, (string)$expected);
+            default: return true; // Default to showing the row if operator is unknown
         }
-        return $out;
     }
-
-    return $expression; 
-    // If it's not a special formula, just return the raw expression.
-    }
-
 }
 // Closes the class definition.
 ?>

@@ -36,5 +36,6 @@
   "extended-graph",
   "obsidian-meta-bind-plugin",
   "cursor-integration",
-  "obsidian-git"
+  "obsidian-git",
+  "dataview-serializer"
 ]
