@@ -86,7 +86,7 @@ class ParsedownBases extends Parsedown {
     $scanDir = dirname($basePath);
     // Gets the directory path where the .base file lives.
 
-    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'));
+    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'), glob($scanDir . '/*/*.md'));
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
     $findProp = function ($props, $id) {
