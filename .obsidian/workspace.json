@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "STORY/writingbase.base",
+                "file": "SPECIES/speciesbase.base",
                 "viewName": "Table"
               },
               "icon": "lucide-table",
-              "title": "writingbase"
+              "title": "speciesbase"
             }
           }
         ]
@@ -266,9 +266,11 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "SPECIES/index.md",
+    "SPECIES/speciesbase.base",
+    "STORY/writingbase.base",
     "EVENTS/index.md",
     "STORY/index.md",
-    "SPECIES/index.md",
     "CONCEPTS/index.md",
     "CHARACTERS/index.md",
     "ARTIFACTS/artifactsbase.base",
@@ -284,8 +286,6 @@
     "vendor/symfony/cache-contracts/ItemInterface.php",
     "vendor/symfony/cache-contracts/composer.json",
     "vendor/symfony/cache-contracts/CHANGELOG.md",
-    "vendor/symfony/cache-contracts/CallbackInterface.php",
-    "vendor/symfony/cache-contracts/CacheTrait.php",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
     "vendor/psr/log/README.md",
@@ -301,7 +301,6 @@
     "vendor/psr/event-dispatcher/README.md",
     "vendor/symfony/polyfill-php80/README.md",
     "vendor/symfony/deprecation-contracts/README.md",
-    "vendor/symfony/deprecation-contracts/CHANGELOG.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",

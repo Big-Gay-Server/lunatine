@@ -236,7 +236,7 @@ class ParsedownBases extends Parsedown {
 
                 // --- FORMATTING LOGIC ---
                 if (is_array($val)) {
-                    $cellValue = implode('', array_map(function ($i) use ($markdownDir) {
+                    $cellValue = implode(', ', array_map(function ($i) use ($markdownDir) {
                         $flatItem = is_array($i) ? implode(', ', $i) : (string)$i;
                         $rendered = render_wiki_markup_html($this->line($flatItem), $markdownDir, $this, true);
                         return "<span class='prop-pill'>" . $rendered . "</span>";
@@ -323,10 +323,23 @@ class ParsedownBases extends Parsedown {
                 
                 $res = false;
                 switch ($method) {
-                    case 'contains': $res = str_contains((string)$actual, $expected); break;
-                    case 'endsWith': $res = str_ends_with((string)$actual, $expected); break;
-                    case 'isEmpty': $res = empty($actual) || trim((string)$actual) === ''; break;
-                    case 'isNotEmpty': $res = !empty($actual) && trim((string)$actual) !== ''; break;
+                    case 'contains': 
+                        if (is_array($actual)) {
+                            // Check if the string exists anywhere in the list
+                            $res = in_array($expected, $actual);
+                        } else {
+                            $res = str_contains((string)$actual, $expected);
+                        }
+                        break;
+                    case 'endsWith': 
+                        $res = str_ends_with(is_array($actual) ? implode(' ', $actual) : (string)$actual, $expected); 
+                        break;
+                    case 'isEmpty': 
+                        $res = empty($actual) || (is_string($actual) && trim($actual) === ''); 
+                        break;
+                    case 'isNotEmpty': 
+                        $res = !empty($actual) && (!is_string($actual) || trim($actual) !== ''); 
+                        break;
                 }
                 return $isNot ? !$res : $res;
             }

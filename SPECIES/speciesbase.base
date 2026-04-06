@@ -3,10 +3,16 @@ views:
     name: Table
     filters:
       and:
-        - file.folder.startsWith("SPECIES")
+        - file.path.contains("SPECIES")
         - file.ext != "base"
+        - '!aliases.contains("Species")'
     order:
       - title
+      - Average Lifespan
+      - Descended Species
+      - Parent Species
     sort:
       - property: file.name
         direction: DESC
+    columnSize:
+      note.Average Lifespan: 145
