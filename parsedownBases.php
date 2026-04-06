@@ -4,7 +4,7 @@
 require_once 'Parsedown.php'; 
 // Imports the base Parsedown library. 'require_once' ensures the script stops if the file is missing.
 
-require_once '/usr/share/nginx/html/lunatine/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 // imports composer stuff?
 
