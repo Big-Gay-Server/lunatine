@@ -16,9 +16,14 @@ class ParsedownBases extends Parsedown {
 
         // Standard Functions
         $this->el->register('if', function($arg) { return ''; }, function($vars, $cond, $true, $false) {
-            // If the condition is an object, convert it to a boolean value based on its string content
-            $boolCond = (is_object($cond) && method_exists($cond, '__toString')) ? (bool)(string)$cond : (bool)$cond;
-            return $boolCond ? $true : $false;
+            // 1. Evaluate the condition (cast to string/bool if it's an object)
+            $boolCond = (is_object($cond)) ? (bool)(string)$cond : (bool)$cond;
+            
+            // 2. Pick the result
+            $result = $boolCond ? $true : $false;
+            
+            // 3. WRAP THE RESULT: This allows .round() to be called on the output of the 'if'
+            return new MetadataWrapper($result);
         });
         // Fix for 'number'
         $this->el->register('number', function($arg) { return ''; }, function($vars, $val) {
@@ -266,30 +271,26 @@ class MetadataWrapper {
     public $data;
 
     public function __construct($data) {
-        $this->data = $data;
+        // If we accidentally wrap a wrapper, just take its data
+        $this->data = ($data instanceof MetadataWrapper) ? $data->data : $data;
     }
 
-    // CHANGE: Return $this so you can chain .toString().contains()
     public function toString() {
-        return $this;
-    }
-
-    // The actual "text" version used by PHP for echo/concat/math
-    public function __toString() {
-        if (is_array($this->data)) {
-            return implode(', ', $this->data);
-        }
-        return (string)$this->data;
-    }
-
-    public function contains($needle) {
-        $haystack = (string)$this; // Uses __toString() logic above
-        return str_contains(strtolower($haystack), strtolower((string)$needle));
+        return $this; // Return the object so we can chain more dots
     }
 
     public function round() {
-        // Return a new wrapper so you can do .round().toString()
-        return new MetadataWrapper(round((float)((string)$this)));
+        $val = (float)((string)$this);
+        return new MetadataWrapper(round($val)); // Wrap the rounded number
+    }
+
+    public function contains($needle) {
+        return str_contains(strtolower((string)$this), strtolower((string)$needle));
+    }
+
+    public function __toString() {
+        if (is_array($this->data)) return implode(', ', $this->data);
+        return (string)$this->data;
     }
 }
 
