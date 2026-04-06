@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "ARTIFACTS/artifactsbase.base",
+                "file": "STORY/writingbase.base",
                 "viewName": "Table"
               },
               "icon": "lucide-table",
-              "title": "artifactsbase"
+              "title": "writingbase"
             }
           }
         ]
@@ -266,12 +266,17 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "EVENTS/index.md",
+    "STORY/index.md",
+    "SPECIES/index.md",
+    "CONCEPTS/index.md",
+    "CHARACTERS/index.md",
+    "ARTIFACTS/artifactsbase.base",
     "ARTIFACTS/index.md",
     "LANGUAGES/languagesbase.base",
     "LANGUAGES/index.md",
     "CHARACTERS/characterbase.base",
     "CHARACTERS/dataview serializer test.md",
-    "CHARACTERS/index.md",
     "vendor/symfony/cache-contracts/TagAwareCacheInterface.php",
     "vendor/symfony/cache-contracts/README.md",
     "vendor/symfony/cache-contracts/NamespacedPoolInterface.php",
@@ -281,7 +286,6 @@
     "vendor/symfony/cache-contracts/CHANGELOG.md",
     "vendor/symfony/cache-contracts/CallbackInterface.php",
     "vendor/symfony/cache-contracts/CacheTrait.php",
-    "vendor/symfony/cache-contracts/CacheInterface.php",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
     "vendor/psr/log/README.md",
@@ -298,10 +302,6 @@
     "vendor/symfony/polyfill-php80/README.md",
     "vendor/symfony/deprecation-contracts/README.md",
     "vendor/symfony/deprecation-contracts/CHANGELOG.md",
-    "vendor/nette/utils/readme.md",
-    "vendor/nette/utils/license.md",
-    "vendor/nette/schema/readme.md",
-    "vendor/nette/schema/license.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",

@@ -306,29 +306,26 @@ class ParsedownBases extends Parsedown {
     private function matchesFilters($props, $filterGroup, $findProp, $mdFile) {
         if (empty($filterGroup)) return true;
 
-        // 1. Handle AND/OR groups (Recursive)
-        if (isset($filterGroup['and'])) {
+        // 1. Recursive AND/OR handling
+        if (isset($filterGroup['and']) && is_array($filterGroup['and'])) {
             foreach ($filterGroup['and'] as $sub) {
                 if (!$this->matchesFilters($props, $sub, $findProp, $mdFile)) return false;
             }
             return true;
         }
-        if (isset($filterGroup['or'])) {
-            foreach ($filterGroup['or'] as $sub) {
-                if ($this->matchesFilters($props, $sub, $findProp, $mdFile)) return true;
-            }
-            return false;
-        }
 
-        // 2. Handle String Filters (e.g. "!note['Character Type'].isEmpty()")
+        // 2. Handle String-style Filters
         if (is_string($filterGroup)) {
             $f = trim($filterGroup);
             $isNot = str_starts_with($f, '!');
             $f = ltrim($f, '!');
 
-            // Improved Regex: Handles note["Prop"], note['Prop'], and simple Prop
-            if (preg_match('/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\.(contains|endsWith|isEmpty|isNotEmpty)\((.*?)\)/', $f, $m)) {
-                $propId = !empty($m[1]) ? $m[1] : $m[2]; // Get the ID from inside brackets OR the simple name
+            // Pattern handles: note["Prop"], file.prop, or just Prop
+            // Group 1 & 2 = Property Name, Group 3 = Method, Group 4 = Value
+            $pattern = '/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\.(contains|endsWith|startsWith|isEmpty|isNotEmpty)\((.*?)\)/';
+            
+            if (preg_match($pattern, $f, $m)) {
+                $propId = !empty($m[1]) ? $m[1] : $m[2];
                 $method = $m[3];
                 $expected = trim($m[4], "\"' ");
                 
@@ -344,22 +341,18 @@ class ParsedownBases extends Parsedown {
                 return $isNot ? !$res : $res;
             }
 
-            // Handle Comparisons (e.g. "Species == 'Elf'")
-            if (preg_match('/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\s*(==|!=)\s*["\'](.*?)["\']/', $f, $m)) {
+            // Handle Comparison Operators: == and !=
+            $compPattern = '/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\s*(==|!=)\s*["\'](.*?)["\']/';
+            if (preg_match($compPattern, $f, $m)) {
                 $propId = !empty($m[1]) ? $m[1] : $m[2];
                 $op = $m[3];
                 $expected = $m[4];
                 $actual = $findProp($props, $propId, $mdFile);
-                return ($op === '==') ? ($actual == $expected) : ($actual != $expected);
+                
+                $match = ($actual == $expected);
+                return ($op === '==') ? $match : !$match;
             }
         }
-
-        // 3. Handle Object Filters (Standard property/operator objects)
-        if (is_array($filterGroup) && isset($filterGroup['property'])) {
-            $actual = $findProp($props, $filterGroup['property'], $mdFile);
-            return $this->evaluateOperator($actual, $filterGroup['operator'] ?? 'is', $filterGroup['value'] ?? '');
-        }
-
         return true;
     }
 
