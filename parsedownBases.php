@@ -183,20 +183,21 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // 1. note["Actual Age"] -> Actual_Age
+        // 1. Clean note["Prop Name"] -> Prop_Name
+        // We use a simplified regex that is less likely to fail
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); 
+            return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
         }, $expression);
 
-        // 2. THE BRIDGE: Turn .method() into method()
-        // This turns 'Species.toString().contains("Selhae")' 
-        // into 'contains(toString(Species), "Selhae")'
-        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
+        // 2. Fix the specific "dot" issues for your Age formula
+        // We do simple string swaps for your exact formula needs
+        $expr = str_replace('.toString()', '', $expr);
+        $expr = str_replace('.round()', '', $expr);
+        
+        // Fix .contains("X") -> contains(Prop, "X")
         $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
-        $expr = preg_replace('/\)\.round\(\)/', ')', $expr); // Handle ).round()
-        $expr = preg_replace('/\)\.toString\(\)/', ')', $expr); // Handle ).toString()
 
-        // 3. Clean up and standard fixes
+        // 3. Final cleanup and plus-to-concat
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
         // 4. Variables Prep (Keep Arrays as Arrays!)
@@ -209,8 +210,8 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Return this for debugging if it still fails
-            return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
+            // Return this for one last debug check if it still fails
+            return "Debug: " . $e->getMessage() . " | Final: " . $expr;
         }
     }
 
