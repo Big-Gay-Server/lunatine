@@ -187,32 +187,34 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // A. The Key Step: Turn note["Actual Age"] into Actual_Age
-        // This finds ANY text inside brackets and replaces spaces with underscores
-        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]);
-        }, $expression);
+        // 1. Convert note["Prop"].toString() -> toString(note["Prop"])
+        // This looks for anything followed by .toString() and wraps it
+        $expr = preg_replace('/(.*?)\.toString\(\)/', 'toString($1)', $expression);
 
-        // B. Clean up trailing dots (note.Actual_Age -> Actual_Age)
+        // 2. Turn note["Actual Age"] into Actual_Age
+        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
+            // Return just the property name with underscores
+            return str_replace(' ', '_', $m[2]); 
+        }, $expr);
+
+        // 3. Clean up any remaining note. or prop. prefixes
         $expr = str_replace(['note.', 'prop.'], '', $expr);
 
-        // C. Concat fix
+        // 4. Standard fixes (+ to ~)
         $expr = str_replace('+', '~', $expr);
 
-        // D. Prepare Variables (matching the underscore style)
+        // 5. Variables matching the underscore style
         $variables = [];
         foreach ($props as $k => $v) {
-            $cleanK = str_replace(' ', '_', $k);
-            $variables[$cleanK] = is_array($v) ? $v : $v;
+            $variables[str_replace(' ', '_', $k)] = $v;
         }
         $variables['name'] = $displayName;
 
         try {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // If it still fails, show the error temporarily so we can see which word broke it
-            return "Error: " . $e->getMessage(); 
-            // return $expression; 
+            // return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr; 
+            return $expression; 
         }
     }
 
