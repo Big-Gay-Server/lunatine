@@ -99,31 +99,36 @@ class ParsedownBases extends Parsedown {
     $allFiles = glob_recursive($scanDir . '/*.md');
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
-    $findProp = function ($props, $id, $mdFile = null) {
-        // 1. Check standard frontmatter first
-        if (isset($props[$id])) return $props[$id];
-        
-        // 2. Handle System Properties (matches your image)
+    $findProp = function ($props, $id, $mdFile = null) use ($markdownDir) {
+        // 1. Clean the ID (Obsidian uses "file.folder" or "folder")
+        $id = str_replace(['file.', 'note.'], '', $id);
+
+        // 2. VIRTUAL PROPERTIES: If it's not in the YAML, check the file system
         if ($mdFile) {
-            switch (strtolower($id)) {
+            // Get the path relative to your vault root
+            $relativePath = ltrim(str_replace(realpath($markdownDir), '', realpath($mdFile)), '/');
+            
+            switch ($id) {
                 case 'folder':
-                    return dirname($mdFile);
+                    return dirname($relativePath);
+                case 'name':
+                case 'file name':
+                    return pathinfo($mdFile, PATHINFO_FILENAME);
+                case 'ext':
                 case 'file extension':
                     return pathinfo($mdFile, PATHINFO_EXTENSION);
-                case 'file name':
-                    // Check for 'index' specifically as seen in your filter
-                    return pathinfo($mdFile, PATHINFO_FILENAME);
-                case 'title':
-                    // Title is often the filename in Obsidian if not in YAML
-                    return $props['title'] ?? pathinfo($mdFile, PATHINFO_FILENAME);
             }
         }
 
-        // 3. Fallback to normalized check
+        // 3. ACTUAL PROPERTIES: Check the YAML frontmatter
+        if (isset($props[$id])) return $props[$id];
+        
+        // Fuzzy match for spaces/casing (e.g. "Full Name" vs "fullname")
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
             if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
         }
+
         return '';
     };
 

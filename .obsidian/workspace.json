@@ -11,14 +11,13 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "ARTIFACTS/index.md",
-                "mode": "source",
-                "source": false
+                "file": "ARTIFACTS/artifactsbase.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-table",
+              "title": "artifactsbase"
             }
           }
         ]
@@ -267,6 +266,7 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "ARTIFACTS/index.md",
     "LANGUAGES/languagesbase.base",
     "LANGUAGES/index.md",
     "CHARACTERS/characterbase.base",
@@ -282,7 +282,6 @@
     "vendor/symfony/cache-contracts/CallbackInterface.php",
     "vendor/symfony/cache-contracts/CacheTrait.php",
     "vendor/symfony/cache-contracts/CacheInterface.php",
-    "vendor/symfony/cache-contracts",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
     "vendor/psr/log/README.md",
