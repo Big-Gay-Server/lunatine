@@ -191,26 +191,34 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-    if (!class_exists('\Symfony\Component\ExpressionLanguage\ExpressionLanguage')) {
-        return "Error: Library not loaded. Check vendor path.";
+        // A. Clean note["Prop"] -> Prop
+        $expr = preg_replace('/(note|prop)\[["\'](.*?)["\']\]/', '$2', $expression);
+        
+        // B. Clean note.Prop -> Prop
+        $expr = str_replace('note.', '', $expr);
+
+        // C. Convert if(a, b, c) -> (a ? b : c)
+        // This is a simple version; nested if's might need more regex love
+        $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/', '($1 ? $2 : $3)', $expr);
+
+        // D. The string joining fix you did earlier
+        $expr = str_replace('+', '~', $expr);
+
+        // E. Prepare variables (Clean spaces in property names)
+        $variables = [];
+        foreach ($props as $k => $v) {
+            $variables[str_replace(' ', '_', $k)] = $v;
+        }
+        $expr = str_replace(' ', '_', $expr);
+
+        try {
+            return $this->el->evaluate($expr, $variables);
+        } catch (\Exception $e) {
+            // Log the error to see exactly what failed (helpful for debugging)
+            // error_log("Bases Error: " . $e->getMessage() . " in " . $expr);
+            return $expression; 
+        }
     }
-    // 1. Clean Obsidian syntax: prop("Status") -> Status
-    $cleanExpression = preg_replace('/prop\(["\'](.*?)["\']\)/', '$1', $expression);
-
-    $cleanExpression = str_replace('+', '~', $cleanExpression);
-
-    // 2. Add 'name' and 'file' so formulas can use them
-    $props['name'] = $displayName;
-    $props['file'] = $displayName;
-
-    try {
-        // 3. Let Symfony handle the math/logic
-        return $this->el->evaluate($cleanExpression, $props);
-    } catch (\Exception $e) {
-        // If it's a complex Obsidian function we haven't registered, return raw string
-        return $expression; 
-    }
-}
 
     private function evaluateOperator($actual, $op, $expected) {
         // Normalize inputs (trim whitespace, handle nulls)
