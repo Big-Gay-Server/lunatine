@@ -185,25 +185,26 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. FIXED REGEX: note["Actual Age"] -> Actual_Age
+        // 1. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            // Use $m[1] to get the property name. $m[0] is the whole "note['...']" string.
             return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
         }, $expr);
 
-        // 2. CONVERT DOTS TO FUNCTIONS (Fixing the 'contains' conflict)
-        // We'll use 'hasValue' as we discussed to avoid the Symfony keyword 'contains'
+        // 2. THE FLIP: Convert X.contains(Y) -> hasValue(X, Y)
+        // This turns 'Species.contains("Selhae")' into 'hasValue(Species, "Selhae")'
         $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
+
+        // 3. Remove .toString() and .round()
         $expr = str_replace(['.toString()', '.round()'], '', $expr);
 
-        // 3. CLEANUP
+        // 4. Standard cleanup
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 4. PREPARE VARIABLES (Fixing the Array to String Warning)
+        // 5. Prepare Variables (Handles the Array Warning)
         $variables = [];
         foreach ($props as $k => $v) {
             $cleanK = str_replace(' ', '_', $k);
-            // Don't force (string) if it's an array (tags/lists)
+            // Keep arrays as arrays for the hasValue function
             $variables[$cleanK] = is_array($v) ? $v : (string)$v;
         }
         $variables['name'] = $displayName;
