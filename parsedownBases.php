@@ -304,50 +304,64 @@ class ParsedownBases extends Parsedown {
     }
 
     private function matchesFilters($props, $filterGroup, $findProp, $mdFile) {
-    if (empty($filterGroup)) return true;
+        if (empty($filterGroup)) return true;
 
-    // Handle 'and' groups
-    if (isset($filterGroup['and']) && is_array($filterGroup['and'])) {
-        foreach ($filterGroup['and'] as $sub) {
-            if (!$this->matchesFilters($props, $sub, $findProp, $mdFile)) return false;
+        // 1. Handle AND/OR groups (Recursive)
+        if (isset($filterGroup['and'])) {
+            foreach ($filterGroup['and'] as $sub) {
+                if (!$this->matchesFilters($props, $sub, $findProp, $mdFile)) return false;
+            }
+            return true;
         }
+        if (isset($filterGroup['or'])) {
+            foreach ($filterGroup['or'] as $sub) {
+                if ($this->matchesFilters($props, $sub, $findProp, $mdFile)) return true;
+            }
+            return false;
+        }
+
+        // 2. Handle String Filters (e.g. "!note['Character Type'].isEmpty()")
+        if (is_string($filterGroup)) {
+            $f = trim($filterGroup);
+            $isNot = str_starts_with($f, '!');
+            $f = ltrim($f, '!');
+
+            // Improved Regex: Handles note["Prop"], note['Prop'], and simple Prop
+            if (preg_match('/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\.(contains|endsWith|isEmpty|isNotEmpty)\((.*?)\)/', $f, $m)) {
+                $propId = !empty($m[1]) ? $m[1] : $m[2]; // Get the ID from inside brackets OR the simple name
+                $method = $m[3];
+                $expected = trim($m[4], "\"' ");
+                
+                $actual = $findProp($props, $propId, $mdFile);
+                
+                $res = false;
+                switch ($method) {
+                    case 'contains': $res = str_contains((string)$actual, $expected); break;
+                    case 'endsWith': $res = str_ends_with((string)$actual, $expected); break;
+                    case 'isEmpty': $res = empty($actual) || trim((string)$actual) === ''; break;
+                    case 'isNotEmpty': $res = !empty($actual) && trim((string)$actual) !== ''; break;
+                }
+                return $isNot ? !$res : $res;
+            }
+
+            // Handle Comparisons (e.g. "Species == 'Elf'")
+            if (preg_match('/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\s*(==|!=)\s*["\'](.*?)["\']/', $f, $m)) {
+                $propId = !empty($m[1]) ? $m[1] : $m[2];
+                $op = $m[3];
+                $expected = $m[4];
+                $actual = $findProp($props, $propId, $mdFile);
+                return ($op === '==') ? ($actual == $expected) : ($actual != $expected);
+            }
+        }
+
+        // 3. Handle Object Filters (Standard property/operator objects)
+        if (is_array($filterGroup) && isset($filterGroup['property'])) {
+            $actual = $findProp($props, $filterGroup['property'], $mdFile);
+            return $this->evaluateOperator($actual, $filterGroup['operator'] ?? 'is', $filterGroup['value'] ?? '');
+        }
+
         return true;
     }
-
-    // --- PARSE COMPACT STRING FILTERS ---
-    if (is_string($filterGroup)) {
-        $f = trim($filterGroup);
-        $isNot = str_starts_with($f, '!');
-        $f = ltrim($f, '!');
-
-        // 1. Handle Methods: .contains(), .endsWith(), .isEmpty()
-        if (preg_match('/(.*?)\.(contains|endsWith|startsWith|isEmpty)\((.*?)\)/', $f, $m)) {
-            $propId = trim($m[1]);
-            $method = $m[2];
-            $expected = trim($m[3], "\"'");
-            
-            $actual = $findProp($props, $propId, $mdFile);
-            
-            $res = false;
-            switch ($method) {
-                case 'contains': $res = str_contains((string)$actual, $expected); break;
-                case 'endsWith': $res = str_ends_with((string)$actual, $expected); break;
-                case 'startsWith': $res = str_starts_with((string)$actual, $expected); break;
-                case 'isEmpty': $res = empty($actual) || trim((string)$actual) === ''; break;
-            }
-            return $isNot ? !$res : $res;
-        }
-
-        // 2. Handle Comparisons: == and !=
-        if (preg_match('/(.*?) (==|!=) ["\'](.*?)["\']/', $f, $m)) {
-            $actual = $findProp($props, trim($m[1]), $mdFile);
-            $match = ($actual == $m[3]);
-            return ($m[2] === '==') ? $match : !$match;
-        }
-    }
-
-    return true;
-}
 
     private function evaluateOperator($actual, $op, $expected) {
         // Normalize inputs (trim whitespace, handle nulls)
