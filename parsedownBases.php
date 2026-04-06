@@ -195,35 +195,38 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
+        // A. Clean note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m); 
-        }, $expr);
+            return str_replace(' ', '_', $m[2]); 
+        }, $expression);
 
-        // 2. THE FIX FOR iftoString: 
-        // We only want to flip .round() or .toString() if they are attached to a variable 
-        // or a closing parenthesis that ISN'T part of the initial 'if'
-        // This regex looks for: Word.round().toString() -> toString(round(Word))
-        $expr = preg_replace('/([\w_]+)\.round\(\)\.toString\(\)/', 'toString(round($1))', $expr);
-        $expr = preg_replace('/([\w_]+)\.round\(\)/', 'round($1)', $expr);
+        // B. TARGETED FIX for the specific formula ending:
+        // This finds ).round().toString() and flips it to toString(round( ... )) 
+        // BUT only if it starts with an 'if'
+        if (str_ends_with(trim($expr), ').round().toString()')) {
+            // Strip the trailing methods and wrap the whole thing
+            $inner = substr(trim($expr), 0, -19); // Remove .round().toString()
+            $expr = "toString(round(" . $inner . "))";
+        }
+
+        // C. SIMPLE FIX for single properties: Species.toString() -> toString(Species)
         $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
-
-        // 3. HANDLE NESTED BLOCKS: ( if(...) ).round().toString() -> toString(round( if(...) ))
-        // We specifically look for the closing paren of the IF block
-        $expr = preg_replace('/\)\.round\(\)\.toString\(\)/', '))', $expr);
-        $expr = preg_replace('/if\((.*)\)\)\.round\(\)\.toString\(\)/s', 'toString(round(if($1)))', $expr);
-
-        // 4. FLIP REMAINING DOTS
         $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
 
-        // 5. FINAL CLEANUP
-        // We use a space 'if (' to keep it distinct
-        $expr = str_replace(['if(', 'note.', 'prop.', '+', '!= null'], ['if (', '', '', '~', '!= ""'], $expr);
-
-        // 6. PREPARE VARIABLES
+        // D. Final Clean
+        $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
+        
+        // --- STEP 6: PREPARE VARIABLES ---
         $variables = [];
         foreach ($props as $k => $v) {
-            $variables[str_replace(' ', '_', $k)] = $v;
+            $cleanK = str_replace(' ', '_', $k);
+            
+            // Check if it's an array (like Tags) before converting to string
+            if (is_array($v)) {
+                $variables[$cleanK] = $v; // Keep it as an array for 'contains'
+            } else {
+                $variables[$cleanK] = (string)$v;
+            }
         }
         $variables['name'] = $displayName;
 
