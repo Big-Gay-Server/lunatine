@@ -99,26 +99,32 @@ class ParsedownBases extends Parsedown {
     $allFiles = glob_recursive($scanDir . '/*.md');
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
-    $findProp = function ($props, $id) {
-        // Defines a helper function (closure) to find metadata values regardless of naming style (e.g., 'Full Name' vs 'fullname').
-
-        if (isset($props[$id])) {
-            return $props[$id];
-        }
-        // Direct match check.
-
-        $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
-        // Strips spaces, underscores, and dashes to create a "normalized" ID for comparison.
-
-        foreach ($props as $key => $val) {
-            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) {
-                return $val;
+    $findProp = function ($props, $id, $mdFile = null) {
+        // 1. Check standard frontmatter first
+        if (isset($props[$id])) return $props[$id];
+        
+        // 2. Handle System Properties (matches your image)
+        if ($mdFile) {
+            switch (strtolower($id)) {
+                case 'folder':
+                    return dirname($mdFile);
+                case 'file extension':
+                    return pathinfo($mdFile, PATHINFO_EXTENSION);
+                case 'file name':
+                    // Check for 'index' specifically as seen in your filter
+                    return pathinfo($mdFile, PATHINFO_FILENAME);
+                case 'title':
+                    // Title is often the filename in Obsidian if not in YAML
+                    return $props['title'] ?? pathinfo($mdFile, PATHINFO_FILENAME);
             }
         }
-        // Loops through all metadata keys to find a normalized match.
 
+        // 3. Fallback to normalized check
+        $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
+        foreach ($props as $key => $val) {
+            if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
+        }
         return '';
-        // Returns an empty string if the property isn't found.
     };
 
     // Find the right filters for the "web" view
@@ -134,7 +140,7 @@ class ParsedownBases extends Parsedown {
         }
 
         // Call the new string-aware matcher
-        return $this->matchesFilters($props, $baseFilters, $findProp);
+        return $this->matchesFilters($props, $baseFilters, $findProp, $mdFile);
     });
 
     // --- APPLY SORTING ---
@@ -289,7 +295,7 @@ class ParsedownBases extends Parsedown {
         }
     }
 
-    private function matchesFilters($props, $filterGroup, $findProp) {
+    private function matchesFilters($props, $filterGroup, $findProp, $mdFile) {
         if (empty($filterGroup)) return true;
 
         // Handle the 'and' array inside the YAML
@@ -326,7 +332,7 @@ class ParsedownBases extends Parsedown {
             $propId = $filterGroup['property'] ?? '';
             $operator = $filterGroup['operator'] ?? 'is';
             $expected = $filterGroup['value'] ?? '';
-            $actual = $findProp($props, $propId);
+            $actual = $findProp($props, $propId, $mdFile);
             return $this->evaluateOperator($actual, $operator, $expected);
         }
 

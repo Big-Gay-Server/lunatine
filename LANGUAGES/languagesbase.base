@@ -7,7 +7,7 @@ views:
         - file.ext != "base"
         - "!title.isEmpty()"
         - file.name == "index"
-        - file.folder != "LANGUAGES/Varae/dictionary"
+        - '!file.folder.endsWith("/dictionary")'
     order:
       - title
       - Mainly spoken by
