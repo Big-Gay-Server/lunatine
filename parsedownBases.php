@@ -185,26 +185,26 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. note["Actual Age"] -> Actual_Age
+        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
         }, $expr);
 
-        // 2. THE FLIP: Convert X.contains(Y) -> hasValue(X, Y)
-        // This turns 'Species.contains("Selhae")' into 'hasValue(Species, "Selhae")'
+        // 2. THE FLIP: Convert Species.contains("Selhae") -> hasValue(Species, "Selhae")
+        // This removes the dot so Symfony doesn't look for a "method"
         $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
 
-        // 3. Remove .toString() and .round()
+        // 3. Remove .toString() and .round() 
+        // We already handled these by wrapping or registering them, so remove the dots
         $expr = str_replace(['.toString()', '.round()'], '', $expr);
 
         // 4. Standard cleanup
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 5. Prepare Variables (Handles the Array Warning)
+        // 5. Prepare Variables (Keep Arrays as Arrays for tags/species lists)
         $variables = [];
         foreach ($props as $k => $v) {
             $cleanK = str_replace(' ', '_', $k);
-            // Keep arrays as arrays for the hasValue function
             $variables[$cleanK] = is_array($v) ? $v : (string)$v;
         }
         $variables['name'] = $displayName;
@@ -212,6 +212,7 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
+            // Return this for debugging if it still fails
             return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
         }
     }
