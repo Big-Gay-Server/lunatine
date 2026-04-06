@@ -13,7 +13,7 @@ class ParsedownBases extends Parsedown {
     private $el;
 
     public function __construct() {
-        $this->el = new ExpressionLanguage();
+        $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
         
         // Register 'dateadd' so it works in any formula generically
         $this->el->register('dateadd', function ($arg) { return ''; }, function ($args, $date, $amount, $unit) {
