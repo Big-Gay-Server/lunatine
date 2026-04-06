@@ -1,3 +1,6 @@
+filters:
+  and:
+    - "!Species.isEmpty()"
 formulas:
   age--: image(iconn)
   fullbody: image(fullbody)
@@ -122,9 +125,6 @@ views:
     rowHeight: medium
   - type: table
     name: web
-    filters:
-      and:
-        - '!note["Character Type"].isEmpty()'
     order:
       - icon
       - formula.name
