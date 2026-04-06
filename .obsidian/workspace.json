@@ -11,14 +11,13 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "CHARACTERS/dataview serializer test.md",
-                "mode": "source",
-                "source": false
+                "file": "CHARACTERS/characterbase.base",
+                "viewName": "web"
               },
-              "icon": "lucide-file",
-              "title": "dataview serializer test"
+              "icon": "lucide-table",
+              "title": "characterbase"
             }
           }
         ]
@@ -267,6 +266,8 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "CHARACTERS/index.md",
+    "CHARACTERS/dataview serializer test.md",
     "vendor/symfony/cache-contracts/TagAwareCacheInterface.php",
     "vendor/symfony/cache-contracts/README.md",
     "vendor/symfony/cache-contracts/NamespacedPoolInterface.php",
@@ -279,7 +280,6 @@
     "vendor/symfony/cache-contracts/CacheInterface.php",
     "vendor/symfony/cache-contracts",
     "vendor/symfony/service-contracts/Test/ServiceLocatorTestCase.php",
-    "vendor/symfony/service-contracts/Test/ServiceLocatorTest.php",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
     "vendor/psr/log/README.md",
@@ -302,7 +302,6 @@
     "vendor/nette/schema/license.md",
     "vendor/league/config/README.md",
     "vendor/league/config/LICENSE.md",
-    "vendor/league/config/CHANGELOG.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",

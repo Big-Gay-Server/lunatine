@@ -6,16 +6,14 @@ formulas:
   calc age: |
     if(note["Actual Age"] != null, 
       note["Actual Age"].toString() + " years\n<i>appears " + 
-      (
+      if(
+        note["Species"].toString().contains("Selhae"),
         if(
-          note["Species"].toString().contains("Selhae"),
-          if(
-            number(note["Actual Age"]) > 25,
-            ((number(note["Actual Age"]) - 25) / 25) + 25,
-            number(note["Actual Age"])
-          ),
+          number(note["Actual Age"]) > 25,
+          ((number(note["Actual Age"]) - 25) / 25) + 25,
           number(note["Actual Age"])
-        )
+        ),
+        number(note["Actual Age"])
       ).round().toString(),
       "<i>Unknown Age</i>"
     )

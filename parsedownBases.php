@@ -195,27 +195,23 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. note["Prop Name"] -> Prop_Name
+        // A. THE MAGIC STEP: Convert dot-notation to function-notation for PHP
+        // This turns 'X.toString()' into 'toString(X)' and 'X.round()' into 'round(X)'
+        // We run it twice to catch "chained" dots like .round().toString()
+        for ($i = 0; $i < 2; $i++) {
+            $expr = preg_replace('/([\w_"\'\[\]]+)\.(toString|round|contains|number)\((.*?)\)/', '$2($1, $3)', $expr);
+            $expr = preg_replace('/([\w_"\'\[\]]+)\.(toString|round|contains|number)\(\)/', '$2($1)', $expr);
+        }
+
+        // B. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); // $m[2] is the text inside the brackets
+            return str_replace(' ', '_', $m[2]); 
         }, $expr);
 
-        // 2. Fix the dot-notation chains (Obsidian style to Function style)
-        // .toString() -> toString()
-        $expr = preg_replace('/\.toString\(\)/', '', $expr); // We'll wrap the whole thing in toString later if needed
-        
-        // .round() -> round()
-        // This is a bit of a hack for your specific Selhae logic:
-        $expr = str_replace(').round()', ')', $expr);
-        $expr = preg_replace('/if\((.*)\)\.round\(\)/', 'round(if($1))', $expr);
-
-        // 3. Fix the "contains" dot: Species.toString().contains("Selhae") -> contains(toString(Species), "Selhae")
-        $expr = preg_replace('/([\w_]+)\.toString\(\)\.contains\((.*?)\)/', 'contains(toString($1), $2)', $expr);
-
-        // 4. Standard Cleanup
+        // C. Clean up remaining prefixes and plus signs
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 5. Variables Prep
+        // D. Prepare Variables
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -223,14 +219,13 @@ class ParsedownBases extends Parsedown {
         $variables['name'] = $displayName;
 
         try {
-            return $this->el->evaluate($expr, $variables);
+            return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Log the final expression to see what the engine is actually trying to read
-            return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
+            // Log this to see the "Final Expr" if it fails
+            // error_log("Bases Error: " . $e->getMessage() . " | Expr: " . $expr);
             return $expression; 
         }
     }
-
     private function evaluateOperator($actual, $op, $expected) {
         // Normalize inputs (trim whitespace, handle nulls)
         $actual = $actual ?? '';
