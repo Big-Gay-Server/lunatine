@@ -111,26 +111,20 @@ class ParsedownBases extends Parsedown {
         // Returns an empty string if the property isn't found.
     };
 
-    // --- GET FILTERS FROM YAML ---
+    // Find the right filters for the "web" view
     $baseFilters = $baseData['views'][$viewIndex]['filters'] ?? [];
 
-    // --- APPLY FILTERS TO FILES ---
     $mdFiles = array_filter($allFiles, function($mdFile) use ($currentPage, $baseFilters, $findProp) {
-        // 1. Skip the current page or bio files
-        if (realpath($mdFile) === realpath($currentPage) || basename($mdFile) === 'bio.md') {
-            return false;
-        }
+        if (realpath($mdFile) === realpath($currentPage) || basename($mdFile) === 'bio.md') return false;
 
-        // 2. Load the frontmatter
         $content = file_get_contents($mdFile);
         $props = [];
         if (preg_match('/^---\s*([\s\S]*?)\s---/u', $content, $matches)) {
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
-        // 3. Use the helper function to handle ALL filter logic (Simple or Nested)
-        // We wrap it in 'and' because Bases filters are an array of requirements
-        return $this->matchesFilters($props, ['and' => $baseFilters], $findProp);
+        // Call the new string-aware matcher
+        return $this->matchesFilters($props, $baseFilters, $findProp);
     });
 
     $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
