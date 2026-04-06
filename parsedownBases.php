@@ -193,28 +193,34 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-    $expr = $expression;
+        $expr = $expression;
 
-    // 1. CLEAN PROPERTIES FIRST: note["Actual Age"] -> Actual_Age
+        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); 
+            return str_replace(' ', '_', $m); 
         }, $expr);
 
-        // 2. THE SURGICAL UNWRAP: ( ... ).round().toString() -> toString(round( ... ))
-        // We use [^if] to make sure we don't swallow the word "if" 
-        $expr = preg_replace('/\((?!if)(.*?)\)\.round\(\)\.toString\(\)/s', 'toString(round($1))', $expr);
-        $expr = preg_replace('/\((?!if)(.*?)\)\.round\(\)/s', 'round($1)', $expr);
-        $expr = preg_replace('/\((?!if)(.*?)\)\.toString\(\)/s', 'toString($1)', $expr);
-
-        // 3. FLIP SIMPLE DOTS: Species.toString() -> toString(Species)
+        // 2. THE FIX FOR iftoString: 
+        // We only want to flip .round() or .toString() if they are attached to a variable 
+        // or a closing parenthesis that ISN'T part of the initial 'if'
+        // This regex looks for: Word.round().toString() -> toString(round(Word))
+        $expr = preg_replace('/([\w_]+)\.round\(\)\.toString\(\)/', 'toString(round($1))', $expr);
+        $expr = preg_replace('/([\w_]+)\.round\(\)/', 'round($1)', $expr);
         $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
+
+        // 3. HANDLE NESTED BLOCKS: ( if(...) ).round().toString() -> toString(round( if(...) ))
+        // We specifically look for the closing paren of the IF block
+        $expr = preg_replace('/\)\.round\(\)\.toString\(\)/', '))', $expr);
+        $expr = preg_replace('/if\((.*)\)\)\.round\(\)\.toString\(\)/s', 'toString(round(if($1)))', $expr);
+
+        // 4. FLIP REMAINING DOTS
         $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
 
-        // 4. FINAL CLEANUP
-        // We add a space after 'if' just in case, and fix the other symbols
+        // 5. FINAL CLEANUP
+        // We use a space 'if (' to keep it distinct
         $expr = str_replace(['if(', 'note.', 'prop.', '+', '!= null'], ['if (', '', '', '~', '!= ""'], $expr);
 
-        // 5. PREPARE VARIABLES
+        // 6. PREPARE VARIABLES
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -224,9 +230,7 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Keep this here for one last check if it fails
             return "Debug: " . $e->getMessage() . " | Final: " . $expr;
-            // return $expression; 
         }
     }
 
