@@ -4,8 +4,23 @@
 require_once 'Parsedown.php'; 
 // Imports the base Parsedown library. 'require_once' ensures the script stops if the file is missing.
 
+require_once __DIR__ . '/vendor/autoload.php';
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+// imports composer stuff?
+
 class ParsedownBases extends Parsedown {
 // Defines a new class that "inherits" from Parsedown, allowing it to use and extend Markdown features.
+    private $el;
+
+    public function __construct() {
+        $this->el = new ExpressionLanguage();
+        
+        // Register 'dateadd' so it works in any formula generically
+        $this->el->register('dateadd', function ($arg) { return ''; }, function ($args, $date, $amount, $unit) {
+            return date('Y-m-d', strtotime("$date +$amount $unit"));
+        });
+    }
+
 
     // --- BASES RENDERER ---
     public function renderTable($basePath, $currentPage, $markdownDir, $targetViewName = null)
@@ -162,28 +177,24 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // 1. Initialize the "Calculator"
-        $language = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
-
-        // 2. Clean the Obsidian syntax
-        // This turns prop("Price") into just 'Price' so the library recognizes it as a variable
-        $cleanExpression = preg_replace('/prop\(["\'](.*?)["\']\)/', '$1', $expression);
-
-        // 3. Prepare the data
-        // We pass the frontmatter ($props) so the formula can see the values
-        $variables = $props;
-        $variables['name'] = $displayName;
-        $variables['file'] = $displayName;
-
-        try {
-            // 4. Let Symfony do the heavy lifting!
-            return $language->evaluate($cleanExpression, $variables);
-        } catch (\Exception $e) {
-            // If it's a complex Obsidian function the library doesn't know yet,
-            // it just returns the raw string instead of crashing your site.
-            return $expression; 
-        }
+    if (!class_exists('\Symfony\Component\ExpressionLanguage\ExpressionLanguage')) {
+        return "Error: Library not loaded. Check vendor path.";
     }
+    // 1. Clean Obsidian syntax: prop("Status") -> Status
+    $cleanExpression = preg_replace('/prop\(["\'](.*?)["\']\)/', '$1', $expression);
+
+    // 2. Add 'name' and 'file' so formulas can use them
+    $props['name'] = $displayName;
+    $props['file'] = $displayName;
+
+    try {
+        // 3. Let Symfony handle the math/logic
+        return $this->el->evaluate($cleanExpression, $props);
+    } catch (\Exception $e) {
+        // If it's a complex Obsidian function we haven't registered, return raw string
+        return $expression; 
+    }
+}
 
     private function evaluateOperator($actual, $op, $expected) {
         // Normalize inputs (trim whitespace, handle nulls)
