@@ -116,35 +116,21 @@ class ParsedownBases extends Parsedown {
 
     // --- APPLY FILTERS TO FILES ---
     $mdFiles = array_filter($allFiles, function($mdFile) use ($currentPage, $baseFilters, $findProp) {
-        // 1. Skip the current page or bio files as you already do
+        // 1. Skip the current page or bio files
         if (realpath($mdFile) === realpath($currentPage) || basename($mdFile) === 'bio.md') {
             return false;
         }
 
-        // 2. Load the frontmatter for this specific file
+        // 2. Load the frontmatter
         $content = file_get_contents($mdFile);
         $props = [];
         if (preg_match('/^---\s*([\s\S]*?)\s---/u', $content, $matches)) {
-            // We use Spyc to load the note's properties
             $props = Spyc::YAMLLoad($matches[1]);
         }
 
-        // 3. Check every filter defined in the Base
-        foreach ($baseFilters as $filter) {
-            $propId = $filter['property'] ?? '';
-            $operator = $filter['operator'] ?? 'is';
-            $expected = $filter['value'] ?? '';
-            
-            // Get the actual value from the note (e.g., the "Status" or "Tags")
-            $actual = $findProp($props, $propId);
-
-            // Use your evaluateOperator function to check for a match
-            if (!$this->evaluateOperator($actual, $operator, $expected)) {
-                return false; // Hide the note if it fails even ONE 'and' filter
-            }
-        }
-
-        return true; // Keep the note if it passes all filters
+        // 3. Use the helper function to handle ALL filter logic (Simple or Nested)
+        // We wrap it in 'and' because Bases filters are an array of requirements
+        return $this->matchesFilters($props, ['and' => $baseFilters], $findProp);
     });
 
     $tableHtml = "<base-embed><table class='bases-table'><thead><tr>";
@@ -260,6 +246,35 @@ class ParsedownBases extends Parsedown {
         } catch (\Exception $e) {
             return $expression; 
         }
+    }
+
+    private function matchesFilters($props, $filterGroup, $findProp) {
+        if (empty($filterGroup)) return true;
+
+        // 1. Handle "AND" groups
+        if (isset($filterGroup['and'])) {
+            foreach ($filterGroup['and'] as $subFilter) {
+                if (!$this->matchesFilters($props, $subFilter, $findProp)) return false;
+            }
+            return true;
+        }
+
+        // 2. Handle "OR" groups
+        if (isset($filterGroup['or'])) {
+            foreach ($filterGroup['or'] as $subFilter) {
+                if ($this->matchesFilters($props, $subFilter, $findProp)) return true;
+            }
+            return false;
+        }
+
+        // 3. Handle a single atomic filter
+        $propId = $filterGroup['property'] ?? '';
+        $operator = $filterGroup['operator'] ?? 'is';
+        $expected = $filterGroup['value'] ?? '';
+        
+        $actual = $findProp($props, $propId);
+
+        return $this->evaluateOperator($actual, $operator, $expected);
     }
 
     private function evaluateOperator($actual, $op, $expected) {
