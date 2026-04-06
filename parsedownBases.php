@@ -86,7 +86,17 @@ class ParsedownBases extends Parsedown {
     $scanDir = dirname($basePath);
     // Gets the directory path where the .base file lives.
 
-    $allFiles = array_merge(glob($scanDir . '/*/index.md'), glob($scanDir . '/*.md'), glob($scanDir . '/*/*.md'));
+    // Define this helper inside your class or before calling it
+    function glob_recursive($pattern, $flags = 0) {
+        $files = glob($pattern, $flags);
+        foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+            $files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
+        }
+        return $files;
+    }
+
+    // Then use it like this in renderTable:
+    $allFiles = glob_recursive($scanDir . '/*.md');
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
     $findProp = function ($props, $id) {
