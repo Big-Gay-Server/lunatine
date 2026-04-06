@@ -182,34 +182,35 @@ class ParsedownBases extends Parsedown {
         return $tableHtml . '</tbody></table>';
     }
 
-        private function evaluateObsidianFormula($expression, $props, $displayName) {
+    private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. Convert Property.contains("Value") to hasValue(Property, "Value")
-        // Note: We use 'hasValue' now to avoid the conflict
-        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
-
-        // 2. Standard cleanup for dot notation and Obsidian syntax
-        $expr = str_replace(['.toString()', '.round()'], '', $expr);
-
+        // 1. FIXED REGEX: note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m); 
+            // Use $m[1] to get the property name. $m[0] is the whole "note['...']" string.
+            return isset($m[1]) ? str_replace(' ', '_', $m[1]) : '';
         }, $expr);
 
-        // 3. Final cleanup for plus signs and null checks
+        // 2. CONVERT DOTS TO FUNCTIONS (Fixing the 'contains' conflict)
+        // We'll use 'hasValue' as we discussed to avoid the Symfony keyword 'contains'
+        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'hasValue($1, $2)', $expr);
+        $expr = str_replace(['.toString()', '.round()'], '', $expr);
+
+        // 3. CLEANUP
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 4. Variables Prep (Keep Arrays as Arrays!)
+        // 4. PREPARE VARIABLES (Fixing the Array to String Warning)
         $variables = [];
         foreach ($props as $k => $v) {
-            $variables[str_replace(' ', '_', $k)] = $v;
+            $cleanK = str_replace(' ', '_', $k);
+            // Don't force (string) if it's an array (tags/lists)
+            $variables[$cleanK] = is_array($v) ? $v : (string)$v;
         }
         $variables['name'] = $displayName;
 
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Log this to see the "Final Expr" if it fails
             return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
         }
     }
