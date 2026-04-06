@@ -3,4 +3,5 @@ aliases:
   - Artifacts
 title: Artifacts
 ---
-[embed_base:artifactsbase#table]
+![[ARTIFACTS/artifactsbase.base|artifactsbase]]
+
