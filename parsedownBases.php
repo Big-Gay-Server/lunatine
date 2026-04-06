@@ -326,17 +326,21 @@ class MetadataWrapper {
     public $data;
 
     public function __construct($data) {
-        // If we accidentally wrap a wrapper, just take its data
         $this->data = ($data instanceof MetadataWrapper) ? $data->data : $data;
     }
 
-    public function toString() {
-        return $this; // Return the object so we can chain more dots
+    // --- THE FIX: Handle missing properties like .folder ---
+    public function __get($name) {
+        // If the formula asks for .folder or .path, return an empty wrapper
+        // This stops the "Undefined property" warning
+        return new MetadataWrapper("");
     }
 
-    public function round() {
+    public function toString() { return $this; }
+    
+    public function round() { 
         $val = (float)((string)$this);
-        return new MetadataWrapper(round($val)); // Wrap the rounded number
+        return new MetadataWrapper(round($val)); 
     }
 
     public function contains($needle) {
@@ -344,12 +348,7 @@ class MetadataWrapper {
     }
 
     public function __toString() {
-        if (is_array($this->data)) {
-            return implode(', ', $this->data);
-        }
-        // Return the raw string including any <i> or <br> tags
-        return (string)$this->data;
+        if (is_array($this->data)) return implode(', ', $this->data);
+        return (string)($this->data ?? '');
     }
 }
-
-?>
