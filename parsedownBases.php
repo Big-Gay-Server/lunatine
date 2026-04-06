@@ -14,24 +14,26 @@ class ParsedownBases extends Parsedown {
 
     public function __construct() {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
-        
-        // 1. Map "if(cond, true, false)" to PHP's ternary logic
-        // Obsidian uses if(a, b, c), but Symfony likes (a ? b : c)
-        // We handle this with a regex in the evaluate function below.
 
-        // 2. Map "toString()"
-        $this->el->register('toString', function ($str) { return ''; }, function ($args, $val) {
-            return (string)$val;
+        // Register 'number' (converts string to float)
+        $this->el->register('number', function($arg) { return ''; }, function($args, $val) {
+            return (float)$val;
         });
 
-        // 3. Map "contains()"
-        $this->el->register('contains', function ($str) { return ''; }, function ($args, $haystack, $needle) {
-            return str_contains((string)$haystack, (string)$needle);
+        // Register 'toString' (converts anything to string)
+        $this->el->register('toString', function($arg) { return ''; }, function($args, $val) {
+            return is_array($val) ? implode(', ', $val) : (string)$val;
         });
 
-        // 4. Map "round()"
-        $this->el->register('round', function ($str) { return ''; }, function ($args, $val) {
+        // Register 'round'
+        $this->el->register('round', function($arg) { return ''; }, function($args, $val) {
             return round((float)$val);
+        });
+
+        // Register 'contains' for Tags/Lists
+        $this->el->register('contains', function($arg) { return ''; }, function($args, $haystack, $needle) {
+            if (is_array($haystack)) return in_array($needle, $haystack);
+            return str_contains((string)$haystack, (string)$needle);
         });
     }
 
@@ -191,36 +193,30 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        // 1. CLEAN SYNTAX: note["Prop"] -> Prop_Name
-        // This removes the "note[]" or "prop()" wrapper and replaces spaces with underscores
+        // A. Normalize: turn note["Actual Age"] into Actual_Age
+        // We use a regex that finds the quoted text and underscores it
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return str_replace(' ', '_', $m[2]);
         }, $expression);
 
-        // 2. CONVERT IF: if(a, b, c) -> (a ? b : c)
-        // This is the most common reason for the "fallback" to raw text
+        // B. Handle the if() syntax -> (cond ? true : false)
+        // We use a non-greedy match to find the three parts of the 'if'
         $expr = preg_replace('/if\((.*?), (.*?), (.*)\)/', '($1 ? $2 : $3)', $expr);
 
-        // 3. CONCAT: + -> ~
+        // C. String Concatenation Fix
         $expr = str_replace('+', '~', $expr);
 
-        // 4. NULL CHECK: != null -> != "" (PHP handles empty strings better here)
-        $expr = str_replace('!= null', '!= ""', $expr);
-
-        // 5. PREPARE VARIABLES: Flatten $props to match underscores
+        // D. Prepare the variables (using the fix from Step 1)
         $variables = [];
-        foreach ($props as $key => $val) {
-            $cleanKey = str_replace(' ', '_', $key);
-            $variables[$cleanKey] = (string)$val;
+        foreach ($props as $k => $v) {
+            $variables[str_replace(' ', '_', $k)] = is_array($v) ? $v : $v;
         }
         $variables['name'] = $displayName;
 
         try {
-            // Evaluate the cleaned-up expression
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // DEBUG: Uncomment the line below to see WHY it's failing in your browser's console or logs
-            // return "Error: " . $e->getMessage() . " | In: " . $expr; 
+            // Return raw expression if it fails so you can see what's wrong
             return $expression; 
         }
     }
