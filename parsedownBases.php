@@ -183,6 +183,8 @@ class ParsedownBases extends Parsedown {
     // 1. Clean Obsidian syntax: prop("Status") -> Status
     $cleanExpression = preg_replace('/prop\(["\'](.*?)["\']\)/', '$1', $expression);
 
+    $cleanExpression = str_replace('+', '~', $cleanExpression);
+
     // 2. Add 'name' and 'file' so formulas can use them
     $props['name'] = $displayName;
     $props['file'] = $displayName;
