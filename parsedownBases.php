@@ -223,7 +223,7 @@ class ParsedownBases extends Parsedown {
         } catch (\Exception $e) {
             // Log this to see the "Final Expr" if it fails
             error_log("Bases Error: " . $e->getMessage() . " | Expr: " . $expr);
-            // return $expression; 
+            return $expression; 
         }
     }
     private function evaluateOperator($actual, $op, $expected) {
