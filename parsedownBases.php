@@ -195,38 +195,29 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // A. Clean note["Actual Age"] -> Actual_Age
-        $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); 
-        }, $expression);
+        // 1. CLEAN PROPERTIES: note["Actual Age"] -> Actual_Age
+        $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
+            return str_replace(' ', '_', $m[1]); 
+        }, $expr);
 
-        // B. TARGETED FIX for the specific formula ending:
-        // This finds ).round().toString() and flips it to toString(round( ... )) 
-        // BUT only if it starts with an 'if'
-        if (str_ends_with(trim($expr), ').round().toString()')) {
-            // Strip the trailing methods and wrap the whole thing
-            $inner = substr(trim($expr), 0, -19); // Remove .round().toString()
-            $expr = "toString(round(" . $inner . "))";
+        // 2. THE "ONION" LOOP: Keep flipping dots until they are all gone
+        // This turns X.toString() into toString(X) AND X.contains(Y) into contains(X, Y)
+        $pattern_with_args = '/([\w_]+\(.*\)|[\w_]+)\.([\w_]+)\((.*?)\)/s';
+        $pattern_no_args   = '/([\w_]+\(.*\)|[\w_]+)\.([\w_]+)\(\)/s';
+
+        while (preg_match($pattern_with_args, $expr) || preg_match($pattern_no_args, $expr)) {
+            $expr = preg_replace($pattern_with_args, '$2($1, $3)', $expr);
+            $expr = preg_replace($pattern_no_args, '$2($1)', $expr);
         }
 
-        // C. SIMPLE FIX for single properties: Species.toString() -> toString(Species)
-        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
-        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
-
-        // D. Final Clean
+        // 3. FINAL CLEANUP: Remove prefixes and fix plus signs
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
-        
-        // --- STEP 6: PREPARE VARIABLES ---
+
+        // 4. PREPARE VARIABLES (Handles the Array Warning too)
         $variables = [];
         foreach ($props as $k => $v) {
             $cleanK = str_replace(' ', '_', $k);
-            
-            // Check if it's an array (like Tags) before converting to string
-            if (is_array($v)) {
-                $variables[$cleanK] = $v; // Keep it as an array for 'contains'
-            } else {
-                $variables[$cleanK] = (string)$v;
-            }
+            $variables[$cleanK] = is_array($v) ? $v : (string)$v;
         }
         $variables['name'] = $displayName;
 
