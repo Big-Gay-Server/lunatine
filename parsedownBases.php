@@ -298,42 +298,55 @@ class ParsedownBases extends Parsedown {
     private function matchesFilters($props, $filterGroup, $findProp, $mdFile) {
         if (empty($filterGroup)) return true;
 
-        // Handle the 'and' array inside the YAML
+        // 1. Handle "AND" groups
         if (isset($filterGroup['and']) && is_array($filterGroup['and'])) {
             foreach ($filterGroup['and'] as $subFilter) {
-                // Recursive call for each item in the 'and' list
-                if (!$this->matchesFilters($props, $subFilter, $findProp)) return false;
+                // FIX: Added $mdFile as the 4th argument here
+                if (!$this->matchesFilters($props, $subFilter, $findProp, $mdFile)) return false;
             }
             return true;
         }
 
-        // --- NEW: Handle the string filter style "!Species.isEmpty()" ---
-        if (is_string($filterGroup)) {
-            $filterStr = $filterGroup;
-            $isNot = str_starts_with($filterStr, '!');
-            $cleanFilter = ltrim($filterStr, '!');
+        // 2. Handle "OR" groups
+        if (isset($filterGroup['or']) && is_array($filterGroup['or'])) {
+            foreach ($filterGroup['or'] as $subFilter) {
+                // FIX: Added $mdFile as the 4th argument here
+                if ($this->matchesFilters($props, $subFilter, $findProp, $mdFile)) return true;
+            }
+            return false;
+        }
 
-            // Handle .isEmpty()
-            if (str_ends_with($cleanFilter, '.isEmpty()')) {
+        // 3. Handle string style filters (e.g., "!Species.isEmpty()")
+        if (is_string($filterGroup)) {
+            $isNot = str_starts_with($filterGroup, '!');
+            $cleanFilter = ltrim($filterGroup, '!');
+
+            // Check for .isEmpty()
+            if (str_contains($cleanFilter, '.isEmpty()')) {
                 $propId = str_replace('.isEmpty()', '', $cleanFilter);
-                
-                // note["Character Type"] style cleaning
-                $propId = preg_replace('/note\[["\'](.*?)["\']\]/', '$1', $propId);
-                
-                $actual = $findProp($props, $propId);
-                $isEmpty = empty($actual) || $actual === '';
-                
+                $propId = preg_replace('/(?:note|prop|file)\[["\'](.*?)["\']\]/', '$1', $propId);
+                $propId = str_replace(['file.', 'note.'], '', $propId);
+
+                $actual = $findProp($props, $propId, $mdFile);
+                $isEmpty = empty($actual) || (is_string($actual) && trim($actual) === '');
                 return $isNot ? !$isEmpty : $isEmpty;
+            }
+            
+            // Handle .contains() in string filters
+            if (preg_match('/(.*?)\.contains\((.*?)\)/', $cleanFilter, $m)) {
+                $propId = str_replace(['file.', 'note.'], '', $m[1]);
+                $expected = trim($m[2], "\"'");
+                $actual = $findProp($props, $propId, $mdFile);
+                $match = str_contains((string)$actual, $expected);
+                return $isNot ? !$match : $match;
             }
         }
 
-        // --- Keep the old Object-style filter support just in case ---
-        if (is_array($filterGroup)) {
-            $propId = $filterGroup['property'] ?? '';
-            $operator = $filterGroup['operator'] ?? 'is';
-            $expected = $filterGroup['value'] ?? '';
+        // 4. Handle Object style filters
+        if (is_array($filterGroup) && isset($filterGroup['property'])) {
+            $propId = str_replace(['file.', 'note.'], '', $filterGroup['property']);
             $actual = $findProp($props, $propId, $mdFile);
-            return $this->evaluateOperator($actual, $operator, $expected);
+            return $this->evaluateOperator($actual, $filterGroup['operator'] ?? 'is', $filterGroup['value'] ?? '');
         }
 
         return true;
