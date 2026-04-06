@@ -122,10 +122,21 @@ class ParsedownBases extends Parsedown {
         return '';
     };
 
-    // Find the right filters for the "web" view
-    $baseFilters = $baseData['views'][$viewIndex]['filters'] ?? [];
+    // 1. Get global (All views) filters
+    $globalFilters = $baseData['filters'] ?? [];
 
-    $mdFiles = array_filter($allFiles, function($mdFile) use ($currentPage, $baseFilters, $findProp) {
+    // 2. Get the specific view (This view) filters
+    $viewFilters = $baseData['views'][$viewIndex]['filters'] ?? [];
+
+    // 3. Combine them into one 'and' group for your matcher
+    $combinedFilters = [
+        'and' => [
+            ['and' => is_array($globalFilters) ? ($globalFilters['and'] ?? $globalFilters) : []],
+            ['and' => is_array($viewFilters) ? ($viewFilters['and'] ?? $viewFilters) : []]
+        ]
+    ];
+
+    $mdFiles = array_filter($allFiles, function($mdFile) use ($currentPage, $combinedFilters, $findProp) {
         if (realpath($mdFile) === realpath($currentPage) || basename($mdFile) === 'bio.md') return false;
 
         $content = file_get_contents($mdFile);
@@ -135,7 +146,7 @@ class ParsedownBases extends Parsedown {
         }
 
         // Call the new string-aware matcher
-        return $this->matchesFilters($props, $baseFilters, $findProp, $mdFile);
+        return $this->matchesFilters($props, $combinedFilters, $findProp, $mdFile);
     });
 
     // --- APPLY SORTING ---
