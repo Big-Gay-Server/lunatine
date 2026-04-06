@@ -15,9 +15,24 @@ class ParsedownBases extends Parsedown {
         $this->el = new \Symfony\Component\ExpressionLanguage\ExpressionLanguage();
 
         // Standard Functions
-        $this->el->register('if', function($arg) { return ''; }, function($vars, $c, $t, $f) { return $c ? $t : $f; });
-        $this->el->register('number', function($arg) { return ''; }, function($vars, $v) { return (float)$v; });
-        $this->el->register('round', function($arg) { return ''; }, function($vars, $v) { return round((float)$v); });
+        $this->el->register('if', function($arg) { return ''; }, function($vars, $cond, $true, $false) {
+            // If the condition is an object, convert it to a boolean value based on its string content
+            $boolCond = (is_object($cond) && method_exists($cond, '__toString')) ? (bool)(string)$cond : (bool)$cond;
+            return $boolCond ? $true : $false;
+        });
+        // Fix for 'number'
+        $this->el->register('number', function($arg) { return ''; }, function($vars, $val) {
+            // Explicitly cast the object to a string before converting to float
+            $strValue = (is_object($val) && method_exists($val, '__toString')) ? (string)$val : $val;
+            return (float)$strValue;
+        });
+
+        // Fix for 'round'
+        $this->el->register('round', function($arg) { return ''; }, function($vars, $val) {
+            // Explicitly cast the object to a string before rounding
+            $strValue = (is_object($val) && method_exists($val, '__toString')) ? (string)$val : $val;
+            return round((float)$strValue);
+        });
         $this->el->register('toString', function($arg) { return ''; }, function($vars, $v) { 
             return is_array($v) ? implode(', ', $v) : (string)$v; 
         });
