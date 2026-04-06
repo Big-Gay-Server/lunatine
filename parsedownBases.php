@@ -193,26 +193,31 @@ class ParsedownBases extends Parsedown {
     }
 
     private function evaluateObsidianFormula($expression, $props, $displayName) {
-        $expr = $expression;
+    $expr = $expression;
 
-        // A. Fix Dot Notation: Convert 'X.contains(Y)' to 'contains(X, Y)'
-        $expr = preg_replace('/(.*?)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
-        
-        // B. Fix Dot Notation: Convert 'X.toString()' to 'toString(X)'
-        $expr = preg_replace('/(.*?)\.toString\(\)/', 'toString($1)', $expr);
-        
-        // C. Fix Dot Notation: Convert 'X.round()' to 'round(X)'
-        $expr = preg_replace('/(.*?)\.round\(\)/', 'round($1)', $expr);
-
-        // D. Clean Property Names: note["Actual Age"] -> Actual_Age
+    // 1. Convert note["Prop Name"] to Prop_Name (Underscores for spaces)
         $expr = preg_replace_callback('/(note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[2]); 
+            return str_replace(' ', '_', $m[2]);
         }, $expr);
 
-        // E. Remove generic prefixes and fix concatenation
+        // 2. Fix the "Double Dot" chain: .toString().contains() -> contains(toString(), )
+        // This handles your complex Selhae logic specifically
+        $expr = str_replace('.toString().contains(', ').contains(toString(', $expr);
+
+        // 3. Convert all remaining X.function() to function(X)
+        // We do this three times to catch nested/chained dots
+        for ($i = 0; $i < 3; $i++) {
+            $expr = preg_replace('/([\w_]+)\.(toString|round|number|contains)\((.*?)\)/', '$2($1, $3)', $expr);
+            $expr = preg_replace('/([\w_]+)\.(toString|round|number|contains)\(\)/', '$2($1)', $expr);
+        }
+
+        // 4. Clean up any accidental double commas from the regex above
+        $expr = str_replace(', )', ')', $expr);
+
+        // 5. Standard Fixes: note. prefix and + concatenation
         $expr = str_replace(['note.', 'prop.', '+'], ['', '', '~'], $expr);
 
-        // F. Variables Prep (underscores for spaces)
+        // 6. Prepare variables matching the underscore style
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -222,9 +227,9 @@ class ParsedownBases extends Parsedown {
         try {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // Only return debug if it fails
-            return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
-            // return $expression; 
+            // Uncomment to debug if it still fails
+            // return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
+            return $expression; 
         }
     }
 
