@@ -204,8 +204,8 @@ class ParsedownBases extends Parsedown {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // Only for debugging:
-            // return "Error: " . $e->getMessage() . " | Expr: " . $expr;
-            return $expression; 
+            return "Error: " . $e->getMessage() . " | Expr: " . $expr;
+            // return $expression; 
         }
     }
 
