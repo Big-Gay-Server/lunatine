@@ -211,8 +211,8 @@ class ParsedownBases extends Parsedown {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // If it still fails, show the error temporarily so we can see which word broke it
-            // return "Error: " . $e->getMessage(); 
-            return $expression; 
+            return "Error: " . $e->getMessage(); 
+            // return $expression; 
         }
     }
 
