@@ -223,8 +223,8 @@ class ParsedownBases extends Parsedown {
             return $this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
             // Only return debug if it fails
-            // return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
-            return $expression; 
+            return "Debug: " . $e->getMessage() . " | Final Expr: " . $expr;
+            // return $expression; 
         }
     }
 
