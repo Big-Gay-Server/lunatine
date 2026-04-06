@@ -185,13 +185,21 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         // 1. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
-            return str_replace(' ', '_', $m[1]); 
+            return str_replace(' ', '_', $m[2]); 
         }, $expression);
 
-        // 2. ONLY fix the plus sign and the prefixes
+        // 2. THE BRIDGE: Turn .method() into method()
+        // This turns 'Species.toString().contains("Selhae")' 
+        // into 'contains(toString(Species), "Selhae")'
+        $expr = preg_replace('/([\w_]+)\.toString\(\)/', 'toString($1)', $expr);
+        $expr = preg_replace('/([\w_]+)\.contains\((.*?)\)/', 'contains($1, $2)', $expr);
+        $expr = preg_replace('/\)\.round\(\)/', ')', $expr); // Handle ).round()
+        $expr = preg_replace('/\)\.toString\(\)/', ')', $expr); // Handle ).toString()
+
+        // 3. Clean up and standard fixes
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
 
-        // 3. Prepare variables (Keep Arrays as Arrays!)
+        // 4. Variables Prep (Keep Arrays as Arrays!)
         $variables = [];
         foreach ($props as $k => $v) {
             $variables[str_replace(' ', '_', $k)] = $v;
@@ -201,7 +209,7 @@ class ParsedownBases extends Parsedown {
         try {
             return (string)$this->el->evaluate($expr, $variables);
         } catch (\Exception $e) {
-            // This will now show us exactly where Symfony is stuck
+            // Return this for debugging if it still fails
             return "Debug: " . $e->getMessage() . " | Expr: " . $expr;
         }
     }
