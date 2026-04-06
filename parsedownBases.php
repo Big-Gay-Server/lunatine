@@ -103,32 +103,35 @@ class ParsedownBases extends Parsedown {
         // 1. Clean the ID (Obsidian uses "file.folder" or "folder")
         $id = str_replace(['file.', 'note.'], '', $id);
 
-        // 2. VIRTUAL PROPERTIES: If it's not in the YAML, check the file system
+        // 2. VIRTUAL PROPERTIES: Resolve file-level data
         if ($mdFile) {
             // Get the path relative to your vault root
             $relativePath = ltrim(str_replace(realpath($markdownDir), '', realpath($mdFile)), '/');
             
-            switch ($id) {
+            switch (strtolower($id)) {
                 case 'folder':
                     return dirname($relativePath);
                 case 'name':
                 case 'file name':
                     return pathinfo($mdFile, PATHINFO_FILENAME);
-                case 'ext':
+                case 'extension':
                 case 'file extension':
+                case 'ext':
                     return pathinfo($mdFile, PATHINFO_EXTENSION);
+                case 'title':
+                    // Use YAML title if it exists, otherwise use filename
+                    return $props['title'] ?? pathinfo($mdFile, PATHINFO_FILENAME);
             }
         }
 
         // 3. ACTUAL PROPERTIES: Check the YAML frontmatter
         if (isset($props[$id])) return $props[$id];
         
-        // Fuzzy match for spaces/casing (e.g. "Full Name" vs "fullname")
+        // Fuzzy match for spaces/casing
         $cleanId = strtolower(str_replace([' ', '_', '-'], '', $id));
         foreach ($props as $key => $val) {
             if (strtolower(str_replace([' ', '_', '-'], '', $key)) === $cleanId) return $val;
         }
-
         return '';
     };
 
