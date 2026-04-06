@@ -99,23 +99,26 @@ class ParsedownBases extends Parsedown {
     $allFiles = glob_recursive($scanDir . '/*.md');
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
-    $findProp = function ($props, $id, $mdFile = null) {
+    $findProp = function ($props, $id, $mdFile = null) use ($markdownDir) {
         // 1. Check standard frontmatter first
         if (isset($props[$id])) return $props[$id];
         
-        // 2. Handle System Properties (matches your image)
+        // 2. Handle System Properties relative to your markdown root
         if ($mdFile) {
+            // Get the path relative to your vault root (the $markdownDir)
+            $relativePath = str_replace(realpath($markdownDir), '', realpath($mdFile));
+            $relativePath = ltrim($relativePath, '/');
+
             switch (strtolower($id)) {
                 case 'folder':
-                    return dirname($mdFile);
-                case 'file extension':
-                    return pathinfo($mdFile, PATHINFO_EXTENSION);
+                    // Obsidian folder path is everything except the filename
+                    return dirname($relativePath);
                 case 'file name':
-                    // Check for 'index' specifically as seen in your filter
+                case 'file.name':
                     return pathinfo($mdFile, PATHINFO_FILENAME);
-                case 'title':
-                    // Title is often the filename in Obsidian if not in YAML
-                    return $props['title'] ?? pathinfo($mdFile, PATHINFO_FILENAME);
+                case 'file extension':
+                case 'file.ext':
+                    return pathinfo($mdFile, PATHINFO_EXTENSION);
             }
         }
 
