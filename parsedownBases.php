@@ -100,25 +100,17 @@ class ParsedownBases extends Parsedown {
     // Searches for all Markdown files in the current folder and subfolders (using index.md patterns).
 
     $findProp = function ($props, $id, $mdFile = null) use ($markdownDir) {
-        // 1. Check standard frontmatter first
-        if (isset($props[$id])) return $props[$id];
+        // Strip common Obsidian prefixes like 'file.' or 'note.'
+        $id = str_replace(['file.', 'note.'], '', $id);
         
-        // 2. Handle System Properties relative to your markdown root
+        // Check system properties first
         if ($mdFile) {
-            // Get the path relative to your vault root (the $markdownDir)
-            $relativePath = str_replace(realpath($markdownDir), '', realpath($mdFile));
-            $relativePath = ltrim($relativePath, '/');
-
-            switch (strtolower($id)) {
-                case 'folder':
-                    // Obsidian folder path is everything except the filename
-                    return dirname($relativePath);
-                case 'file name':
-                case 'file.name':
-                    return pathinfo($mdFile, PATHINFO_FILENAME);
-                case 'file extension':
-                case 'file.ext':
-                    return pathinfo($mdFile, PATHINFO_EXTENSION);
+            $relativePath = ltrim(str_replace(realpath($markdownDir), '', realpath($mdFile)), '/');
+            switch ($id) {
+                case 'folder': return dirname($relativePath);
+                case 'ext': return pathinfo($mdFile, PATHINFO_EXTENSION);
+                case 'name': return pathinfo($mdFile, PATHINFO_FILENAME);
+                case 'title': return $props['title'] ?? pathinfo($mdFile, PATHINFO_FILENAME);
             }
         }
 
@@ -301,55 +293,48 @@ class ParsedownBases extends Parsedown {
     private function matchesFilters($props, $filterGroup, $findProp, $mdFile) {
         if (empty($filterGroup)) return true;
 
-        // 1. Handle "AND" groups
+        // Handle 'and' groups
         if (isset($filterGroup['and']) && is_array($filterGroup['and'])) {
-            foreach ($filterGroup['and'] as $subFilter) {
-                // FIX: Added $mdFile as the 4th argument here
-                if (!$this->matchesFilters($props, $subFilter, $findProp, $mdFile)) return false;
+            foreach ($filterGroup['and'] as $sub) {
+                if (!$this->matchesFilters($props, $sub, $findProp, $mdFile)) return false;
             }
             return true;
         }
 
-        // 2. Handle "OR" groups
-        if (isset($filterGroup['or']) && is_array($filterGroup['or'])) {
-            foreach ($filterGroup['or'] as $subFilter) {
-                // FIX: Added $mdFile as the 4th argument here
-                if ($this->matchesFilters($props, $subFilter, $findProp, $mdFile)) return true;
-            }
-            return false;
-        }
-
-        // 3. Handle string style filters (e.g., "!Species.isEmpty()")
+        // --- PARSE STRING FILTERS ---
         if (is_string($filterGroup)) {
-            $isNot = str_starts_with($filterGroup, '!');
-            $cleanFilter = ltrim($filterGroup, '!');
+            $f = trim($filterGroup);
+            $isNot = str_starts_with($f, '!');
+            $f = ltrim($f, '!');
 
-            // Check for .isEmpty()
-            if (str_contains($cleanFilter, '.isEmpty()')) {
-                $propId = str_replace('.isEmpty()', '', $cleanFilter);
-                $propId = preg_replace('/(?:note|prop|file)\[["\'](.*?)["\']\]/', '$1', $propId);
-                $propId = str_replace(['file.', 'note.'], '', $propId);
-
+            // 1. Handle .contains("VALUE") and .endsWith("VALUE")
+            if (preg_match('/(.*?)\.(contains|endsWith|startsWith|isEmpty)\((.*?)\)/', $f, $m)) {
+                $propId = trim($m[1]);
+                $method = $m[2];
+                $expected = trim($m[3], "\"'"); // Remove quotes from the value
+                
                 $actual = $findProp($props, $propId, $mdFile);
-                $isEmpty = empty($actual) || (is_string($actual) && trim($actual) === '');
-                return $isNot ? !$isEmpty : $isEmpty;
+                
+                $result = false;
+                switch ($method) {
+                    case 'contains': $result = str_contains((string)$actual, $expected); break;
+                    case 'endsWith': $result = str_ends_with((string)$actual, $expected); break;
+                    case 'startsWith': $result = str_starts_with((string)$actual, $expected); break;
+                    case 'isEmpty': $result = empty($actual) || trim((string)$actual) === ''; break;
+                }
+                return $isNot ? !$result : $result;
             }
-            
-            // Handle .contains() in string filters
-            if (preg_match('/(.*?)\.contains\((.*?)\)/', $cleanFilter, $m)) {
-                $propId = str_replace(['file.', 'note.'], '', $m[1]);
-                $expected = trim($m[2], "\"'");
-                $actual = $findProp($props, $propId, $mdFile);
-                $match = str_contains((string)$actual, $expected);
-                return $isNot ? !$match : $match;
-            }
-        }
 
-        // 4. Handle Object style filters
-        if (is_array($filterGroup) && isset($filterGroup['property'])) {
-            $propId = str_replace(['file.', 'note.'], '', $filterGroup['property']);
-            $actual = $findProp($props, $propId, $mdFile);
-            return $this->evaluateOperator($actual, $filterGroup['operator'] ?? 'is', $filterGroup['value'] ?? '');
+            // 2. Handle Comparison Operators: == and !=
+            if (preg_match('/(.*?) (==|!=) ["\'](.*?)["\']/', $f, $m)) {
+                $propId = trim($m[1]);
+                $op = $m[2];
+                $expected = $m[3];
+                $actual = $findProp($props, $propId, $mdFile);
+
+                $match = ($actual == $expected);
+                return ($op == '==') ? $match : !$match;
+            }
         }
 
         return true;
