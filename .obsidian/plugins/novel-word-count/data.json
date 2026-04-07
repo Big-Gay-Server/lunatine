@@ -4162,10 +4162,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "yukii"
+      ],
       "createdDate": 1775147145229,
-      "modifiedDate": 1775147145230,
-      "sizeInBytes": 169,
+      "modifiedDate": 1775576923362,
+      "sizeInBytes": 177,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -4180,7 +4182,9 @@
           "noun"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "yukii",
+        "aliases": "yukii"
       }
     },
     "LANGUAGES/Varae/dictionary/yua.md": {
@@ -4384,10 +4388,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "yiiduyasii"
+      ],
       "createdDate": 1775147145220,
-      "modifiedDate": 1775147145220,
-      "sizeInBytes": 177,
+      "modifiedDate": 1775576905022,
+      "sizeInBytes": 190,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -4402,7 +4408,9 @@
           "verb"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "yiiduyasii",
+        "aliases": "yiiduyasii"
       }
     },
     "LANGUAGES/Varae/dictionary/yiim.md": {
@@ -8243,10 +8251,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "nodosa"
+      ],
       "createdDate": 1775147145087,
-      "modifiedDate": 1775147145087,
-      "sizeInBytes": 169,
+      "modifiedDate": 1775576871612,
+      "sizeInBytes": 178,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -8261,7 +8271,9 @@
           "noun"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "nodosa",
+        "aliases": "nodosa"
       }
     },
     "LANGUAGES/Varae/dictionary/niinii.md": {
@@ -8841,10 +8853,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "naesii"
+      ],
       "createdDate": 1775147145059,
-      "modifiedDate": 1775147145060,
-      "sizeInBytes": 171,
+      "modifiedDate": 1775576931315,
+      "sizeInBytes": 180,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -8859,7 +8873,9 @@
           "verb"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "naesii",
+        "aliases": "naesii"
       }
     },
     "LANGUAGES/Varae/dictionary/muvaka.md": {
@@ -10263,10 +10279,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "lo"
+      ],
       "createdDate": 1775147144969,
-      "modifiedDate": 1775147144969,
-      "sizeInBytes": 175,
+      "modifiedDate": 1775576917239,
+      "sizeInBytes": 180,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -10281,7 +10299,9 @@
           "adposition"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "lo",
+        "aliases": "lo"
       }
     },
     "LANGUAGES/Varae/dictionary/luwasii.md": {
@@ -10565,10 +10585,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "laehu"
+      ],
       "createdDate": 1775147144961,
-      "modifiedDate": 1775147144962,
-      "sizeInBytes": 168,
+      "modifiedDate": 1775576874872,
+      "sizeInBytes": 176,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -10583,7 +10605,9 @@
           "noun"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "laehu",
+        "aliases": "laehu"
       }
     },
     "LANGUAGES/Varae/dictionary/kuthaesii.md": {
@@ -11786,8 +11810,8 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.023333333333333334,
-      "characterCount": 142,
-      "nonWhitespaceCharacterCount": 133,
+      "characterCount": 140,
+      "nonWhitespaceCharacterCount": 131,
       "newlineCount": 6,
       "readingTimeInMinutes": 0.026415094339622643,
       "linkCount": 1,
@@ -11796,8 +11820,8 @@
         "Varae Dictionary"
       ],
       "createdDate": 1775147144921,
-      "modifiedDate": 1775576469359,
-      "sizeInBytes": 173,
+      "modifiedDate": 1775576799370,
+      "sizeInBytes": 171,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.02666666666666667,
@@ -13089,10 +13113,12 @@
       "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "garasii"
+      ],
       "createdDate": 1775147144885,
-      "modifiedDate": 1775147144885,
-      "sizeInBytes": 172,
+      "modifiedDate": 1775576934229,
+      "sizeInBytes": 182,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.013333333333333334,
@@ -13107,7 +13133,9 @@
           "verb"
         ],
         "note": null,
-        "related words": null
+        "related words": null,
+        "title": "garasii",
+        "aliases": "garasii"
       }
     },
     "LANGUAGES/Varae/dictionary/gahinuka.md": {
@@ -13577,8 +13605,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147144871,
-      "modifiedDate": 1775576631050,
-      "sizeInBytes": 701,
+      "modifiedDate": 1775576963895,
+      "sizeInBytes": 1335,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

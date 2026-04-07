@@ -262,15 +262,31 @@ if ($filePath && file_exists($filePath)) {
             }, $text);
 
             // 2. DATAVIEW RENDERER (Pre-Parsedown)
-            $pattern = '/=\s*(?:default\()?\s*this\.character\.([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?/i';
+            // Updated Regex: Handles 'this.prop' AND 'this.character.prop'
+            $pattern = '/\(?=\s*(?:default\()?\s*this\.(?:character\.)?([a-zA-Z0-9_-]+)(?:\s*,\s*["\'](.*?)["\']\s*\))?\)?/i';
+
             $text = preg_replace_callback($pattern, function ($m) use ($yamlData) {
-                $propName = $m[1]; $fallback = $m[2] ?? ''; $val = null;
+                $propName = $m[1]; 
+                $fallback = $m[2] ?? ''; 
+                $val = null;
+
+                // Fuzzy match properties (ignores spaces, dashes, and underscores)
+                $cleanSearch = strtolower(str_replace([' ', '-', '_'], '', $propName));
+                
                 foreach ($yamlData as $k => $v) {
-                    if (strtolower(str_replace([' ', '-', '_'], '', $k)) === strtolower(str_replace([' ', '-', '_'], '', $propName))) {
-                        $val = $v; break;
+                    $cleanKey = strtolower(str_replace([' ', '-', '_'], '', $k));
+                    if ($cleanKey === $cleanSearch) {
+                        $val = $v; 
+                        break;
                     }
                 }
-                return ($val !== null) ? (is_array($val) ? implode(', ', $val) : $val) : $fallback;
+
+                // Return the value (joined by commas if it's a list) or the fallback
+                if ($val !== null) {
+                    return is_array($val) ? implode(', ', $val) : (string)$val;
+                }
+                
+                return $fallback;
             }, $text);
 
             // 2. NOTE & BASE EMBEDDER (Pre-Parsedown)
