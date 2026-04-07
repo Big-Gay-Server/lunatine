@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "CHARACTERS/characterbase.base",
-                "viewName": "web"
+                "file": "STORY/writingbase.base",
+                "viewName": "Table"
               },
               "icon": "lucide-table",
-              "title": "characterbase"
+              "title": "writingbase"
             }
           }
         ]
@@ -266,6 +266,7 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "CHARACTERS/characterbase.base",
     "CHARACTERS/index.md",
     "STORY/writingbase.base",
     "EVENTS/index.md",
@@ -276,7 +277,6 @@
     "ARTIFACTS/index.md",
     "LANGUAGES/languagesbase.base",
     "LANGUAGES/index.md",
-    "CHARACTERS/characterbase.base",
     "CHARACTERS/dataview serializer test.md",
     "vendor/symfony/cache-contracts/TagAwareCacheInterface.php",
     "vendor/symfony/cache-contracts/README.md",
