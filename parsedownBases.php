@@ -197,42 +197,38 @@ class ParsedownBases extends Parsedown {
     // Closes the header section and starts the table body.
 
     foreach ($mdFiles as $mdFile) {
-        // Loops through every Markdown file found earlier to create a table row.
+    $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
+    $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
+    $rawContent = file_get_contents($mdFile);
 
-        $displayName = (basename($mdFile) === 'index.md') ? basename(dirname($mdFile)) : basename($mdFile, '.md');
-        // Determines the "Name" of the file: if it's 'index.md', use the folder name; otherwise, use the filename.
+    // 1. First, load the actual properties from the YAML frontmatter
+    $props = [];
+    if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
+        $props = Spyc::YAMLLoad($matches[1]);
+    }
 
-        $finalUrl = create_wiki_url(str_replace([$markdownDir, '.md'], '', $mdFile));
-        // Generates a clickable link to the page (uses a custom function `create_wiki_url`).
+    // 2. Now inject the file metadata into that $props array
+    $relativePath = ltrim(str_replace(realpath($markdownDir), '', realpath($mdFile)), '/');
+    $props['folder'] = dirname($relativePath);
+    $props['path'] = $relativePath;
 
-        $rawContent = file_get_contents($mdFile);
-        // Reads the entire text of the Markdown file.
+    $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
+    $linkPlaced = false;
 
-        $props = [];
-        if (preg_match('/^---\s*([\s\S]*?)\s---/u', $rawContent, $matches)) {
-            $props = Spyc::YAMLLoad($matches[1]);
+    foreach ($order as $propId) {
+        $val = '';
+        $cleanFormulaId = str_replace('formula.', '', $propId);
+
+        if (isset($baseData['formulas'][$cleanFormulaId])) {
+            $expression = (string)$baseData['formulas'][$cleanFormulaId];
+            // 3. Now this call has access to both YAML props and the injected folder/path
+            $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
+        } else {
+            $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
+            $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
+                ? $displayName 
+                : $findProp($props, $cleanPropId);
         }
-        // Extracts the "Frontmatter" (the YAML between the --- lines at the top of the file) into an array.
-
-        $tableHtml .= "<tr onclick=\"if(event.target.closest('a')===null){window.location='$finalUrl';}\" style='cursor:pointer;'>";
-        // Creates the row. If the user clicks anywhere on the row (except a link), it redirects them to that page.
-
-        $linkPlaced = false;
-        // A flag to ensure we only place a clickable text link in the first available cell.
-
-        foreach ($order as $propId) {
-                $val = '';
-                $cleanFormulaId = str_replace('formula.', '', $propId);
-
-                if (isset($baseData['formulas'][$cleanFormulaId])) {
-                    $expression = (string)$baseData['formulas'][$cleanFormulaId];
-                    $val = $this->evaluateObsidianFormula($expression, $props, $displayName);
-                } else {
-                    $cleanPropId = str_replace(['note.', 'file.'], '', $propId);
-                    $val = ($cleanPropId === 'name' || $cleanPropId === 'file') 
-                        ? $displayName 
-                        : $findProp($props, $cleanPropId);
-                }
 
                 // --- FORMATTING LOGIC ---
                 if (is_array($val)) {
