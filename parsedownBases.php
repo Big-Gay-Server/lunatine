@@ -87,12 +87,15 @@ class ParsedownBases extends Parsedown {
     // Gets the directory path where the .base file lives.
 
     // Define this helper inside your class or before calling it
-    function glob_recursive($pattern, $flags = 0) {
-        $files = glob($pattern, $flags);
-        foreach (glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
-            $files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
+    if (!function_exists('glob_recursive')) {
+        function glob_recursive($pattern, $flags = 0) {
+            $files = glob($pattern, $flags);
+            $dirPattern = dirname($pattern) . '/*';
+            foreach (glob($dirPattern, GLOB_ONLYDIR | GLOB_NOSORT) as $dir) {
+                $files = array_merge($files, glob_recursive($dir . '/' . basename($pattern), $flags));
+            }
+            return $files;
         }
-        return $files;
     }
 
     // Then use it like this in renderTable:
