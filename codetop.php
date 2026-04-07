@@ -1,6 +1,6 @@
 <?php
 // basic setup
-$markdownDir = __DIR__ . '/';
+$markdownDir = __DIR__ . '/compendium';
 $fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
 $requestedPath = trim(str_replace('..', '', $fileName), '/');
 if (empty($requestedPath)) $requestedPath = 'index';

@@ -5,15 +5,15 @@
     <div class="sidebarsection quicklinks">
         <center><h4>Compendium</h4></center>
         <ul>
-            <li><a href="/characters">characters</a>
-            <li><a href="/locations">locations</a>
-            <li><a href="/species">species</a>
-            <li><a href="/languages">languages</a>
-            <li><a href="/concepts">concepts</a>
-            <li><a href="/events">events</a>
-            <li><a href="/artifacts">artifacts</a>
-            <li><a href="/organizations">organizations</a>
-            <li><a href="/story">story</a>
+            <li><a href="/compendium/characters">characters</a>
+            <li><a href="/compendium/locations">locations</a>
+            <li><a href="/compendium/species">species</a>
+            <li><a href="/compendium/languages">languages</a>
+            <li><a href="/compendium/concepts">concepts</a>
+            <li><a href="/compendium/events">events</a>
+            <li><a href="/compendium/artifacts">artifacts</a>
+            <li><a href="/compendium/organizations">organizations</a>
+            <li><a href="/compendium/story">story</a>
         </ul>
     </div>
 </div>
