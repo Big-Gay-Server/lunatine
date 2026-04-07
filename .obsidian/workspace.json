@@ -11,13 +11,14 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "LANGUAGES/languagesbase.base",
-                "viewName": "Table"
+                "file": "LANGUAGES/Varae/dictionary/index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-table",
-              "title": "languagesbase"
+              "icon": "lucide-file",
+              "title": "index"
             }
           }
         ]
@@ -266,6 +267,8 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "LANGUAGES/Varae/grammar.md",
+    "LANGUAGES/languagesbase.base",
     "ARTIFACTS/artifactsbase.base",
     "ARTIFACTS/index.md",
     "SPECIES/speciesbase.base",
@@ -277,7 +280,6 @@
     "STORY/index.md",
     "SPECIES/index.md",
     "CONCEPTS/index.md",
-    "LANGUAGES/languagesbase.base",
     "LANGUAGES/index.md",
     "CHARACTERS/dataview serializer test.md",
     "vendor/symfony/cache-contracts/TagAwareCacheInterface.php",
