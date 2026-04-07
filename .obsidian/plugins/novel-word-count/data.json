@@ -1396,8 +1396,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537474,
-      "modifiedDate": 1774964620707,
-      "sizeInBytes": 709,
+      "modifiedDate": 1775596032642,
+      "sizeInBytes": 808,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -2224,7 +2224,7 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1774630537458,
-      "modifiedDate": 1774991282569,
+      "modifiedDate": 1775596116010,
       "sizeInBytes": 3563,
       "sessionStart": {
         "noteCount": 0,
@@ -8430,17 +8430,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 3,
+      "wordCount": 1,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.01,
-      "characterCount": 54,
-      "nonWhitespaceCharacterCount": 47,
-      "newlineCount": 4,
-      "readingTimeInMinutes": 0.011320754716981131,
+      "pageCount": 0.0033333333333333335,
+      "characterCount": 31,
+      "nonWhitespaceCharacterCount": 29,
+      "newlineCount": 2,
+      "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Events"
+      ],
       "createdDate": 1775595904750,
       "modifiedDate": 1775595904751,
       "sizeInBytes": 54,
@@ -8451,6 +8453,10 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "title": "Events",
+        "aliases": "Events"
       }
     },
     "compendium/EVENTS/old overview timeline.md": {
@@ -9726,17 +9732,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 509,
+      "wordCount": 410,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 1.6966666666666668,
-      "characterCount": 4503,
-      "nonWhitespaceCharacterCount": 3698,
-      "newlineCount": 152,
-      "readingTimeInMinutes": 1.920754716981132,
-      "linkCount": 0,
+      "pageCount": 1.3666666666666667,
+      "characterCount": 3422,
+      "nonWhitespaceCharacterCount": 2763,
+      "newlineCount": 118,
+      "readingTimeInMinutes": 1.5471698113207548,
+      "linkCount": 12,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Esela"
+      ],
       "createdDate": 1775595904350,
       "modifiedDate": 1775595904350,
       "sizeInBytes": 4513,
@@ -9747,6 +9755,44 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "Full Name": "Esela Levenkagaelii",
+        "Name Pronunciation": "eh-SEHL-uh",
+        "Character Type": "Main Character",
+        "Status": "Alive",
+        "Species": "[[SPECIES/Selhae/index|Selhae]]",
+        "Gender": "nonbinary",
+        "Pronouns": "she/they",
+        "Age": "103 years, appears 28",
+        "Actual Age": "103",
+        "Apparent age": "28",
+        "Perceived age range": "mid-to-late twenties",
+        "Birthdate": "5/26/1198",
+        "Birthdate (written)": "Yomiithe, Day 26 of Uruwa, Year 1198",
+        "Current Location": "[[LOCATIONS/Kaemeris/index | Kaemeris]]",
+        "Birthplace": "[[LOCATIONS/Kohoii/index|Kohoii]]",
+        "Children": "[[CHARACTERS/Kaeyomii/index|Kaeyomii]]",
+        "Parents": "[[CHARACTERS/Naediia/index | Naediia]]",
+        "Partners": "[[CHARACTERS/Kulith/index |Kulith]]",
+        "Constructs": "[[CHARACTERS/Merisdae/index |Merisdae]]",
+        "Eyes": "light, pastel blue",
+        "Hair": "short, curly pastel pink bob with bangs",
+        "Height": "5'0'' // 152cm",
+        "Languages Spoken": [
+          "[[LANGUAGES/Varae/index|Varae]]"
+        ],
+        "Skin Tone": "fair",
+        "aliases": [
+          "Esela"
+        ],
+        "title": "Esela Levenkagaelii",
+        "icon": "![[CHARACTERS/Esela/art/prism transparent.png|75]]",
+        "tags": [
+          "Selhae"
+        ],
+        "fullbody": "![[fullbody.png|300]]",
+        "iconn": "[[prism transparent.png]]"
       }
     },
     "compendium/CHARACTERS/Esela/moodboard.md": {
@@ -10806,14 +10852,14 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 40,
+      "wordCount": 38,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.13333333333333333,
-      "characterCount": 1404,
-      "nonWhitespaceCharacterCount": 1017,
-      "newlineCount": 28,
-      "readingTimeInMinutes": 0.1509433962264151,
+      "pageCount": 0.12666666666666668,
+      "characterCount": 1351,
+      "nonWhitespaceCharacterCount": 969,
+      "newlineCount": 26,
+      "readingTimeInMinutes": 0.14339622641509434,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
@@ -10827,6 +10873,9 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "character": "[[CHARACTERS/Wefa/index|Wefa]]"
       }
     },
     "compendium/CHARACTERS/Wefa/index.md": {
@@ -12588,17 +12637,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 8,
+      "wordCount": 0,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.02666666666666667,
-      "characterCount": 122,
-      "nonWhitespaceCharacterCount": 109,
-      "newlineCount": 5,
-      "readingTimeInMinutes": 0.03018867924528302,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Solei Royal Court"
+      ],
       "createdDate": 1775595905678,
       "modifiedDate": 1775595905679,
       "sizeInBytes": 122,
@@ -12609,6 +12660,12 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "Members": "[[CHARACTERS/Helita/index|Helita]]",
+        "title": "Solei Royal Court",
+        "owns": "[[LOCATIONS/Solei/index|Solei]]",
+        "aliases": "Solei Royal Court"
       }
     },
     "compendium/SPECIES/Construct/index.md": {
@@ -14937,17 +14994,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 16,
+      "wordCount": 4,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.05333333333333334,
-      "characterCount": 184,
-      "nonWhitespaceCharacterCount": 144,
-      "newlineCount": 14,
-      "readingTimeInMinutes": 0.06037735849056604,
+      "pageCount": 0.013333333333333334,
+      "characterCount": 91,
+      "nonWhitespaceCharacterCount": 74,
+      "newlineCount": 7,
+      "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "garusii"
+      ],
       "createdDate": 1775595904874,
       "modifiedDate": 1775595904875,
       "sizeInBytes": 184,
@@ -14958,6 +15017,16 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "definition": "to go",
+        "part of speech": [
+          "verb"
+        ],
+        "related words": null,
+        "note": null,
+        "title": "garusii",
+        "aliases": "garusii"
       }
     },
     "compendium/LANGUAGES/Varae/dictionary/geralo.md": {
@@ -17718,17 +17787,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 25,
+      "wordCount": 4,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.08333333333333333,
-      "characterCount": 245,
-      "nonWhitespaceCharacterCount": 193,
-      "newlineCount": 15,
-      "readingTimeInMinutes": 0.09433962264150944,
+      "pageCount": 0.013333333333333334,
+      "characterCount": 93,
+      "nonWhitespaceCharacterCount": 74,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "mosadesii"
+      ],
       "createdDate": 1775595905016,
       "modifiedDate": 1775595905016,
       "sizeInBytes": 245,
@@ -17739,6 +17810,16 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "definition": "to remove / take off (clothes)",
+        "part of speech": [
+          "verb"
+        ],
+        "related words": null,
+        "note": "only used in regards to clothes",
+        "title": "mosadesii",
+        "aliases": "mosadesii"
       }
     },
     "compendium/LANGUAGES/Varae/dictionary/mosasii.md": {
@@ -20337,17 +20418,19 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 15,
+      "wordCount": 4,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.05,
-      "characterCount": 187,
-      "nonWhitespaceCharacterCount": 146,
-      "newlineCount": 15,
-      "readingTimeInMinutes": 0.05660377358490566,
+      "pageCount": 0.013333333333333334,
+      "characterCount": 93,
+      "nonWhitespaceCharacterCount": 74,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.01509433962264151,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "uya"
+      ],
       "createdDate": 1775595905210,
       "modifiedDate": 1775595905211,
       "sizeInBytes": 187,
@@ -20358,6 +20441,16 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "definition": "young",
+        "part of speech": [
+          "adjective"
+        ],
+        "related words": null,
+        "note": null,
+        "title": "uya",
+        "aliases": "uya"
       }
     },
     "compendium/LANGUAGES/Varae/dictionary/vaen.md": {
@@ -21641,7 +21734,7 @@
       "nonWhitespaceCharacterCount": 1603,
       "newlineCount": 33,
       "readingTimeInMinutes": 0.7471698113207547,
-      "linkCount": 0,
+      "linkCount": 1,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1775595904690,
