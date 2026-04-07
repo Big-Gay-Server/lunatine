@@ -266,7 +266,7 @@ class ParsedownBases extends Parsedown {
     private function evaluateObsidianFormula($expression, $props, $displayName) {
         $expr = $expression;
 
-        // 1. note["Actual Age"] -> Actual_Age
+        // 1. slugifying note references in the formula i.e. note["Actual Age"] -> Actual_Age
         $expr = preg_replace_callback('/(?:note|prop)\[["\'](.*?)["\']\]/', function($m) {
             return str_replace(' ', '_', $m[1]); 
         }, $expr);
@@ -285,10 +285,18 @@ class ParsedownBases extends Parsedown {
         $variables['file'] = new MetadataWrapper($displayName);
 
         try {
-            $result = (string)$this->el->evaluate($expr, $variables);
-            // Convert Obsidian newlines to HTML breaks
-            return str_replace("\n", "<br>", $result);
+            $result = $this->el->evaluate($expr, $variables);
+            
+            // If the result is our wrapper object, get the internal value
+            if ($result instanceof MetadataWrapper) {
+                // You might need a getter or make the property public
+                // For now, let's assume __toString handles it or use a getValue() method
+                $result = (string)$result; 
+            }
+
+            return str_replace("\n", "<br>", (string)$result);
         } catch (\Exception $e) {
+            // Log error for debugging if needed: error_log($e->getMessage());
             return $expression; 
         }
     }
@@ -418,6 +426,20 @@ class MetadataWrapper {
 
     public function contains($needle) {
         return str_contains(strtolower((string)$this), strtolower((string)$needle));
+    }
+
+    // This handles .split("/")
+    public function split($delimiter) {
+        if (is_array($this->data)) return $this; // Can't split an array
+        $parts = explode($delimiter, (string)$this->data);
+        return new self($parts); // Return new wrapper so we can chain .slice()
+    }
+
+    // This handles .slice(1)
+    public function slice($start, $end = null) {
+        if (!is_array($this->data)) return $this;
+        $sliced = array_slice($this->data, $start, $end);
+        return new self($sliced);
     }
 
     public function __toString() {
