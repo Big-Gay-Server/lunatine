@@ -1,5 +1,6 @@
 <?php
-function renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlContent, $yamlData) {
+// Add $bioHtml to the argument list here
+function renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlContent, $yamlData, $bioHtml = '') {
     $isIndexFile = (basename($filePath ?? '', '.md') === 'index' || basename($filePath ?? '', '.base') === 'index');
     $urlDepth = count($urlParts);
 
@@ -11,9 +12,8 @@ function renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlC
 
     $specificTemplate = $templateDir . $templateName . '.php';
 
-    // --- THE FIX ---
-    // This makes $htmlContent and $yamlData available inside the included file
-    extract(get_defined_vars()); 
+    // This makes sure $bioHtml, $htmlContent, etc., are visible to the included file
+    extract(get_defined_vars());
 
     if (file_exists($specificTemplate)) {
         include $specificTemplate;

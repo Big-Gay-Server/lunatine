@@ -404,7 +404,7 @@ if ($filePath && file_exists($filePath)) {
     }
 }
 
-renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlContent, $yamlData);
+renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlContent, $yamlData, $bioHtml);
 
 ?>
 
