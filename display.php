@@ -7,7 +7,7 @@ require_once 'parsedownBases.php';      // extended parser for bases blocks
 require_once 'Spyc.php';                // YAML frontmatter parser
 require_once 'imageparser.php';         // Obsidian-style image path resolver
 require_once 'filefinder.php';          // finds markdown files by URL path
-require_once 'template_router.php';       // routes to different PHP templates based on URL
+require_once 'templates/template_router.php';       // routes to different PHP templates based on URL
 
 // Create instances used later in the file.
 $Spyc = new Spyc();

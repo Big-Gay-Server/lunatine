@@ -266,6 +266,7 @@
   },
   "active": "99b85da6ba43ad79",
   "lastOpenFiles": [
+    "templates/template_router.php",
     "template_router.php",
     "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/dictionary/dictionarybase.base",
@@ -288,7 +289,6 @@
     "vendor/symfony/cache-contracts/README.md",
     "vendor/symfony/cache-contracts/NamespacedPoolInterface.php",
     "vendor/symfony/cache-contracts/LICENSE",
-    "vendor/symfony/cache-contracts/ItemInterface.php",
     "vendor/symfony/cache-contracts/CHANGELOG.md",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
