@@ -12,6 +12,7 @@ if ($firstSegment === 'compendium') {
     // Default fallback for root files like about.md or index.md
     $markdownDir = __DIR__ . '/';
 }
+$GLOBALS['markdownDir'] = $markdownDir;
 
 $fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
 $requestedPath = trim(str_replace('..', '', $fileName), '/');
