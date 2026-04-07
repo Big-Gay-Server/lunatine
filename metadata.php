@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/Spyc.php';
+// --- IMPORTING EXTERNAL LIBRARIES ---
+// 1. Composer Autoloader (Handles Parsedown, Spyc, and Symfony)
+require_once 'vendor/autoload.php';
 
 function get_page_metadata($path) {
     if (!$path || !file_exists($path)) return ['title' => ''];
