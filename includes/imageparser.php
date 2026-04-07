@@ -6,6 +6,11 @@ function find_image_path($baseDir, $imageName) {
     $targetPath = str_replace(['\\', '%20'], ['/', ' '], urldecode(trim($imageName)));
     $normalizedBase = str_replace('\\', '/', realpath($baseDir));
     
+    // --- START DEBUG ECHO ---
+    echo "\n<!-- DEBUG: Finding [$imageName] -->\n";
+    echo "<!-- Base Dir: $normalizedBase -->\n";
+    // --- END DEBUG ECHO ---
+
     $isCompendium = str_contains($normalizedBase, '/compendium');
     $urlPrefix = $isCompendium ? '/compendium/' : '/';
 
