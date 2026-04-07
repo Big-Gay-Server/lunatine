@@ -1169,33 +1169,6 @@
         "newlineCount": 67
       }
     },
-    "Spyc.php": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1774630537453,
-      "modifiedDate": 1774630537454,
-      "sizeInBytes": 39415,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
     "SPECIES/speciesbase.base": {
       "isCountable": false,
       "targetNodeType": "file",
@@ -1452,33 +1425,6 @@
       "createdDate": 1774630537473,
       "modifiedDate": 1774630537474,
       "sizeInBytes": 1897,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
-    "Parsedown.php": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1774630537312,
-      "modifiedDate": 1774630537313,
-      "sizeInBytes": 54065,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -25054,8 +25000,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775243719118,
-      "modifiedDate": 1775580776968,
-      "sizeInBytes": 20453,
+      "modifiedDate": 1775580818223,
+      "sizeInBytes": 20473,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
