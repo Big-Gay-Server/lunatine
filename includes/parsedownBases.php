@@ -1,9 +1,6 @@
 <?php
 // Opens the PHP code block.
 
-require_once __DIR__ . '/includes/Parsedown.php'; 
-// Imports the base Parsedown library. 'require_once' ensures the script stops if the file is missing.
-
 require_once __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 // imports composer stuff?
