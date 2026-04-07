@@ -1,13 +1,16 @@
 <?php
 // --- IMPORTING EXTERNAL LIBRARIES ---
-// Load the markdown parser, YAML parser, image helper, and file resolver.
-require_once 'Parsedown.php';           // basic markdown to HTML parser
-require_once 'parsedownGloss.php';      // extended parser for gloss blocks
-require_once 'parsedownBases.php';      // extended parser for bases blocks
-require_once 'Spyc.php';                // YAML frontmatter parser
-require_once 'imageparser.php';         // Obsidian-style image path resolver
-require_once 'filefinder.php';          // finds markdown files by URL path
-require_once 'templates/template_router.php';       // routes to different PHP templates based on URL
+// 1. Composer Autoloader (Handles Parsedown, Spyc, and Symfony)
+require_once 'vendor/autoload.php';
+
+// 2. Custom Extensions and Helpers
+require_once 'includes/parsedownGloss.php';
+require_once 'includes/parsedownBases.php';
+require_once 'includes/imageparser.php';
+require_once 'includes/filefinder.php';
+
+// 3. Templates
+require_once 'templates/template_router.php';
 
 // Create instances used later in the file.
 $Spyc = new Spyc();
