@@ -5,4 +5,4 @@ Codex for Varae.
 
 [[LANGUAGES/Varae/word generator|word generator]]
 
-![[LANGUAGES/Varae/dictionary/dictionarybase.base#Table|dictionarybase]]
+![[LANGUAGES/Varae/dictionary/dictionarybase.base#web|dictionarybase]]

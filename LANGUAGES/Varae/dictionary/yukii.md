@@ -4,6 +4,7 @@ part of speech:
   - noun
 note:
 related words:
+title: yukii
 ---
 ### (`= this.part-of-speech`)
 

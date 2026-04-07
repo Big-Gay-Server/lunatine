@@ -1,6 +1,36 @@
 views:
   - type: table
-    name: Table
+    name: table
+    filters:
+      and:
+        - file.inFolder("LANGUAGES/Varae/dictionary")
+        - file.name != "index"
+        - file.ext == "md"
+    order:
+      - file.name
+      - definition
+      - part of speech
+      - related words
+      - note.note
+    sort:
+      - property: title
+        direction: ASC
+      - property: note.note
+        direction: ASC
+      - property: definition
+        direction: ASC
+      - property: related words
+        direction: DESC
+    summaries:
+      title: Unique
+    columnSize:
+      file.name: 106
+      note.title: 89
+      note.definition: 126
+      note.part of speech: 122
+      note.note: 166
+  - type: table
+    name: web
     filters:
       and:
         - file.inFolder("LANGUAGES/Varae/dictionary")
@@ -29,5 +59,3 @@ views:
       note.definition: 126
       note.part of speech: 122
       note.note: 166
-  - type: table
-    name: View
