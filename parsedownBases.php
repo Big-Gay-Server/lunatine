@@ -273,6 +273,8 @@ class ParsedownBases extends Parsedown {
 
         // 2. Standard syntax cleanup (Keep the dots! The wrapper handles them now)
         $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
+        $expr = str_replace(['note.', 'prop.', '!= null'], ['', '', '!= ""'], $expr);
+        $expr = str_replace(' + ', ' ~ ', $expr); // Force concatenation operator
 
         // 3. Wrap every property in our Proxy Object
         $variables = [];

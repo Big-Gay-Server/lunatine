@@ -13,11 +13,11 @@
             "state": {
               "type": "bases",
               "state": {
-                "file": "SPECIES/speciesbase.base",
-                "viewName": "Table"
+                "file": "CHARACTERS/characterbase.base",
+                "viewName": "web"
               },
               "icon": "lucide-table",
-              "title": "speciesbase"
+              "title": "characterbase"
             }
           }
         ]
@@ -266,13 +266,12 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
-    "SPECIES/index.md",
-    "SPECIES/speciesbase.base",
+    "CHARACTERS/index.md",
     "STORY/writingbase.base",
     "EVENTS/index.md",
     "STORY/index.md",
+    "SPECIES/index.md",
     "CONCEPTS/index.md",
-    "CHARACTERS/index.md",
     "ARTIFACTS/artifactsbase.base",
     "ARTIFACTS/index.md",
     "LANGUAGES/languagesbase.base",
@@ -286,6 +285,7 @@
     "vendor/symfony/cache-contracts/ItemInterface.php",
     "vendor/symfony/cache-contracts/composer.json",
     "vendor/symfony/cache-contracts/CHANGELOG.md",
+    "vendor/symfony/cache-contracts/CallbackInterface.php",
     "vendor/symfony/service-contracts/README.md",
     "vendor/symfony/service-contracts/CHANGELOG.md",
     "vendor/psr/log/README.md",
