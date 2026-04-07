@@ -11,7 +11,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
     <link><?php echo $site_url; ?></link>
     <description>Latest posts from my server folder</description>
     <?php
-    require_once(__DIR__ . '/../Parsedown.php');
+    require_once 'vendor/autoload.php';
     $Parsedown = new Parsedown();
 
     $files = glob($dir . '*.{html,md}', GLOB_BRACE);
