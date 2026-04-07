@@ -5,17 +5,23 @@ function find_image_path($baseDir, $imageName) {
     $targetPath = str_replace(['\\', '%20'], ['/', ' '], urldecode(trim($imageName)));
     $normalizedBase = str_replace('\\', '/', realpath($baseDir));
     
-    // --- NEW: Detect if we are searching inside the compendium ---
-    // This ensures the browser looks in the right subfolder
+    // 1. Detect URL prefix
     $isCompendium = str_contains($normalizedBase, '/compendium');
     $urlPrefix = $isCompendium ? '/compendium/' : '/';
 
+    // --- THE NEW FIX: Check Local Folder First ---
+    // If we are on a page like /compendium/SPECIES/Dragon, check that folder specifically
+    $localPath = $normalizedBase . '/' . $targetPath;
+    if (file_exists($localPath) && !is_dir($localPath)) {
+        return $urlPrefix . ltrim(str_replace($normalizedBase, '', $localPath), '/');
+    }
+
+    // 2. PRIORITY: Check for exact path match (Standard logic)
     $possiblePaths = [
         $targetPath,
-        $targetPath . '.md',
         $targetPath . '.png',
         $targetPath . '.jpg',
-        $targetPath . '.webp' // Added webp support
+        $targetPath . '.webp'
     ];
 
     foreach ($possiblePaths as $testPath) {
