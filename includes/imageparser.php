@@ -6,6 +6,10 @@ function find_image_path($baseDir, $imageName) {
     $targetPath = str_replace(['\\', '%20'], ['/', ' '], urldecode(trim($imageName)));
     $normalizedBase = str_replace('\\', '/', realpath($baseDir));
     
+    echo "<!-- DEBUG: Function received Base Dir: $baseDir -->\n";
+    echo "<!-- DEBUG: Global markdownDir is: " . ($GLOBALS['markdownDir'] ?? 'NOT SET') . " -->\n";
+
+
     $isCompendium = str_contains($normalizedBase, '/compendium');
     $urlPrefix = $isCompendium ? '/compendium/' : '/';
 
@@ -39,6 +43,5 @@ function find_image_path($baseDir, $imageName) {
             return $urlPrefix . $relativeDiskPath;
         }
     }
-    error_log("IMAGE DEBUG: Searching for [$imageName] in [$baseDir]. Result: " . ($resolved ?: 'NOT FOUND'));
     return null;
 }
