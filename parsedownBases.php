@@ -422,24 +422,38 @@ class MetadataWrapper {
         $this->data = ($data instanceof MetadataWrapper) ? $data->data : $data;
     }
 
+    // --- THE FIX: Handle missing properties like .folder ---
     public function __get($name) {
         if (is_array($this->data) && isset($this->data[$name])) {
             return new MetadataWrapper($this->data[$name]);
         }
+        // Fallback for missing properties
         return new MetadataWrapper("");
     }
 
-    public function split($delimiter) {
-        if (is_array($this->data)) return $this;
-        $parts = explode($delimiter, (string)$this->data);
-        return new MetadataWrapper($parts);
+    public function toString() { return $this; }
+    
+    public function round() { 
+        $val = (float)((string)$this);
+        return new MetadataWrapper(round($val)); 
     }
 
+    public function contains($needle) {
+        return str_contains(strtolower((string)$this), strtolower((string)$needle));
+    }
+
+    // This handles .split("/")
+    public function split($delimiter) {
+        if (is_array($this->data)) return $this; // Can't split an array
+        $parts = explode($delimiter, (string)$this->data);
+        return new self($parts); // Return new wrapper so we can chain .slice()
+    }
+
+    // This handles .slice(1)
     public function slice($start, $end = null) {
         if (!is_array($this->data)) return $this;
-        // Bases uses 0-based indexing for slice
         $sliced = array_slice($this->data, $start, $end);
-        return new MetadataWrapper($sliced);
+        return new self($sliced);
     }
 
     public function __toString() {
