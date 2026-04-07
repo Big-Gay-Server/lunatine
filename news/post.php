@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Parsedown.php';
+require_once 'vendor/autoload.php';
 $Parsedown = new Parsedown();
 
 // Fix: Since post.php is in /news, just look in the 'posts' subfolder
