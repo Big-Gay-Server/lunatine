@@ -2,6 +2,7 @@
 Parent Species: "[[SPECIES/Selhae/index | Selhae]]"
 title: Construct
 aliases: Construct
+Average Lifespan: ∞
 ---
 ## About
 Constructs are magical beings created by the [[SPECIES/Selhae/index|Selhae]] and the [[SPECIES/Inna/index|Inna]]. They come in many forms and can be made for various reasons, such as companionship or assistance.

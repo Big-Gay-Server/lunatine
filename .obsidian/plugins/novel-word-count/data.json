@@ -1212,8 +1212,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147145580,
-      "modifiedDate": 1775167046252,
-      "sizeInBytes": 223,
+      "modifiedDate": 1775574981692,
+      "sizeInBytes": 383,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -1276,8 +1276,8 @@
         "Selhae"
       ],
       "createdDate": 1775147145576,
-      "modifiedDate": 1775166972953,
-      "sizeInBytes": 3497,
+      "modifiedDate": 1775575020518,
+      "sizeInBytes": 3503,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 1.68,
@@ -1287,13 +1287,13 @@
         "newlineCount": 54
       },
       "frontmatter": {
-        "Average Lifespan": 650,
+        "Average Lifespan": "650 years",
         "Parent Species": "[[SPECIES/Inna/index | Inna]]",
         "Descended Species": "[[SPECIES/Construct/index | Construct]]",
         "aliases": [
           "Selhae"
         ],
-        "title": "selhae"
+        "title": "Selhae"
       }
     },
     "SPECIES/Inna/index.md": {
@@ -1314,8 +1314,8 @@
         "Inna"
       ],
       "createdDate": 1775147145570,
-      "modifiedDate": 1775165993401,
-      "sizeInBytes": 6023,
+      "modifiedDate": 1775575023798,
+      "sizeInBytes": 6050,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 3.013333333333333,
@@ -1332,7 +1332,8 @@
         "aliases": [
           "Inna"
         ],
-        "title": "Inna"
+        "title": "Inna",
+        "Average Lifespan": "∞"
       }
     },
     "SPECIES/Fae/index.md": {
@@ -1389,8 +1390,8 @@
         "Construct"
       ],
       "createdDate": 1775147145561,
-      "modifiedDate": 1775147145561,
-      "sizeInBytes": 4535,
+      "modifiedDate": 1775575032447,
+      "sizeInBytes": 4554,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 2.2533333333333334,
@@ -1402,7 +1403,8 @@
       "frontmatter": {
         "Parent Species": "[[SPECIES/Selhae/index | Selhae]]",
         "title": "Construct",
-        "aliases": "Construct"
+        "aliases": "Construct",
+        "Average Lifespan": "∞"
       }
     },
     "sidebar.php": {
@@ -1475,8 +1477,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775243719118,
-      "modifiedDate": 1775574656828,
-      "sizeInBytes": 20869,
+      "modifiedDate": 1775574877494,
+      "sizeInBytes": 20467,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

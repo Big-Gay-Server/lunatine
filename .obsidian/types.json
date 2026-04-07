@@ -15,6 +15,7 @@
     "date": "date",
     "Species": "text",
     "Actual Age": "number",
-    "Apparent age": "number"
+    "Apparent age": "number",
+    "Average Lifespan": "text"
   }
 }

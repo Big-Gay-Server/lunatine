@@ -1,8 +1,11 @@
 ---
-Descended Species: ["[[SPECIES/Selhae/index | Selhae]]", "[[SPECIES/Fae/index | Fae]]"]
+Descended Species:
+  - "[[SPECIES/Selhae/index | Selhae]]"
+  - "[[SPECIES/Fae/index | Fae]]"
 aliases:
   - Inna
 title: Inna
+Average Lifespan: ∞
 ---
 ## About
 Inna - Star Walkers. Ancient cosmic beings who plant the seeds of new worlds in their Garden, and from those worlds spring newborn Inna. Rarely do they visit these worlds in person, but on such occasions they will hide their true form and blend in among the locals, indistinguishable save for their planetary eyes.

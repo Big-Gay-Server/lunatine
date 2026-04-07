@@ -8,6 +8,7 @@ views:
         - "!title.isEmpty()"
         - file.name == "index"
         - '!file.folder.endsWith("/dictionary")'
+        - '!file.folder.endsWith("/translations")'
     order:
       - title
       - Mainly spoken by

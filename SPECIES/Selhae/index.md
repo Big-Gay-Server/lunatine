@@ -1,10 +1,10 @@
 ---
-Average Lifespan: 650
+Average Lifespan: 650 years
 Parent Species: "[[SPECIES/Inna/index | Inna]]"
 Descended Species: "[[SPECIES/Construct/index | Construct]]"
 aliases:
   - Selhae
-title: selhae
+title: Selhae
 ---
 ## About
 A species created by [[CHARACTERS/Anwi/index|Anwi]] to live upon the planet [[LOCATIONS/Asilles/index|Asilles]].
