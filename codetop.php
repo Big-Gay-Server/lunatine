@@ -1,5 +1,7 @@
 <?php
 // basic setup
+$fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
+$requestedPath = trim(str_replace('..', '', $fileName), '/');
 $urlParts = explode('/', $requestedPath);
 
 // Change this logic: 
@@ -17,8 +19,6 @@ if ($firstSegment === 'compendium') {
 // Make it available to the image parser functions
 $GLOBALS['markdownDir'] = $markdownDir;
 
-$fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
-$requestedPath = trim(str_replace('..', '', $fileName), '/');
 if (empty($requestedPath)) $requestedPath = 'index';
 
 // 1. Determine Section & Title
