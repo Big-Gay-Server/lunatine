@@ -55,7 +55,7 @@ body {
     padding: 0;
     color: var(--color-5);
     line-height: 1.6;
-    background: var(--color-1) url(/GRAPHICS/background.png);
+    background: var(--color-1) url(/compendium/GRAPHICS/background.png);
     font-weight: 500;
     font-family: "Caudex", serif;
     letter-spacing: 0.005rem;
