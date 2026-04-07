@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "892de77251f513ff",
+        "id": "601a918ca1284d5a",
         "type": "tabs",
         "children": [
           {
-            "id": "1702ae3c1c95b240",
+            "id": "67213c6da78abf54",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "CHARACTERS/Helita/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "index"
             }
           }
         ]
@@ -194,8 +198,7 @@
               "title": "All properties"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       },
       {
         "id": "afe34fa239e6fb93",
@@ -250,6 +253,7 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false,
       "templater-obsidian:Templater": false,
       "obsidian-leaflet-plugin:Open Leaflet Map": false,
+      "calendarium:Open Calendarium": false,
       "obsidian-importer:Open Importer": false,
       "obsidian-rich-links:Rich Links": false,
       "obsidian-stille:Toggle Stille": false,
@@ -257,12 +261,16 @@
       "media-extended:Open external media": false,
       "vscode-editor:Create Code File": false,
       "terminal:Open terminal": false,
-      "obsidian-git:Open Git source control": false,
-      "calendarium:Open Calendarium": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "99b85da6ba43ad79",
+  "active": "67213c6da78abf54",
   "lastOpenFiles": [
+    "CHARACTERS/Canelé/index.md",
+    "CHARACTERS/Esela/index.md",
+    "CHARACTERS/characterbase.base",
+    "CHARACTERS/index.md",
+    "CONCEPTS/index.md",
     "compendium/CHARACTERS/Merisdae/art/_COVER_future eve/model/model.lsc",
     "compendium/CHARACTERS/Yudora/art/spica/lipsync.lsc",
     "compendium/CHARACTERS/Merisdae/art/_COVER_Meteor_redbirddraws/README.txt",
@@ -290,15 +298,10 @@
     "compendium/LANGUAGES/Varae/dictionary/wuyiir.md",
     "compendium/LANGUAGES/Varae/dictionary/wurone.md",
     "compendium/LANGUAGES/Varae/dictionary/wo.md",
-    "compendium/LANGUAGES/Varae/dictionary/weise.md",
-    "compendium/LANGUAGES/Varae/dictionary/weilasii.md",
-    "compendium/LANGUAGES/Varae/dictionary/wawa.md",
     "compendium/LANGUAGES/Varae/dictionary/varae.csv",
     "compendium/LANGUAGES/Varae/dictionary/varae (2).csv",
     "compendium/LANGUAGES/Varae/dictionary/dictionarybase.base",
     "compendium/CHARACTERS/Yudora/art/spica",
-    "compendium/CHARACTERS/Merisdae/art/_COVER_Meteor_redbirddraws",
-    "compendium/CHARACTERS/Merisdae/art/_COVER_future eve",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",

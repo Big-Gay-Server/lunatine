@@ -39,6 +39,6 @@ function find_image_path($baseDir, $imageName) {
             return $urlPrefix . $relativeDiskPath;
         }
     }
-
+    error_log("IMAGE DEBUG: Searching for [$imageName] in [$baseDir]. Result: " . ($resolved ?: 'NOT FOUND'));
     return null;
 }
