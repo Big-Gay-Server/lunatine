@@ -271,10 +271,13 @@ class ParsedownBases extends Parsedown {
             return str_replace(' ', '_', $m[1]); 
         }, $expr);
 
-        // 2. Standard syntax cleanup (Keep the dots! The wrapper handles them now)
-        $expr = str_replace(['note.', 'prop.', '+', '!= null'], ['', '', '~', '!= ""'], $expr);
+        // 2. Standard syntax cleanup
         $expr = str_replace(['note.', 'prop.', '!= null'], ['', '', '!= ""'], $expr);
-        $expr = str_replace(' + ', ' ~ ', $expr); // Force concatenation operator
+
+        // Use a Regex to only replace '+' with '~' if it's touching a quote or a closing parenthesis 
+        // followed by a quote. This protects math like "25 + 25".
+        $expr = preg_replace('/"\s*\+\s*/', '" ~ ', $expr); // "text" + ...
+        $expr = preg_replace('/\s*\+\s*"/', ' ~ "', $expr); // ... + "text"
 
         // 3. Wrap every property in our Proxy Object
         $variables = [];
