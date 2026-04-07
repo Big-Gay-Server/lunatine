@@ -1,8 +1,17 @@
 <?php
 // basic setup
-$markdownDir = (strtolower($urlParts[0] ?? '') === 'compendium') 
-    ? __DIR__ . '/compendium/' 
-    : __DIR__ . '/';
+// 1. Get the first part of the URL (e.g., 'compendium', 'news', 'about')
+$firstSegment = strtolower($urlParts[0] ?? '');
+
+// 2. Set the markdownDir based on the actual section
+if ($firstSegment === 'compendium') {
+    $markdownDir = __DIR__ . '/compendium/';
+} elseif ($firstSegment === 'news') {
+    $markdownDir = __DIR__ . '/news/';
+} else {
+    // Default fallback for root files like about.md or index.md
+    $markdownDir = __DIR__ . '/';
+}
 
 $fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
 $requestedPath = trim(str_replace('..', '', $fileName), '/');
