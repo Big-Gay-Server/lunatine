@@ -1,8 +1,9 @@
 <?php
 // Opens the PHP code block.
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once '/usr/share/nginx/html/lunatine/vendor/autoload.php';
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
 // imports composer stuff?
 class ParsedownBases extends Parsedown {
 // Defines a new class that "inherits" from Parsedown, allowing it to use and extend Markdown features.
