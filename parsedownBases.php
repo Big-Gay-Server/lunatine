@@ -434,12 +434,12 @@ class MetadataWrapper {
     public function toString() { return $this; }
     
     public function round() { 
-        $val = (float)((string)$this);
+        $val = (float)((string)$this->data); 
         return new MetadataWrapper(round($val)); 
     }
 
     public function contains($needle) {
-        return str_contains(strtolower((string)$this), strtolower((string)$needle));
+        return str_contains(strtolower((string)$this->data), strtolower((string)$needle));
     }
 
     // This handles .split("/")
