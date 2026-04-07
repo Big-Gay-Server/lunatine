@@ -1,17 +1,18 @@
 <?php
 header('Content-Type: application/xml; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 $site_url = 'https://lunatine.lunarconstruct.net';
-$dir = '/posts/';
+$dir = __DIR__ . '/posts/'; 
 
 echo '<?xml version="1.0" encoding="UTF-8" ?>';
 ?>
 <rss version="2.0">
 <channel>
-    <title>My Automated Feed</title>
+    <title>Lunatine News</title>
     <link><?php echo $site_url; ?></link>
-    <description>Latest posts from my server folder</description>
+    <description>Lunatine Updates</description>
     <?php
-    require_once 'vendor/autoload.php';
+    require_once dirname(__DIR__) . '/vendor/autoload.php';
     $Parsedown = new Parsedown();
 
     $files = glob($dir . '*.{html,md}', GLOB_BRACE);
