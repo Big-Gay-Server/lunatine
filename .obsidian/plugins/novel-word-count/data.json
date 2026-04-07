@@ -1477,8 +1477,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775243719118,
-      "modifiedDate": 1775574877494,
-      "sizeInBytes": 20467,
+      "modifiedDate": 1775576353398,
+      "sizeInBytes": 20589,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -4083,16 +4083,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 6.336666666666667,
-      "characterCount": 14027,
+      "characterCount": 13714,
       "nonWhitespaceCharacterCount": 10659,
       "newlineCount": 314,
       "readingTimeInMinutes": 7.173584905660378,
       "linkCount": 2,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "Varae Grammar"
+      ],
       "createdDate": 1775147145247,
-      "modifiedDate": 1775147145248,
-      "sizeInBytes": 14316,
+      "modifiedDate": 1775576388272,
+      "sizeInBytes": 14001,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 6.336666666666667,
@@ -11780,20 +11782,22 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 8,
+      "wordCount": 7,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.02666666666666667,
-      "characterCount": 180,
-      "nonWhitespaceCharacterCount": 162,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.03018867924528302,
-      "linkCount": 0,
+      "pageCount": 0.023333333333333334,
+      "characterCount": 142,
+      "nonWhitespaceCharacterCount": 133,
+      "newlineCount": 6,
+      "readingTimeInMinutes": 0.026415094339622643,
+      "linkCount": 1,
       "embedCount": 1,
-      "aliases": null,
+      "aliases": [
+        "Varae Dictionary"
+      ],
       "createdDate": 1775147144921,
-      "modifiedDate": 1775489544665,
-      "sizeInBytes": 211,
+      "modifiedDate": 1775576469359,
+      "sizeInBytes": 173,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.02666666666666667,
@@ -11803,7 +11807,8 @@
         "newlineCount": 8
       },
       "frontmatter": {
-        "title": "Varae Dictionary"
+        "title": "Varae Dictionary",
+        "aliases": "Varae Dictionary"
       }
     },
     "LANGUAGES/Varae/dictionary/iise.md": {
@@ -13572,8 +13577,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775147144871,
-      "modifiedDate": 1775147144872,
-      "sizeInBytes": 742,
+      "modifiedDate": 1775576631050,
+      "sizeInBytes": 701,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

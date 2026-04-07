@@ -7,13 +7,13 @@ views:
         - file.name != "index"
         - file.ext == "md"
     order:
-      - file.name
+      - title
       - definition
       - part of speech
       - related words
       - note.note
     sort:
-      - property: file.name
+      - property: title
         direction: ASC
       - property: note.note
         direction: ASC

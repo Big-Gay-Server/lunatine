@@ -11,14 +11,13 @@
             "id": "1702ae3c1c95b240",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "LANGUAGES/Varae/dictionary/index.md",
-                "mode": "source",
-                "source": false
+                "file": "LANGUAGES/Varae/dictionary/dictionarybase.base",
+                "viewName": "Table"
               },
-              "icon": "lucide-file",
-              "title": "index"
+              "icon": "lucide-table",
+              "title": "dictionarybase"
             }
           }
         ]
@@ -267,6 +266,7 @@
   },
   "active": "1702ae3c1c95b240",
   "lastOpenFiles": [
+    "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/grammar.md",
     "LANGUAGES/languagesbase.base",
     "ARTIFACTS/artifactsbase.base",
@@ -302,7 +302,6 @@
     "vendor/psr/cache/README.md",
     "vendor/psr/cache/CHANGELOG.md",
     "vendor/psr/event-dispatcher/README.md",
-    "vendor/symfony/polyfill-php80/README.md",
     "CHARACTERS/Kaeyomii/art/meteor.webp",
     "CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
