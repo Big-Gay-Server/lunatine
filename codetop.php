@@ -1,17 +1,22 @@
 <?php
 // basic setup
-// 1. Get the first part of the URL (e.g., 'compendium', 'news', 'about')
+$fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
+$requestedPath = trim(str_replace('..', '', $fileName), '/');
+$urlParts = explode('/', $requestedPath);
+
+// Change this logic: 
+// $urlParts[0] after trim('/') will be the first folder name
 $firstSegment = strtolower($urlParts[0] ?? '');
 
-// 2. Set the markdownDir based on the actual section
 if ($firstSegment === 'compendium') {
     $markdownDir = __DIR__ . '/compendium/';
 } elseif ($firstSegment === 'news') {
     $markdownDir = __DIR__ . '/news/';
 } else {
-    // Default fallback for root files like about.md or index.md
     $markdownDir = __DIR__ . '/';
 }
+
+// Make it available to the image parser functions
 $GLOBALS['markdownDir'] = $markdownDir;
 
 $fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
