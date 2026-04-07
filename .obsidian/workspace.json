@@ -264,8 +264,9 @@
       "calendarium:Open Calendarium": false
     }
   },
-  "active": "1702ae3c1c95b240",
+  "active": "99b85da6ba43ad79",
   "lastOpenFiles": [
+    "template_router.php",
     "LANGUAGES/Varae/dictionary/index.md",
     "LANGUAGES/Varae/dictionary/dictionarybase.base",
     "LANGUAGES/Varae/grammar.md",

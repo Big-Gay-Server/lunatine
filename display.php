@@ -7,6 +7,7 @@ require_once 'parsedownBases.php';      // extended parser for bases blocks
 require_once 'Spyc.php';                // YAML frontmatter parser
 require_once 'imageparser.php';         // Obsidian-style image path resolver
 require_once 'filefinder.php';          // finds markdown files by URL path
+require_once 'template_router.php';       // routes to different PHP templates based on URL
 
 // Create instances used later in the file.
 $Spyc = new Spyc();
@@ -351,12 +352,12 @@ if ($filePath && file_exists($filePath)) {
                 return "<h$level id=\"$slug\">{$m[2]}</h$level>";
             }, $html);
 
-            // 5. RESTORE EMBEDS (Use $html here!)
+            // 5. RESTORE EMBEDS
             if (!empty($transclusions)) {
                 $html = str_replace(array_keys($transclusions), array_values($transclusions), $html);
             }
 
-            // 6. SHORTCODES, IMAGES & LINKS (Use $html here!)
+            // 6. SHORTCODES, IMAGES & LINKS
             $html = preg_replace_callback('/\[\s*embed_base\s*:\s*([^\]\s]+)\s*\]/i', function ($m) use ($renderTable, $filePath) {
                 $parts = explode('#', trim($m[1]));
                 return $renderTable(dirname($filePath) . '/' . $parts[0] . '.base', $filePath, $parts[1] ?? null);
@@ -403,31 +404,8 @@ if ($filePath && file_exists($filePath)) {
     }
 }
 
-// --- TEMPLATE PICKER ---
-// Decide which PHP template should render the page.
-// If this is the root index of a section, use section_index.
-$isIndexFile = (basename($filePath ?? '', '.md') === 'index' || basename($filePath ?? '', '.base') === 'index');
+renderWithTemplate($section, $urlParts, $filePath, $templateDir, $htmlContent, $yamlData);
 
-// Count the URL segments to know whether this is a root section page or a child page.
-// Example: /characters has depth 1, /characters/merisdae has depth 2.
-$urlDepth = count($urlParts);
-
-if ($isIndexFile && $urlDepth <= 1) {
-    $templateName = $section . '_index';
-} else {
-    $templateName = $section;
-}
-
-$specificTemplate = $templateDir . $templateName . '.php';
-
-if (file_exists($specificTemplate)) {
-    include $specificTemplate;
-} elseif (file_exists($templateDir . $section . '.php')) {
-    include $templateDir . $section . '.php';
-} else {
-    // If no section template exists, fall back to a simple content wrapper.
-    echo '<div class="main-content">' . $htmlContent . '</div>';
-}
 ?>
 
 
