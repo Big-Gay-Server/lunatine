@@ -1,7 +1,5 @@
 <?php
 // basic setup
-$fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
-$requestedPath = trim(str_replace('..', '', $fileName), '/');
 $urlParts = explode('/', $requestedPath);
 
 // Change this logic: 
