@@ -19,8 +19,6 @@ if ($firstSegment === 'compendium') {
 // Make it available to the image parser functions
 $GLOBALS['markdownDir'] = $markdownDir;
 
-if (empty($requestedPath)) $requestedPath = 'index';
-
 // 1. Determine Section & Title
 $urlParts = explode('/', $requestedPath);
 $section = strtolower($urlParts[0]);
