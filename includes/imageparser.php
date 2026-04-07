@@ -13,21 +13,30 @@ function find_image_path($baseDir, $imageName) {
     $isCompendium = str_contains($normalizedBase, '/compendium');
     $urlPrefix = $isCompendium ? '/compendium/' : '/';
 
-    // 2. PRIORITY: Check for an exact path match relative to your vault root
-    // If the MD file says [[Characters/Elowen/portrait.png]], find_case_insensitive will look for that exact file.
-    $resolved = find_case_insensitive($baseDir, $targetPath);
-    
-    if (!$resolved) {
-        // Try common extensions if they were missing in the MD link
-        foreach (['.png', '.jpg', '.webp'] as $ext) {
-            $resolved = find_case_insensitive($baseDir, $targetPath . $ext);
-            if ($resolved) break;
-        }
-    }
+     // 2. PRIORITY: Check for an exact path match
+    $possiblePaths = [
+        $targetPath,
+        $targetPath . '.png',
+        $targetPath . '.jpg',
+        $targetPath . '.webp'
+    ];
 
-    if ($resolved && file_exists($resolved) && !is_dir($resolved)) {
-        $relativePath = ltrim(str_replace($normalizedBase, '', str_replace('\\', '/', realpath($resolved))), '/');
-        return $urlPrefix . $relativePath;
+    foreach ($possiblePaths as $testPath) {
+        // --- THE SMART FIX ---
+        // 1. Try Root First
+        $resolved = find_case_insensitive($baseDir, $testPath);
+        
+        // 2. If not found, try inside Compendium
+        if (!$resolved) {
+            $resolved = find_case_insensitive($baseDir . '/compendium', $testPath);
+        }
+
+        if ($resolved && file_exists($resolved) && !is_dir($resolved)) {
+            // Calculate relative path based on the SITE ROOT ($baseDir)
+            // This ensures the browser URL starts with /compendium/...
+            $relativePath = ltrim(str_replace(realpath($baseDir), '', realpath($resolved)), '/');
+            return '/' . $relativePath;
+        }
     }
 
     // 3. FALLBACK: Only if the exact path above fails, do the "fuzzy" recursive search

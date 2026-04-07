@@ -1,23 +1,11 @@
 <?php
 // basic setup
+$markdownDir = __DIR__ . '/';
+$GLOBALS['markdownDir'] = $markdownDir;
+
 $fileName = isset($_GET['file']) ? $_GET['file'] : 'index';
 $requestedPath = trim(str_replace('..', '', $fileName), '/');
-$urlParts = explode('/', $requestedPath);
-
-// Change this logic: 
-// $urlParts[0] after trim('/') will be the first folder name
-$firstSegment = strtolower($urlParts[0] ?? '');
-
-if ($firstSegment === 'compendium') {
-    $markdownDir = __DIR__ . '/compendium/';
-} elseif ($firstSegment === 'news') {
-    $markdownDir = __DIR__ . '/news/';
-} else {
-    $markdownDir = __DIR__ . '/';
-}
-
-// Make it available to the image parser functions
-$GLOBALS['markdownDir'] = $markdownDir;
+if (empty($requestedPath)) $requestedPath = 'index';
 
 // 1. Determine Section & Title
 $urlParts = explode('/', $requestedPath);
