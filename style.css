@@ -278,11 +278,19 @@ a, .file-link {
 /* THE IMAGE FIX: Allow images to sit NEXT to the sidebar */
 .profile-text img {
     display: block;
-    float: none;
-    clear: none; /* Crucial: stops image from jumping below the float */
-    max-width: calc(100% - 380px); /* Leaves 350px (sidebar) + 30px (gap) */
+    float: left;        /* Force the image to float left, opposite the bio */
+    clear: none;        /* Allow it to sit next to other floats */
+    max-width: calc(100% - 380px); /* Leave room for the 350px bio + 30px gap */
     height: auto;
-    margin: 20px 0; /* Align to the left next to sidebar */
+    margin: 10px 20px 20px 0; /* Margin on the right and bottom */
+}
+
+/* Ensure that if an image is meant to be full width (no sidebar), it still looks okay */
+.profile-text img:only-child, 
+.profile-text p:not(:has(~ .bio-sidebar)) img {
+    float: none;
+    max-width: 100%;
+    margin: 20px auto;
 }
 
 /* Once we are past the sidebar (cleared), images can be full width again */
