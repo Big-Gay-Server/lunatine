@@ -3,7 +3,6 @@ views:
     name: Table
     filters:
       and:
-        - file.name == "index"
         - note["compendium-index"] == true
     order:
       - title
