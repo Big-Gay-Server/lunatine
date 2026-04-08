@@ -16,6 +16,7 @@
     "Species": "text",
     "Actual Age": "number",
     "Apparent age": "number",
-    "Average Lifespan": "text"
+    "Average Lifespan": "text",
+    "compendium-index": "checkbox"
   }
 }

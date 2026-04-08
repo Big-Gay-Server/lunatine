@@ -1,1 +1,6 @@
-[[embed_base:organizationsbase]]
+---
+title: Organizations
+compendium-index: true
+---
+
+![[ORGANIZATIONS/organizationsbase.base|organizationsbase]]

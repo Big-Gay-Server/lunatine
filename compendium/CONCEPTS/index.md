@@ -1,4 +1,5 @@
 ---
 title: Concepts
+compendium-index: true
 ---
-[embed_base:conceptsbase#table]
+![[CONCEPTS/conceptsbase.base|conceptsbase]]

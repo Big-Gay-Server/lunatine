@@ -105,14 +105,16 @@
       "pageCount": 0.01,
       "characterCount": 50,
       "nonWhitespaceCharacterCount": 45,
-      "newlineCount": 2,
+      "newlineCount": 3,
       "readingTimeInMinutes": 0.011320754716981131,
       "linkCount": 0,
       "embedCount": 1,
-      "aliases": null,
+      "aliases": [
+        "Story"
+      ],
       "createdDate": 1775595905829,
-      "modifiedDate": 1775595905830,
-      "sizeInBytes": 50,
+      "modifiedDate": 1775671388891,
+      "sizeInBytes": 93,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.01,
@@ -120,6 +122,11 @@
         "characterCount": 50,
         "nonWhitespaceCharacterCount": 45,
         "newlineCount": 2
+      },
+      "frontmatter": {
+        "title": "Story",
+        "compendium-index": true,
+        "aliases": "Story"
       }
     },
     "STORY/misc writings/kaeyomii.docx": {
@@ -1104,8 +1111,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775595905626,
-      "modifiedDate": 1775595905627,
-      "sizeInBytes": 266,
+      "modifiedDate": 1775671237946,
+      "sizeInBytes": 251,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -1228,18 +1235,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 34,
-      "nonWhitespaceCharacterCount": 30,
-      "newlineCount": 3,
+      "characterCount": 42,
+      "nonWhitespaceCharacterCount": 41,
+      "newlineCount": 2,
       "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
-      "embedCount": 0,
+      "embedCount": 1,
       "aliases": [
         "Species"
       ],
       "createdDate": 1775595905731,
-      "modifiedDate": 1775595905734,
-      "sizeInBytes": 81,
+      "modifiedDate": 1775671373291,
+      "sizeInBytes": 108,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -1252,7 +1259,8 @@
         "aliases": [
           "Species"
         ],
-        "title": "Species"
+        "title": "Species",
+        "compendium-index": true
       }
     },
     "SPECIES/Fae/index.md": {
@@ -1367,16 +1375,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 32,
-      "nonWhitespaceCharacterCount": 32,
-      "newlineCount": 1,
+      "characterCount": 61,
+      "nonWhitespaceCharacterCount": 59,
+      "newlineCount": 3,
       "readingTimeInMinutes": 0.0037735849056603774,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
+      "linkCount": 0,
+      "embedCount": 1,
+      "aliases": [
+        "Organizations"
+      ],
       "createdDate": 1775595905681,
-      "modifiedDate": 1775595905682,
-      "sizeInBytes": 32,
+      "modifiedDate": 1775671358697,
+      "sizeInBytes": 112,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -1384,6 +1394,11 @@
         "characterCount": 32,
         "nonWhitespaceCharacterCount": 32,
         "newlineCount": 1
+      },
+      "frontmatter": {
+        "title": "Organizations",
+        "compendium-index": true,
+        "aliases": "Organizations"
       }
     },
     "ORGANIZATIONS/organizationsbase.base": {
@@ -2186,16 +2201,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 34,
-      "nonWhitespaceCharacterCount": 32,
+      "characterCount": 48,
+      "nonWhitespaceCharacterCount": 47,
       "newlineCount": 2,
       "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
+      "embedCount": 1,
+      "aliases": [
+        "Locations"
+      ],
       "createdDate": 1775595905620,
-      "modifiedDate": 1775595905621,
-      "sizeInBytes": 60,
+      "modifiedDate": 1775671224940,
+      "sizeInBytes": 95,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -2206,6 +2223,7 @@
       },
       "frontmatter": {
         "title": "Locations",
+        "compendium-index": true,
         "aliases": "Locations"
       }
     },
@@ -14387,8 +14405,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775595905313,
-      "modifiedDate": 1775595905314,
-      "sizeInBytes": 469,
+      "modifiedDate": 1775671153340,
+      "sizeInBytes": 450,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -14406,16 +14424,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 47,
+      "characterCount": 48,
       "nonWhitespaceCharacterCount": 47,
-      "newlineCount": 1,
+      "newlineCount": 2,
       "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
       "embedCount": 1,
-      "aliases": null,
+      "aliases": [
+        "Languages"
+      ],
       "createdDate": 1775595905310,
-      "modifiedDate": 1775595905311,
-      "sizeInBytes": 47,
+      "modifiedDate": 1775671177910,
+      "sizeInBytes": 95,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -14423,6 +14443,11 @@
         "characterCount": 47,
         "nonWhitespaceCharacterCount": 47,
         "newlineCount": 1
+      },
+      "frontmatter": {
+        "title": "Languages",
+        "compendium-index": true,
+        "aliases": "Languages"
       }
     },
     "LANGUAGES/Innalang/index.md": {
@@ -14570,16 +14595,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 7.273333333333333,
-      "characterCount": 12927,
+      "characterCount": 12795,
       "nonWhitespaceCharacterCount": 9907,
       "newlineCount": 133,
       "readingTimeInMinutes": 8.233962264150943,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": null,
+      "aliases": [
+        "timeline"
+      ],
       "createdDate": 1775595904760,
-      "modifiedDate": 1775595904761,
-      "sizeInBytes": 13008,
+      "modifiedDate": 1775671145010,
+      "sizeInBytes": 12874,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 7.273333333333333,
@@ -14655,33 +14682,6 @@
         "aliases": "Selhae-Fae Separation"
       }
     },
-    "EVENTS/old overview timeline.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 287,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.9566666666666667,
-      "characterCount": 225413,
-      "nonWhitespaceCharacterCount": 224976,
-      "newlineCount": 37,
-      "readingTimeInMinutes": 1.0830188679245283,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1775595904756,
-      "modifiedDate": 1775595904757,
-      "sizeInBytes": 225513,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.9566666666666667,
-        "wordCount": 287,
-        "characterCount": 225413,
-        "nonWhitespaceCharacterCount": 224976,
-        "newlineCount": 37
-      }
-    },
     "EVENTS/Kohoii Solei War/index.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -14723,16 +14723,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 31,
-      "nonWhitespaceCharacterCount": 29,
+      "characterCount": 39,
+      "nonWhitespaceCharacterCount": 38,
       "newlineCount": 2,
       "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
+      "embedCount": 1,
+      "aliases": [
+        "Events"
+      ],
       "createdDate": 1775595904750,
-      "modifiedDate": 1775595904751,
-      "sizeInBytes": 54,
+      "modifiedDate": 1775671149682,
+      "sizeInBytes": 83,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -14743,6 +14745,7 @@
       },
       "frontmatter": {
         "title": "Events",
+        "compendium-index": true,
         "aliases": "Events"
       }
     },
@@ -15085,18 +15088,18 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 32,
-      "nonWhitespaceCharacterCount": 31,
+      "characterCount": 45,
+      "nonWhitespaceCharacterCount": 44,
       "newlineCount": 2,
       "readingTimeInMinutes": 0.0037735849056603774,
       "linkCount": 0,
-      "embedCount": 0,
+      "embedCount": 1,
       "aliases": [
         "Concepts"
       ],
       "createdDate": 1775595904716,
-      "modifiedDate": 1775597583601,
-      "sizeInBytes": 55,
+      "modifiedDate": 1775671111239,
+      "sizeInBytes": 91,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -15107,6 +15110,7 @@
       },
       "frontmatter": {
         "title": "Concepts",
+        "compendium-index": true,
         "aliases": "Concepts"
       }
     },
@@ -16957,7 +16961,7 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.24666666666666667,
-      "characterCount": 918,
+      "characterCount": 874,
       "nonWhitespaceCharacterCount": 745,
       "newlineCount": 45,
       "readingTimeInMinutes": 0.2792452830188679,
@@ -16967,8 +16971,8 @@
         "Helita"
       ],
       "createdDate": 1775595904370,
-      "modifiedDate": 1775595904371,
-      "sizeInBytes": 1809,
+      "modifiedDate": 1775670463929,
+      "sizeInBytes": 1736,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.24666666666666667,
@@ -17206,8 +17210,8 @@
         "Characters"
       ],
       "createdDate": 1775595904622,
-      "modifiedDate": 1775597582887,
-      "sizeInBytes": 129,
+      "modifiedDate": 1775671049408,
+      "sizeInBytes": 152,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -17219,6 +17223,7 @@
       "frontmatter": {
         "title": "Characters",
         "description": "my lovely lovely ocs :) i love them sm!!!",
+        "compendium-index": true,
         "aliases": "Characters"
       }
     },
@@ -18169,7 +18174,7 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.0033333333333333335,
-      "characterCount": 53,
+      "characterCount": 50,
       "nonWhitespaceCharacterCount": 47,
       "newlineCount": 4,
       "readingTimeInMinutes": 0.0037735849056603774,
@@ -18179,8 +18184,8 @@
         "Artifacts"
       ],
       "createdDate": 1775595904266,
-      "modifiedDate": 1775595904266,
-      "sizeInBytes": 104,
+      "modifiedDate": 1775671081534,
+      "sizeInBytes": 120,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.0033333333333333335,
@@ -18193,7 +18198,8 @@
         "aliases": [
           "Artifacts"
         ],
-        "title": "Artifacts"
+        "title": "Artifacts",
+        "compendium-index": true
       }
     },
     "ARTIFACTS/Fae Artifact/index.md": {
@@ -18262,20 +18268,47 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 6,
+      "wordCount": 7,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.02,
-      "characterCount": 34,
-      "nonWhitespaceCharacterCount": 29,
-      "newlineCount": 1,
-      "readingTimeInMinutes": 0.022641509433962263,
+      "pageCount": 0.023333333333333334,
+      "characterCount": 60,
+      "nonWhitespaceCharacterCount": 53,
+      "newlineCount": 3,
+      "readingTimeInMinutes": 0.026415094339622643,
       "linkCount": 0,
-      "embedCount": 0,
+      "embedCount": 1,
       "aliases": null,
       "createdDate": 1775656156902,
-      "modifiedDate": 1775656156903,
-      "sizeInBytes": 34,
+      "modifiedDate": 1775671399201,
+      "sizeInBytes": 60,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "compendiumbase.base": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1775670677142,
+      "modifiedDate": 1775671068307,
+      "sizeInBytes": 162,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

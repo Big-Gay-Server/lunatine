@@ -1,4 +1,5 @@
 ---
 title: Events
+compendium-index: true
 ---
-[embed_base:eventsbase#table]
+![[EVENTS/eventsbase.base|eventsbase]]

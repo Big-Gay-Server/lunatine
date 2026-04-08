@@ -1,4 +1,5 @@
 ---
 title: Locations
+compendium-index: true
 ---
-[embed_base:locationsbase#table]
+![[LOCATIONS/locationsbase.base|locationsbase]]

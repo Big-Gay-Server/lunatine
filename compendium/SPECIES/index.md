@@ -2,5 +2,6 @@
 aliases:
   - Species
 title: Species
+compendium-index: true
 ---
-[embed_base:speciesbase#table]
+![[SPECIES/speciesbase.base|speciesbase]]
