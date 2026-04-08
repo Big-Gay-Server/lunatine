@@ -265,28 +265,16 @@ a, .file-link {
 
 
 /* CHARACTER PROFILES */
-/* CHARACTER PROFILES */
 .profile-wrapper {
-    display: block; /* Back to block for wrapping */
-    width: 100%;
-}
-
-.profile-text {
-    display: inline; /* Allows content to flow around floats */
-}
-
-/* THE FIX: Ensure images inside the text wrap instead of blocking */
-.profile-text img {
-    max-width: calc(100% - 380px); /* Forces image to leave room for sidebar */
-    height: auto;
     display: block;
-    margin: 20px 0;
-    clear: none; /* Prevents the image from jumping below the sidebar */
+    width: 100%;
+    /* This creates a new stacking context so floats stay inside */
+    overflow: flow-root; 
 }
 
 .bio-sidebar {
     float: right;
-    width: 350px; /* Fixed width */
+    width: 350px;
     margin-left: 30px;
     margin-bottom: 20px;
     background: rgba(26, 11, 46, 0.85);
@@ -295,76 +283,41 @@ a, .file-link {
     border-radius: 1.25rem;
     box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
     text-align: center;
-
-    & code {
-        font-family: "Caudex", serif;
-        letter-spacing: 0.005rem;
-    }
-    & table {
-        margin: 0 auto !important;
-        display: table;
-        width: 100%;
-        border: none;
-        padding: 0px;
-    }
-    & tr {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 10px;
-        border: none !important;
-    }
-    & td:first-child {
-        flex: 0 0 35%;
-        text-align: right;
-        font-weight: bold;
-        color: var(--color-7);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: none !important;
-    }
-    & td:last-child {
-        flex: 1 1 auto;
-        text-align: left;
-        color: var(--color-5);
-        font-size: 0.95rem;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        border: none !important;
-    }
-    & hr { display: none; }
-    & th { border: none !important; }
-    & h2, & h3, & thead {
-        display: block;
-        text-align: center;
-        color: var(--color-4);
-        margin: 15px 0 10px 0;
-        font-size: 1.2rem;
-        text-shadow: 0 0 8px var(--color-3);
-    }
-    & img {
-        display: block;
-        margin: 0 auto 15px auto;
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-        border: 1px solid var(--color-3);
-    }
-    & tbody {
-        display: block;
-        width: 100%;
-    }
+    /* Keep your internal & table styles here ... */
 }
 
-/* Reset image width once the sidebar is cleared */
-.profile-text img:nth-of-type(n+5) { /* Optional: adjusts images further down if needed */
+/* THE FIX: Control how the article content interacts with the float */
+.profile-text {
+    display: block;
+    /* Do NOT use overflow: hidden here, or it won't wrap under the sidebar */
+}
+
+/* Force images to stay small ONLY when they are next to the sidebar */
+.profile-text img {
+    display: block;
+    float: none;
+    clear: none;
     max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    /* This allows the image container to shrink if there is a float next to it */
+    shape-outside: margin-box; 
 }
+
+/* If the image is specifically your "Top" image or early in the text */
+.profile-text p:first-of-type img,
+.profile-text > img:first-of-type {
+    max-width: 50%; /* Adjust this to fit your preferred 'side-by-side' look */
+    margin-right: auto;
+}
+
+/* Keep the rest of your bio-sidebar internal styles (& table, & tr, etc.) below */
+.bio-sidebar & table { margin: 0 auto !important; display: table; width: 100%; border: none; padding: 0px; }
+.bio-sidebar & tr { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 12px; margin-bottom: 10px; border: none !important; }
+.bio-sidebar & td:first-child { flex: 0 0 35%; text-align: right; font-weight: bold; color: var(--color-7); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; border: none !important; }
+.bio-sidebar & td:last-child { flex: 1 1 auto; text-align: left; color: var(--color-5); font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; overflow-wrap: break-word; white-space: normal; border: none !important; }
+.bio-sidebar & img { display: block; margin: 0 auto 15px auto; max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--color-3); }
+
 
 
 /* INTERLINEAR GLOSSES */
