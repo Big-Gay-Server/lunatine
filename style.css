@@ -388,11 +388,6 @@ a, .file-link {
     }
 }
 
-/* Reset image width once the sidebar is cleared */
-.profile-text img:nth-of-type(n+5) { /* Optional: adjusts images further down if needed */
-    max-width: 100%;
-}
-
 
 /* INTERLINEAR GLOSSES */
 /* Hide the \ex, \gla, etc. in the browser */
