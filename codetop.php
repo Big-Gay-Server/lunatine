@@ -70,9 +70,6 @@ foreach ($urlParts as $part) {
 $breadcrumbs = implode(' > ', $breadcrumbLinks);
 
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,6 +1,7 @@
 <?php
+if (ob_get_length()) ob_end_clean();
+
 header('Content-Type: application/xml; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
 $site_url = 'https://lunatine.lunarconstruct.net';
 $dir = __DIR__ . '/posts/'; 
 
@@ -35,7 +36,8 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>';
       }
 
       $date = date(DATE_RSS, filemtime($file));
-      $clean_name = str_replace(['.md', '.html'], '', $filename);
+      global $clean_name;
+      $clean_name = str_replace(['.md', ' ', '!', '?'], ['', '-', '', ''], $filename);
       $link = 'https://lunatine.lunarconstruct.net/news/' . $clean_name;
 
       // clean for preview

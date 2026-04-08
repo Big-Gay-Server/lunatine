@@ -1,24 +1,37 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 $Parsedown = new Parsedown();
 
-// Fix: Since post.php is in /news, just look in the 'posts' subfolder
-$post_dir = __DIR__ . '/posts/'; 
-$file = $_GET['f'] ?? '';
+// 1. Get the slug from the URL (e.g., 'getting-things-started')
+$requested_slug = $_GET['f'] ?? ''; 
+$requested_slug = str_replace(['.md', '.html'], '', $requested_slug); 
 
-$path = realpath($post_dir . $file);
+$post_dir = __DIR__ . '/posts/';
+$matched_file = null;
 
-// Verify the file exists and is inside the posts folder
-if ($path && strpos($path, $post_dir) === 0 && file_exists($path)) {
-    $markdown = file_get_contents($path);
+// 2. Scan the directory for all markdown files
+$files = glob($post_dir . '*.md');
+
+
+foreach ($files as $full_path) {
+    $filename = basename($full_path);
     
-    echo "<article class='blog-post' style='max-width: 900px; margin: auto;'>";
-    echo $Parsedown->text($markdown); 
-    echo "</article>";
+    // 3. Create the "Clean Slug" exactly how you do it in feed.php
+    $current_slug = str_replace(['.md', ' ', '!', '?'], ['', '-', '', ''], $filename);
+    $current_slug = trim($current_slug, '-'); // Remove trailing dashes
+
+    // 4. Compare: Does this file's slug match the URL?
+    if ($current_slug === $requested_slug) {
+        $matched_file = $full_path;
+        break;
+    }
+}
+
+if ($matched_file) {
+    $markdown = file_get_contents($matched_file);
+    echo "<article class='blog-post'>" . $Parsedown->text($markdown) . "</article>";
 } else {
-    echo "<h1>Post not found.</h1>";
-    // Debug info to help you see what's wrong:
-    echo "<!-- Script is looking in: " . $post_dir . " for file: " . $file . " -->";
+    echo "<h3>Post not found.</h3>";
 }
 
 // back to news page
