@@ -11,10 +11,14 @@
             "id": "67213c6da78abf54",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "CHARACTERS/Helita/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "index"
             }
           }
         ]
@@ -37,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -176,8 +180,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "git-view"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           },
           {
@@ -260,19 +264,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "52a7fa4a3980b932",
+  "active": "67213c6da78abf54",
   "lastOpenFiles": [
-    "CHARACTERS/Kaeyomii/art/Pasted image 20260329235002.png",
     "index.md",
-    "compendium.md",
-    "GALLERY/view from asilles.md",
-    "GALLERY/index.md",
-    "GALLERY/fullbody.md",
-    "CHARACTERS/index.md",
-    "CHARACTERS/Helita/index.md",
     "CHARACTERS/Canelé/index.md",
     "CHARACTERS/Esela/index.md",
     "CHARACTERS/characterbase.base",
+    "CHARACTERS/index.md",
     "CONCEPTS/index.md",
     "compendium/CHARACTERS/Merisdae/art/_COVER_future eve/model/model.lsc",
     "compendium/CHARACTERS/Yudora/art/spica/lipsync.lsc",
@@ -294,6 +292,12 @@
     "compendium/LANGUAGES/Varae/dictionary/yonokii.md",
     "compendium/LANGUAGES/Varae/dictionary/yomii.md",
     "compendium/LANGUAGES/Varae/dictionary/yiim.md",
+    "compendium/LANGUAGES/Varae/dictionary/yiiduyasii.md",
+    "compendium/LANGUAGES/Varae/dictionary/yeita.md",
+    "compendium/LANGUAGES/Varae/dictionary/yasiksii.md",
+    "compendium/LANGUAGES/Varae/dictionary/yaesii.md",
+    "compendium/LANGUAGES/Varae/dictionary/wuyiir.md",
+    "compendium/LANGUAGES/Varae/dictionary/wurone.md",
     "compendium/LANGUAGES/Varae/dictionary/varae.csv",
     "compendium/LANGUAGES/Varae/dictionary/varae (2).csv",
     "compendium/LANGUAGES/Varae/dictionary/dictionarybase.base",
