@@ -268,52 +268,32 @@ a, .file-link {
 .profile-wrapper {
     display: block;
     width: 100%;
-    /* This creates a new stacking context so floats stay inside */
-    overflow: flow-root; 
+    overflow: flow-root; /* Contains the floats so they don't spill */
+}
+
+.profile-text {
+    display: block;
+}
+
+/* THE IMAGE FIX: Allow images to sit NEXT to the sidebar */
+.profile-text img {
+    display: block;
+    float: none;
+    clear: none; /* Crucial: stops image from jumping below the float */
+    max-width: calc(100% - 380px); /* Leaves 350px (sidebar) + 30px (gap) */
+    height: auto;
+    margin: 20px 0; /* Align to the left next to sidebar */
+}
+
+/* Once we are past the sidebar (cleared), images can be full width again */
+/* We use a 'clearfix' style approach on paragraphs to help the wrapping */
+.profile-text p {
+    overflow: visible;
 }
 
 .bio-sidebar {
     float: right;
     width: 350px;
-    margin-left: 30px;
-    margin-bottom: 20px;
-    background: rgba(26, 11, 46, 0.85);
-    padding: 20px;
-    border: 1px solid var(--color-3);
-    border-radius: 1.25rem;
-    box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
-    text-align: center;
-    /* Keep your internal & table styles here ... */
-}
-
-/* THE FIX: Control how the article content interacts with the float */
-.profile-text {
-    display: block;
-    /* Do NOT use overflow: hidden here, or it won't wrap under the sidebar */
-}
-
-/* Force images to stay small ONLY when they are next to the sidebar */
-.profile-text img {
-    display: block;
-    float: none;
-    clear: none;
-    max-width: 100%;
-    height: auto;
-    margin: 20px auto;
-    /* This allows the image container to shrink if there is a float next to it */
-    shape-outside: margin-box; 
-}
-
-/* If the image is specifically your "Top" image or early in the text */
-.profile-text p:first-of-type img,
-.profile-text > img:first-of-type {
-    max-width: 50%; /* Adjust this to fit your preferred 'side-by-side' look */
-    margin-right: auto;
-}
-
-.bio-sidebar {
-    float: right;
-    width: 350px; /* Fixed width */
     margin-left: 30px;
     margin-bottom: 20px;
     background: rgba(26, 11, 46, 0.85);
@@ -387,7 +367,6 @@ a, .file-link {
         width: 100%;
     }
 }
-
 
 /* INTERLINEAR GLOSSES */
 /* Hide the \ex, \gla, etc. in the browser */
