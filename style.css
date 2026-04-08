@@ -268,35 +268,27 @@ a, .file-link {
 .profile-wrapper {
     display: block;
     width: 100%;
-    overflow: flow-root; /* Contains the floats so they don't spill */
 }
 
+/* THE FIX: Wrap only the part of the text that sits next to the bio */
 .profile-text {
     display: block;
+    width: 100%;
 }
 
-/* THE IMAGE FIX: Allow images to sit NEXT to the sidebar */
+/* This forces images to shrink to fit the space next to the sidebar */
 .profile-text img {
-    display: block;
-    float: left;        /* Force the image to float left, opposite the bio */
-    clear: none;        /* Allow it to sit next to other floats */
-    max-width: calc(100% - 380px); /* Leave room for the 350px bio + 30px gap */
+    float: left; /* Float left so it sits opposite the bio */
+    clear: none;
+    /* Math: 100% minus sidebar(350px) minus gap(30px) */
+    max-width: calc(100% - 380px); 
     height: auto;
-    margin: 10px 20px 20px 0; /* Margin on the right and bottom */
+    margin: 0 20px 20px 0;
 }
 
-/* Ensure that if an image is meant to be full width (no sidebar), it still looks okay */
-.profile-text img:only-child, 
-.profile-text p:not(:has(~ .bio-sidebar)) img {
-    float: none;
-    max-width: 100%;
-    margin: 20px auto;
-}
-
-/* Once we are past the sidebar (cleared), images can be full width again */
-/* We use a 'clearfix' style approach on paragraphs to help the wrapping */
-.profile-text p {
-    overflow: visible;
+/* CRUCIAL: Paragraphs containing images must not 'block' the float */
+.profile-text p:has(img) {
+    display: flow-root; /* Creates a box that can sit next to floats */
 }
 
 .bio-sidebar {
@@ -310,7 +302,7 @@ a, .file-link {
     border-radius: 1.25rem;
     box-shadow: 0 0 15px rgba(139, 24, 255, 0.2);
     text-align: center;
-
+    /* Keep your internal styles (& table, & tr, etc.) inside here */
     & code {
         font-family: "Caudex", serif;
         letter-spacing: 0.005rem;
