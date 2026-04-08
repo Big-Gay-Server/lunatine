@@ -372,6 +372,25 @@ class ParsedownBases extends Parsedown {
                 $match = ($actual == $expected);
                 return ($op === '==') ? $match : !$match;
             }
+
+            // Handle Comparison Operators: == and !=
+            $compPattern = '/(?:(?:note|prop|file)\[["\'](.*?)["\']\]|([\w.]+))\s*(==|!=)\s*(.*)/';
+            if (preg_match($compPattern, $f, $m)) {
+                $propId = !empty($m[1]) ? $m[1] : $m[2];
+                $op = $m[3];
+                $expectedRaw = trim($m[4], "\"' "); // Clean quotes and spaces
+                
+                // Convert string keywords to real booleans
+                $expected = $expectedRaw;
+                if ($expectedRaw === 'true') $expected = true;
+                if ($expectedRaw === 'false') $expected = false;
+
+                $actual = $findProp($props, $propId, $mdFile);
+                
+                // Use loose comparison (==) so boolean true matches 1 or "true" if needed
+                $match = ($actual == $expected);
+                return ($op === '==') ? $match : !$match;
+            }
         }
         return true;
     }
