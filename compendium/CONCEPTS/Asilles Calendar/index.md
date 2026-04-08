@@ -20,3 +20,5 @@ The calendar starts at year 1, the year that Anwi and Wefa created the Selhae an
 
 When the calendar was first created, the Selhae and the Fae were still intertwined in one society, speaking Varae. Therefore, even though the fae are now isolated from the Selhae, and speak mainly Acorithe, the fae still use the same calendar as the Selhae, including the Varae names.
 
+```calendarium
+```

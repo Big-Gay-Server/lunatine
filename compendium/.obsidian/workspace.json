@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "index.md",
+                "file": "CONCEPTS/Asilles Calendar/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -80,8 +80,8 @@
             "state": {
               "type": "VIEW_TYPE_LONGFORM_EXPLORER",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "VIEW_TYPE_LONGFORM_EXPLORER"
+              "icon": "longform",
+              "title": "Longform"
             }
           }
         ]
@@ -120,10 +120,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "LANGUAGES/Varae/translations/translationsbase.base"
+                "file": "CONCEPTS/Asilles Calendar/index.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for translationsbase"
+              "title": "File properties for index"
             }
           },
           {
@@ -132,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LANGUAGES/Varae/translations/translationsbase.base",
+                "file": "CONCEPTS/Asilles Calendar/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,7 +142,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for translationsbase"
+              "title": "Backlinks for index"
             }
           },
           {
@@ -151,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "STORY/index.md",
+                "file": "CONCEPTS/Asilles Calendar/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -166,7 +166,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CHARACTERS/Kaeyomii/index.md",
+                "file": "CONCEPTS/Asilles Calendar/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -198,7 +198,8 @@
               "title": "All properties"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       },
       {
         "id": "afe34fa239e6fb93",
@@ -266,20 +267,20 @@
   },
   "active": "67213c6da78abf54",
   "lastOpenFiles": [
+    "CONCEPTS/index.md",
+    "LOCATIONS/index.md",
     "compendiumbase.base",
+    "index.md",
     "STORY/index.md",
     "SPECIES/index.md",
     "ORGANIZATIONS/index.md",
     "MISC/index.base",
-    "LOCATIONS/index.md",
     "LANGUAGES/index.md",
     "LANGUAGES/languagesbase.base",
     "EVENTS/index.md",
     "EVENTS/timeline.md",
-    "CONCEPTS/index.md",
     "ARTIFACTS/index.md",
     "CHARACTERS/index.md",
-    "index.md",
     "CHARACTERS/Helita/index.md",
     "CHARACTERS/Canelé/index.md",
     "CHARACTERS/Esela/index.md",

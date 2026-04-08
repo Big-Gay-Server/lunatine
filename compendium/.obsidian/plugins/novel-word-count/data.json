@@ -18268,20 +18268,22 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 7,
+      "wordCount": 18,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.023333333333333334,
-      "characterCount": 60,
-      "nonWhitespaceCharacterCount": 53,
-      "newlineCount": 3,
-      "readingTimeInMinutes": 0.026415094339622643,
+      "pageCount": 0.06,
+      "characterCount": 149,
+      "nonWhitespaceCharacterCount": 129,
+      "newlineCount": 5,
+      "readingTimeInMinutes": 0.06792452830188679,
       "linkCount": 0,
       "embedCount": 1,
-      "aliases": null,
+      "aliases": [
+        "Compendium"
+      ],
       "createdDate": 1775656156902,
-      "modifiedDate": 1775671399201,
-      "sizeInBytes": 60,
+      "modifiedDate": 1775671465348,
+      "sizeInBytes": 174,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -18289,6 +18291,10 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      },
+      "frontmatter": {
+        "title": "Compendium",
+        "aliases": "Compendium"
       }
     },
     "compendiumbase.base": {
@@ -18307,8 +18313,8 @@
       "embedCount": 0,
       "aliases": [],
       "createdDate": 1775670677142,
-      "modifiedDate": 1775671068307,
-      "sizeInBytes": 162,
+      "modifiedDate": 1775673412060,
+      "sizeInBytes": 237,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

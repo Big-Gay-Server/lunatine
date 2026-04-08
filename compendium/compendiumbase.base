@@ -1,3 +1,6 @@
+properties:
+  note.title:
+    displayName: topic
 views:
   - type: table
     name: Table
@@ -6,3 +9,6 @@ views:
         - note["compendium-index"] == true
     order:
       - title
+    sort:
+      - property: title
+        direction: ASC
