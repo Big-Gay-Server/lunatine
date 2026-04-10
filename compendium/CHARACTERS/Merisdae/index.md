@@ -45,6 +45,7 @@ Merisdae is a construct created by [[CHARACTERS/Esela/index|Esela]] in order to 
 ![[CHARACTERS/Merisdae/art/merisforms.png]]
 
 Merisdae also has the ability to split herself into 5 forms. Each of these forms are named after the [[LOCATIONS/Asilles/index|Asilles]] moons. Each of these forms were created to watch over their respective moons. 
+[[CHARACTERS/Merisdae/KuraesMerisdae|KuraesMerisdae]], [[CHARACTERS/Merisdae/BuroMerisdae|BuroMerisdae]], [[CHARACTERS/Merisdae/HiitoMerisdae|HiitoMerisdae]], [[CHARACTERS/Merisdae/KaeMerisdae|KaeMerisdae]], [[CHARACTERS/Merisdae/FolMerisdae|FolMerisdae]]
 
 ### Supermoon
 ![[maikory merisdae.png]]
@@ -59,7 +60,7 @@ Merisdae has a slender build, with a height of 5'4'' or 164cm. They have long, s
 They have pinkish-magenta eyes, with the Lunatine symbol in their pupils.
 
 ### Special abilities
-[[Core Archetypes#Catalyst’s Soul]]
+[[CONCEPTS/Soul/Archetypes/Core Archetypes#Catalyst’s Soul|Catalyst's Soul]]
 
 One of their most impressive abilities is the power to split themselves into five distinct forms, each of which represents one of the Asilles moons. This ability allows Merisdae to be in multiple places at once and keep a watchful eye over all of the moons simultaneously.
 
@@ -81,7 +82,7 @@ On her head, Merisdae can be seen wearing the [[ARTIFACTS/Moonband/index|Moonban
 
 ## Mental Characteristics
 ### Personal history
-Merisdae was created by the [[SPECIES/Inna/index|Inna]], [[CHARACTERS/Anwi/index|Anwi]] and [[CHARACTERS/Wefa/index|Wefa]]to be a guardian of [[LOCATIONS/Asilles/index|Asilles]] and to choose a [[SPECIES/Selhae/index|Selhae]] to guide the people up to the moons in the [[EVENTS/Kuraesmeris Migration/index|Kuraesmeris Migration]]. She chose [[CHARACTERS/Esela/index|Esela]] to be this guide, linking the two’s souls together.
+Merisdae was created by the [[SPECIES/Inna/index|Inna]], [[CHARACTERS/Anwi/index|Anwi]] and [[CHARACTERS/Wefa/index|Wefa]] to be a guardian of [[LOCATIONS/Asilles/index|Asilles]] and to choose a [[SPECIES/Selhae/index|Selhae]] to guide the people up to the moons in the [[EVENTS/Kuraesmeris Migration/index|Kuraesmeris Migration]]. She chose [[CHARACTERS/Esela/index|Esela]] to be this guide, linking the two’s souls together.
 
 She saved [[CHARACTERS/Kaeyomii/index|Kaeyomii]]’s soul from the [[EVENTS/Debris Impact/index|Debris Impact]] by taking Kaeyomii’s soul into her own, which influenced the appearance of her [[KaeMerisdae]] form. However, saving Kaeyomii led to the deconstruction of Merisdae back down to the moonband.
 

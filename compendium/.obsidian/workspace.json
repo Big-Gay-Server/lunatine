@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CONCEPTS/Asilles Calendar/index.md",
+                "file": "CHARACTERS/Merisdae/KaeMerisdae.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "KaeMerisdae"
             }
           }
         ]
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -97,7 +97,7 @@
       {
         "id": "e42138525fc4c41e",
         "type": "tabs",
-        "dimension": 65.31007751937985,
+        "dimension": 65.11627906976744,
         "children": [
           {
             "id": "1d4b072197f93ee3",
@@ -120,10 +120,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "CONCEPTS/Asilles Calendar/index.md"
+                "file": "CHARACTERS/Merisdae/KaeMerisdae.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for index"
+              "title": "File properties for KaeMerisdae"
             }
           },
           {
@@ -132,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CONCEPTS/Asilles Calendar/index.md",
+                "file": "CHARACTERS/Merisdae/KaeMerisdae.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,7 +142,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for index"
+              "title": "Backlinks for KaeMerisdae"
             }
           },
           {
@@ -151,13 +151,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CONCEPTS/Asilles Calendar/index.md",
+                "file": "CHARACTERS/Merisdae/KaeMerisdae.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of index"
+              "title": "Outline of KaeMerisdae"
             }
           },
           {
@@ -166,12 +166,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CONCEPTS/Asilles Calendar/index.md",
+                "file": "CHARACTERS/Merisdae/KaeMerisdae.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from index"
+              "title": "Outgoing links from KaeMerisdae"
             }
           },
           {
@@ -204,7 +204,7 @@
       {
         "id": "afe34fa239e6fb93",
         "type": "tabs",
-        "dimension": 34.689922480620154,
+        "dimension": 34.883720930232556,
         "children": [
           {
             "id": "591b18d1aa3a12ef",
@@ -267,20 +267,23 @@
   },
   "active": "67213c6da78abf54",
   "lastOpenFiles": [
-    "CONCEPTS/index.md",
-    "LOCATIONS/index.md",
-    "compendiumbase.base",
-    "index.md",
-    "STORY/index.md",
-    "SPECIES/index.md",
+    "CHARACTERS/Merisdae/index.md",
+    "CHARACTERS/index.md",
+    "ARTIFACTS/index.md",
     "ORGANIZATIONS/index.md",
     "MISC/index.base",
+    "index.md",
+    "compendiumbase.base",
+    "CONCEPTS/Dust/index.md",
+    "CONCEPTS/Asilles Calendar/index.md",
+    "CONCEPTS/index.md",
+    "LOCATIONS/index.md",
+    "STORY/index.md",
+    "SPECIES/index.md",
     "LANGUAGES/index.md",
     "LANGUAGES/languagesbase.base",
     "EVENTS/index.md",
     "EVENTS/timeline.md",
-    "ARTIFACTS/index.md",
-    "CHARACTERS/index.md",
     "CHARACTERS/Helita/index.md",
     "CHARACTERS/Canelé/index.md",
     "CHARACTERS/Esela/index.md",
@@ -299,8 +302,6 @@
     "compendium/LANGUAGES/Varae/translations/Sanctuary.md",
     "compendium/LANGUAGES/Varae/dictionary/yuraeya.md",
     "compendium/LANGUAGES/Varae/dictionary/yukii.md",
-    "compendium/LANGUAGES/Varae/dictionary/yua.md",
-    "compendium/LANGUAGES/Varae/dictionary/yovela.md",
     "compendium/LANGUAGES/Varae/dictionary/varae.csv",
     "compendium/CHARACTERS/Merisdae/art/Merisdae w background.bmp",
     "CHARACTERS/Kaeyomii/art/meteor.webp",

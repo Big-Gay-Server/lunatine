@@ -1,22 +1,26 @@
 ---
-Actual Age: 1301 years
+Actual Age:
 Status: Alive
 Gender: genderless
 Pronouns: they/she
-Apparent Age: ageless
-mid-twenties
-Current Location: [[LOCATIONS/Kaemeris/index|Kaemeris]]
-Birthplace: [[LOCATIONS/Asilles/index|Asilles]]
+Apparent Age:
+Current Location:
+  - "[[LOCATIONS/Kaemeris/index|Kaemeris]]"
+Birthplace:
+  - "[[LOCATIONS/Asilles/index|Asilles]]"
 Eyes: black
 Hair: messy purple hair that reaches mid-back, pulled into two low, loose ponytails on the side. tips fade to black.
 Height: 4'8'' or 142cm
-Languages Spoken: [[LANGUAGES/Varae/index|Varae]]
+Languages Spoken:
+  - "[[LANGUAGES/Varae/index|Varae]]"
 Rank: Guardian
-Ruler/Owner of: [[LOCATIONS/Kaemeris/index|Kaemeris]]
+Ruler/Owner of:
+  - "[[LOCATIONS/Kaemeris/index|Kaemeris]]"
 Skin Tone: fair
-Species: [[SPECIES/Construct/index|Construct]]
+Species: "[[SPECIES/Construct/index|Construct]]"
 Titles: Construct of Newmoon
-main character: [[CHARACTERS/Merisdae/index|Merisdae]]
+main character:
+  - "[[CHARACTERS/Merisdae/index|Merisdae]]"
 ---
 
 [https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1)
