@@ -22,8 +22,7 @@ Titles: Construct of Newmoon
 main character:
   - "[[CHARACTERS/Merisdae/index|Merisdae]]"
 ---
-
-[https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1](https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&hideHeader=1&transparent=1)
+<iframe src="https://petracoding.github.io/pinterest/board.html?link=lunarconstruct/merisdae/newmoon/&amp;hideHeader=1&amp;transparent=1" allow="fullscreen" allowfullscreen="" style="height: 100%; width: 100%; aspect-ratio: 1 / 1;"></iframe>
 
 ![new newmoon_momo.png](new_newmoon_momo%201.png)
 
